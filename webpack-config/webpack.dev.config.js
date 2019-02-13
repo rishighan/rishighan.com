@@ -1,6 +1,9 @@
-const webpack = require("webpack");
+const htmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
+    entry: {
+        main: './src/index.js'
+    },
     module: {
         rules: [
             {
@@ -9,7 +12,20 @@ module.exports = {
                 use: {
                     loader: "babel-loader"
                 }
+            },
+            {
+                test: /\.html$/,
+                use: {
+                    loader: "html-loader",
+                    options: { minimize: true }
+                }
             }
         ]
-    }
+    },
+    plugins: [
+        new htmlWebpackPlugin({
+            template: './src/index.html',
+            filename: "./index.html"
+        })
+    ]
 }
