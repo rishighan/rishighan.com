@@ -1,9 +1,16 @@
-const htmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+import path from 'path';
 
+const SRC = path.resolve(`${__dirname }/src/`);
 module.exports = {
     entry: {
-        main: './src/index.js'
+        rgapp: path.resolve(`${__dirname}/src/index.js`)
     },
+    output: {
+        filename: 'rgbundle.js',
+        path: path.resolve(__dirname, '../dist')
+    },
+    mode: "development",
     module: {
         rules: [
             {
@@ -23,9 +30,9 @@ module.exports = {
         ]
     },
     plugins: [
-        new htmlWebpackPlugin({
+        new HtmlWebpackPlugin({
             template: './src/index.html',
-            filename: "./index.html"
+            filename: "index.html"
         })
     ]
 }
