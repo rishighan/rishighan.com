@@ -1,4 +1,5 @@
 import path from "path";
+import webpack from "webpack";
 
 module.exports = {
     entry: "./src/index.js",
@@ -30,5 +31,11 @@ module.exports = {
     resolve: {
         extensions: ['*', '.js', '.jsx']
     },
-    plugins: []
+    devServer: {
+        contentBase: '../dist',
+        hot: true
+    },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+    ]
 }

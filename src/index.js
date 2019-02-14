@@ -6,3 +6,5 @@ render(
   <AppContainer/>,
   document.getElementById('app')
 );
+
+module.hot.accept()
