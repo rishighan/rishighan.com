@@ -4,7 +4,8 @@ module.exports = {
     entry: "./src/index.js",
     output: {
         filename: 'rgbundle.js',
-        path: path.resolve( __dirname, '../dist')
+        path: path.resolve( __dirname, '../dist'),
+        publicPath: '../public'
     },
     mode: "development",
     module: {
@@ -25,6 +26,9 @@ module.exports = {
                 }
             }
         ]
+    },
+    resolve: {
+        extensions: ['*', '.js', '.jsx']
     },
     plugins: []
 }
