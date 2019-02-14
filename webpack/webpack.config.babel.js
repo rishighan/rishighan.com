@@ -1,20 +1,17 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-import path from 'path';
+import path from "path";
 
-const SRC = path.resolve(`${__dirname }/src/`);
 module.exports = {
-    entry: {
-        rgapp: path.resolve(`${__dirname}/src/index.js`)
-    },
+    entry: "./src/index.js",
     output: {
         filename: 'rgbundle.js',
-        path: path.resolve(__dirname, '../dist')
+        path: path.resolve( __dirname, '../dist')
     },
     mode: "development",
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                test: /\.jsx?$/,
+                include: path.resolve(__dirname, '../src'),
                 exclude: /node_modules/,
                 use: {
                     loader: "babel-loader"
@@ -29,10 +26,5 @@ module.exports = {
             }
         ]
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: './src/index.html',
-            filename: "index.html"
-        })
-    ]
+    plugins: []
 }
