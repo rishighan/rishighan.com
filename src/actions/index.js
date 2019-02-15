@@ -3,7 +3,7 @@ import {
     FETCH_POSTS_ERROR,
     FETCH_POSTS_SUCCESS
  } from '../constants/action-types';
-import fetch from "whatwg-fetch";
+import { fetch } from "whatwg-fetch";
 
 export function fetchPosts(payload) {
     return function(dispatch) {

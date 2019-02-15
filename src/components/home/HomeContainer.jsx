@@ -1,15 +1,31 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { List } from "../List/List";
+import { fetchPosts } from "../../actions/index";
 
-class Button extends React.Component {
-    constructor(props) {
-        super(props);
+class HomeContainer extends Component {
+    componentDidMount() {
+        this.props.fetchPosts();
     }
-
     render() {
         return(
-            <button>{ this.props.buttonText }</button>
+            <List data = { this.props.posts } />            
         )
     }
 }
 
-export default Button
+function mapStateToProps(state) {
+    return {
+        posts: state.posts
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        fetchPosts: function(){
+            dispatch(fetchPosts());
+        }
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);

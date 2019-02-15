@@ -1,22 +1,21 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { Component } from "react";
 
-const mapStateToProps = state => {
-    return {
-        posts: state.posts
+class List extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return(
+            <ul>
+                { this.props.map((data) => {
+                    <li key={ data.id }>
+                        { data.title }
+                    </li>
+                })}
+            </ul>
+        )
     }
 }
-
-const ConnectedList = ({ posts }) => (
-    <ul>
-        { posts.map(post => {
-            <li key={ post.id }>
-                { post.title }
-            </li>
-        }) }
-    </ul>
-)
-
-const List = connect(mapStateToProps)(ConnectedList)
 
 export default List;
