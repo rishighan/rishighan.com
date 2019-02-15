@@ -1,16 +1,8 @@
-import { LOAD_POSTS } from '../constants/action-types';
+import { combineReducers } from "redux";
+import postsReducers from './post.reducers';
 
-const initialState = {
-    posts: []
-};
-
-function rootReducer(state = initialState, action) {
-    if(action.type === LOAD_POSTS){ 
-        Object.assign(state, {
-            posts: state.posts.concat(action.payload)
-        })
-    }
-    return state;
-}
+const rootReducer = combineReducers({
+    posts: postsReducers
+});
 
 export default rootReducer;
