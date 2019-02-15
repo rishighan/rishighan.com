@@ -7,7 +7,7 @@ let app = express();
 // prevent no-sniff header 
 app.use(helmet.noSniff());
 
-let port = process.env.PORT || 3000;
+let port = process.env.PORT || 8080;
 
 app.all('/', (req, res) => {
     res.sendFile('index.html', {

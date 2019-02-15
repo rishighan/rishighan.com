@@ -5,7 +5,7 @@
   "repository": "https://github.com/rishighan/rishighan.com",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --config webpack/webpack.config.babel.js --mode development",
+    "build": "webpack --config webpack/webpack.config.babel.js --mode development",
     "test": "npm test"
   },
   "keywords": [
