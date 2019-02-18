@@ -12,7 +12,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
+                test: /\.(js|jsx)$/,
                 include: path.resolve(__dirname, '../src'),
                 exclude: /node_modules/,
                 use: {
@@ -33,7 +33,7 @@ module.exports = {
     },
     devServer: {
         contentBase: '../dist',
-        hot: true
+        watchContentBase: true
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin()

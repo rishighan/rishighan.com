@@ -13,22 +13,17 @@ export function fetchPosts(payload) {
         return fetch('http://localhost:3000/api/v1/posts/retrieve', {
             method: "GET",
             headers: {
-                "Content-Type": "application/json"
-            }
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            },
+            mode: "cors"
         })
         .then((response) => response.json())
-        .catch((error) => {
-            if(error) {
-                dispatch({
-                    type: FETCH_POSTS_ERROR,
-                    error: error
-                })
-            } else {
-                dispatch({
-                    type: FETCH_POSTS_SUCCESS,
-                    posts: response
-                });
-            }
+        .then((json) => {
+            dispatch({
+                type: FETCH_POSTS_SUCCESS,
+                posts: json
+            });
         });
     }
 }

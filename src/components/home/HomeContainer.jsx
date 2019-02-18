@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { List } from "../List/List";
+import List from "../List/List";
 import { fetchPosts } from "../../actions/index";
 
-class HomeContainer extends Component {
+class ConnectedHomeContainer extends Component {
     componentDidMount() {
         this.props.fetchPosts();
     }
     render() {
         return(
-            <List data = { this.props.posts } />            
+            <List info={ this.props.posts } />            
         )
     }
 }
@@ -27,5 +27,5 @@ function mapDispatchToProps(dispatch) {
         }
     };
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
+const HomeContainer = connect(mapStateToProps, mapDispatchToProps)(ConnectedHomeContainer); 
+export default HomeContainer;

@@ -24,7 +24,7 @@ function postsReducer(state = initialState, action) {
         case FETCH_POSTS_SUCCESS:
             return Object.assign({}, state, {
                 isFetching: false,
-                posts: action.posts
+                posts: state.posts.concat(action.posts)
             });
         default:
             return state; 
