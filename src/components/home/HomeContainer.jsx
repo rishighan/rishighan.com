@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import List from "../List/List";
 import { fetchPosts } from "../../actions/index";
 
-class ConnectedHomeContainer extends Component {
+class HomeContainer extends Component {
     componentDidMount() {
         this.props.fetchPosts();
     }
@@ -27,5 +27,4 @@ function mapDispatchToProps(dispatch) {
         }
     };
 }
-const HomeContainer = connect(mapStateToProps, mapDispatchToProps)(ConnectedHomeContainer); 
-export default HomeContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer); 
