@@ -9,6 +9,7 @@ module.exports = {
         publicPath: '../public'
     },
     mode: "development",
+    watch: true,
     module: {
         rules: [
             {
