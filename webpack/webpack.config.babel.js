@@ -2,7 +2,7 @@ import path from "path";
 import webpack from "webpack";
 
 module.exports = {
-    entry: "./src/index.js",
+    entry: ["babel-polyfill", "./src/index.js"],
     output: {
         filename: 'rgbundle.js',
         path: path.resolve( __dirname, '../dist'),

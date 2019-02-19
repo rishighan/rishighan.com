@@ -9,11 +9,10 @@ class HomeContainer extends Component {
     }
     render() {
         return(
-            <List info={ this.props.posts } />            
+            <List info={ this.props.posts } />
         )
     }
 }
-
 function mapStateToProps(state) {
     return {
         posts: state.posts

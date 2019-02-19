@@ -5,25 +5,30 @@ import {
  } from '../constants/action-types';
 import { fetch } from "whatwg-fetch";
 
-export function fetchPosts(payload) {
-    return function(dispatch) {
-        dispatch({
-            type: FETCH_POSTS_REQUEST,
-        });
-        return fetch('http://localhost:3000/api/v1/posts/retrieve', {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*"
-            },
-            mode: "cors"
-        })
-        .then((response) => response.json())
-        .then((json) => {
-            dispatch({
-                type: FETCH_POSTS_SUCCESS,
-                posts: json
-            });
-        });
+export const fetchPosts = () => async dispatch => {
+    try {
+		dispatch({
+			type: FETCH_POSTS_REQUEST,
+			isFetching: true
+		})
+        const response = await fetch('http://localhost:3000/api/v1/posts/retrieve', {
+                            method: "GET",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Access-Control-Allow-Origin": "*"
+                            },
+                            mode: "cors"
+						});
+		const responseBody = await response.json();
+		dispatch({
+			type: FETCH_POSTS_SUCCESS,
+			isFetching: false,
+			posts: responseBody
+		})
+	} catch(error) {
+		dispatch({
+			type: FETCH_POSTS_ERROR,
+			error: error
+		})
     }
 }

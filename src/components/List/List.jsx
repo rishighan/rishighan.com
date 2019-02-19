@@ -1,20 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
+import _ from "lodash";
 
-class List extends React.Component {
-    constructor(props) {
-        super(props);
-        console.log("props", props)
-    }
-
-    render() {
-        return(
-            <ul>
-                { this.props.info.posts.map((post) =>{
-                    { post.title}
-                }) }
-            </ul>
-        )
-    }
-}
+const List = (props) => (
+    <ul>
+        { props.info.posts.length !== 0 ?
+            props.info.posts.map((post) => {
+                post.slug
+            }) : <h1>null</h1> }
+    </ul>
+)
 
 export default List;
