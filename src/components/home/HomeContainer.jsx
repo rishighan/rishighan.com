@@ -8,9 +8,7 @@ class HomeContainer extends Component {
         this.props.fetchPosts();
     }
     render() {
-        return(
-            <List info={ this.props.posts } />
-        )
+            return (this.props.posts.length!==0 && <List data={this.props.posts} />)
     }
 }
 function mapStateToProps(state) {

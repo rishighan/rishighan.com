@@ -1,13 +1,17 @@
 import React from "react";
 import _ from "lodash";
 
-const List = (props) => (
-    <ul>
-        { props.info.posts.length !== 0 ?
-            props.info.posts.map((post) => {
-                post.slug
-            }) : <h1>null</h1> }
-    </ul>
-)
+const List = (props) => {
+   console.log(props)
+    return(
+        <ul>
+            <li>
+           { props.data.map((post) => {
+              <span>{ post._id }</span>
+           })}
+           </li>
+        </ul>
+    );
+}
 
 export default List;

@@ -22,10 +22,10 @@ export const fetchPosts = () => async dispatch => {
 		const responseBody = await response.json();
 		dispatch({
 			type: FETCH_POSTS_SUCCESS,
-			isFetching: false,
 			posts: responseBody
 		})
 	} catch(error) {
+		console.log(error)
 		dispatch({
 			type: FETCH_POSTS_ERROR,
 			error: error
