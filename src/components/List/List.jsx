@@ -9,8 +9,8 @@ class List extends React.Component {
     render() {
         return(
             <ul>
-                { this.props.info.posts.map((post) =>{
-                    { post.title}
+                {this.props.info.posts && this.props.info.posts.map((post) =>{
+                    { post.slug }
                 }) }
             </ul>
         )

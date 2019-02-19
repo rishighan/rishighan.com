@@ -14,13 +14,13 @@ class HomeContainer extends Component {
     }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
     return {
         posts: state.posts
     };
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = dispatch => {
     return {
         fetchPosts: function(){
             dispatch(fetchPosts());
