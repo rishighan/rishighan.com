@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import List from "../List/List";
+import { List } from "../List/List";
 import { fetchPosts } from "../../actions/index";
 
 class HomeContainer extends Component {
@@ -9,7 +9,7 @@ class HomeContainer extends Component {
     }
     render() {
         return(
-            <List info={ this.props.posts } />            
+            <List info={ this.props.posts.posts } />            
         )
     }
 }
