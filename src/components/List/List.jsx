@@ -2,14 +2,14 @@ import React from "react";
 import _ from "lodash";
 
 const List = (props) => {
-   console.log(props)
-    return(
+    console.log(props.data)
+    return( 
         <ul>
-            <li>
-           { props.data.map((post) => {
-              <span>{ post._id }</span>
-           })}
-           </li>
+            {props.data.map((post, idx) => 
+                <li key={ idx }>
+                    { post.slug }
+                </li>
+            )}
         </ul>
     );
 }
