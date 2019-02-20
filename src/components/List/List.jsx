@@ -1,14 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 import _ from "lodash";
 
-export const List = (props) => (
+const List = (props) => {
+    console.log(props.data)
+    return( 
         <ul>
-            { !_.isEmpty(props.info) ?
-                <li>
-                    {props.info.map((post) => {
-                        { post._id }
-                    })}
-                </li> : "shoo"
-            }
+            {props.data.map((post, idx) => 
+                <li key={ idx }>
+                    { post.slug }
+                </li>
+            )}
         </ul>
-)
+    );
+}
+
+export default List;
