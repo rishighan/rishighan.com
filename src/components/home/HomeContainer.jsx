@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import List from "../List/List";
+import ListItem from "../ListItem/ListItem";
 import { fetchPosts } from "../../actions/index";
 
 class HomeContainer extends Component {
@@ -8,7 +8,7 @@ class HomeContainer extends Component {
 		this.props.fetchPosts();
     }
     render() {
-        return (this.props.posts.length !==0 && <List data={ this.props.posts } />)
+        return (this.props.posts.length !==0 && <ListItem data={ this.props.posts } />)
     }
 }
 function mapStateToProps(state) {
