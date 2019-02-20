@@ -1,4 +1,4 @@
-### rishighan.com
+## rishighan.com
 
 This is a basic boilerplate built on:
 
@@ -8,7 +8,7 @@ This is a basic boilerplate built on:
 + Webpack 4.29.3 configured with `"@babel/core": "^7.2.2"`
 + Support for `async/await`
 
-## Local development
+### Local development
 
 `nvm i 10.15.0 && nvm use 10.15.0`
 
