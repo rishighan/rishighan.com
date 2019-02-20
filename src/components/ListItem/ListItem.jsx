@@ -6,11 +6,11 @@ const ListItem = (props) => {
         <ul>
             {props.data.posts.map((post, idx) => 
                 <li key={ idx }>
-                    { post.slug }
+                    { post.title }
                 </li>
             )} 
         </ul>
-    );
+    )
 }
 
 export default ListItem;
