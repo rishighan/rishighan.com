@@ -25,7 +25,7 @@ export const fetchPosts = () => async dispatch => {
 			posts: responseBody
 		})
 	} catch(error) {
-		console.log(error)
+		console.log("Error", error)
 		dispatch({
 			type: FETCH_POSTS_ERROR,
 			error: error
