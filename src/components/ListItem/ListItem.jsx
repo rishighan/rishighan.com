@@ -7,9 +7,7 @@ const ListItem = (props) => (
         {props.data.posts.map((post, idx) => 
             <li key={idx}>
                 <h3>{ post.title }</h3>
-                <div><MarkdownRenderer
-                        text={ post.content }
-                     /></div>
+                <div><MarkdownRenderer text={ post.content }/></div>
             </li>
         )}
     </ul>)

@@ -1,7 +1,7 @@
-import { PureComponent } from "react";
+import React, { Component } from "react";
 import kramed from "kramed";
-import renderHTML from "react-render-html";
 import hljs from "highlight.js";
+import Interweave from "interweave";
 import "highlight.js/styles/atom-one-dark.css";
 import _ from "lodash";
 
@@ -10,21 +10,20 @@ let options = {
         highlight: code => hljs.highlightAuto(code).value,
         gfm: true,
         tables: true,
-        breaks: false,
+        breaks: true,
         xhtml: true,
         smartLists: true,
         smartypants: true,
       })
 };
 
-class MarkdownRenderer extends PureComponent {
-    static defaultProps = {
-        text: null,
-    }
-
+class MarkdownRenderer extends Component {
+    constructor(props) {
+        super(props)
+    } 
     render() {
         const { text } = this.props;
-        return !_.isNull(text) ? renderHTML(kramed(text, options)) : null;
+        return !_.isEmpty(text) ? <Interweave content={ kramed(text, options) } /> : null;
     }
 }
 
