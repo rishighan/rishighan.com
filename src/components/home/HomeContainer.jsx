@@ -8,7 +8,7 @@ class HomeContainer extends Component {
 		this.props.fetchPosts();
     }
     render() {
-        return (_.isEmpty(this.props.posts) && 
+        return (!_.isEmpty(this.props.posts) && 
         <ListItem 
             data={ this.props.posts } />)
     }
