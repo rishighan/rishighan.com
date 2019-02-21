@@ -10,7 +10,8 @@ let options = {
         highlight: code => hljs.highlightAuto(code).value,
         gfm: true,
         tables: true,
-        breaks: true,
+        breaks: false,
+        xhtml: true,
         smartLists: true,
         smartypants: true,
       })
