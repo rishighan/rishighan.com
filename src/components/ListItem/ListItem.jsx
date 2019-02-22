@@ -3,13 +3,13 @@ import _ from "lodash";
 import MarkdownRenderer from "../MarkdownRenderer/MarkdownRenderer";
 
 const ListItem = (props) => (
-    <ul>
+    <div className="column is-half-desktop is-three-quarters-mobile">
         {props.data.posts.map((post, idx) => 
-            <li key={idx}>
-                <h3>{ post.title }</h3>
+            <div key={ idx }>
+                <h2>{ post.title }</h2>
                 <div><MarkdownRenderer text={ post.content }/></div>
-            </li>
+            </div>
         )}
-    </ul>)
+    </div>)
 
 export default ListItem;

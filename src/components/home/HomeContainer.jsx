@@ -2,15 +2,18 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import ListItem from "../ListItem/ListItem";
 import { fetchPosts } from "../../actions/index";
+import "bulma/css/bulma.css";
 
 class HomeContainer extends Component {
     componentDidMount() {
 		this.props.fetchPosts();
     }
     render() {
-        return (!_.isEmpty(this.props.posts) && 
-        <ListItem 
-            data={ this.props.posts } />)
+		return (!_.isEmpty(this.props.posts) && 
+			<div className="columns is-desktop">
+	   			<ListItem 
+			   	    data={ this.props.posts } />
+			</div>)
     }
 }
 function mapStateToProps(state) {
