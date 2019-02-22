@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import ListItem from '../ListItem/ListItem';
 import { fetchPosts } from '../../actions/index';
-import 'bulma/css/bulma.css';
 
 class HomeContainer extends Component {
   componentDidMount() {

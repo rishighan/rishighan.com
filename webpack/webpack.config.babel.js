@@ -1,13 +1,13 @@
 import path from 'path';
-import webpack from 'webpack';
 import MiniCSSExtractPlugin from 'mini-css-extract-plugin';
+import HTMLWebpackPlugin from 'html-webpack-plugin';
 
 module.exports = {
   entry: ['babel-polyfill', './src/index.js'],
   output: {
-    filename: 'rgbundle.js',
+    filename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, '../dist'),
-    publicPath: '../public',
+    publicPath: './public',
   },
   mode: 'development',
   devtool: 'source-map',
@@ -24,34 +24,41 @@ module.exports = {
       },
       {
         test: /\.html$/,
-        use: {
+        use: [{
           loader: 'html-loader',
           options: { minimize: true },
         },
+        {
+          loader: 'ejs-html-loader',
+          options: {
+            htmlWebpackPlugin: HTMLWebpackPlugin,
+          },
+        }],
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.scss$/,
-        use: [{
-          loader: MiniCSSExtractPlugin.loader,
-        }, 'css-loader'],
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          MiniCSSExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+        ],
       },
     ],
   },
   resolve: {
     extensions: ['*', '.js', '.jsx'],
   },
-  devServer: {
-    contentBase: '../dist',
-    watchContentBase: true,
-  },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new MiniCSSExtractPlugin({
-      filename: '[name].css',
+      filename: '[name].[contenthash].css',
+    }),
+    new HTMLWebpackPlugin({
+      inject: false,
+      hash: true,
+      title: 'Rishi Ghan',
+      template: './public/index.html',
+      filename: 'index.html',
+      environment: 'development',
     }),
   ],
 };

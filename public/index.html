@@ -2,11 +2,11 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="./dist/main.css" />
-        <title>Rishi Ghan</title>
+        <title><%= htmlWebpackPlugin.options.title %></title>
+        <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.chunks.main.css %>" />
     </head>
     <body>
         <div id="app"></div>
     </body>
-    <script type="text/javascript" src="./dist/rgbundle.js"></script>
+    <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
 </html>
