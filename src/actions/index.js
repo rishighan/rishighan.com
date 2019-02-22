@@ -3,7 +3,7 @@ import {
     FETCH_POSTS_ERROR,
     FETCH_POSTS_SUCCESS
  } from '../constants/action-types';
-import { fetch } from "whatwg-fetch";
+import axios from "axios";
 
 export const fetchPosts = () => async dispatch => {
     try {
@@ -11,18 +11,22 @@ export const fetchPosts = () => async dispatch => {
 			type: FETCH_POSTS_REQUEST,
 			isFetching: true
 		})
-        const response = await fetch('http://localhost:3000/api/v1/posts/retrieve', {
-                            method: "GET",
+		let serviceURI = 'http://localhost:3000/api/v1/posts/findByTagName';
+        const response = await axios.get(serviceURI, {
+							method: "get",
+							params: {
+								tagName: "Blog",
+								pageOffset: 1,
+								pageLimit: 20
+							},
                             headers: {
                                 "Content-Type": "application/json",
                                 "Access-Control-Allow-Origin": "*"
-                            },
-                            mode: "cors"
+							}
 						});
-		const responseBody = await response.json();
 		dispatch({
 			type: FETCH_POSTS_SUCCESS,
-			posts: responseBody
+			posts: response.data
 		})
 	} catch(error) {
 		console.log("Error", error)
