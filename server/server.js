@@ -11,7 +11,7 @@ const port = process.env.PORT || 8080;
 
 app.all('/', (req, res) => {
   res.sendFile('index.html', {
-    root: path.join(__dirname, '../public'),
+    root: path.join(__dirname, '../dist'),
   });
 });
 

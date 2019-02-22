@@ -7,7 +7,7 @@ module.exports = {
   output: {
     filename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, '../dist'),
-    publicPath: './public',
+    publicPath: './dist',
   },
   mode: 'development',
   devtool: 'source-map',
@@ -28,12 +28,7 @@ module.exports = {
           loader: 'html-loader',
           options: { minimize: true },
         },
-        {
-          loader: 'ejs-html-loader',
-          options: {
-            htmlWebpackPlugin: HTMLWebpackPlugin,
-          },
-        }],
+        'ejs-html-loader'],
       },
       {
         test: /\.(sa|sc|c)ss$/,
@@ -56,7 +51,7 @@ module.exports = {
       inject: false,
       hash: true,
       title: 'Rishi Ghan',
-      template: './public/index.html',
+      template: './public/index.ejs',
       filename: 'index.html',
       environment: 'development',
     }),
