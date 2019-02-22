@@ -8,8 +8,8 @@ const ListItem = props => (
                 <h2>{ post.title }</h2>
                 <div><MarkdownRenderer text={ post.content }/></div>
             </div>)}
-		</div>);
-	
+    </div>);
+
 ListItem.propTypes = {
   data: PropTypes.object,
 };
