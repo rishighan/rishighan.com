@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import kramed from "kramed";
 import hljs from "highlight.js";
 import Interweave from "interweave";
-import "highlight.js/styles/atom-one-dark.css";
+import "highlight.js/styles/monokai.css";
 import _ from "lodash";
 
 let options = {

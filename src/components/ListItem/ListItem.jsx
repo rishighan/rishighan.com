@@ -3,7 +3,7 @@ import _ from "lodash";
 import MarkdownRenderer from "../MarkdownRenderer/MarkdownRenderer";
 
 const ListItem = (props) => (
-    <div className="column is-half-desktop is-three-quarters-mobile">
+    <div className="column content is-two-thirds-desktop is-two-quarters-tablet is-two-quarters-mobile">
         {props.data.posts.map((post, idx) => 
             <div key={ idx }>
                 <h2>{ post.title }</h2>

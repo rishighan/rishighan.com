@@ -10,7 +10,7 @@ class HomeContainer extends Component {
     }
     render() {
 		return (!_.isEmpty(this.props.posts) && 
-			<div className="columns is-desktop">
+			<div className="columns is-centered">
 	   			<ListItem 
 			   	    data={ this.props.posts } />
 			</div>)
