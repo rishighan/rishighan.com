@@ -1,15 +1,16 @@
-import React from "react";
-import _ from "lodash";
-import MarkdownRenderer from "../MarkdownRenderer/MarkdownRenderer";
+import React from 'react';
+import PropTypes from 'prop-types';
+import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 
-const ListItem = (props) => (
+const ListItem = props => (
     <div className="column content is-two-thirds-desktop is-two-quarters-tablet is-two-quarters-mobile">
-        {props.data.posts.map((post, idx) => 
-            <div key={ idx }>
+        {props.data.posts.map((post, idx) => <div key={ idx }>
                 <h2>{ post.title }</h2>
                 <div><MarkdownRenderer text={ post.content }/></div>
-            </div>
-        )}
-    </div>)
-
+            </div>)}
+		</div>);
+	
+ListItem.propTypes = {
+  data: PropTypes.object,
+};
 export default ListItem;

@@ -1,47 +1,57 @@
-import path from "path";
-import webpack from "webpack";
+import path from 'path';
+import webpack from 'webpack';
+import MiniCSSExtractPlugin from 'mini-css-extract-plugin';
 
 module.exports = {
-    entry: ["babel-polyfill", "./src/index.js"],
-    output: {
-        filename: 'rgbundle.js',
-        path: path.resolve( __dirname, '../dist'),
-        publicPath: '../public'
-    },
-    mode: "development",
-    devtool: "source-map",
-    watch: true,
-    module: {
-        rules: [
-            {
-                test: /\.(js|jsx)$/,
-                include: path.resolve(__dirname, '../src'),
-                exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader"
-                }
-            },
-            {
-                test: /\.html$/,
-                use: {
-                    loader: "html-loader",
-                    options: { minimize: true }
-                }
-            },
-            {
-                test: /\.css$/,
-                use: ["style-loader", "css-loader"]
-            }
-        ]
-    },
-    resolve: {
-        extensions: ['*', '.js', '.jsx']
-    },
-    devServer: {
-        contentBase: '../dist',
-        watchContentBase: true
-    },
-    plugins: [
-        new webpack.HotModuleReplacementPlugin()
-    ]
-}
+  entry: ['babel-polyfill', './src/index.js'],
+  output: {
+    filename: 'rgbundle.js',
+    path: path.resolve(__dirname, '../dist'),
+    publicPath: '../public',
+  },
+  mode: 'development',
+  devtool: 'source-map',
+  watch: true,
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        include: path.resolve(__dirname, '../src'),
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+        },
+      },
+      {
+        test: /\.html$/,
+        use: {
+          loader: 'html-loader',
+          options: { minimize: true },
+        },
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.scss$/,
+        use: [{
+          loader: MiniCSSExtractPlugin.loader,
+        }, 'css-loader'],
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['*', '.js', '.jsx'],
+  },
+  devServer: {
+    contentBase: '../dist',
+    watchContentBase: true,
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new MiniCSSExtractPlugin({
+      filename: '[name].css',
+    }),
+  ],
+};
