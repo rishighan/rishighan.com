@@ -28,7 +28,18 @@ module.exports = {
           loader: 'html-loader',
           options: { minimize: true },
         },
-        'ejs-html-loader'],
+        'ejs-html-loader'
+      ]},
+      {
+        test: /\.(woff|woff2|ttf|otf)$/,
+          use: [{
+            loader: 'file-loader',
+              options: {
+                name: '[name].[ext]',
+                outputPath: 'fonts/',
+                publicPath: url => `../fonts/${url}`
+              }
+          }]
       },
       {
         test: /\.(sa|sc|c)ss$/,

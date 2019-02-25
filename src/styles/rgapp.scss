@@ -1,2 +1,12 @@
 @charset "utf-8";
 @import "../../node_modules/bulma/bulma.sass";
+
+@mixin font($font-family, $font-file) {
+    @font-face {
+        font-family: 'Moderat';
+        src: url($font-file)
+    }
+}
+// Typography
+$render-mode: optimizeLegibility;
+$body-family: font('Moderat', '../../public/assets/fonts/moderat/Moderat Regular.otf');
