@@ -28,18 +28,23 @@ module.exports = {
           loader: 'html-loader',
           options: { minimize: true },
         },
-        'ejs-html-loader'
-      ]},
+        'ejs-html-loader',
+        ],
+      },
       {
-        test: /\.(woff|woff2|ttf|otf)$/,
-          use: [{
-            loader: 'file-loader',
-              options: {
-                name: '[name].[ext]',
-                outputPath: 'fonts/',
-                publicPath: url => `../fonts/${url}`
-              }
-          }]
+        test: /\.(ttf|eot|woff|woff2)$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'fonts/',
+            publicPath: url => `./fonts/${url}`,
+          },
+        }],
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline-loader',
       },
       {
         test: /\.(sa|sc|c)ss$/,

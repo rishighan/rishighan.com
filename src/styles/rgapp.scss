@@ -1,12 +1,34 @@
 @charset "utf-8";
 @import "../../node_modules/bulma/bulma.sass";
 
-@mixin font($font-family, $font-file) {
-    @font-face {
-        font-family: 'Moderat';
-        src: url($font-file)
-    }
-}
+
+// @font-face {
+//     font-family: 'Moderat';
+//     src: url('../../public/assets/fonts/moderat/Moderat-Regular.eot');
+//     src: url('../../public/assets/fonts/moderat/Moderat-Regular.eot?#iefix') format('embedded-opentype'),
+//          url('../../dist/fonts/Moderat-Regular.svg#Moderat-Regular') format('svg'),
+//          url('../../public/assets/fonts/moderat/Moderat-Regular.ttf') format('truetype'),
+//          url('../../public/assets/fonts/moderat/Moderat-Regular.woff') format('woff'),
+//          url('../../public/assets/fonts/moderat/Moderat-Regular.woff2') format('woff2');
+//     font-weight: normal;
+//     font-style: normal;
+//   }
+
+//   @font-face {
+//     font-family: 'Moderat-Bold';
+//     src: url('../../public/assets/fonts/moderat/Moderat-Bold.eot');
+//     src: url('../../public/assets/fonts/moderat/Moderat-Bold.eot?#iefix') format('embedded-opentype'),
+//          url('../../public/assets/fonts/moderat/Moderat-Bold.svg#Moderat-Bold') format('svg'),
+//          url('../../public/assets/fonts/moderat/Moderat-Bold.ttf') format('truetype'),
+//          url('../../public/assets/fonts/moderat/Moderat-Bold.woff') format('woff'),
+//          url('../../public/assets/fonts/moderat/Moderat-Bold.woff2') format('woff2');
+//     font-weight: normal;
+//     font-style: normal;
+//   }
+  
 // Typography
 $render-mode: optimizeLegibility;
-$body-family: font('Moderat', '../../public/assets/fonts/moderat/Moderat Regular.otf');
+$family-sans-serif: "Moderat", sans-serif; 
+.content {
+    font-family: "Moderat", sans-serif;
+}
