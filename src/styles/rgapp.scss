@@ -1,34 +1,11 @@
 @charset "utf-8";
 @import "../../node_modules/bulma/bulma.sass";
+@import "./mixins/helpers";
 
-
-// @font-face {
-//     font-family: 'Moderat';
-//     src: url('../../public/assets/fonts/moderat/Moderat-Regular.eot');
-//     src: url('../../public/assets/fonts/moderat/Moderat-Regular.eot?#iefix') format('embedded-opentype'),
-//          url('../../dist/fonts/Moderat-Regular.svg#Moderat-Regular') format('svg'),
-//          url('../../public/assets/fonts/moderat/Moderat-Regular.ttf') format('truetype'),
-//          url('../../public/assets/fonts/moderat/Moderat-Regular.woff') format('woff'),
-//          url('../../public/assets/fonts/moderat/Moderat-Regular.woff2') format('woff2');
-//     font-weight: normal;
-//     font-style: normal;
-//   }
-
-//   @font-face {
-//     font-family: 'Moderat-Bold';
-//     src: url('../../public/assets/fonts/moderat/Moderat-Bold.eot');
-//     src: url('../../public/assets/fonts/moderat/Moderat-Bold.eot?#iefix') format('embedded-opentype'),
-//          url('../../public/assets/fonts/moderat/Moderat-Bold.svg#Moderat-Bold') format('svg'),
-//          url('../../public/assets/fonts/moderat/Moderat-Bold.ttf') format('truetype'),
-//          url('../../public/assets/fonts/moderat/Moderat-Bold.woff') format('woff'),
-//          url('../../public/assets/fonts/moderat/Moderat-Bold.woff2') format('woff2');
-//     font-weight: normal;
-//     font-style: normal;
-//   }
-  
 // Typography
+@include font-face('Proxima Nova Regular', '../../public/assets/fonts/Proxima Nova/Proxima Nova Regular', null, normal, ttf);
 $render-mode: optimizeLegibility;
-$family-sans-serif: "Moderat", sans-serif; 
+$family-sans-serif: 'Proxima Nova Regular', sans-serif;
 .content {
-    font-family: "Moderat", sans-serif;
+  font-family: 'Proxima Nova Regular', sans-serif;
 }
