@@ -3,6 +3,7 @@
 
 // Typography
 @include font-face('Proxima Nova Regular', '../../public/assets/fonts/Proxima Nova/Proxima Nova Regular', null, normal, ttf);
+@include font-face('Proxima Nova Bold', '../../public/assets/fonts/Proxima Nova/Proxima Nova Regular', bold, normal, ttf);
 @include font-face('Proxima Nova Light', '../../public/assets/fonts/Proxima Nova/Proxima Nova Light', null, normal, ttf);
 @include font-face('Source Code Pro Regular', '../../public/assets/fonts/Source Code Pro/Source Code Pro Regular', null, normal, ttf);
 
@@ -11,5 +12,19 @@ $family-sans-serif: 'Proxima Nova Regular', sans-serif;
 $family-primary: $family-sans-serif;
 $family-monospace: 'Source Code Pro Regular';
 $family-code: 'Source Code Pro Regular';
+
+// Content
+$content-blockquote-border-left: 0px none;
+$content-blockquote-padding: 1em;
+
+.content {
+	font-feature-settings: "case" "zero", "rlig", "ordn", "salt";
+	font-kerning: normal;
+
+	h2, h3, h4 {
+		font-family: 'Proxima Nova Light', sans-serif;
+	}
+
+}
 
 @import "../../node_modules/bulma/bulma.sass";
