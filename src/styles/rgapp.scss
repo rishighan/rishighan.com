@@ -15,7 +15,8 @@ $family-code: 'Source Code Pro Regular';
 
 // Content
 $content-blockquote-border-left: 0px none;
-$content-blockquote-padding: 1em;
+$content-blockquote-padding: 0em;
+$content-blockquote-background-color: none transparent;
 
 .content {
 	font-feature-settings: "case" "zero", "rlig", "ordn", "salt";
@@ -23,6 +24,10 @@ $content-blockquote-padding: 1em;
 
 	h2, h3, h4 {
 		font-family: 'Proxima Nova Light', sans-serif;
+	}
+
+	blockquote {
+		font-size: 0.75rem;
 	}
 
 }

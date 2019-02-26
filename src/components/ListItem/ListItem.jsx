@@ -4,10 +4,10 @@ import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 
 const ListItem = props => (
     <div className="column content is-two-thirds-desktop is-two-thirds-tablet is-mobile">
-        {props.data.posts.map((post, idx) => <div key={ idx }>
-                <h2>{ post.title }</h2>
-                <div><MarkdownRenderer text={ post.content }/></div>
-            </div>)}
+        {props.data.posts.map((post, idx) => <article key={ idx }>
+            <header><h2>{ post.title }</h2></header>
+            <section><MarkdownRenderer text={ post.content }/></section>
+        </article>)}
     </div>);
 
 ListItem.propTypes = {
