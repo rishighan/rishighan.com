@@ -3,7 +3,7 @@
 
 // Typography
 @include font-face('Proxima Nova Regular', '../../public/assets/fonts/Proxima Nova/Proxima Nova Regular', null, normal, ttf);
-@include font-face('Proxima Nova Bold', '../../public/assets/fonts/Proxima Nova/Proxima Nova Regular', bold, normal, ttf);
+@include font-face('Proxima Nova Bold', '../../public/assets/fonts/Proxima Nova/Proxima Nova Semibold', null, normal, ttf);
 @include font-face('Proxima Nova Italic', '../../public/assets/fonts/Proxima Nova/Proxima Nova Regular', italic, normal, ttf);
 @include font-face('Proxima Nova Light', '../../public/assets/fonts/Proxima Nova/Proxima Nova Light', null, normal, ttf);
 @include font-face('Source Code Pro Regular', '../../public/assets/fonts/Source Code Pro/Source Code Pro Regular', null, normal, ttf);
@@ -23,15 +23,21 @@ $content-blockquote-padding: 0em;
 $content-blockquote-background-color: none transparent;
 
 .content {
-	font-feature-settings: "case" "zero", "rlig", "ordn", "salt";
+	font-variant-numeric: tabular-nums;
+	font-variant-ligatures: common-ligatures contextual;
 	font-kerning: normal;
-
-	h2, h3, h4 {
+	article {
+		padding: 0 0 2em 0;
+	}
+	th, h3, h4 {
 		font-family: 'Proxima Nova Light', sans-serif;
 	}
-
+	
 	blockquote {
 		font-size: 0.75rem;
+		sup {
+			color: $black;
+		}
 	}
 
 }
