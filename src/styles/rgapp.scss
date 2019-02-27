@@ -74,7 +74,7 @@ $content-blockquote-background-color: none transparent;
 
 .content {
 	font-variant-numeric: tabular-nums;
-	font-variant-ligatures: common-ligatures contextual;
+	font-variant-ligatures: discretionary-ligatures;
 	font-kerning: normal;
 
 	article {
@@ -91,6 +91,7 @@ $content-blockquote-background-color: none transparent;
 		font-size: 0.75rem;
 
 		sup {
+			font-variant-position: super;
 			color: $black;
 		}
 	}
