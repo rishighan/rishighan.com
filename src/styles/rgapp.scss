@@ -4,6 +4,7 @@
 // Typography
 @include font-face('Proxima Nova Regular', '../../public/assets/fonts/Proxima Nova/Proxima Nova Regular', null, normal, ttf);
 @include font-face('Proxima Nova Bold', '../../public/assets/fonts/Proxima Nova/Proxima Nova Regular', bold, normal, ttf);
+@include font-face('Proxima Nova Italic', '../../public/assets/fonts/Proxima Nova/Proxima Nova Regular', italic, normal, ttf);
 @include font-face('Proxima Nova Light', '../../public/assets/fonts/Proxima Nova/Proxima Nova Light', null, normal, ttf);
 @include font-face('Source Code Pro Regular', '../../public/assets/fonts/Source Code Pro/Source Code Pro Regular', null, normal, ttf);
 
