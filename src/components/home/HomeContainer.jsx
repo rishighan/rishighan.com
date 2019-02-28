@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import ListItem from '../ListItem/ListItem';
+import Post from '../Post/Post';
 import { fetchPosts } from '../../actions/index';
 
 class HomeContainer extends Component {
@@ -13,7 +13,7 @@ class HomeContainer extends Component {
   render() {
     return (!_.isEmpty(this.props.posts)
         && <div className="columns is-centered">
-                <ListItem data={ this.props.posts } />
+                <Post data={ this.props.posts } />
            </div>);
   }
 }
