@@ -4,59 +4,13 @@
 // Typography
 @import url("//hello.myfonts.net/count/38dd7f");
 
-@font-face {
-	font-family: 'ArminGrotesk-Thin';
-	src: url('../../public/assets/fonts/Armin Grotesk/38DD7F_0_0.eot');
-	src: url('../../public/assets/fonts/Armin Grotesk/38DD7F_0_0.eot?#iefix') format('embedded-opentype'),
-		url('../../public/assets/fonts/Armin Grotesk/38DD7F_0_0.woff2') format('woff2'),
-		url('../../public/assets/fonts/Armin Grotesk/38DD7F_0_0.woff') format('woff'),
-		url('../../public/assets/fonts/Armin Grotesk/38DD7F_0_0.ttf') format('truetype');
-}
-
-@font-face {
-	font-family: 'ArminGrotesk-ThinItalic';
-	src: url('../../public/assets/fonts/Armin Grotesk/38DD7F_1_0.eot');
-	src: url('../../public/assets/fonts/Armin Grotesk/38DD7F_1_0.eot?#iefix') format('embedded-opentype'),
-		url('../../public/assets/fonts/Armin Grotesk/38DD7F_1_0.woff2') format('woff2'),
-		url('../../public/assets/fonts/Armin Grotesk/38DD7F_1_0.woff') format('woff'),
-		url('../../public/assets/fonts/Armin Grotesk/38DD7F_1_0.ttf') format('truetype');
-}
-
-@font-face {
-	font-family: 'ArminGrotesk-Normal';
-	src: url('../../public/assets/fonts/Armin Grotesk/38DD7F_2_0.eot');
-	src: url('../../public/assets/fonts/Armin Grotesk/38DD7F_2_0.eot?#iefix') format('embedded-opentype'),
-		url('../../public/assets/fonts/Armin Grotesk/38DD7F_2_0.woff2') format('woff2'),
-		url('../../public/assets/fonts/Armin Grotesk/38DD7F_2_0.woff') format('woff'),
-		url('../../public/assets/fonts/Armin Grotesk/38DD7F_2_0.ttf') format('truetype');
-}
-
-@font-face {
-	font-family: 'ArminGrotesk-Regular';
-	src: url('../../public/assets/fonts/Armin Grotesk/38DD7F_3_0.eot');
-	src: url('../../public/assets/fonts/Armin Grotesk/38DD7F_3_0.eot?#iefix') format('embedded-opentype'),
-		url('../../public/assets/fonts/Armin Grotesk/38DD7F_3_0.woff2') format('woff2'),
-		url('../../public/assets/fonts/Armin Grotesk/38DD7F_3_0.woff') format('woff'),
-		url('../../public/assets/fonts/Armin Grotesk/38DD7F_3_0.ttf') format('truetype');
-}
-
-@font-face {
-	font-family: 'ArminGrotesk-SemiBoldItalic';
-	src: url('../../public/assets/fonts/Armin Grotesk/38DD7F_4_0.eot');
-	src: url('../../public/assets/fonts/Armin Grotesk/38DD7F_4_0.eot?#iefix') format('embedded-opentype'), url('../../public/assets/fonts/Armin Grotesk/38DD7F_4_0.woff2') format('woff2'), url('../../public/assets/fonts/Armin Grotesk/38DD7F_4_0.woff') format('woff'), url('../../public/assets/fonts/Armin Grotesk/38DD7F_4_0.ttf') format('truetype');
-}
-
-@font-face {
-	font-family: 'ArminGrotesk-SemiBold';
-	src: url('../../public/assets/fonts/Armin Grotesk/38DD7F_5_0.eot');
-	src: url('../../public/assets/fonts/Armin Grotesk/38DD7F_5_0.eot?#iefix') format('embedded-opentype'), url('../../public/assets/fonts/Armin Grotesk/38DD7F_5_0.woff2') format('woff2'), url('../../public/assets/fonts/Armin Grotesk/38DD7F_5_0.woff') format('woff'), url('../../public/assets/fonts/Armin Grotesk/38DD7F_5_0.ttf') format('truetype');
-}
-
-@include font-face('Proxima Nova Regular', '../../public/assets/fonts/Proxima Nova/Proxima Nova Regular', null, normal, ttf);
-@include font-face('Proxima Nova Bold', '../../public/assets/fonts/Proxima Nova/Proxima Nova Semibold', null, normal, ttf);
-@include font-face('Proxima Nova Italic', '../../public/assets/fonts/Proxima Nova/Proxima Nova Regular', italic, normal, ttf);
-@include font-face('Proxima Nova Light', '../../public/assets/fonts/Proxima Nova/Proxima Nova Light', null, normal, ttf);
 @include font-face('Source Code Pro Regular', '../../public/assets/fonts/Source Code Pro/Source Code Pro Regular', null, normal, ttf);
+@include font-face('ArminGrotesk-Regular', '../../public/assets/fonts/Armin Grotesk/38DD7F_3_0', null, normal, eot ttf woff woff2);
+@include font-face('ArminGrotesk-Thin', '../../public/assets/fonts/Armin Grotesk/38DD7F_0_0', null, normal, eot ttf woff woff2);
+@include font-face('ArminGrotesk-ThinItalic', '../../public/assets/fonts/Armin Grotesk/38DD7F_1_0', null, normal, eot ttf woff woff2);
+@include font-face('ArminGrotesk-Normal', '../../public/assets/fonts/Armin Grotesk/38DD7F_2_0', null, normal, eot ttf woff woff2);
+@include font-face('ArminGrotesk-SemiBold', '../../public/assets/fonts/Armin Grotesk/38DD7F_5_0', null, normal, eot ttf woff woff2);
+@include font-face('ArminGrotesk-SemiBoldItalic', '../../public/assets/fonts/Armin Grotesk/38DD7F_4_0', null, normal, eot ttf woff woff2);
 
 $render-mode: optimizeLegibility;
 $family-sans-serif: 'ArminGrotesk-Regular', sans-serif;
@@ -79,23 +33,21 @@ $content-blockquote-background-color: none transparent;
 
 	article {
 		padding: 0 0 2em 0;
-	}
 
-	th,
-	h3,
-	h4 {
-		font-family: 'ArminGrotesk-Thin', sans-serif;
-	}
+		h2 {
+			font-family: 'ArminGrotesk-Normal', sans-serif;
+		}
+		th, h3, h4 {
+			font-family: 'ArminGrotesk-Thin', sans-serif;
+		}
 
-	blockquote {
-		font-size: 0.75rem;
-
-		sup {
-			font-variant-position: super;
-			color: $black;
+		blockquote {
+			font-size: 0.75rem;
+			sup {
+				color: $black;
+			}
 		}
 	}
-
 }
 
 @import "../../node_modules/bulma/bulma.sass";
