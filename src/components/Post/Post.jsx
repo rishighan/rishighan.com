@@ -12,5 +12,7 @@ const Post = props => (
 
 Post.propTypes = {
   data: PropTypes.object,
+  format: PropTypes.string,
+  type: PropTypes.string,
 };
 export default Post;
