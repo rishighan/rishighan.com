@@ -11,7 +11,6 @@ This is a basic boilerplate built on:
 
 ### Local development
 
-`nvm i 10.15.0 && nvm use 10.15.0`
-
-1. Spin up the local node server using `npm run dev` 
-2. Run `webpack` while watching for file changes using `npm run hot`
+1. `nvm i 10.15.0 && nvm use 10.15.0`
+2. Spin up the local node server using `npm run dev` 
+3. Run `webpack` while watching for file changes using `npm run hot`
