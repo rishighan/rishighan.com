@@ -1,5 +1,5 @@
 import React from 'react';
-import HomeContainer from './Home/HomeContainer';
+import HomeContainer from './HomeContainer/HomeContainer';
 
 const AppContainer = () => (<div>
   Here <HomeContainer />

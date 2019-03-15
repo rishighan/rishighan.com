@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 
 const Post = props => (
-    <div className="column content is-two-thirds-tablet is-half-mobile">
+    <div className="column content is-two-thirds-tablet is-full-mobile">
         {props.data.posts.map((post, idx) => <article key={ idx }>
             <header><h2>{ post.title }</h2></header>
             <section><MarkdownRenderer text={ post.content }/></section>

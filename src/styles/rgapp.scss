@@ -26,6 +26,11 @@ $content-blockquote-border-left: 0px none;
 $content-blockquote-padding: 0em;
 $content-blockquote-background-color: none transparent;
 
+.navbar {
+	text-transform: uppercase;
+	font-family: 'ArminGrotesk-Normal', sans-serif;
+	font-kerning: normal;
+}
 .content {
 	font-variant-numeric: tabular-nums;
 	font-variant-ligatures: discretionary-ligatures;
