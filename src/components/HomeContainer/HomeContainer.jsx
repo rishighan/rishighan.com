@@ -12,9 +12,13 @@ class HomeContainer extends Component {
 
   render() {
     return (!_.isEmpty(this.props.posts)
-        && <div className="columns is-centered">
-                <Post data={ this.props.posts } />
-           </div>);
+      && <section className="section">
+          <div className="container">
+            <div className="columns is-centered">
+              <Post data={this.props.posts} />
+            </div>
+          </div>
+      </section>);
   }
 }
 function mapStateToProps(state) {
