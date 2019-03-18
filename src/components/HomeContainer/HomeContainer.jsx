@@ -30,6 +30,10 @@ class HomeContainer extends Component {
         displayName: 'colophon',
         link: '/colophon',
       },
+      {
+        displayName: 'archive',
+        link: '/archive'
+      }
     ];
   }
 
