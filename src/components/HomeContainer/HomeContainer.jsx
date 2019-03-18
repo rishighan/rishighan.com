@@ -12,28 +12,28 @@ class HomeContainer extends Component {
     this.navItems = [
       {
         displayName: 'home',
-        link: '/',
+        href: '/',
       },
       {
         displayName: 'work',
-        link: '/work',
+        href: '/work',
       },
       {
         displayName: 'trampoline',
-        link: '/trampoline',
+        href: '/trampoline',
       },
       {
         displayName: 'illustrations',
-        link: '/illustrations',
+        href: '/illustrations',
       },
       {
         displayName: 'colophon',
-        link: '/colophon',
+        href: '/colophon',
       },
       {
         displayName: 'archive',
-        link: '/archive'
-      }
+        href: '/archive',
+      },
     ];
   }
 
