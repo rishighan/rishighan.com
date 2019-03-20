@@ -1,8 +1,11 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import HomeContainer from './HomeContainer/HomeContainer';
 
 const AppContainer = () => (
-  <HomeContainer />
+  <Router>
+    <HomeContainer />
+  </Router>
 );
 
 export default AppContainer;
