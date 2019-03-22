@@ -5,6 +5,7 @@ import _ from 'lodash';
 import Post from '../Post/Post';
 import Navigation from '../Navigation/Navigation';
 import { fetchPosts } from '../../actions/index';
+import Work from '../../pages/Work';
 
 class HomeContainer extends Component {
   componentDidMount() {
@@ -13,26 +14,32 @@ class HomeContainer extends Component {
       {
         displayName: 'home',
         href: '/',
+        component: 'Home',
       },
       {
         displayName: 'work',
         href: '/work',
+        component: Work,
       },
       {
         displayName: 'trampoline',
         href: '/trampoline',
+        component: 'Trampoline',
       },
       {
         displayName: 'illustrations',
         href: '/illustrations',
+        component: 'Illustrations',
       },
       {
         displayName: 'colophon',
         href: '/colophon',
+        component: 'Colophon',
       },
       {
         displayName: 'archive',
         href: '/archive',
+        component: 'Archive',
       },
     ];
   }
