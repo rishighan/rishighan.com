@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
-const Work = () => (
-    <div>work</div>
-);
+class Work extends Component {
+    render() {
+        return (<div> Work </div>);
+    }
+}
 export default Work;
