@@ -1,6 +1,6 @@
 import React from 'react';
 import {
- Route, Switch, Link, BrowserRouter as Router 
+ Route, Link, BrowserRouter as Router 
 } from 'react-router-dom';
 import Navigation from './Navigation/Navigation';
 import HomeContainer from './HomeContainer/HomeContainer';
@@ -44,20 +44,20 @@ const AppContainer = () => (
   <section className="section">
     <div className="container">
       <Router>
-        <div>
+       <div>
           {/* <Navigation navItems={navItems} /> */}
           <nav className="navbar is-full-mobile">
-                    <ul>
-                        {navItems.map((navItem, idx) => <li key={ idx }>
-                            <Link to={ navItem.href }>
-                                {navItem.displayName}
-                            </Link>
-                        </li>)}
-                    </ul>
-                </nav>
-          <Switch>
-            {navItems.map((navItem, idx) => <Route path={ navItem.href } key={ idx } component={ navItem.component } />)}
-          </Switch>
+              <ul>
+                  {navItems.map((navItem, idx) => <li key={ idx }>
+                      <Link to={ navItem.href }>
+                          {navItem.displayName}
+                      </Link>
+                  </li>)}
+              </ul>
+          </nav>
+          <div className="columns is-centered">
+            {navItems.map((navItem, idx) => <Route exact path={ navItem.href } key={ idx } component={ navItem.component } />)}
+          </div>
         </div>
       </Router>
     </div>

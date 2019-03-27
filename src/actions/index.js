@@ -5,7 +5,22 @@ import {
   FETCH_POSTS_SUCCESS,
 } from '../constants/action-types';
 
-export const fetchPosts = () => async (dispatch) => {
+// sample options obj
+/*
+  options = {
+    callType: string,
+    callURIAction: 'findByTagName',
+    // for findByTagName
+    callParams: {
+      tagName: 'Blog',
+      pageOffset: 1,
+      pageLimit: 10
+    }
+
+  }
+
+*/
+export const fetchPosts = (options) => async (dispatch) => {
   try {
     dispatch({
       type: FETCH_POSTS_REQUEST,
