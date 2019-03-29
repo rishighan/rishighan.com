@@ -1,15 +1,15 @@
 <!-- What's a surfer with a bane? 
-     Hearty chum tossed with a hurricane-->
+     Hearty chum tossed with a hurricane -->
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
         <title><%= htmlWebpackPlugin.options.title %></title>
-        <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.chunks.main.css %>" />
+        <link rel="stylesheet" href="/dist<%= htmlWebpackPlugin.files.css %>" />
     </head>
     <body>
         <div id="app"></div>
     </body>
-    <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
+    <script type="text/javascript" src="/dist<%= htmlWebpackPlugin.files.js %>"></script>
 </html>
