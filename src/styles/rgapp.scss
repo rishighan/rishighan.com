@@ -4,13 +4,13 @@
 // Typography
 @import url("//hello.myfonts.net/count/38dd7f");
 
-@include font-face('Source Code Pro Regular', '../../public/assets/fonts/Source Code Pro/Source Code Pro Regular', null, normal, ttf);
-@include font-face('ArminGrotesk-Regular', '../../public/assets/fonts/Armin Grotesk/38DD7F_3_0', null, normal, eot ttf woff woff2);
-@include font-face('ArminGrotesk-Thin', '../../public/assets/fonts/Armin Grotesk/38DD7F_0_0', null, normal, eot ttf woff woff2);
-@include font-face('ArminGrotesk-ThinItalic', '../../public/assets/fonts/Armin Grotesk/38DD7F_1_0', null, normal, eot ttf woff woff2);
-@include font-face('ArminGrotesk-Normal', '../../public/assets/fonts/Armin Grotesk/38DD7F_2_0', null, normal, eot ttf woff woff2);
-@include font-face('ArminGrotesk-SemiBold', '../../public/assets/fonts/Armin Grotesk/38DD7F_5_0', null, normal, eot ttf woff woff2);
-@include font-face('ArminGrotesk-SemiBoldItalic', '../../public/assets/fonts/Armin Grotesk/38DD7F_4_0', null, normal, eot ttf woff woff2);
+@include font-face('Source Code Pro Regular', '../../public/assets/fonts/Source Code Pro/Source Code Pro Regular', normal, normal, ttf);
+@include font-face('ArminGrotesk-Regular', '../../public/assets/fonts/Armin Grotesk/38DD7F_3_0', normal, normal, eot ttf woff woff2);
+@include font-face('ArminGrotesk-Thin', '../../public/assets/fonts/Armin Grotesk/38DD7F_0_0', normal, normal, eot ttf woff woff2);
+@include font-face('ArminGrotesk-ThinItalic', '../../public/assets/fonts/Armin Grotesk/38DD7F_1_0', normal, normal, eot ttf woff woff2);
+@include font-face('ArminGrotesk-Normal', '../../public/assets/fonts/Armin Grotesk/38DD7F_2_0', normal, normal, eot ttf woff woff2);
+@include font-face('ArminGrotesk-SemiBold', '../../public/assets/fonts/Armin Grotesk/38DD7F_5_0', normal, normal, eot ttf woff woff2);
+@include font-face('ArminGrotesk-SemiBoldItalic', '../../public/assets/fonts/Armin Grotesk/38DD7F_4_0', normal, normal, eot ttf woff woff2);
 
 $render-mode: optimizeLegibility;
 $family-sans-serif: 'ArminGrotesk-Regular', sans-serif;
@@ -38,12 +38,9 @@ $content-blockquote-background-color: none transparent;
 
 	article {
 		padding: 0 0 2em 0;
-
-		h2 {
-			font-family: 'ArminGrotesk-Normal', sans-serif;
-		}
-		th, h3, h4 {
-			font-family: 'ArminGrotesk-Thin', sans-serif;
+		th, h2, h3, h4 {
+			font-family: 'ArminGrotesk-Regular', sans-serif;
+			font-weight: normal;
 		}
 
 		blockquote {
