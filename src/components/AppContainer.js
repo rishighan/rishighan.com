@@ -1,6 +1,6 @@
 import React from 'react';
 import {
- Route, Link, BrowserRouter as Router 
+  Route, Link, BrowserRouter as Router,
 } from 'react-router-dom';
 import Navigation from './Navigation/Navigation';
 import HomeContainer from './HomeContainer/HomeContainer';

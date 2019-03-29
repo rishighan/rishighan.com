@@ -12,13 +12,13 @@ const port = process.env.PORT || 8080;
 app.use('/dist', express.static(path.resolve(__dirname, '../dist')));
 
 // catch-all
-app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, '../dist/index.html'), function(err) {
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'), (err) => {
     if (err) {
-      res.status(500).send(err)
+      res.status(500).send(err);
     }
-  })
-})
+  });
+});
 
 
 app.listen(port, () => {

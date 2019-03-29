@@ -5,35 +5,31 @@ import {
   FETCH_POSTS_SUCCESS,
 } from '../constants/action-types';
 
-// sample options obj
+// sample options signature
 /*
-  options = {
-    callType: string,
+  {
+    callMethod: string,
     callURIAction: 'findByTagName',
     // for findByTagName
     callParams: {
       tagName: 'Blog',
       pageOffset: 1,
       pageLimit: 10
-    }
-
+    },
+    callHeaders :{}
   }
-
 */
-export const fetchPosts = (options) => async (dispatch) => {
+export const fetchPosts = options => async (dispatch) => {
   try {
     dispatch({
       type: FETCH_POSTS_REQUEST,
       isFetching: true,
     });
-    const serviceURI = 'http://localhost:3000/api/v1/posts/findByTagName';
+    const serviceBaseURI = 'http://localhost:3000/api/v1/posts/';
+    const serviceURI = serviceBaseURI + options.callURIAction;
     const response = await axios.get(serviceURI, {
-      method: 'get',
-      params: {
-        tagName: 'Blog',
-        pageOffset: 1,
-        pageLimit: 20,
-      },
+      method: options.callMethod,
+      params: options.callParams,
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',

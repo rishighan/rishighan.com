@@ -24,7 +24,16 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = dispatch => ({
   fetchPosts() {
-    dispatch(fetchPosts());
+    const options = {
+      callMethod: 'get',
+      callURIAction: 'findByTagName',
+      callParams: {
+        tagName: 'Blog',
+        pageOffset: 1,
+        pageLimit: 10,
+      },
+    };
+    dispatch(fetchPosts(options));
   },
 });
 
