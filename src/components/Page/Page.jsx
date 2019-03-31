@@ -5,14 +5,15 @@ import _ from 'lodash';
 import Post from '../Post/Post';
 import { fetchPosts } from '../../actions/index';
 
-class HomeContainer extends Component {
+class Page extends Component {
   componentDidMount() {
     this.props.fetchPosts();
   }
 
   render() {
     return (!_.isEmpty(this.props.posts)
-      && <Post data={this.props.posts} />
+      && <Post data={ this.props.posts } 
+               postType={ this.props.postOptions.type } />
     );
   }
 }
@@ -22,23 +23,14 @@ function mapStateToProps(state) {
   };
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchPosts() {
-    const options = {
-      callMethod: 'get',
-      callURIAction: 'findByTagName',
-      callParams: {
-        tagName: 'Blog',
-        pageOffset: 1,
-        pageLimit: 10,
-      },
-    };
-    dispatch(fetchPosts(options));
+    dispatch(fetchPosts(ownProps.callOptions));
   },
 });
 
-HomeContainer.propTypes = {
+Page.propTypes = {
   posts: PropTypes.object,
   fetchPosts: PropTypes.func,
 };
-export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(Page);

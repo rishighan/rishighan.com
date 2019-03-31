@@ -3,20 +3,48 @@ import {
   Route, Link, BrowserRouter as Router,
 } from 'react-router-dom';
 import Navigation from './Navigation/Navigation';
-import HomeContainer from './HomeContainer/HomeContainer';
-import Work from '../pages/Work';
+import Page from './Page/Page';
 
 
 const navItems = [
   {
     displayName: 'home',
     href: '/',
-    component: HomeContainer,
+    render: (props) => <Page callOptions={
+      {
+        callMethod: 'get',
+        callURIAction: 'findByTagName',
+        callParams: {
+          tagName: 'Blog',
+          pageOffset: 1,
+          pageLimit: 10,
+        },
+      }
+    } postOptions={
+      {
+        type: 'blogPost'
+      }
+    }/>,
   },
   {
     displayName: 'work',
     href: '/work',
-    component: Work,
+    render: (props) => <Page callOptions={
+      {
+        callMethod: 'get',
+        callURIAction: 'findByTagName',
+        callParams: {
+          tagName: 'Work',
+          pageOffset: 1,
+          pageLimit: 5
+        },
+      }
+    } postOptions={
+      {
+        type: 'titles'
+      }
+    } />,
+    
   },
   // {
   //   displayName: 'trampoline',
@@ -44,19 +72,19 @@ const AppContainer = () => (
   <section className="section">
     <div className="container">
       <Router>
-       <div>
+        <div>
           {/* <Navigation navItems={navItems} /> */}
           <nav className="navbar is-full-mobile">
-              <ul>
-                  {navItems.map((navItem, idx) => <li key={ idx }>
-                      <Link to={ navItem.href }>
-                          {navItem.displayName}
-                      </Link>
-                  </li>)}
-              </ul>
+            <ul>
+              {navItems.map((navItem, idx) => <li key={idx}>
+                <Link to={navItem.href}>
+                  {navItem.displayName}
+                </Link>
+              </li>)}
+            </ul>
           </nav>
           <div className="columns is-centered">
-            {navItems.map((navItem, idx) => <Route exact path={ navItem.href } key={ idx } component={ navItem.component } />)}
+            {navItems.map((navItem, idx) => <Route exact path={navItem.href} key={idx} render={navItem.render} />)}
           </div>
         </div>
       </Router>
