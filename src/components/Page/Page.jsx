@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import Post from '../Post/Post';
@@ -11,8 +12,8 @@ class Page extends Component {
   }
 
   render() {
-    return (!_.isEmpty(this.props.posts)
-      && <Post data={ this.props.posts } 
+    return (_.isEmpty(this.props.posts) ? 'loading...'
+      : <Post data={ this.props.posts }
                postType={ this.props.postOptions.type } />
     );
   }
@@ -32,5 +33,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 Page.propTypes = {
   posts: PropTypes.object,
   fetchPosts: PropTypes.func,
+  postOptions: PropTypes.object,
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Page);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Page));

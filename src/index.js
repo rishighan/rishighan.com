@@ -1,16 +1,17 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
 import { Provider } from 'react-redux';
-import store from './store/index';
+import configureStore, { history } from './store/index';
 import './styles/rgapp.scss';
 import AppContainer from './components/AppContainer';
 
+const store = configureStore();
 render(
     <Provider store={ store }>
-      <BrowserRouter>
+      <ConnectedRouter history={ history }>
         <AppContainer/>
-      </BrowserRouter>
+      </ConnectedRouter>
     </Provider>,
     document.getElementById('app'),
 );

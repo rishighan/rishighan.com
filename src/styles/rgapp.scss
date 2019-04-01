@@ -36,13 +36,21 @@ $content-blockquote-background-color: none transparent;
 	font-variant-ligatures: discretionary-ligatures;
 	font-kerning: normal;
 
-	article {
-		padding: 0 0 2em 0;
+	article, div {
+		margin-bottom: 0.7em;
+		.timestamp {
+			margin-bottom: 1em;
+		}
 		th, h2, h3, h4 {
 			font-family: 'ArminGrotesk-Regular', sans-serif;
 			font-weight: normal;
 		}
-
+		h3 {
+			margin-bottom: 0.2em;
+		}
+	}
+	article {
+		padding: 0 0 2em 0;
 		blockquote {
 			font-size: 0.75rem;
 			sup {
