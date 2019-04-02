@@ -14,7 +14,7 @@ class Page extends Component {
   render() {
     return (_.isEmpty(this.props.posts) ? 'loading...'
       : <Post data={ this.props.posts }
-               postType={ this.props.postOptions.type } />
+              postType={ this.props.postOptions.type } />
     );
   }
 }

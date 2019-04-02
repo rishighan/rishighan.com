@@ -6,7 +6,8 @@ import configureStore, { history } from './store/index';
 import './styles/rgapp.scss';
 import AppContainer from './components/AppContainer';
 
-const store = configureStore();
+const store = configureStore({});
+
 render(
     <Provider store={ store }>
       <ConnectedRouter history={ history }>
