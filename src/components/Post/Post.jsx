@@ -5,23 +5,27 @@ import Heading from '../Heading/Heading';
 import Timestamp from '../Timestamp/Timestamp';
 
 const renderPost = (data) => ({
-    'blogPost': <div className="column content is-two-thirds-tablet is-full-mobile">
+    'blogPost': <React.Fragment>
                     {data.map((post, idx) => <article key={idx}>
                         <Heading headingText={post.title} />
                         <Timestamp date={post.date_updated} dateFormat={'D MMM, YYYY '} />
                         <section><MarkdownRenderer text={post.content} /></section>
                     </article>)}
-                </div>,
-    'titles':   <div className="column content is-two-thirds-tablet is-full-mobile">
+                </React.Fragment>,
+    'titles':   <React.Fragment>
                     {data.map((post, idx) => <div key={ idx }>
                             <Heading headingText={ post.title } />
                             <span>{ post.excerpt } </span>
                         </div>
                     )}
-                </div>,
-    'single':   <div className="column content is-two-thirds-tablet is-full-mobile">
-                    {}
-                </div>
+                </React.Fragment>,
+    'single':   <React.Fragment>
+                    <article>
+                        <Heading headingText={ data.title } />
+                        <Timestamp date={ data.date_updated } dateFormat={ 'D MMM, YYYY' } />
+                        <section><MarkdownRenderer text={ data.content } /></section>
+                    </article>
+                </React.Fragment>
 });
 
 const Post = (props) => renderPost(props.data.posts)[props.postType];

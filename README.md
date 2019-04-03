@@ -6,6 +6,7 @@ This is a basic boilerplate built on:
 + redux 6.0.0
 + redux-thunk 2.3.0 
 + react-router 4.3.1
++ connected-react-router 6.3.2
 + webpack 4.29.3 configured with `"@babel/core": "^7.2.2"`
 + Support for `async/await`
 

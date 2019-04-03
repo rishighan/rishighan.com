@@ -13,8 +13,10 @@ class Page extends Component {
 
   render() {
     return (_.isEmpty(this.props.posts) ? <div>Loading...</div>
-      : <Post data={ this.props.posts }
-              postType={ this.props.postOptions.type } />
+      : <div className="column content is-two-thirds-tablet is-full-mobile">
+            <Post data={ this.props.posts }
+                  postType={ this.props.postOptions.type } />
+        </div>
     );
   }
 }
