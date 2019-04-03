@@ -10,9 +10,9 @@ const store = configureStore({});
 
 render(
     <Provider store={ store }>
-      <ConnectedRouter history={ history }>
+      {/* <ConnectedRouter history={ history }> */}
         <AppContainer/>
-      </ConnectedRouter>
+      {/* </ConnectedRouter> */}
     </Provider>,
     document.getElementById('app'),
 );

@@ -1,3 +1,4 @@
+import { LOCATION_CHANGE } from 'connected-react-router';
 import {
   FETCH_POSTS_REQUEST,
   FETCH_POSTS_ERROR,
@@ -11,6 +12,10 @@ const initialState = {
 };
 function postsReducer(state = initialState, action) {
   switch (action.type) {
+    case LOCATION_CHANGE:
+      return {
+        posts: [],
+      }
     case FETCH_POSTS_REQUEST:
       return {
         ...state,

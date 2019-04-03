@@ -3,6 +3,8 @@ import React from 'react';
 import {
   Route, Link, BrowserRouter as Router,
 } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import { history } from '../store/index';
 import Navigation from './Navigation/Navigation';
 import Page from './Page/Page';
 
@@ -71,7 +73,7 @@ const navItems = [
 const AppContainer = () => (
   <section className="section">
     <div className="container">
-      <Router>
+      <ConnectedRouter history={ history }>
         <div>
           {/* <Navigation navItems={navItems} /> */}
           <nav className="navbar is-full-mobile">
@@ -85,10 +87,11 @@ const AppContainer = () => (
           </nav>
           <div className="columns is-centered">
             {navItems.map((navItem, idx) => <Route exact path={ navItem.href }
-                                                   key={ idx } render={ navItem.render } />)}
+                                                   key={ idx } 
+                                                   render={ navItem.render } />)}
           </div>
         </div>
-      </Router>
+      </ConnectedRouter>
     </div>
   </section>
 );

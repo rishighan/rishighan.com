@@ -13,7 +13,7 @@ const renderPost = (data) => ({
                     </article>)}
                 </div>,
     'titles':   <div className="column content is-two-thirds-tablet is-full-mobile">
-                    {data.map((post, idx) => <div>
+                    {data.map((post, idx) => <div key={ idx }>
                             <Heading headingText={ post.title } />
                             <span>{ post.excerpt } </span>
                         </div>
