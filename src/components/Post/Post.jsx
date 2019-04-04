@@ -5,11 +5,11 @@ import Heading from '../Heading/Heading';
 import Timestamp from '../Timestamp/Timestamp';
 
 const renderPost = (data) => ({
-    'blogPost': <React.Fragment>
+    'blog':     <React.Fragment>
                     {data.map((post, idx) => <article key={idx}>
-                        <Heading headingText={post.title} />
-                        <Timestamp date={post.date_updated} dateFormat={'D MMM, YYYY '} />
-                        <section><MarkdownRenderer text={post.content} /></section>
+                        <Heading headingText={ post.title } postSlug={ post.slug } />
+                        <Timestamp date={ post.date_updated } dateFormat={ 'D MMM, YYYY ' } />
+                        <section><MarkdownRenderer text={ post.content } /></section>
                     </article>)}
                 </React.Fragment>,
     'titles':   <React.Fragment>
@@ -20,11 +20,11 @@ const renderPost = (data) => ({
                     )}
                 </React.Fragment>,
     'single':   <React.Fragment>
-                    <article>
-                        <Heading headingText={ data.title } />
-                        <Timestamp date={ data.date_updated } dateFormat={ 'D MMM, YYYY' } />
-                        <section><MarkdownRenderer text={ data.content } /></section>
-                    </article>
+                    {data[0] && <article>
+                        <Heading headingText={ data[0].title } />
+                        <Timestamp date={ data[0].date_updated } dateFormat={ 'D MMM, YYYY' } />
+                        <section><MarkdownRenderer text={ data[0].content } /></section>
+                    </article>}
                 </React.Fragment>
 });
 

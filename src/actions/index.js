@@ -5,20 +5,6 @@ import {
   FETCH_POSTS_SUCCESS,
 } from '../constants/action-types';
 
-// sample options signature
-/*
-  {
-    callMethod: string,
-    callURIAction: 'findByTagName',
-    // for findByTagName
-    callParams: {
-      tagName: 'Blog',
-      pageOffset: 1,
-      pageLimit: 10
-    },
-    callHeaders :{}
-  }
-*/
 export const fetchPosts = options => async (dispatch) => {
   try {
     dispatch({
