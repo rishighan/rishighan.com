@@ -20,6 +20,7 @@ class Page extends Component {
     );
   }
 }
+
 function mapStateToProps(state) {
   return {
     posts: state.posts,

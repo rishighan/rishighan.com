@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import configureStore, { history } from './store/index';
+import configureStore from './store/index';
 import './styles/rgapp.scss';
 import AppContainer from './components/AppContainer';
 

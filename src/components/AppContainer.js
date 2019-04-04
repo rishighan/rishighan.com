@@ -5,42 +5,36 @@ import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../store/index';
 import Navigation from './Navigation/Navigation';
 import Page from './Page/Page';
+import postApiConfiguration from '../utils/postApi.config';
 
 
 const navItems = [
   {
     displayName: 'home',
     href: '/',
-    render: () => <Page callOptions={
+    render: () => <Page callOptions={postApiConfiguration('get', 'findByTagName',
       {
-        callMethod: 'get',
-        callURIAction: 'findByTagName',
-        callParams: {
-          tagName: 'Blog',
-          pageOffset: 1,
-          pageLimit: 10,
-        },
+        tagName: 'Blog',
+        pageOffset: 1,
+        pageLimit: 15,
+      })}
+      postOptions={
+        {
+          type: 'blog',
+        }
       }
-    } postOptions={
-      {
-        type: 'blog',
-      }
-    } />,
+    />,
   },
   {
     displayName: 'work',
     href: '/work',
-    render: () => <Page callOptions={
+    render: () => <Page callOptions={postApiConfiguration('get', 'findByTagName',
       {
-        callMethod: 'get',
-        callURIAction: 'findByTagName',
-        callParams: {
-          tagName: 'Work',
-          pageOffset: 1,
-          pageLimit: 5,
-        },
-      }
-    } postOptions={
+        tagName: 'Work',
+        pageOffset: 1,
+        pageLimit: 5,
+      })}
+      postOptions={
       {
         type: 'titles',
       }
@@ -49,27 +43,33 @@ const navItems = [
   {
     displayName: 'trampoline',
     href: '/trampoline',
-    render: () => <Page callOptions={
+    render: () => <Page callOptions={postApiConfiguration('get', 'findByTagName',
       {
-        callMethod: 'get',
-        callURIAction: 'findByTagName',
-        callParams: {
-          tagName: 'Trampoline',
-          pageOffset: 1,
-          pageLimit: 5,
-        },
-      }
-    } postOptions={
+        tagName: 'Trampoline',
+        pageOffset: 1,
+        pageLimit: 5,
+      })}
+      postOptions={
       {
         type: 'blog',
       }
     } />,
   },
-  // {
-  //   displayName: 'illustrations',
-  //   href: '/illustrations',
-  //   component: 'Illustrations',
-  // },
+  {
+    displayName: 'illustrations',
+    href: '/illustrations',
+    render: () => <Page callOptions={postApiConfiguration('get', 'findByTagName',
+      {
+        tagName: 'Illustrations',
+        pageOffset: 1,
+        pageLimit: 5,
+      })}
+      postOptions={
+      {
+        type: 'illustrations',
+      }
+    } />,
+  },
   // {
   //   displayName: 'colophon',
   //   href: '/colophon',
@@ -101,7 +101,7 @@ const AppContainer = () => (
             {navItems.map((navItem, idx) => <Route exact path={navItem.href}
               key={idx}
               render={navItem.render} />)}
-            <Route path={`/post/:postSlug`} render={props => <Page callOptions={
+            <Route path={'/post/:postSlug'} render={props => <Page callOptions={
               {
                 callMethod: 'get',
                 callURIAction: 'retrieve',
