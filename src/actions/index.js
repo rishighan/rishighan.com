@@ -21,7 +21,6 @@ export const fetchPosts = options => async (dispatch) => {
         'Access-Control-Allow-Origin': '*',
       },
     });
-    console.log(response.data)
     dispatch({
       type: FETCH_POSTS_SUCCESS,
       posts: response.data,

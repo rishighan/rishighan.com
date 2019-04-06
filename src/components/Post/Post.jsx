@@ -37,7 +37,7 @@ const renderPost = data => ({
                  </React.Fragment>,
   archive: <React.Fragment>
                 <ul>
-                    { data[0] && data[0].archivedPosts && data[0].archivedPosts.map((post, idx) => <li>
+                    { data[0] && data[0].archivedPosts && data[0].archivedPosts.map((post, idx) => <li key={ idx }>
                         <Heading headingText={ post.title } postSlug={ post.slug } />
                     </li>) }
                 </ul>
