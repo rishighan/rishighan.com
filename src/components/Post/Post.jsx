@@ -15,7 +15,7 @@ const renderPost = data => ({
         </React.Fragment>,
   titles: <React.Fragment>
                     {data.map((post, idx) => <div key={ idx }>
-                            <Heading headingText={ post.title } />
+                            <Heading headingText={ post.title } postSlug = { post.slug } />
                             <span>{ post.excerpt } </span>
                         </div>)}
           </React.Fragment>,
@@ -27,9 +27,13 @@ const renderPost = data => ({
                     </article>}
            </React.Fragment>,
   illustrations: <React.Fragment>
-                    {data.map((post, idx) => <div key={ idx }>
-                        { _.filter(post.attachments, attachment => attachment.id === 'Hero') }
-                    </div>)}
+                    { data.map((post, idx) => <div key={ idx }>
+                        <h4>{ post.title }</h4>
+                        <figure className="image">
+                            { post.attachment.map((pic, idx) => <img key={ idx } src={ pic.url } />)}
+                        </figure>
+                        <section><MarkdownRenderer text={ post.content } /></section>
+                    </div>) }
                  </React.Fragment>,
 });
 
