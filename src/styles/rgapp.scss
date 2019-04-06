@@ -27,37 +27,59 @@ $content-blockquote-padding: 0em;
 $content-blockquote-background-color: none transparent;
 
 .navbar {
-	text-transform: uppercase;
-	font-family: 'ArminGrotesk-Normal', sans-serif;
-	font-kerning: normal;
+    text-transform: uppercase;
+    font-family: 'ArminGrotesk-Normal', sans-serif;
+    font-kerning: normal;
 }
-.content {
-	font-variant-numeric: tabular-nums;
-	font-variant-ligatures: discretionary-ligatures;
-	font-kerning: normal;
 
-	article, div {
-		margin-bottom: 0.7em;
-		.timestamp {
-			margin-bottom: 1em;
-		}
-		th, h2, h3, h4 {
-			font-family: 'ArminGrotesk-Regular', sans-serif;
-			font-weight: normal;
-		}
-		h3 {
-			margin-bottom: 0.2em;
-		}
-	}
-	article {
-		padding: 0 0 2em 0;
-		blockquote {
-			font-size: 0.75rem;
-			sup {
-				color: $black;
-			}
-		}
-	}
+.content {
+    font-variant-numeric: tabular-nums;
+    font-variant-ligatures: discretionary-ligatures;
+    font-kerning: normal;
+
+    article,
+    div {
+        margin-bottom: 0.7em;
+
+        .timestamp {
+            margin-bottom: 1em;
+        }
+
+        th,
+        h2,
+        h3,
+        h4 {
+            font-family: 'ArminGrotesk-Regular', sans-serif;
+            font-weight: normal;
+        }
+
+        h3 {
+            margin-bottom: 0.2em;
+        }
+    }
+
+    ul {
+        li {
+	        list-style-type: none;
+            a {
+                h3 {
+                    font-weight: normal;
+                }
+            }
+        }
+    }
+
+    article {
+        padding: 0 0 2em 0;
+
+        blockquote {
+            font-size: 0.75rem;
+
+            sup {
+                color: $black;
+            }
+        }
+    }
 }
 
 @import "../../node_modules/bulma/bulma.sass";

@@ -35,10 +35,10 @@ const navItems = [
         pageLimit: 5,
       })}
       postOptions={
-      {
-        type: 'titles',
-      }
-    } />,
+        {
+          type: 'titles',
+        }
+      } />,
   },
   {
     displayName: 'trampoline',
@@ -50,10 +50,10 @@ const navItems = [
         pageLimit: 5,
       })}
       postOptions={
-      {
-        type: 'blog',
-      }
-    } />,
+        {
+          type: 'blog',
+        }
+      } />,
   },
   {
     displayName: 'illustrations',
@@ -65,21 +65,38 @@ const navItems = [
         pageLimit: 5,
       })}
       postOptions={
-      {
-        type: 'illustrations',
-      }
-    } />,
+        {
+          type: 'illustrations',
+        }
+      } />,
   },
-  // {
-  //   displayName: 'colophon',
-  //   href: '/colophon',
-  //   component: 'Colophon',
-  // },
-  // {
-  //   displayName: 'archive',
-  //   href: '/archive',
-  //   component: 'Archive',
-  // },
+  {
+    displayName: 'archive',
+    href: '/archive',
+    render: () => <Page callOptions={postApiConfiguration('get', 'getArchivedPosts')}
+      postOptions={
+        {
+          type: 'archive',
+        }
+      } />,
+  },
+  {
+    displayName: 'colophon',
+    href: '/colophon',
+    render: () => <Page callOptions={
+      {
+        callMethod: 'get',
+        callURIAction: 'findByTagName',
+        callParams: {
+          tagName: 'colophon',
+        },
+      }
+    } postOptions={
+      {
+        type: 'single',
+      }
+    } />
+  },
 ];
 
 const AppContainer = () => (
