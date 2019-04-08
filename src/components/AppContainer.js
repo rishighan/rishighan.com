@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../store/index';
 import Navigation from './Navigation/Navigation';
@@ -95,7 +95,7 @@ const navItems = [
       {
         type: 'single',
       }
-    } />
+    } />,
   },
 ];
 
@@ -104,16 +104,8 @@ const AppContainer = () => (
     <div className="container">
       <ConnectedRouter history={history}>
         <div>
-          {/* <Navigation navItems={navItems} /> */}
-          <nav className="navbar is-full-mobile">
-            <ul>
-              {navItems.map((navItem, idx) => <li key={idx}>
-                <Link to={navItem.href}>
-                  {navItem.displayName}
-                </Link>
-              </li>)}
-            </ul>
-          </nav>
+          <Navigation navItems={navItems} />
+          {/* Route configuration */}
           <div className="columns is-centered">
             {navItems.map((navItem, idx) => <Route exact path={navItem.href}
               key={idx}
@@ -131,7 +123,7 @@ const AppContainer = () => (
                 type: 'single',
               }
             } />} />
-            <Route path={'/admin/create'} render={} />
+            <Route path={'/admin/create'} render={ () => <div>admin</div> } />
           </div>
         </div>
       </ConnectedRouter>
