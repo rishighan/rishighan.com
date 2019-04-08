@@ -131,6 +131,7 @@ const AppContainer = () => (
                 type: 'single',
               }
             } />} />
+            <Route path={'/admin/create'} render={} />
           </div>
         </div>
       </ConnectedRouter>

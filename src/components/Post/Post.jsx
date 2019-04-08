@@ -30,7 +30,7 @@ const renderPost = data => ({
                     { data.map((post, idx) => <div key={ idx }>
                         <h4>{ post.title }</h4>
                         <figure className="image">
-                            { post.attachment && post.attachment.map((pic, idx) => { pic.isHero? <img key={ idx } src={ pic.url } />: null })}
+                            { post.attachment && post.attachment.map((pic, idx) => <img key={ idx } src={ pic.url } data-meta={pic.isHero}/> )}
                         </figure>
                         <section><MarkdownRenderer text={ post.content } /></section>
                     </div>) }
