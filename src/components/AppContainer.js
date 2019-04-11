@@ -5,7 +5,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../store/index';
 import Navigation from './Navigation/Navigation';
 import Page from './Page/Page';
-import Form from './Form/Form';
+import AdminForm from './AdminForm/AdminForm';
 import postApiConfiguration from '../utils/postApi.config';
 
 
@@ -105,16 +105,7 @@ const AppContainer = () => (
     <div className="container">
       <ConnectedRouter history={history}>
         <div>
-          {/* <Navigation navItems={navItems} /> */}
-          <nav className="navbar is-full-mobile">
-            <ul>
-              {navItems.map((navItem, idx) => <li key={idx}>
-                <Link to={navItem.href}>
-                  {navItem.displayName}
-                </Link>
-              </li>)}
-            </ul>
-          </nav>
+          <Navigation navItems={navItems} />
           <div className="columns is-centered">
             {navItems.map((navItem, idx) => <Route exact path={navItem.href}
               key={idx}
@@ -132,7 +123,7 @@ const AppContainer = () => (
                 type: 'single',
               }
             } />} />
-            <Route path={'/admin/create'} render={() => <Form /> } />
+            <Route path={'/admin/create'} render={() => <AdminForm /> } />
           </div>
         </div>
       </ConnectedRouter>
