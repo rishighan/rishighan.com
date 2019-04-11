@@ -80,6 +80,23 @@ $content-blockquote-background-color: none transparent;
             }
         }
     }
+
+    // Form controls
+    .input {
+        border-bottom: 1px solid $black;
+        border-top: 0 none;
+        border-right: 0 none;
+        border-left: 0 none;
+        border-radius: 0;
+        box-shadow: none;
+        &:hover {
+            border-color: 1px solid blue;
+        }
+        &:focus, &:active {
+            box-shadow: none;
+        }
+        
+    }
 }
 
 @import "../../node_modules/bulma/bulma.sass";
