@@ -5,6 +5,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../store/index';
 import Navigation from './Navigation/Navigation';
 import Page from './Page/Page';
+import AdminForm from './AdminForm/AdminForm';
 import postApiConfiguration from '../utils/postApi.config';
 
 
@@ -123,7 +124,7 @@ const AppContainer = () => (
                 type: 'single',
               }
             } />} />
-            <Route path={'/admin/create'} render={ () => <div>admin</div> } />
+            <Route path={'/admin/create'} render={() => <AdminForm /> } />
           </div>
         </div>
       </ConnectedRouter>
