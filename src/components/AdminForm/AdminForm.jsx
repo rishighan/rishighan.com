@@ -29,6 +29,20 @@ const AdminForm = props => <div className="column content is-two-thirds-tablet i
                         </div>
                     </div>
                 </div>
+
+                <div className="field">
+                    <label className="field-label is-normal">Content</label>
+                    <div className="control is-expanded">
+                        <Field name="content" component="textarea" placeholder="Write" className="textarea" />
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="field-label is-normal">Excerpt</label>`
+                    <div className="control is-expanded">
+                        <Field name="title" component="textarea" placeholder="Write" className="textarea is-small" rows="3" />
+                    </div>
+                </div>
             </form>
         )} />
 </div>;
