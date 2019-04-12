@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Field } from 'react-final-form'
+import { Form, Field } from 'react-final-form';
 
 const AdminForm = (props) => <div className="column content is-two-thirds-tablet is-full-mobile">
     <Form
@@ -17,7 +17,9 @@ const AdminForm = (props) => <div className="column content is-two-thirds-tablet
 
                 <div className="field">
                     <div class="tags has-addons">
-                        <span class="tag is-info">Alex Smith</span>
+                        <span class="tag is-info">Highlight</span>
+                        <a class="tag is-delete"></a>
+                        <span class="tag is-info">General</span>
                         <a class="tag is-delete"></a>
                     </div>
                 </div>

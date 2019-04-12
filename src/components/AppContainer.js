@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../store/index';
 import Navigation from './Navigation/Navigation';
@@ -96,7 +96,7 @@ const navItems = [
       {
         type: 'single',
       }
-    } />
+    } />,
   },
 ];
 
@@ -106,6 +106,7 @@ const AppContainer = () => (
       <ConnectedRouter history={history}>
         <div>
           <Navigation navItems={navItems} />
+          {/* Route configuration */}
           <div className="columns is-centered">
             {navItems.map((navItem, idx) => <Route exact path={navItem.href}
               key={idx}
