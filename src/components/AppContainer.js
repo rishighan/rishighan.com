@@ -25,7 +25,6 @@ const navItems = [
           metadata: {
             type: 'blog'
           }
-          
         }
       }
     />,
