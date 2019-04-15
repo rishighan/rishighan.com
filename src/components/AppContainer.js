@@ -19,9 +19,13 @@ const navItems = [
         pageOffset: 1,
         pageLimit: 15,
       })}
-      postOptions={
+      options={
         {
-          type: 'blog',
+          type: 'post',
+          metadata: {
+            type: 'blog'
+          }
+          
         }
       }
     />,
@@ -42,8 +46,8 @@ const navItems = [
       } />,
   },
   {
-    displayName: 'trampoline',
-    href: '/trampoline',
+    displayName: 'freeswim',
+    href: '/freeswim',
     render: () => <Page callOptions={postApiConfiguration('get', 'findByTagName',
       {
         tagName: 'Trampoline',
@@ -124,7 +128,7 @@ const AppContainer = () => (
                 type: 'single',
               }
             } />} />
-            <Route path={'/admin/create'} render={() => <AdminForm /> } />
+            <Route path={'/admin/create'} render={() => <AdminForm />} />
           </div>
         </div>
       </ConnectedRouter>

@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import Post from '../Post/Post';
+import AdminForm from '../AdminForm/AdminForm';
 import { fetchPosts } from '../../actions/index';
 
 class Page extends Component {
@@ -11,15 +12,18 @@ class Page extends Component {
     this.props.fetchPosts();
   }
 
-  render() {
-    return (_.isEmpty(this.props.posts) ? <div>Loading...</div>
-      : <div className="column content is-two-thirds-tablet is-full-mobile">
-            <Post data={ this.props.posts }
-                  postType={ this.props.postOptions.type } />
-        </div>
-    );
+  render(){
+    return renderPage(this.props)[this.props.pageType];
   }
 }
+
+const renderPage = props => ({
+  'post': <div className="column content is-two-thirds-tablet is-full-mobile">
+            <Post data={ props.posts }
+                  postType={ props.options.type } />
+          </div>,
+  'adminForm': <AdminForm formData={ props.posts } />
+});
 
 function mapStateToProps(state) {
   return {
