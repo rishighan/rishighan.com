@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import Post from '../Post/Post';
+import PageBlock from '../PageBlock/PageBlock';
 import AdminForm from '../AdminForm/AdminForm';
 import { fetchPosts } from '../../actions/index';
 
 const renderPage = props => ({
   post: <div className="column content is-two-thirds-tablet is-full-mobile">
-            <Post data={ props.posts }
+            <PageBlock data={ props.posts }
                   postType={ props.options.metadata.subType } />
           </div>,
   adminForm: !_.isEmpty(props.posts.posts[0]) ? <AdminForm formData={ props.posts.posts[0] } /> : null,

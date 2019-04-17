@@ -4,7 +4,7 @@ import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 import Heading from '../Heading/Heading';
 import Timestamp from '../Timestamp/Timestamp';
 
-const renderPost = data => ({
+const renderPageBlock = data => ({
   blog: <React.Fragment>
                     { data.map((post, idx) => <article key={idx}>
                         <Heading headingText={ post.title } postSlug={ post.slug } />
@@ -43,8 +43,9 @@ const renderPost = data => ({
            </React.Fragment>,
 });
 
-const Post = props => renderPost(props.data.posts)[props.postType];
+const PageBlock = props => renderPageBlock(props.data.posts)[props.postType];
 
-Post.propTypes = {
+PageBlock.propTypes = {
+  data: PropTypes.object,
 };
-export default Post;
+export default PageBlock;
