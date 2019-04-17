@@ -18,7 +18,7 @@ const AdminForm = props => <div className="column content is-two-thirds-tablet i
           handleSubmit, pristine, invalid,
         }) => (
                 <form>
-                    <h2>Write a Post</h2>
+                    <h3>Write a Post</h3>
                     <div className="field">
                         <label className="field-label is-normal">Title</label>
                         <div className="control is-expanded">
@@ -27,6 +27,13 @@ const AdminForm = props => <div className="column content is-two-thirds-tablet i
                     </div>
 
                     {/* Edit mode only */}
+                    <div className="field">
+                        <label className="field-label is-normal">Slug</label>
+                        <div className="control is-expanded">
+                            <Field name="slug" component="input" className="input" />
+                        </div>
+                    </div>
+
                     <div className="field is-grouped">
                         {props.formData.tags.map((tag, idx) => <div className="control" key={idx}>
                             <div className="tags has-addons">
@@ -39,13 +46,13 @@ const AdminForm = props => <div className="column content is-two-thirds-tablet i
                     <div className="field">
                         <label className="field-label is-normal">Content</label>
                         <div className="control is-expanded">
-                            <Field name="content" component="textarea" placeholder="Write" className="textarea" />
+                            <Field name="content" component="textarea" placeholder="Write" className="textarea" rows="14" />
                         </div>
                     </div>
 
                     <div className="field">
                         <label className="field-label is-normal">Excerpt</label>`
-                    <div className="control is-expanded">
+                        <div className="control is-expanded">
                             <Field name="title" component="textarea" placeholder="Write" className="textarea is-small" rows="3" />
                         </div>
                     </div>
