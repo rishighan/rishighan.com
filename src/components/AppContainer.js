@@ -5,7 +5,6 @@ import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../store/index';
 import Navigation from './Navigation/Navigation';
 import Page from './Page/Page';
-import AdminForm from './AdminForm/AdminForm';
 import postApiConfiguration from '../utils/postApi.config';
 
 
