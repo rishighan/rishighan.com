@@ -23,8 +23,8 @@ const navItems = [
         {
           type: 'post',
           metadata: {
-            type: 'blog'
-          }
+            subType: 'blog',
+          },
         }
       }
     />,
@@ -38,9 +38,12 @@ const navItems = [
         pageOffset: 1,
         pageLimit: 5,
       })}
-      postOptions={
+      options={
         {
-          type: 'titles',
+          type: 'post',
+          metadata: {
+            subType: 'titles',
+          },
         }
       } />,
   },
@@ -53,9 +56,12 @@ const navItems = [
         pageOffset: 1,
         pageLimit: 5,
       })}
-      postOptions={
+      options={
         {
-          type: 'blog',
+          type: 'post',
+          metadata: {
+            subType: 'blog',
+          },
         }
       } />,
   },
@@ -68,9 +74,12 @@ const navItems = [
         pageOffset: 1,
         pageLimit: 5,
       })}
-      postOptions={
+      options={
         {
-          type: 'illustrations',
+          type: 'post',
+          metadata: {
+            subType: 'illustrations',
+          },
         }
       } />,
   },
@@ -78,9 +87,12 @@ const navItems = [
     displayName: 'archive',
     href: '/archive',
     render: () => <Page callOptions={postApiConfiguration('get', 'getArchivedPosts')}
-      postOptions={
+      options={
         {
-          type: 'archive',
+          type: 'post',
+          metadata: {
+            subType: 'archive',
+          },
         }
       } />,
   },
@@ -95,9 +107,12 @@ const navItems = [
           tagName: 'colophon',
         },
       }
-    } postOptions={
+    } options={
       {
-        type: 'single',
+        type: 'post',
+        metadata: {
+          subType: 'single',
+        },
       }
     } />,
   },
@@ -122,12 +137,29 @@ const AppContainer = () => (
                   slug: props.match.params.postSlug,
                 },
               }
-            } postOptions={
+            } options={
               {
-                type: 'single',
+                type: 'post',
+                metadata: {
+                  subType: 'single',
+                },
               }
             } />} />
-            <Route path={'/admin/create'} render={() => <AdminForm />} />
+            {/* Edit post form route */}
+            <Route path={'/admin/edit/:postSlug'} render={props => <Page callOptions={ {
+              callMethod: 'get',
+              callURIAction: 'retrieve',
+              callParams: {
+                slug: props.match.params.postSlug,
+              },
+            }} options={
+              {
+                type: 'adminForm',
+                metadata: {
+                  mode: 'edit',
+                },
+              }
+            } />} />
           </div>
         </div>
       </ConnectedRouter>

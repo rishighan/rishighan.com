@@ -1,11 +1,22 @@
 import React from 'react';
 import { Form, Field } from 'react-final-form';
 
+const onSubmit = async (values) => {
+  await sleep(300);
+  window.alert(JSON.stringify(values, 0, 2));
+};
+
 const AdminForm = props => <div className="column content is-two-thirds-tablet is-full-mobile">
     <Form
-        // onSubmit={onSubmit}
-        // validate={validate}
-        render={({ handleSubmit, pristine, invalid }) => (
+        onSubmit={onSubmit}
+        initialValues={
+            {
+              ...props.formData,
+            }
+        }
+        render={({
+          handleSubmit, pristine, invalid,
+        }) => (
             <form>
                 <h2>Write a Post</h2>
                 <div className="field">

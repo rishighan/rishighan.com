@@ -7,23 +7,22 @@ import Post from '../Post/Post';
 import AdminForm from '../AdminForm/AdminForm';
 import { fetchPosts } from '../../actions/index';
 
+const renderPage = props => ({
+  post: <div className="column content is-two-thirds-tablet is-full-mobile">
+            <Post data={ props.posts }
+                  postType={ props.options.metadata.subType } />
+          </div>,
+  adminForm: !_.isEmpty(props.posts.posts[0]) ? <AdminForm formData={ props.posts.posts[0] } /> : null,
+});
 class Page extends Component {
   componentDidMount() {
     this.props.fetchPosts();
   }
 
-  render(){
-    return renderPage(this.props)[this.props.pageType];
+  render() {
+    return renderPage(this.props)[this.props.options.type];
   }
 }
-
-const renderPage = props => ({
-  'post': <div className="column content is-two-thirds-tablet is-full-mobile">
-            <Post data={ props.posts }
-                  postType={ props.options.type } />
-          </div>,
-  'adminForm': <AdminForm formData={ props.posts } />
-});
 
 function mapStateToProps(state) {
   return {
@@ -39,7 +38,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 Page.propTypes = {
   posts: PropTypes.object,
+  options: PropTypes.object,
   fetchPosts: PropTypes.func,
-  postOptions: PropTypes.object,
 };
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Page));
