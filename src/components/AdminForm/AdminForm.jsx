@@ -22,10 +22,11 @@ const AdminForm = props => <div className="column content is-two-thirds-tablet i
                     <div className="field">
                         <label className="field-label is-normal">Title</label>
                         <div className="control is-expanded">
-                            <Field name="title" component="input" placeholder="Enter a Title" className="input" />
+                            <Field name="title" component="input" placeholder="Title for this content" className="input" />
                         </div>
                     </div>
 
+                    {/* Edit mode only */}
                     <div className="field is-grouped">
                         {props.formData.tags.map((tag, idx) => <div className="control" key={idx}>
                             <div className="tags has-addons">

@@ -36,6 +36,8 @@ $content-blockquote-background-color: none transparent;
     font-variant-numeric: tabular-nums;
     font-variant-ligatures: discretionary-ligatures;
     font-kerning: normal;
+    font-variant-alternates: normal;
+    font-feature-settings: "ss01", "ss08";
 
     article,
     div {
