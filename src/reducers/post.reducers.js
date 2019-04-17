@@ -15,7 +15,7 @@ function postsReducer(state = initialState, action) {
     case LOCATION_CHANGE:
       return {
         posts: [],
-      }
+      };
     case FETCH_POSTS_REQUEST:
       return {
         ...state,
