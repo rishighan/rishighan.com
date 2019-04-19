@@ -19,6 +19,8 @@ const tabs = [
 
 function AdminForm(props) {
     const [tabContent, changeTab] = useState(tabs[0].markup);
+    const [currentlyActiveTab, setTab] = useState(tabs[0].displayName);
+    
     return (
         <div className="column content is-two-thirds-tablet is-full-mobile">
             <Form
@@ -64,7 +66,13 @@ function AdminForm(props) {
 
                             <div className="tabs">
                                 <ul>
-                                    {tabs.map((tab, idx) => <li key={idx} onClick={() => changeTab(tabs[idx].markup)}>
+                                    {tabs.map((tab, idx) => <li
+                                        className={currentlyActiveTab === tab.displayName ? "is-active" : ""}
+                                        key={idx}
+                                        onClick={e => {
+                                            changeTab(tab.markup);
+                                            setTab(tab.displayName);
+                                        }}>
                                         <a>{tab.displayName}</a>
                                     </li>)}
                                 </ul>
