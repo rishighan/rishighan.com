@@ -6,13 +6,19 @@ const onSubmit = async (values) => {
     console.log('submitted');
 };
 
-const contentDirectory = {
-    content: <div>coa</div>,
-    preview: <div>preview</div>
-}
+const tabs = [
+    {
+        displayName: 'Content',
+        markup: <div>coa</div>,
+    },
+    {
+        displayName: 'Preview',
+        markup: <div>preview</div>
+    }
+]
 
 function AdminForm(props) {
-    const [tabContent, changeTab] = useState(contentDirectory['content']);
+    const [tabContent, changeTab] = useState(tabs[0].markup);
     return (
         <div className="column content is-two-thirds-tablet is-full-mobile">
             <Form
@@ -58,12 +64,9 @@ function AdminForm(props) {
 
                             <div className="tabs">
                                 <ul>
-                                    <li className="is-active" onClick={() => changeTab(contentDirectory['content'])}>
-                                        <a>Content</a>
-                                    </li>
-                                    <li onClick={() => changeTab(contentDirectory['preview'])}>
-                                        <a>Preview</a>
-                                    </li>
+                                    {tabs.map((tab, idx) => <li key={idx} onClick={() => changeTab(tabs[idx].markup)}>
+                                        <a>{tab.displayName}</a>
+                                    </li>)}
                                 </ul>
                             </div>
                             <div id="tab-content">
