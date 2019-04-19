@@ -38,18 +38,22 @@ function AdminForm(props) {
                             <div className="field">
                                 <label className="field-label is-normal">Slug</label>
                                 <div className="control is-expanded">
-                                    <Field name="slug" component="input" className="input is-disabled" />
+                                    <Field name="slug" component="input" className="input" />
                                 </div>
                             </div>
 
-                            <div className="field is-horizontal">
+                            <div className="field">
                                 <label className="field-label is-normal">Tags</label>
-                                {props.formData.tags.map((tag, idx) => <div className="control" key={idx}>
-                                    <div className="tags has-addons">
-                                        <span className="tag is-link">{tag.id}</span>
-                                        <a className="tag is-delete"></a>
+                                <div className="field-body">
+                                    <div className="field is-grouped">
+                                        {props.formData.tags.map((tag, idx) => <div className="control" key={idx}>
+                                            <div className="tags has-addons">
+                                                <span className="tag is-link">{tag.id}</span>
+                                                <a className="tag is-delete"></a>
+                                            </div>
+                                        </div>)}
                                     </div>
-                                </div>)}
+                                </div>
                             </div>
 
                             <div className="tabs">
