@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form';
 import PropTypes from 'prop-types';
+import Dropzone from 'react-dropzone'
+import _ from 'lodash';
 
 const onSubmit = async (values) => {
     console.log('submitted');
 };
+
+const onDrop = async (file) => {
+    console.log('dropped', file)
+}
 
 const tabs = [
     {
@@ -18,9 +24,9 @@ const tabs = [
 ]
 
 function AdminForm(props) {
-    const [tabContent, changeTab] = useState({ 
-        markup: tabs[0].markup, 
-        currentlyActiveTab: tabs[0].displayName 
+    const [tabContent, changeTab] = useState({
+        markup: tabs[0].markup,
+        currentlyActiveTab: tabs[0].displayName
     });
 
     return (
@@ -85,8 +91,40 @@ function AdminForm(props) {
                             <div className="field">
                                 <label className="field-label is-normal">Excerpt</label>
                                 <div className="control is-expanded">
-                                    <Field name="title" component="textarea" placeholder="Write" className="textarea is-small" rows="3" />
+                                    <Field name="title" component="textarea" placeholder="Write" className="textarea" rows="1" />
                                 </div>
+                            </div>
+                            {/* Media management */}
+                            <div className="box">
+                                <section>
+                                    <Dropzone onDrop={onDrop}>
+                                        {({ getRootProps, getInputProps }) => (
+                                            <section>
+                                                <div {...getRootProps({ className: 'dropzone' })}>
+                                                    <input {...getInputProps()} />
+                                                    <p>Drag and drop some files here, or click to select files</p>
+                                                </div>
+                                            </section>
+                                        )}
+                                    </Dropzone>
+                                    <ul className="is-clearfix">
+                                        {props.formData.attachment.map((mediaObj, idx) => <li className="is-pulled-left" key={idx}>
+                                            <div className="card is-fullimage">
+                                                <div className="card-image">
+                                                    <figure className="image is-4by3">
+                                                        <img src={mediaObj.url} />
+                                                    </figure>
+                                                </div>
+                                                <div className="card-content">
+                                                    <div className="content">
+                                                        <figcaption>{mediaObj.name}</figcaption>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        )}
+                                    </ul>
+                                </section>
                             </div>
                         </form>
                     )} />
@@ -102,3 +140,6 @@ AdminForm.propTypes = {
 };
 
 export default AdminForm;
+
+
+

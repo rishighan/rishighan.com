@@ -13,7 +13,8 @@
 @include font-face('ArminGrotesk-SemiBoldItalic', '../../public/assets/fonts/Armin Grotesk/38DD7F_4_0', normal, normal, eot ttf woff woff2);
 
 $render-mode: optimizeLegibility;
-$family-sans-serif: 'ArminGrotesk-Regular', sans-serif;
+$family-sans-serif: 'ArminGrotesk-Regular',
+sans-serif;
 $family-primary: $family-sans-serif;
 $family-monospace: 'Source Code Pro Regular';
 $family-code: 'Source Code Pro Regular';
@@ -61,7 +62,8 @@ $content-blockquote-background-color: none transparent;
 
     ul {
         li {
-	        list-style-type: none;
+            list-style-type: none;
+
             a {
                 h3 {
                     font-weight: normal;
@@ -81,7 +83,13 @@ $content-blockquote-background-color: none transparent;
             }
         }
     }
-    .input {
+
+    .label {
+        color: $
+    }
+
+    .input,
+    .textarea {
         border-bottom: 1px solid $black;
         border-top: 0;
         border-right: 0;
@@ -92,16 +100,35 @@ $content-blockquote-background-color: none transparent;
         &:hover {
             border-color: orange;
         }
-        &:active, &:focus {
+
+        &:active,
+        &:focus {
             box-shadow: none;
             border-color: green;
         }
     }
+
     form {
-        h2 {
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-weight: normal;
         }
+
         ul {
+            margin: 0;
+
+            li {
+                margin: 0 10px 0 0;
+            }
+        }
+
+        figure {
+            display: inline-block;
             margin: 0;
         }
     }
