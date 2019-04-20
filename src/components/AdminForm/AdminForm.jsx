@@ -110,12 +110,15 @@ function AdminForm(props) {
                                         {props.formData.attachment.map((mediaObj, idx) => <li className="is-pulled-left" key={idx}>
                                             <div className="card">
                                                 <div className="card-image">
-                                                    <figure className="image is-5by4">
+                                                    <figure className="image is-128x128">
                                                         <img src={mediaObj.url} />
                                                     </figure>
                                                 </div>
                                                 <div className="card-content">
-                                                    <span className="content is-family-monospace is-size-7">{mediaObj.name}</span>
+                                                    <ul className="content is-family-monospace is-size-7">
+                                                        <li>{mediaObj.name}</li>
+                                                        <li>{mediaObj.size/1024}</li>
+                                                    </ul>
                                                 </div>
                                                 <footer className="card-footer">
                                                     <a href="#" className="card-footer-item is-size-7">Make Hero</a>

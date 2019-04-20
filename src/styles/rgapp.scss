@@ -119,8 +119,12 @@ $content-blockquote-background-color: none transparent;
             margin: 0;
 
             li {
-                margin: 0 10px 0 0;
+                margin: 0;
             }
+        }
+
+        .card {
+            margin: 0 10px 0 0;
         }
     }
 }
