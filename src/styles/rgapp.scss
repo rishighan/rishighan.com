@@ -84,10 +84,6 @@ $content-blockquote-background-color: none transparent;
         }
     }
 
-    .label {
-        color: $
-    }
-
     .input,
     .textarea {
         border-bottom: 1px solid $black;
@@ -125,11 +121,6 @@ $content-blockquote-background-color: none transparent;
             li {
                 margin: 0 10px 0 0;
             }
-        }
-
-        figure {
-            display: inline-block;
-            margin: 0;
         }
     }
 }

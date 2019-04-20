@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone'
-import _ from 'lodash';
 
 const onSubmit = async (values) => {
     console.log('submitted');
@@ -109,17 +108,19 @@ function AdminForm(props) {
                                     </Dropzone>
                                     <ul className="is-clearfix">
                                         {props.formData.attachment.map((mediaObj, idx) => <li className="is-pulled-left" key={idx}>
-                                            <div className="card is-fullimage">
+                                            <div className="card">
                                                 <div className="card-image">
-                                                    <figure className="image is-4by3">
+                                                    <figure className="image is-5by4">
                                                         <img src={mediaObj.url} />
                                                     </figure>
                                                 </div>
                                                 <div className="card-content">
-                                                    <div className="content">
-                                                        <figcaption>{mediaObj.name}</figcaption>
-                                                    </div>
+                                                    <span className="content is-family-monospace is-size-7">{mediaObj.name}</span>
                                                 </div>
+                                                <footer className="card-footer">
+                                                    <a href="#" className="card-footer-item is-size-7">Make Hero</a>
+                                                    <a href="#" className="card-footer-item is-size-7">Delete</a>
+                                                </footer>
                                             </div>
                                         </li>
                                         )}
