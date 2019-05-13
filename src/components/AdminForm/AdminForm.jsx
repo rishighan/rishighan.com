@@ -1,44 +1,44 @@
 import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form';
 import PropTypes from 'prop-types';
-import Dropzone from 'react-dropzone'
+import Dropzone from 'react-dropzone';
 
 const onSubmit = async (values) => {
-    console.log('submitted');
+  console.log('submitted');
 };
 
 const onDrop = async (file) => {
-    console.log('dropped', file)
-}
+  console.log('dropped', file);
+};
 
 const tabs = [
-    {
-        displayName: 'Content',
-        markup: <div>coa</div>,
-    },
-    {
-        displayName: 'Preview',
-        markup: <div>preview</div>
-    }
-]
+  {
+    displayName: 'Content',
+    markup: <div>coa</div>,
+  },
+  {
+    displayName: 'Preview',
+    markup: <div>preview</div>,
+  },
+];
 
 function AdminForm(props) {
-    const [tabContent, changeTab] = useState({
-        markup: tabs[0].markup,
-        currentlyActiveTab: tabs[0].displayName
-    });
+  const [tabContent, changeTab] = useState({
+    markup: tabs[0].markup,
+    currentlyActiveTab: tabs[0].displayName,
+  });
 
-    return (
+  return (
         <div className="column content is-two-thirds-tablet is-full-mobile">
             <Form
                 onSubmit={onSubmit}
                 initialValues={
                     {
-                        ...props.formData,
+                      ...props.formData,
                     }
                 }
                 render={({
-                    handleSubmit, pristine, invalid,
+                  handleSubmit, pristine, invalid,
                 }) => (
                         <form>
                             <h2>Write a Post</h2>
@@ -74,10 +74,10 @@ function AdminForm(props) {
                             <div className="tabs">
                                 <ul>
                                     {tabs.map((tab, idx) => <li
-                                        className={tabContent.currentlyActiveTab === tab.displayName ? "is-active" : ""}
+                                        className={tabContent.currentlyActiveTab === tab.displayName ? 'is-active' : ''}
                                         key={idx}
                                         onClick={() => {
-                                            changeTab({ markup: tab.markup, currentlyActiveTab: tab.displayName });
+                                          changeTab({ markup: tab.markup, currentlyActiveTab: tab.displayName });
                                         }}>
                                         <a>{tab.displayName}</a>
                                     </li>)}
@@ -117,7 +117,7 @@ function AdminForm(props) {
                                                 <div className="card-content">
                                                     <ul className="content is-family-monospace is-size-7">
                                                         <li>{mediaObj.name}</li>
-                                                        <li>{mediaObj.size/1024}</li>
+                                                        <li>{mediaObj.size / 1024}</li>
                                                     </ul>
                                                 </div>
                                                 <footer className="card-footer">
@@ -125,25 +125,18 @@ function AdminForm(props) {
                                                     <a href="#" className="card-footer-item is-size-7">Delete</a>
                                                 </footer>
                                             </div>
-                                        </li>
-                                        )}
+                                        </li>,)}
                                     </ul>
                                 </section>
                             </div>
                         </form>
-                    )} />
+                )} />
         </div>);
 }
 
 
-
-
-
 AdminForm.propTypes = {
-    formData: PropTypes.object,
+  formData: PropTypes.object,
 };
 
 export default AdminForm;
-
-
-
