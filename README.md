@@ -1,4 +1,4 @@
-## rishighan.com
+## A very small react-redux boilerplate
 
 This is a basic boilerplate built on:
 
