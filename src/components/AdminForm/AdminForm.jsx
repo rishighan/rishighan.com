@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
+import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 
 const onSubmit = async (values) => {
   console.log('submitted');
@@ -11,18 +12,18 @@ const onDrop = async (file) => {
   console.log('dropped', file);
 };
 
-const tabs = [
-  {
-    displayName: 'Content',
-    markup: <div>coa</div>,
-  },
-  {
-    displayName: 'Preview',
-    markup: <div>preview</div>,
-  },
-];
 
 function AdminForm(props) {
+  const tabs = [
+    {
+      displayName: 'Content',
+      markup: <MarkdownRenderer text={ props.formData.content } />,
+    },
+    {
+      displayName: 'Statistics',
+      markup: <div>yaaaa</div>,
+    },
+  ];
   const [tabContent, changeTab] = useState({
     markup: tabs[0].markup,
     currentlyActiveTab: tabs[0].displayName,
@@ -110,7 +111,7 @@ function AdminForm(props) {
                                         {props.formData.attachment.map((mediaObj, idx) => <li className="is-pulled-left" key={idx}>
                                             <div className="card">
                                                 <div className="card-image">
-                                                    <figure className="image is-128x128">
+                                                    <figure className="image is-4by3">
                                                         <img src={mediaObj.url} />
                                                     </figure>
                                                 </div>
@@ -125,7 +126,7 @@ function AdminForm(props) {
                                                     <a href="#" className="card-footer-item is-size-7">Delete</a>
                                                 </footer>
                                             </div>
-                                        </li>,)}
+                                        </li>)}
                                     </ul>
                                 </section>
                             </div>
