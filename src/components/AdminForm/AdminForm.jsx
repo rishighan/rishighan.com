@@ -20,8 +20,14 @@ function AdminForm(props) {
       markup: <MarkdownRenderer text={ props.formData.content } />,
     },
     {
+      displayName: 'Raw',
+      markup: <div className="control is-expanded">
+                <Field name="content" component="textarea" placeholder="Write" className="textarea " rows="20" />
+              </div>,
+    },
+    {
       displayName: 'Statistics',
-      markup: <div>yaaaa</div>,
+      markup: <div>yaaa</div>,
     },
   ];
   const [tabContent, changeTab] = useState({
