@@ -5,47 +5,47 @@ import Dropzone from 'react-dropzone';
 import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 
 const onSubmit = async (values) => {
-  console.log('submitted');
+    console.log('submitted');
 };
 
 const onDrop = async (file) => {
-  console.log('dropped', file);
+    console.log('dropped', file);
 };
 
 
 function AdminForm(props) {
-  const tabs = [
-    {
-      displayName: 'Content',
-      markup: <MarkdownRenderer text={ props.formData.content } />,
-    },
-    {
-      displayName: 'Raw',
-      markup: <div className="control is-expanded">
-                <Field name="content" component="textarea" placeholder="Write" className="textarea " rows="20" />
-              </div>,
-    },
-    {
-      displayName: 'Statistics',
-      markup: <div>yaaa</div>,
-    },
-  ];
-  const [tabContent, changeTab] = useState({
-    markup: tabs[0].markup,
-    currentlyActiveTab: tabs[0].displayName,
-  });
+    const tabs = [
+        {
+            displayName: 'Preview',
+            markup: <MarkdownRenderer text={props.formData.content} />,
+        },
+        {
+            displayName: 'Raw',
+            markup: <div className="control is-expanded">
+                <Field name="content" component="textarea" placeholder="Write" className="textarea is-family-monospace" rows="20" />
+            </div>,
+        },
+        {
+            displayName: 'Statistics',
+            markup: <div>yaaa</div>,
+        },
+    ];
+    const [tabContent, changeTab] = useState({
+        markup: tabs[0].markup,
+        currentlyActiveTab: tabs[0].displayName,
+    });
 
-  return (
+    return (
         <div className="column content is-two-thirds-tablet is-full-mobile">
             <Form
                 onSubmit={onSubmit}
                 initialValues={
                     {
-                      ...props.formData,
+                        ...props.formData,
                     }
                 }
                 render={({
-                  handleSubmit, pristine, invalid,
+                    handleSubmit, pristine, invalid,
                 }) => (
                         <form>
                             <h2>Write a Post</h2>
@@ -67,14 +67,12 @@ function AdminForm(props) {
                             <div className="field">
                                 <label className="field-label is-normal">Tags</label>
                                 <div className="field-body">
-                                    <div className="field is-grouped">
-                                        {props.formData.tags.map((tag, idx) => <div className="control" key={idx}>
-                                            <div className="tags has-addons">
-                                                <span className="tag is-link">{tag.id}</span>
-                                                <a className="tag is-delete"></a>
-                                            </div>
-                                        </div>)}
-                                    </div>
+                                    {props.formData.tags.map((tag, idx) => <div key={idx}>
+                                        <div className="tags has-addons is-grouped">
+                                            <span className="tag is-link">{tag.id}</span>
+                                            <a className="tag is-delete"></a>
+                                        </div>
+                                    </div>)}
                                 </div>
                             </div>
 
@@ -84,7 +82,7 @@ function AdminForm(props) {
                                         className={tabContent.currentlyActiveTab === tab.displayName ? 'is-active' : ''}
                                         key={idx}
                                         onClick={() => {
-                                          changeTab({ markup: tab.markup, currentlyActiveTab: tab.displayName });
+                                            changeTab({ markup: tab.markup, currentlyActiveTab: tab.displayName });
                                         }}>
                                         <a>{tab.displayName}</a>
                                     </li>)}
@@ -117,7 +115,7 @@ function AdminForm(props) {
                                         {props.formData.attachment.map((mediaObj, idx) => <li className="is-pulled-left" key={idx}>
                                             <div className="card">
                                                 <div className="card-image">
-                                                    <figure className="image is-4by3">
+                                                    <figure className="image is-3by4">
                                                         <img src={mediaObj.url} />
                                                     </figure>
                                                 </div>
@@ -137,13 +135,13 @@ function AdminForm(props) {
                                 </section>
                             </div>
                         </form>
-                )} />
+                    )} />
         </div>);
 }
 
 
 AdminForm.propTypes = {
-  formData: PropTypes.object,
+    formData: PropTypes.object,
 };
 
 export default AdminForm;
