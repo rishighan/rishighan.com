@@ -13,8 +13,7 @@
 @include font-face('ArminGrotesk-SemiBoldItalic', '../../public/assets/fonts/Armin Grotesk/38DD7F_4_0', normal, normal, eot ttf woff woff2);
 
 $render-mode: optimizeLegibility;
-$family-sans-serif: 'ArminGrotesk-Regular',
-sans-serif;
+$family-sans-serif: 'ArminGrotesk-Regular', sans-serif;
 $family-primary: $family-sans-serif;
 $family-monospace: 'Source Code Pro Regular';
 $family-code: 'Source Code Pro Regular';
@@ -123,11 +122,28 @@ $content-blockquote-background-color: none transparent;
         }
         .field {
             margin: 1.5rem 0;
+            .tags {
+                margin: 0.5rem 0.5rem 0 0;
+            }
         }
         .card {
             margin: 0 10px 0 0;
             figure {
                 margin: 0;
+            }
+            .card-content {
+                padding: 0.2rem 2rem;
+                ul {
+                    li {
+                        display: block;
+                        margin: 5px 0 auto;
+                        line-height: 1.3rem;
+                    }
+                }
+            }
+            .image {
+                object-fit: cover;
+                height: 100%;
             }
         }
     }

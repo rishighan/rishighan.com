@@ -5,47 +5,47 @@ import Dropzone from 'react-dropzone';
 import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 
 const onSubmit = async (values) => {
-    console.log('submitted');
+  console.log('submitted');
 };
 
 const onDrop = async (file) => {
-    console.log('dropped', file);
+  console.log('dropped', file);
 };
 
 
 function AdminForm(props) {
-    const tabs = [
-        {
-            displayName: 'Preview',
-            markup: <MarkdownRenderer text={props.formData.content} />,
-        },
-        {
-            displayName: 'Raw',
-            markup: <div className="control is-expanded">
+  const tabs = [
+    {
+      displayName: 'Preview',
+      markup: <MarkdownRenderer text={props.formData.content} />,
+    },
+    {
+      displayName: 'Raw',
+      markup: <div className="control is-expanded">
                 <Field name="content" component="textarea" placeholder="Write" className="textarea is-family-monospace" rows="20" />
             </div>,
-        },
-        {
-            displayName: 'Statistics',
-            markup: <div>yaaa</div>,
-        },
-    ];
-    const [tabContent, changeTab] = useState({
-        markup: tabs[0].markup,
-        currentlyActiveTab: tabs[0].displayName,
-    });
+    },
+    {
+      displayName: 'Statistics',
+      markup: <div>yaaa</div>,
+    },
+  ];
+  const [tabContent, changeTab] = useState({
+    markup: tabs[0].markup,
+    currentlyActiveTab: tabs[0].displayName,
+  });
 
-    return (
+  return (
         <div className="column content is-two-thirds-tablet is-full-mobile">
             <Form
                 onSubmit={onSubmit}
                 initialValues={
                     {
-                        ...props.formData,
+                      ...props.formData,
                     }
                 }
                 render={({
-                    handleSubmit, pristine, invalid,
+                  handleSubmit, pristine, invalid,
                 }) => (
                         <form>
                             <h2>Write a Post</h2>
@@ -69,7 +69,7 @@ function AdminForm(props) {
                                 <div className="field-body">
                                     {props.formData.tags.map((tag, idx) => <div key={idx}>
                                         <div className="tags has-addons is-grouped">
-                                            <span className="tag is-link">{tag.id}</span>
+                                            <span className="tag is-light">{tag.id}</span>
                                             <a className="tag is-delete"></a>
                                         </div>
                                     </div>)}
@@ -82,7 +82,7 @@ function AdminForm(props) {
                                         className={tabContent.currentlyActiveTab === tab.displayName ? 'is-active' : ''}
                                         key={idx}
                                         onClick={() => {
-                                            changeTab({ markup: tab.markup, currentlyActiveTab: tab.displayName });
+                                          changeTab({ markup: tab.markup, currentlyActiveTab: tab.displayName });
                                         }}>
                                         <a>{tab.displayName}</a>
                                     </li>)}
@@ -121,8 +121,8 @@ function AdminForm(props) {
                                                 </div>
                                                 <div className="card-content">
                                                     <ul className="content is-family-monospace is-size-7">
-                                                        <li>{mediaObj.name}</li>
-                                                        <li>{mediaObj.size / 1024}</li>
+                                                        <li className="tag is-info">{mediaObj.name}</li>
+                                                        <li className="tag is-light">{mediaObj.size / 1024}</li>
                                                     </ul>
                                                 </div>
                                                 <footer className="card-footer">
@@ -135,13 +135,13 @@ function AdminForm(props) {
                                 </section>
                             </div>
                         </form>
-                    )} />
+                )} />
         </div>);
 }
 
 
 AdminForm.propTypes = {
-    formData: PropTypes.object,
+  formData: PropTypes.object,
 };
 
 export default AdminForm;
