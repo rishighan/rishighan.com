@@ -5,14 +5,15 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import PageBlock from '../PageBlock/PageBlock';
 import AdminForm from '../AdminForm/AdminForm';
-import { fetchPosts } from '../../actions/index';
+import { fetchPosts, onDroppedFile } from '../../actions/index';
 
 const renderPage = props => ({
   post: <div className="column content is-two-thirds-tablet is-full-mobile">
             <PageBlock data={ props.posts }
                        postType={ props.options.metadata.subType } />
         </div>,
-  adminForm: !_.isEmpty(props.posts.posts[0]) ? <AdminForm formData={ props.posts.posts[0] } /> : null,
+  adminForm: !_.isEmpty(props.posts.posts[0]) ? <AdminForm formData={ props.posts.posts[0] }
+                                                           onDroppedFile={ onDroppedFile } /> : null,
 });
 class Page extends Component {
   componentDidMount() {

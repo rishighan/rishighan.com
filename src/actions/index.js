@@ -3,7 +3,11 @@ import {
   FETCH_POSTS_REQUEST,
   FETCH_POSTS_ERROR,
   FETCH_POSTS_SUCCESS,
+  DROP_FILE,
 } from '../constants/action-types';
+
+const postsServiceBaseURI = 'http://localhost:3000/api/v1/posts/';
+const assetsServiceBaseURI = 'http://localhost:3030/api/v1/assets/';
 
 export const fetchPosts = options => async (dispatch) => {
   try {
@@ -11,8 +15,7 @@ export const fetchPosts = options => async (dispatch) => {
       type: FETCH_POSTS_REQUEST,
       isFetching: true,
     });
-    const serviceBaseURI = 'http://localhost:3000/api/v1/posts/';
-    const serviceURI = serviceBaseURI + options.callURIAction;
+    const serviceURI = postsServiceBaseURI + options.callURIAction;
     const response = await axios.get(serviceURI, {
       method: options.callMethod,
       params: options.callParams,
@@ -34,4 +37,16 @@ export const fetchPosts = options => async (dispatch) => {
   }
 };
 
-export const fetchOther = () => 'foo';
+export const onDroppedFile = options => async (dispatch) => {
+  try {
+    dispatch({
+      type: DROP_FILE,
+      isUploading: true,
+    });
+    const serviceURI = assetsServiceBaseURI + options.callURIAction;
+    const response = await axios.get(serviceURI, {});
+    console.log('reached here');
+  } catch (error) {
+    console.log('Error', error);
+  }
+};

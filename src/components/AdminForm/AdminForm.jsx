@@ -4,16 +4,12 @@ import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 
-const onSubmit = async (values) => {
+const onSubmit = () => {
   console.log('submitted');
 };
 
-const onDrop = async (file) => {
-  console.log('dropped', file);
-};
-
-
 function AdminForm(props) {
+    console.log(props);
   const tabs = [
     {
       displayName: 'Preview',
@@ -101,7 +97,7 @@ function AdminForm(props) {
                             {/* Media management */}
                             <div className="box">
                                 <section>
-                                    <Dropzone onDrop={onDrop}>
+                                    <Dropzone onDrop={props.onDroppedFile()}>
                                         {({ getRootProps, getInputProps }) => (
                                             <section>
                                                 <div {...getRootProps({ className: 'dropzone' })}>
@@ -122,7 +118,7 @@ function AdminForm(props) {
                                                 <div className="card-content">
                                                     <ul className="content is-family-monospace is-size-7">
                                                         <li className="tag is-info">{mediaObj.name}</li>
-                                                        <li className="tag is-light">{mediaObj.size / 1024}</li>
+                                                        <span className="tag is-light">{Math.round(mediaObj.size / 1024)}</span>
                                                     </ul>
                                                 </div>
                                                 <footer className="card-footer">
@@ -142,6 +138,7 @@ function AdminForm(props) {
 
 AdminForm.propTypes = {
   formData: PropTypes.object,
+  onDroppedFile: PropTypes.func,
 };
 
 export default AdminForm;
