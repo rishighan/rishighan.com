@@ -3,13 +3,14 @@ import { Form, Field } from 'react-final-form';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
+import { onDroppedFile } from '../../actions/index';
 
 const onSubmit = () => {
   console.log('submitted');
 };
 
 function AdminForm(props) {
-    console.log(props);
+  console.log(props);
   const tabs = [
     {
       displayName: 'Preview',
@@ -97,7 +98,10 @@ function AdminForm(props) {
                             {/* Media management */}
                             <div className="box">
                                 <section>
-                                    <Dropzone onDrop={props.onDroppedFile()}>
+                                    <Dropzone onDrop={ onDroppedFile({
+                                      callURIAction: 'upload',
+                                      callMethod: 'POST',
+                                    })}>
                                         {({ getRootProps, getInputProps }) => (
                                             <section>
                                                 <div {...getRootProps({ className: 'dropzone' })}>
@@ -134,7 +138,6 @@ function AdminForm(props) {
                 )} />
         </div>);
 }
-
 
 AdminForm.propTypes = {
   formData: PropTypes.object,
