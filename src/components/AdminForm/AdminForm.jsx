@@ -4,9 +4,16 @@ import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 import { onDroppedFile } from '../../actions/index';
+import { calculateRatio } from '../../utils/image.utils';
 
 const onSubmit = () => {
   console.log('submitted');
+};
+const inferImageDimensions = (imageUrl) => {
+  const imageElement = document.createElement('img');
+  imageElement.src = imageUrl;
+  const options = { targetWidth: '200' };
+  return calculateRatio(imageElement.naturalWidth, imageElement.naturalHeight, options);
 };
 
 function AdminForm(props) {
@@ -105,7 +112,7 @@ function AdminForm(props) {
                                         {({ getRootProps, getInputProps }) => (
                                             <section>
                                                 <div {...getRootProps({ className: 'dropzone' })}>
-                                                    <input {...getInputProps()} />
+                                                    <input {...getInputProps({ name: 'asset' })} />
                                                     <p>Drag and drop some files here, or click to select files</p>
                                                 </div>
                                             </section>
@@ -116,14 +123,14 @@ function AdminForm(props) {
                                             <div className="card">
                                                 <div className="card-image">
                                                     <figure className="image is-3by4">
-                                                        <img src={mediaObj.url} />
+                                                        <img src={ mediaObj.url } className="hasRatio" />
                                                     </figure>
                                                 </div>
                                                 <div className="card-content">
-                                                    <ul className="content is-family-monospace is-size-7">
-                                                        <li className="tag is-info">{mediaObj.name}</li>
+                                                    <div className="content is-family-monospace is-size-7">
+                                                        <span className="tag is-info">{mediaObj.name}</span>
                                                         <span className="tag is-light">{Math.round(mediaObj.size / 1024)}</span>
-                                                    </ul>
+                                                    </div>
                                                 </div>
                                                 <footer className="card-footer">
                                                     <a href="#" className="card-footer-item is-size-7">Make Hero</a>

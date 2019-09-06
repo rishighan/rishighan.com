@@ -38,6 +38,7 @@ export const fetchPosts = options => async (dispatch) => {
 };
 
 export const onDroppedFile = options => async (payload) => {
+  console.log(payload);
   try {
     const serviceURI = assetsServiceBaseURI + options.callURIAction;
     const response = await axios.get(serviceURI, {
