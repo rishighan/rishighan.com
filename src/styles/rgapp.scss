@@ -112,11 +112,6 @@ $content-blockquote-background-color: none transparent;
         h6 {
             font-weight: normal;
         }
-        div {
-            span {
-                margin: 5px 0;
-            }
-        }
         .field {
             margin: 1.5rem 0;
             .tags {
@@ -129,7 +124,7 @@ $content-blockquote-background-color: none transparent;
                 margin: 0;
             }
             .card-content {
-                padding: 0.2rem 2rem;
+                padding: 0.1rem 1rem;
                 ul {
                     li {
                         display: block;
@@ -138,10 +133,7 @@ $content-blockquote-background-color: none transparent;
                     }
                 }
             }
-            .image {
-                object-fit: cover;
-                height: 100%;
-            }
+            
         }
     }
 }

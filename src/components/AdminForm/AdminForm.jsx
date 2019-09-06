@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
+import AspectRatio from 'react-aspect-ratio';
 import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 import { onDroppedFile } from '../../actions/index';
-import { calculateRatio } from '../../utils/image.utils';
+import { calculateAspectRatio } from '../../utils/image.utils';
 
 const onSubmit = () => {
   console.log('submitted');
@@ -12,8 +13,7 @@ const onSubmit = () => {
 const inferImageDimensions = (imageUrl) => {
   const imageElement = document.createElement('img');
   imageElement.src = imageUrl;
-  const options = { targetWidth: '200' };
-  return calculateRatio(imageElement.naturalWidth, imageElement.naturalHeight, options);
+  return calculateAspectRatio(imageElement.naturalWidth, imageElement.naturalHeight);
 };
 
 function AdminForm(props) {
@@ -122,14 +122,16 @@ function AdminForm(props) {
                                         {props.formData.attachment.map((mediaObj, idx) => <li className="is-pulled-left" key={idx}>
                                             <div className="card">
                                                 <div className="card-image">
-                                                    <figure className="image is-3by4">
-                                                        <img src={ mediaObj.url } className="hasRatio" />
-                                                    </figure>
+                                                    <AspectRatio ratio={ inferImageDimensions(mediaObj.url) } style={{ maxWidth: '200px' }}>
+                                                      <figure className="image">
+                                                           <img src={ mediaObj.url } />
+                                                        </figure>
+                                                    </AspectRatio>
                                                 </div>
                                                 <div className="card-content">
                                                     <div className="content is-family-monospace is-size-7">
-                                                        <span className="tag is-info">{mediaObj.name}</span>
-                                                        <span className="tag is-light">{Math.round(mediaObj.size / 1024)}</span>
+                                                        <p>{mediaObj.name}</p>
+                                                        <span >{Math.round(mediaObj.size / 1024)}</span>
                                                     </div>
                                                 </div>
                                                 <footer className="card-footer">
