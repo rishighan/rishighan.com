@@ -17,8 +17,11 @@ const inferImageDimensions = (imageUrl) => {
 };
 
 function AdminForm(props) {
-  console.log(props);
   const tabs = [
+    {
+      displayName: 'Statistics',
+      markup: <div>yaaa</div>,
+    },
     {
       displayName: 'Preview',
       markup: <MarkdownRenderer text={props.formData.content} />,
@@ -27,12 +30,9 @@ function AdminForm(props) {
       displayName: 'Raw',
       markup: <div className="control is-expanded">
                 <Field name="content" component="textarea" placeholder="Write" className="textarea is-family-monospace" rows="20" />
-            </div>,
+              </div>,
     },
-    {
-      displayName: 'Statistics',
-      markup: <div>yaaa</div>,
-    },
+
   ];
   const [tabContent, changeTab] = useState({
     markup: tabs[0].markup,

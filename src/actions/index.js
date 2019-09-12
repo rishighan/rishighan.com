@@ -9,7 +9,6 @@ const postsServiceBaseURI = 'http://localhost:3000/api/v1/posts/';
 const assetsServiceBaseURI = 'http://localhost:3030/api/v1/assets/';
 
 export const fetchPosts = options => async (dispatch) => {
-  console.log(dispatch);
   try {
     dispatch({
       type: FETCH_POSTS_REQUEST,
@@ -37,20 +36,18 @@ export const fetchPosts = options => async (dispatch) => {
   }
 };
 
-export const onDroppedFile = options => async (payload) => {
-  console.log(payload);
-  try {
-    const serviceURI = assetsServiceBaseURI + options.callURIAction;
-    const response = await axios.get(serviceURI, {
-      method: options.callMethod,
-      params: payload,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
+export const onDroppedFile = options => (data) => {
+  const formData = new FormData();
+  console.log(data);
+  formData.append('file', data[0]);
+  console.log(formData);
+  const serviceURI = assetsServiceBaseURI + options.callURIAction;
+  axios.post(serviceURI, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+    .then((response) => {
+      console.log(response);
     });
-    console.log(response);
-  } catch (error) {
-    console.log('Error', error);
-  }
 };
