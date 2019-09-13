@@ -36,18 +36,25 @@ export const fetchPosts = options => async (dispatch) => {
   }
 };
 
-export const onDroppedFile = options => (data) => {
-  const formData = new FormData();
-  console.log(data);
-  formData.append('file', data[0]);
-  console.log(formData);
+export const onDroppedFile = async (file, options) => {
   const serviceURI = assetsServiceBaseURI + options.callURIAction;
-  axios.post(serviceURI, formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  })
-    .then((response) => {
-      console.log(response);
+  const form = new FormData();
+  file.forEach((f) => {
+    console.log(f);
+    form.append(f.name, f);
+  });
+  console.log(form);
+  try {
+    const response = await axios({
+      method: 'POST',
+      url: serviceURI,
+      data: form,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     });
+    console.log(response);
+  } catch (error) {
+    console.log('Error', error);
+  }
 };

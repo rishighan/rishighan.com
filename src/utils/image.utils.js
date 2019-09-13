@@ -6,3 +6,9 @@ export const calculateAspectRatio = (width, height) => {
   const denominator = Math.round(height / aspectRatio);
   return `${numerator}/${denominator}`;
 };
+
+export const inferImageDimensions = (imageUrl) => {
+  const imageElement = document.createElement('img');
+  imageElement.src = imageUrl;
+  return calculateAspectRatio(imageElement.naturalWidth, imageElement.naturalHeight);
+};

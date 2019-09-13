@@ -5,15 +5,10 @@ import Dropzone from 'react-dropzone';
 import AspectRatio from 'react-aspect-ratio';
 import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 import { onDroppedFile } from '../../actions/index';
-import { calculateAspectRatio } from '../../utils/image.utils';
+import { inferImageDimensions } from '../../utils/image.utils';
 
 const onSubmit = () => {
   console.log('submitted');
-};
-const inferImageDimensions = (imageUrl) => {
-  const imageElement = document.createElement('img');
-  imageElement.src = imageUrl;
-  return calculateAspectRatio(imageElement.naturalWidth, imageElement.naturalHeight);
 };
 
 function AdminForm(props) {
@@ -105,10 +100,7 @@ function AdminForm(props) {
                             {/* Media management */}
                             <div className="box">
                                 <section>
-                                    <Dropzone onDrop={ onDroppedFile({
-                                      callURIAction: 'upload',
-                                      callMethod: 'POST',
-                                    })}>
+                                    <Dropzone onDrop={ file => onDroppedFile(file, { callURIAction: 'upload' }) }>
                                         {({ getRootProps, getInputProps }) => (
                                             <section>
                                                 <div {...getRootProps({ className: 'dropzone' })}>
