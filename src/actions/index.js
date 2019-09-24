@@ -1,12 +1,13 @@
-import axios from 'axios';
 import {
   FETCH_POSTS_REQUEST,
   FETCH_POSTS_ERROR,
   FETCH_POSTS_SUCCESS,
 } from '../constants/action-types';
+import axios from 'axios';
+import formData from 'form-data';
 
 const postsServiceBaseURI = 'http://localhost:3000/api/v1/posts/';
-const assetsServiceBaseURI = 'http://localhost:3030/api/v1/assets/';
+const assetsServiceBaseURI = 'http://localhost:4000/';
 
 export const fetchPosts = options => async (dispatch) => {
   try {
@@ -36,25 +37,18 @@ export const fetchPosts = options => async (dispatch) => {
   }
 };
 
-export const onDroppedFile = async (file, options) => {
-  const serviceURI = assetsServiceBaseURI + options.callURIAction;
-  const form = new FormData();
-  file.forEach((f) => {
-    console.log(f);
-    form.append(f.name, f);
-  });
-  console.log(form);
+export const onDroppedFile = async (file) => {
   try {
-    const response = await axios({
-      method: 'POST',
-      url: serviceURI,
-      data: form,
+    const fd = new formData();
+    fd.append('fileData', file[0]);
+    fd.append('fileName', file[0].name);
+    const response = await axios.post(
+      assetsServiceBaseURI, fd, {
       headers: {
-        'Content-Type': 'multipart/form-data',
-      },
+        "Content-Type": `multipart/form-data boundary=${fd._boundary}`,
+      }
     });
-    console.log(response);
   } catch (error) {
-    console.log('Error', error);
+    console.log(error);
   }
 };

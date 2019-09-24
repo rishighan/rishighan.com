@@ -1,50 +1,52 @@
 import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import Dropzone from 'react-dropzone';
 import AspectRatio from 'react-aspect-ratio';
 import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 import { onDroppedFile } from '../../actions/index';
+import formData from 'form-data';
 import { inferImageDimensions } from '../../utils/image.utils';
 
 const onSubmit = () => {
-  console.log('submitted');
+    console.log('submitted');
 };
 
 function AdminForm(props) {
-  const tabs = [
-    {
-      displayName: 'Statistics',
-      markup: <div>yaaa</div>,
-    },
-    {
-      displayName: 'Preview',
-      markup: <MarkdownRenderer text={props.formData.content} />,
-    },
-    {
-      displayName: 'Raw',
-      markup: <div className="control is-expanded">
+    const tabs = [
+        {
+            displayName: 'Statistics',
+            markup: <div>yaaa</div>,
+        },
+        {
+            displayName: 'Preview',
+            markup: <MarkdownRenderer text={props.formData.content} />,
+        },
+        {
+            displayName: 'Raw',
+            markup: <div className="control is-expanded">
                 <Field name="content" component="textarea" placeholder="Write" className="textarea is-family-monospace" rows="20" />
-              </div>,
-    },
+            </div>,
+        },
 
-  ];
-  const [tabContent, changeTab] = useState({
-    markup: tabs[0].markup,
-    currentlyActiveTab: tabs[0].displayName,
-  });
+    ];
+    const [tabContent, changeTab] = useState({
+        markup: tabs[0].markup,
+        currentlyActiveTab: tabs[0].displayName,
+    });
 
-  return (
+    return (
         <div className="column content is-two-thirds-tablet is-full-mobile">
             <Form
                 onSubmit={onSubmit}
                 initialValues={
                     {
-                      ...props.formData,
+                        ...props.formData,
                     }
                 }
                 render={({
-                  handleSubmit, pristine, invalid,
+                    handleSubmit, pristine, invalid,
                 }) => (
                         <form>
                             <h2>Write a Post</h2>
@@ -81,7 +83,7 @@ function AdminForm(props) {
                                         className={tabContent.currentlyActiveTab === tab.displayName ? 'is-active' : ''}
                                         key={idx}
                                         onClick={() => {
-                                          changeTab({ markup: tab.markup, currentlyActiveTab: tab.displayName });
+                                            changeTab({ markup: tab.markup, currentlyActiveTab: tab.displayName });
                                         }}>
                                         <a>{tab.displayName}</a>
                                     </li>)}
@@ -100,7 +102,7 @@ function AdminForm(props) {
                             {/* Media management */}
                             <div className="box">
                                 <section>
-                                    <Dropzone onDrop={ file => onDroppedFile(file, { callURIAction: 'upload' }) }>
+                                    <Dropzone onDrop={ onDroppedFile }>
                                         {({ getRootProps, getInputProps }) => (
                                             <section>
                                                 <div {...getRootProps({ className: 'dropzone' })}>
@@ -114,9 +116,9 @@ function AdminForm(props) {
                                         {props.formData.attachment.map((mediaObj, idx) => <li className="is-pulled-left" key={idx}>
                                             <div className="card">
                                                 <div className="card-image">
-                                                    <AspectRatio ratio={ inferImageDimensions(mediaObj.url) } style={{ maxWidth: '200px' }}>
-                                                      <figure className="image">
-                                                           <img src={ mediaObj.url } />
+                                                    <AspectRatio ratio={ inferImageDimensions(mediaObj.url)} style={{ maxWidth: '200px' }}>
+                                                        <figure className="image">
+                                                            <img src={mediaObj.url} />
                                                         </figure>
                                                     </AspectRatio>
                                                 </div>
@@ -136,13 +138,13 @@ function AdminForm(props) {
                                 </section>
                             </div>
                         </form>
-                )} />
+                    )} />
         </div>);
 }
 
 AdminForm.propTypes = {
-  formData: PropTypes.object,
-  onDroppedFile: PropTypes.func,
+    formData: PropTypes.object,
+    onDroppedFile: PropTypes.func,
 };
 
 export default AdminForm;
