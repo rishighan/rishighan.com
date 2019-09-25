@@ -7,7 +7,7 @@ import axios from 'axios';
 import formData from 'form-data';
 
 const postsServiceBaseURI = 'http://localhost:3000/api/v1/posts/';
-const assetsServiceBaseURI = 'http://localhost:4000/';
+const assetsServiceBaseURI = 'http://localhost:4000/upload/';
 
 export const fetchPosts = options => async (dispatch) => {
   try {
@@ -16,7 +16,7 @@ export const fetchPosts = options => async (dispatch) => {
       isFetching: true,
     });
     const serviceURI = postsServiceBaseURI + options.callURIAction;
-    const response = await axios.get(serviceURI, {
+    const response = await axios(serviceURI, {
       method: options.callMethod,
       params: options.callParams,
       headers: {

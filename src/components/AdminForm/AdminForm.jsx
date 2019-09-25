@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import Dropzone from 'react-dropzone';
 import AspectRatio from 'react-aspect-ratio';
 import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 import { onDroppedFile } from '../../actions/index';
-import formData from 'form-data';
 import { inferImageDimensions } from '../../utils/image.utils';
 
 const onSubmit = () => {
@@ -102,7 +100,7 @@ function AdminForm(props) {
                             {/* Media management */}
                             <div className="box">
                                 <section>
-                                    <Dropzone onDrop={ onDroppedFile }>
+                                    <Dropzone onDrop={onDroppedFile}>
                                         {({ getRootProps, getInputProps }) => (
                                             <section>
                                                 <div {...getRootProps({ className: 'dropzone' })}>
@@ -116,7 +114,7 @@ function AdminForm(props) {
                                         {props.formData.attachment.map((mediaObj, idx) => <li className="is-pulled-left" key={idx}>
                                             <div className="card">
                                                 <div className="card-image">
-                                                    <AspectRatio ratio={ inferImageDimensions(mediaObj.url)} style={{ maxWidth: '200px' }}>
+                                                    <AspectRatio ratio={inferImageDimensions(mediaObj.url)} style={{ maxWidth: '200px' }}>
                                                         <figure className="image">
                                                             <img src={mediaObj.url} />
                                                         </figure>
@@ -136,6 +134,18 @@ function AdminForm(props) {
                                         </li>)}
                                     </ul>
                                 </section>
+                            </div>
+                            {/* Global Form controls */}
+                            <div class="field is-grouped">
+                                <div class="control">
+                                    <button class="button is-link">Save Topic</button>
+                                </div>
+                                <div class="control">
+                                    <button class="button is-link">Save As Draft</button>
+                                </div>
+                                <div class="control">
+                                    <button class="button is-link is-danger">Delete Post</button>
+                                </div>
                             </div>
                         </form>
                     )} />

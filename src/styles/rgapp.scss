@@ -123,7 +123,9 @@ $content-blockquote-background-color: none transparent;
 
         .field {
             margin: 1.5rem 0;
-
+            input, textarea {
+                padding-left: 0;
+            }
             .tags {
                 margin: 0.5rem 0.5rem 0 0;
             }
