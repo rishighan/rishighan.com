@@ -144,8 +144,19 @@ const AppContainer = () => (
                 },
               }
             } />} />
+            <Route path={'/admin'} render={props => <Page callOptions={{
+              callMethod: 'get',
+              callURIAction: 'retrieve',
+            }} options={
+              {
+                type: 'adminMain',
+                metadata: {
+
+                }
+              }
+            } />} />
             {/* Edit post form route */}
-            <Route path={'/admin/edit/:postSlug'} render={props => <Page callOptions={ {
+            <Route path={'/admin/edit/:postSlug'} render={props => <Page callOptions={{
               callMethod: 'get',
               callURIAction: 'retrieve',
               callParams: {

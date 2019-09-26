@@ -12,6 +12,7 @@ const renderPage = props => ({
             <PageBlock data={ props.posts }
                        postType={ props.options.metadata.subType } />
         </div>,
+  adminMain: <div>admin</div>,
   adminForm: !_.isEmpty(props.posts.posts[0]) ? <AdminForm formData={ props.posts.posts[0] } /> : null,
 });
 class Page extends Component {
