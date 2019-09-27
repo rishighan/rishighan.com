@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import PageBlock from '../PageBlock/PageBlock';
 import AdminForm from '../AdminForm/AdminForm';
+import AdminMain from '../AdminMain/AdminMain';
 import { fetchPosts } from '../../actions/index';
 
 const renderPage = props => ({
@@ -12,7 +13,7 @@ const renderPage = props => ({
             <PageBlock data={ props.posts }
                        postType={ props.options.metadata.subType } />
         </div>,
-  adminMain: <div>admin</div>,
+  adminMain: !_.isEmpty(props.posts.posts[0]) ? <AdminMain data={ props.posts }/> : null,
   adminForm: !_.isEmpty(props.posts.posts[0]) ? <AdminForm formData={ props.posts.posts[0] } /> : null,
 });
 class Page extends Component {

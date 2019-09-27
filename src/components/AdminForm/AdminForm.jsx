@@ -8,43 +8,43 @@ import { onDroppedFile } from '../../actions/index';
 import { inferImageDimensions } from '../../utils/image.utils';
 
 const onSubmit = () => {
-    console.log('submitted');
+  console.log('submitted');
 };
 
 function AdminForm(props) {
-    const tabs = [
-        {
-            displayName: 'Statistics',
-            markup: <div>yaaa</div>,
-        },
-        {
-            displayName: 'Preview',
-            markup: <MarkdownRenderer text={props.formData.content} />,
-        },
-        {
-            displayName: 'Raw',
-            markup: <div className="control is-expanded">
+  const tabs = [
+    {
+      displayName: 'Statistics',
+      markup: <div>yaaa</div>,
+    },
+    {
+      displayName: 'Preview',
+      markup: <MarkdownRenderer text={props.formData.content} />,
+    },
+    {
+      displayName: 'Raw',
+      markup: <div className="control is-expanded">
                 <Field name="content" component="textarea" placeholder="Write" className="textarea is-family-monospace" rows="20" />
             </div>,
-        },
+    },
 
-    ];
-    const [tabContent, changeTab] = useState({
-        markup: tabs[0].markup,
-        currentlyActiveTab: tabs[0].displayName,
-    });
+  ];
+  const [tabContent, changeTab] = useState({
+    markup: tabs[0].markup,
+    currentlyActiveTab: tabs[0].displayName,
+  });
 
-    return (
+  return (
         <div className="column content is-two-thirds-tablet is-full-mobile">
             <Form
                 onSubmit={onSubmit}
                 initialValues={
                     {
-                        ...props.formData,
+                      ...props.formData,
                     }
                 }
                 render={({
-                    handleSubmit, pristine, invalid,
+                  handleSubmit, pristine, invalid,
                 }) => (
                         <form>
                             <h2>Write a Post</h2>
@@ -81,7 +81,7 @@ function AdminForm(props) {
                                         className={tabContent.currentlyActiveTab === tab.displayName ? 'is-active' : ''}
                                         key={idx}
                                         onClick={() => {
-                                            changeTab({ markup: tab.markup, currentlyActiveTab: tab.displayName });
+                                          changeTab({ markup: tab.markup, currentlyActiveTab: tab.displayName });
                                         }}>
                                         <a>{tab.displayName}</a>
                                     </li>)}
@@ -136,25 +136,25 @@ function AdminForm(props) {
                                 </section>
                             </div>
                             {/* Global Form controls */}
-                            <div class="field is-grouped">
-                                <div class="control">
-                                    <button class="button is-link">Save Topic</button>
+                            <div className="field is-grouped">
+                                <div className="control">
+                                    <button className="button is-link">Save Topic</button>
                                 </div>
-                                <div class="control">
-                                    <button class="button is-link">Save As Draft</button>
+                                <div className="control">
+                                    <button className="button is-link">Save As Draft</button>
                                 </div>
-                                <div class="control">
-                                    <button class="button is-link is-danger">Delete Post</button>
+                                <div className="control">
+                                    <button className="button is-link is-danger">Delete Post</button>
                                 </div>
                             </div>
                         </form>
-                    )} />
+                )} />
         </div>);
 }
 
 AdminForm.propTypes = {
-    formData: PropTypes.object,
-    onDroppedFile: PropTypes.func,
+  formData: PropTypes.object,
+  onDroppedFile: PropTypes.func,
 };
 
 export default AdminForm;

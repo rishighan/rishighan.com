@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 
-export default class List extends React.Component {
-    
+class List extends Component {
+  render() {
+    return <div>{props.children}</div>
+  }
 }
+
+List.propTypes = {
+  children: PropTypes.Component,
+};
+
+export default List;
