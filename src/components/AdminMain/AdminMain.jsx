@@ -7,7 +7,7 @@ class AdminMain extends Component {
   render() {
     return (
       <div>
-        <SearchBar />
+        <SearchBar onChange={} debounce={} />
         <List>
           {this.props.data.posts.map(post => post)}
         </List>
