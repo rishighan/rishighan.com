@@ -29,7 +29,7 @@ export const fetchPosts = options => async (dispatch) => {
       posts: response.data,
     });
   } catch (error) {
-    console.log('Error', error);
+    console.log(error);
     dispatch({
       type: FETCH_POSTS_ERROR,
       error,
@@ -48,7 +48,8 @@ export const onDroppedFile = async (file) => {
           'Content-Type': `multipart/form-data boundary=${fd._boundary}`,
         },
       });
+    return response;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };

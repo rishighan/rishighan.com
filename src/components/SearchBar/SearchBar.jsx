@@ -1,11 +1,15 @@
 import React from 'react';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 const SearchBar = (props) => {
-  console.log(props);
   return (<div>
-            <input type="text" autoComplete="off" />
+            <input type="text"
+                   autoComplete="off"
+                   onChange={props.searchBarChangeHandler} />
         </div>);
 };
 
+SearchBar.propTypes = {
+  searchBarChangeHandler: PropTypes.func,
+};
 export default SearchBar;
