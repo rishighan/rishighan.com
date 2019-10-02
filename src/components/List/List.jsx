@@ -6,11 +6,11 @@ import Timestamp from '../Timestamp/Timestamp';
 function List(props) {
   return (
     <ul>
-      {props.children && props.children.map((child, idx) => (
+      {props.children ? props.children.map((child, idx) => (
         <li key={idx}>
           <Heading headingText={child.title} postSlug={child.slug} />
           <Timestamp date={child.date_updated} dateFormat={'dddd, MMMM Do YYYY'} />
-        </li>))}
+        </li>)) : 'No posts found'}
     </ul>
   );
 }

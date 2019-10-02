@@ -7,14 +7,16 @@ import SearchBar from '../SearchBar/SearchBar';
 import { fetchPosts } from '../../actions/index';
 
 class AdminMain extends Component {
-  componentDidMount() {
-    this.props.fetchPosts();
+  constructor(props) {
+    super(props);
+    this.searchPosts = this.props.searchPosts.bind(this);
+    this.debouncedSearchPosts = _.debounce(this.searchPosts, 500);
   }
 
   render() {
     return (
       <div className="column content is-two-thirds-tablet is-full-mobile">
-        <SearchBar searchBarChangeHandler={this.props.searchPosts} />
+        <SearchBar searchBarChangeHandler={ this.debouncedSearchPosts } />
         <List>
           {this.props.posts.posts.map(post => post)}
         </List>
@@ -28,8 +30,7 @@ function mapStateToProps(state) {
   };
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  fetchPosts: () => dispatch(fetchPosts(ownProps.callOptions)),
+const mapDispatchToProps = dispatch => ({
   searchPosts: (e) => {
     const searchCallConfiguration = {
       callURIAction: 'searchPosts',
@@ -51,7 +52,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 AdminMain.propTypes = {
   posts: PropTypes.object,
-  fetchPosts: PropTypes.func,
   searchPosts: PropTypes.func,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AdminMain);
