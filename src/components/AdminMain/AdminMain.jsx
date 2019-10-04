@@ -9,14 +9,12 @@ import { fetchPosts } from '../../actions/index';
 class AdminMain extends Component {
   constructor(props) {
     super(props);
-    this.searchPosts = this.props.searchPosts.bind(this);
-    this.debouncedSearchPosts = _.debounce(this.searchPosts, 500);
   }
 
   render() {
     return (
       <div className="column content is-two-thirds-tablet is-full-mobile">
-        <SearchBar searchBarChangeHandler={ this.debouncedSearchPosts } />
+        <SearchBar searchBarChangeHandler={this.props.debouncedSearchPosts} />
         <List>
           {this.props.posts.posts.map(post => post)}
         </List>
@@ -30,24 +28,28 @@ function mapStateToProps(state) {
   };
 }
 
+const debouncedSearchPosts = (e, dispatch) => {
+  console.log(e)
+  const searchTextValue = e.target.value;
+  const searchCallConfiguration = {
+    callURIAction: 'searchPosts',
+    callMethod: 'post',
+    callParams: {
+      pageOffset: 1,
+      pageLimit: 10,
+      searchTerm: searchTextValue,
+    },
+  };
+  const retrieveCallConfiguration = {
+    callURIAction: 'retrieve',
+    callMethod: 'get',
+  };
+  const actionConfig = searchTextValue === '' ? retrieveCallConfiguration : searchCallConfiguration;
+  dispatch(fetchPosts(actionConfig))
+}
+
 const mapDispatchToProps = dispatch => ({
-  searchPosts: (e) => {
-    const searchCallConfiguration = {
-      callURIAction: 'searchPosts',
-      callMethod: 'post',
-      callParams: {
-        pageOffset: 1,
-        pageLimit: 10,
-        searchTerm: e.target.value,
-      },
-    };
-    const retrieveCallConfiguration = {
-      callURIAction: 'retrieve',
-      callMethod: 'get',
-    };
-    const actionConfig = e.target.value === '' ? retrieveCallConfiguration : searchCallConfiguration;
-    dispatch(fetchPosts(actionConfig));
-  },
+  debouncedSearchPosts: (e) => debouncedSearchPosts(e, dispatch)
 });
 
 AdminMain.propTypes = {
