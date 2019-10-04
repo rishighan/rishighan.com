@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { DebounceInput } from 'react-debounce-input';
 import _ from 'lodash';
+import ReactPaginate from 'react-paginate';
 import List from '../List/List';
 import { fetchPosts } from '../../actions/index';
 
@@ -17,6 +18,19 @@ class AdminMain extends Component {
         <List>
           {!_.isEmpty(this.props.posts.posts) ? this.props.posts.posts.map(post => post) : [] }
         </List>
+        <ReactPaginate
+          previousLabel={'previous'}
+          nextLabel={'next'}
+          breakLabel={'...'}
+          breakClassName={'break-me'}
+          pageCount={this.props.posts.posts.length}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={this.handlePageClick}
+          containerClassName={'pagination'}
+          subContainerClassName={'pages pagination'}
+          activeClassName={'active'}
+        />
       </div>
     );
   }
@@ -42,6 +56,10 @@ const mapDispatchToProps = dispatch => ({
     const retrieveCallConfiguration = {
       callURIAction: 'retrieve',
       callMethod: 'get',
+      callParams: {
+        pageOffset: 1,
+        pageLimit: 10,
+      },
     };
     const actionConfig = searchTextValue === '' ? retrieveCallConfiguration : searchCallConfiguration;
     dispatch(fetchPosts(actionConfig));
