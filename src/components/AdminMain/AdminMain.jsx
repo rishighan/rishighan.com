@@ -9,6 +9,7 @@ import { fetchPosts } from '../../actions/index';
 
 class AdminMain extends Component {
   render() {
+    console.log(this.props.posts)
     return (
       <div className="column content is-two-thirds-tablet is-full-mobile">
         <DebounceInput minLength={3}
@@ -22,13 +23,10 @@ class AdminMain extends Component {
           previousLabel={'previous'}
           nextLabel={'next'}
           breakLabel={'...'}
-          breakClassName={'break-me'}
-          pageCount={this.props.posts.posts.length}
+          pageCount={3}
           marginPagesDisplayed={2}
           pageRangeDisplayed={5}
           onPageChange={this.handlePageClick}
-          containerClassName={'pagination'}
-          subContainerClassName={'pages pagination'}
           activeClassName={'active'}
         />
       </div>
