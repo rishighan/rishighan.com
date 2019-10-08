@@ -8,64 +8,83 @@ import List from '../List/List';
 import { fetchPosts } from '../../actions/index';
 
 class AdminMain extends Component {
+  componentDidMount() {
+    this.props.searchPosts();
+  }
   render() {
-    console.log(this.props.posts)
     return (
       <div className="column content is-two-thirds-tablet is-full-mobile">
         <DebounceInput minLength={3}
-                       debounceTimeout={450}
-                       onChange={e => this.props.searchPosts(e)}
-                       />
+          debounceTimeout={450}
+          onChange={e => this.props.searchPosts(e)}
+        />
         <List>
-          {!_.isEmpty(this.props.posts.posts) ? this.props.posts.posts.map(post => post) : [] }
+          {!_.isEmpty(this.props.posts) ? this.props.posts.map(post => post) : []}
         </List>
         <ReactPaginate
           previousLabel={'previous'}
           nextLabel={'next'}
           breakLabel={'...'}
-          pageCount={3}
+          pageCount={this.props.pages}
           marginPagesDisplayed={2}
           pageRangeDisplayed={5}
-          onPageChange={this.handlePageClick}
+          onPageChange={this.props.nextPageHandler}
           activeClassName={'active'}
         />
       </div>
     );
   }
 }
+
 function mapStateToProps(state) {
   return {
-    posts: state.posts,
+    posts: state.posts.posts.docs,
+    pages: state.posts.posts.pages,
   };
 }
 
 const mapDispatchToProps = dispatch => ({
   searchPosts: (e) => {
-    const searchTextValue = e.target.value;
-    const searchCallConfiguration = {
-      callURIAction: 'searchPosts',
-      callMethod: 'post',
-      callParams: {
-        pageOffset: 1,
-        pageLimit: 10,
-        searchTerm: searchTextValue,
-      },
-    };
-    const retrieveCallConfiguration = {
+    let actionConfig;
+    if (!_.isUndefined(e) && !_.isEmpty(e.target.value)) {
+      const searchTextValue = e.target.value;
+      const searchCallConfiguration = {
+        callURIAction: 'searchPosts',
+        callMethod: 'post',
+        callParams: {
+          pageOffset: 1,
+          pageLimit: 10,
+          searchTerm: searchTextValue,
+        },
+      };
+      actionConfig = searchCallConfiguration;
+    } else {
+      const retrieveCallConfiguration = {
+        callURIAction: 'retrieve',
+        callMethod: 'get',
+        callParams: {
+          pageOffset: 1,
+          pageLimit: 10,
+        },
+      };
+      actionConfig = retrieveCallConfiguration;
+    }
+    dispatch(fetchPosts(actionConfig));
+  },
+  nextPageHandler: data => {
+    dispatch(fetchPosts({
       callURIAction: 'retrieve',
       callMethod: 'get',
       callParams: {
-        pageOffset: 1,
+        pageOffset: data.selected + 1,
         pageLimit: 10,
       },
-    };
-    const actionConfig = searchTextValue === '' ? retrieveCallConfiguration : searchCallConfiguration;
-    dispatch(fetchPosts(actionConfig));
-  },
+    }))
+  }
 });
 
 AdminMain.propTypes = {
-  posts: PropTypes.object,
+  posts: PropTypes.array,
   searchPosts: PropTypes.func,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AdminMain);
