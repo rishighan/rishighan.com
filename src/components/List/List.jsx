@@ -9,7 +9,7 @@ function List(props) {
     <ul>
       {!_.isEmpty(props.children) ? props.children.map((child, idx) => (
         <li key={idx}>
-          <Heading headingText={child.title} postSlug={child.slug} />
+          <Heading headingText={child.title} linkHref={`/admin/edit/${child.slug}`} />
           <Timestamp date={child.date_updated} dateFormat={'dddd, MMMM Do YYYY'} />
         </li>)) : 'No posts found'}
     </ul>

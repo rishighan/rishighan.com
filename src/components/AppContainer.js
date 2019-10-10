@@ -16,7 +16,7 @@ const navItems = [
       {
         tagName: 'Blog',
         pageOffset: 1,
-        pageLimit: 15,
+        pageLimit: 25,
       })}
       options={
         {
@@ -134,6 +134,8 @@ const AppContainer = () => (
                 callURIAction: 'retrieve',
                 callParams: {
                   slug: props.match.params.postSlug,
+                  pageOffset: 1,
+                  pageLimit: 1,
                 },
               }
             } options={

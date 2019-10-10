@@ -4,7 +4,7 @@ import { Route, Link } from 'react-router-dom';
 
 const Heading = props => (
   <header>
-    <Link to={`/post/${props.postSlug}`}>
+    <Link to={props.linkHref}>
       <h3>{props.headingText}</h3>
     </Link>
   </header>
