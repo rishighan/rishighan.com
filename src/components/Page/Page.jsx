@@ -10,8 +10,9 @@ import { fetchPosts } from '../../actions/index';
 
 const renderPage = props => ({
   post: <div className="column content is-two-thirds-tablet is-full-mobile">
-            <PageBlock data={ props.posts }
-                       postType={ props.options.metadata.subType } />
+            <PageBlock singlePostData={ props.posts }
+            postsData={ props.posts }
+            postType={ props.options.metadata.subType } />
         </div>,
   adminMain: <AdminMain />,
   adminForm: !_.isEmpty(props.posts.posts[0]) ? <AdminForm formData={ props.posts.posts[0] } /> : null,
