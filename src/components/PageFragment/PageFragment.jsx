@@ -7,16 +7,22 @@ import Timestamp from '../Timestamp/Timestamp';
 
 const renderPageFragment = (props) => {
   return {
-      single: <React.Fragment>
-          <div>{props.postData.docs[0].title}</div>
-      </React.Fragment>,
-    // blog: <React.Fragment>
-    //                 { data.map((post, idx) => <article key={idx}>
-    //                     <Heading headingText={ post.title } linkHref={ `/post/${post.slug}` } />
-    //                     <Timestamp date={ post.date_updated } dateFormat={ 'D MMM, YYYY ' } />
-    //                     <section><MarkdownRenderer text={ post.content } /></section>
-    //                 </article>)}
-    //     </React.Fragment>,
+    single: <React.Fragment>
+      { props.postsData.posts.docs ? (<div>
+        <Heading headingText={props.postsData.posts.docs[0].title} />
+        <Timestamp date={props.postsData.posts.docs[0].date_updated} dateFormat={'D MMM, YYYY '} />
+        <section><MarkdownRenderer text={props.postsData.posts.docs[0].content} /></section>
+      </div>) : null }
+    </React.Fragment>,
+    blog: <React.Fragment>
+      { _.isArray(props.postsData.posts) ? <div>
+        {props.postsData.posts.map((post, idx) => <article key={idx}>
+          <Heading headingText={post.title} linkHref={`/post/${post.slug}`} />
+          <Timestamp date={post.date_updated} dateFormat={'D MMM, YYYY '} />
+          <section><MarkdownRenderer text={post.content} /></section>
+        </article>) }
+      </div> : null }
+    </React.Fragment>,
     // titles: <React.Fragment>
     //                 { data.map((post, idx) => <div key={ idx }>
     //                         <Heading headingText={ post.title } linkHref={ `/post/${post.slug}` } />

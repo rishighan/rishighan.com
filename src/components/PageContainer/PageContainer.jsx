@@ -11,7 +11,7 @@ import { fetchPosts } from '../../actions/index';
 const renderPage = (props) => {
   return {
     post: <div className="column content is-two-thirds-tablet is-full-mobile">
-            <PageFragment postsData={ props.posts.postsData }
+            <PageFragment postsData={ props.posts }
                        postType={ props.options.metadata.subType } />
         </div>,
     adminMain: <AdminMain />,
@@ -24,7 +24,6 @@ class PageContainer extends Component {
   }
 
   render() {
-    console.log(this.props);
     return renderPage(this.props)[this.props.options.type];
   }
 }

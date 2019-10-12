@@ -4,9 +4,10 @@ import { Route, Link } from 'react-router-dom';
 
 const Heading = props => (
   <header>
-    <Link to={props.linkHref}>
-      <h3>{props.headingText}</h3>
-    </Link>
+    { props.linkHref ?
+      (<Link to={props.linkHref}>
+        <h3>{props.headingText}</h3>
+      </Link>) : <h3>{props.headingText}</h3> }
   </header>
 );
 
