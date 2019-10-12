@@ -11,6 +11,7 @@ class AdminMain extends Component {
   componentDidMount() {
     this.props.searchPosts();
   }
+
   render() {
     return (
       <div className="column content is-two-thirds-tablet is-full-mobile">
@@ -71,7 +72,7 @@ const mapDispatchToProps = dispatch => ({
     }
     dispatch(fetchPosts(actionConfig));
   },
-  nextPageHandler: data => {
+  nextPageHandler: (data) => {
     dispatch(fetchPosts({
       callURIAction: 'retrieve',
       callMethod: 'get',
@@ -79,8 +80,8 @@ const mapDispatchToProps = dispatch => ({
         pageOffset: data.selected + 1,
         pageLimit: 10,
       },
-    }))
-  }
+    }));
+  },
 });
 
 AdminMain.propTypes = {

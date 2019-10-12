@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../store/index';
 import Navigation from './Navigation/Navigation';
-import Page from './Page/Page';
+import PageContainer from './PageContainer/PageContainer';
 import postApiConfiguration from '../utils/postApi.config';
 
 
@@ -12,7 +12,7 @@ const navItems = [
   {
     displayName: 'home',
     href: '/',
-    render: () => <Page callOptions={postApiConfiguration('get', 'findByTagName',
+    render: () => <PageContainer callOptions={postApiConfiguration('get', 'findByTagName',
       {
         tagName: 'Blog',
         pageOffset: 1,
@@ -31,7 +31,7 @@ const navItems = [
   {
     displayName: 'work',
     href: '/work',
-    render: () => <Page callOptions={postApiConfiguration('get', 'findByTagName',
+    render: () => <PageContainer callOptions={postApiConfiguration('get', 'findByTagName',
       {
         tagName: 'Work',
         pageOffset: 1,
@@ -49,7 +49,7 @@ const navItems = [
   {
     displayName: 'freeswim',
     href: '/freeswim',
-    render: () => <Page callOptions={postApiConfiguration('get', 'findByTagName',
+    render: () => <PageContainer callOptions={postApiConfiguration('get', 'findByTagName',
       {
         tagName: 'Trampoline',
         pageOffset: 1,
@@ -67,7 +67,7 @@ const navItems = [
   {
     displayName: 'illustrations',
     href: '/illustrations',
-    render: () => <Page callOptions={postApiConfiguration('get', 'findByTagName',
+    render: () => <PageContainer callOptions={postApiConfiguration('get', 'findByTagName',
       {
         tagName: 'Illustrations',
         pageOffset: 1,
@@ -85,7 +85,7 @@ const navItems = [
   {
     displayName: 'archive',
     href: '/archive',
-    render: () => <Page callOptions={postApiConfiguration('get', 'getArchivedPosts')}
+    render: () => <PageContainer callOptions={postApiConfiguration('get', 'getArchivedPosts')}
       options={
         {
           type: 'post',
@@ -98,7 +98,7 @@ const navItems = [
   {
     displayName: 'colophon',
     href: '/colophon',
-    render: () => <Page callOptions={
+    render: () => <PageContainer callOptions={
       {
         callMethod: 'get',
         callURIAction: 'findByTagName',
@@ -128,7 +128,7 @@ const AppContainer = () => (
             {navItems.map((navItem, idx) => <Route exact path={navItem.href}
               key={idx}
               render={navItem.render} />)}
-            <Route path={'/post/:postSlug'} render={props => <Page callOptions={
+            <Route path={'/post/:postSlug'} render={props => <PageContainer callOptions={
               {
                 callMethod: 'get',
                 callURIAction: 'retrieve',
@@ -146,7 +146,7 @@ const AppContainer = () => (
                 },
               }
             } />} />
-            <Route path={'/admin'} exact render={props => <Page callOptions={{
+            <Route path={'/admin'} exact render={props => <PageContainer callOptions={{
               callMethod: 'get',
               callURIAction: 'retrieve',
             }} options={
@@ -158,7 +158,7 @@ const AppContainer = () => (
               }
             } />} />
             {/* Edit post form route */}
-            <Route path={'/admin/edit/:postSlug'} exact render={props => <Page callOptions={{
+            <Route path={'/admin/edit/:postSlug'} exact render={props => <PageContainer callOptions={{
               callMethod: 'get',
               callURIAction: 'retrieve',
               callParams: {
