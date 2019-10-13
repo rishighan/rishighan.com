@@ -131,11 +131,9 @@ const AppContainer = () => (
             <Route path={'/post/:postSlug'} render={props => <PageContainer callOptions={
               {
                 callMethod: 'get',
-                callURIAction: 'retrieve',
+                callURIAction: 'retrieveOne',
                 callParams: {
                   slug: props.match.params.postSlug,
-                  pageOffset: 1,
-                  pageLimit: 1,
                 },
               }
             } options={
@@ -160,7 +158,7 @@ const AppContainer = () => (
             {/* Edit post form route */}
             <Route path={'/admin/edit/:postSlug'} exact render={props => <PageContainer callOptions={{
               callMethod: 'get',
-              callURIAction: 'retrieve',
+              callURIAction: 'retrieveOne',
               callParams: {
                 slug: props.match.params.postSlug,
               },

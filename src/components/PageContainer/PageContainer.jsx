@@ -12,7 +12,8 @@ const renderPage = (props) => {
   return {
     post: <div className="column content is-two-thirds-tablet is-full-mobile">
             <PageFragment postsData={ props.posts }
-                       postType={ props.options.metadata.subType } />
+                          singlePostData={ props.posts.posts }
+                          postType={ props.options.metadata.subType } />
         </div>,
     adminMain: <AdminMain />,
     adminForm: !_.isEmpty(props.posts.posts[0]) ? <AdminForm formData={ props.posts.posts[0] } /> : null,
@@ -24,6 +25,7 @@ class PageContainer extends Component {
   }
 
   render() {
+    console.log(this.props);
     return renderPage(this.props)[this.props.options.type];
   }
 }
@@ -31,6 +33,7 @@ class PageContainer extends Component {
 function mapStateToProps(state) {
   return {
     posts: state.posts,
+    singlePost: state.posts.docs,
   };
 }
 

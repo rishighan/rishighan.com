@@ -6,52 +6,52 @@ import Heading from '../Heading/Heading';
 import Timestamp from '../Timestamp/Timestamp';
 
 const renderPageFragment = (props) => {
+  // console.log(props);
   return {
     single: <React.Fragment>
-      { props.postsData.posts.docs ? (<div>
-        <Heading headingText={props.postsData.posts.docs[0].title} />
-        <Timestamp date={props.postsData.posts.docs[0].date_updated} dateFormat={'D MMM, YYYY '} />
-        <section><MarkdownRenderer text={props.postsData.posts.docs[0].content} /></section>
-      </div>) : null }
+      {props.singlePostData ? (<>
+        <Heading headingText={props.singlePostData.title} />
+        <Timestamp date={props.singlePostData.date_updated} dateFormat={'D MMM, YYYY '} />
+        <section><MarkdownRenderer text={props.singlePostData.content} /></section>
+      </>) : null}
     </React.Fragment>,
     blog: <React.Fragment>
-      { _.isArray(props.postsData.posts) ? <div>
+      {_.isArray(props.postsData.posts) ? <div>
         {props.postsData.posts.map((post, idx) => <article key={idx}>
           <Heading headingText={post.title} linkHref={`/post/${post.slug}`} />
           <Timestamp date={post.date_updated} dateFormat={'D MMM, YYYY '} />
           <section><MarkdownRenderer text={post.content} /></section>
-        </article>) }
-      </div> : null }
+        </article>)}
+      </div> : null}
     </React.Fragment>,
-    // titles: <React.Fragment>
-    //                 { data.map((post, idx) => <div key={ idx }>
-    //                         <Heading headingText={ post.title } linkHref={ `/post/${post.slug}` } />
-    //                         <span>{ post.excerpt } </span>
-    //                     </div>)}
-    //       </React.Fragment>,
-    // single: <React.Fragment>
-    //                 { data[0] && <article>
-    //                     <Heading headingText={ data[0].title } />
-    //                     <Timestamp date={ data[0].date_updated } dateFormat={ 'D MMM, YYYY' } />
-    //                     <section><MarkdownRenderer text={ data[0].content } /></section>
-    //                 </article>}
-    //        </React.Fragment>,
-    // illustrations: <React.Fragment>
-    //                 { data.map((post, idx) => <div key={ idx }>
-    //                     <h4>{ post.title }</h4>
-    //                     <figure className="image">
-    //                         { post.attachment && post.attachment.map((pic, i) => <img key={ i } src={ pic.url } data-meta={pic.isHero}/>)}
-    //                     </figure>
-    //                     <section><MarkdownRenderer text={ post.content } /></section>
-    //                 </div>) }
-    //              </React.Fragment>,
-    // archive: <React.Fragment>
-    //             <ul>
-    //                 { data[0] && data[0].archivedPosts && data[0].archivedPosts.map((post, idx) => <li key={ idx }>
-    //                     <Heading headingText={ post.title } linkHref={ `/post/${post.slug}` } />
-    //                 </li>) }
-    //             </ul>
-    //        </React.Fragment>,
+    titles: <React.Fragment>
+      {_.isArray(props.postsData.posts) ? <div>
+        {props.postsData.posts.map((post, idx) => <div key={idx}>
+          <Heading headingText={post.title} linkHref={`/post/${post.slug}`} />
+          <span>{post.excerpt} </span>
+        </div>)}
+      </div> : null}
+    </React.Fragment>,
+    illustrations: <React.Fragment>
+      {_.isArray(props.postsData.posts) ? <div>
+        {props.postsData.posts.map((post, idx) => <div key={idx}>
+          <Heading headingText={post.title} />
+          <figure className="image">
+            {post.attachment && post.attachment.map((pic, i) => <img key={i} src={pic.url} data-meta={pic.isHero} />)}
+          </figure>
+          <section><MarkdownRenderer text={post.content} /></section>
+        </div>)}
+      </div> : null}
+    </React.Fragment>,
+    archive: <React.Fragment>
+      {!_.isUndefined(props.postsData.posts[0]) && !_.isUndefined(props.postsData.posts[0].archivedPosts) ? <div>
+        <ul>
+          {props.postsData.posts[0].archivedPosts.map((post, idx) => <li key={idx}>
+            <Heading headingText={post.title} linkHref={`/post/${post.slug}`} />
+          </li>)}
+        </ul>
+      </div> : null}
+    </React.Fragment>,
   };
 };
 
