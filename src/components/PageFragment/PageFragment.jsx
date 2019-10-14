@@ -6,7 +6,6 @@ import Heading from "../Heading/Heading";
 import Timestamp from "../Timestamp/Timestamp";
 
 const renderPageFragment = props => {
-  // console.log(props);
   return {
     single: (
       <React.Fragment>
