@@ -50,7 +50,7 @@ const renderPageFragment = props => {
     titles: (
       <React.Fragment>
         {_.isArray(props.postsData.posts) ? (
-          <div>
+          <>
             {props.postsData.posts.map((post, idx) => (
               <div key={idx}>
                 <Heading
@@ -60,7 +60,7 @@ const renderPageFragment = props => {
                 <span>{post.excerpt} </span>
               </div>
             ))}
-          </div>
+          </>
         ) : null}
       </React.Fragment>
     ),
