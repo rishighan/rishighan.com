@@ -26,6 +26,10 @@ class AdminMain extends Component {
           previousLabel={'previous'}
           nextLabel={'next'}
           breakLabel={'...'}
+          containerClassName={'pagination'}
+          pageLinkClassName={'pagination-link'}
+          previousClassName={'pagination-previous'}
+          nextClassName={'pagination-next'}
           pageCount={this.props.pages}
           marginPagesDisplayed={2}
           pageRangeDisplayed={5}
