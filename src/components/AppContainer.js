@@ -161,7 +161,7 @@ const AppContainer = () => (
             <Route
               path={'/admin'}
               exact
-              render={props => (
+              render={() => (
                 <PageContainer
                   callOptions={{
                     callMethod: 'get',
