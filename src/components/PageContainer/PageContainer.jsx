@@ -20,8 +20,8 @@ const renderPage = props => {
       </div>
     ),
     adminMain: <AdminMain />,
-    adminForm: !_.isEmpty(props.posts.posts[0]) ? (
-      <AdminForm formData={props.posts.posts[0]} />
+    adminForm: !_.isArray(props.posts.posts) ? (
+      <AdminForm formData={ props.posts.posts } />
     ) : null
   };
 };
@@ -31,7 +31,6 @@ class PageContainer extends Component {
   }
 
   render() {
-    console.log(this.props);
     return renderPage(this.props)[this.props.options.type];
   }
 }
@@ -39,7 +38,6 @@ class PageContainer extends Component {
 function mapStateToProps(state) {
   return {
     posts: state.posts,
-    singlePost: state.posts.docs
   };
 }
 
