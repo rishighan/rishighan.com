@@ -1,125 +1,125 @@
 /* eslint-disable react/display-name */
-import React from "react";
-import { Route } from "react-router-dom";
-import { ConnectedRouter } from "connected-react-router";
-import { history } from "../store/index";
-import Navigation from "./Navigation/Navigation";
-import PageContainer from "./PageContainer/PageContainer";
-import postApiConfiguration from "../utils/postApi.config";
+import React from 'react';
+import { Route } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import { history } from '../store/index';
+import Navigation from './Navigation/Navigation';
+import PageContainer from './PageContainer/PageContainer';
+import postApiConfiguration from '../utils/postApi.config';
 
 const navItems = [
   {
-    displayName: "home",
-    href: "/",
+    displayName: 'home',
+    href: '/',
     render: () => (
       <PageContainer
-        callOptions={postApiConfiguration("get", "findByTagName", {
-          tagName: "Blog",
+        callOptions={postApiConfiguration('get', 'findByTagName', {
+          tagName: 'Blog',
           pageOffset: 1,
-          pageLimit: 25
+          pageLimit: 25,
         })}
         options={{
-          type: "post",
+          type: 'post',
           metadata: {
-            subType: "blog"
-          }
+            subType: 'blog',
+          },
         }}
       />
-    )
+    ),
   },
   {
-    displayName: "work",
-    href: "/work",
+    displayName: 'work',
+    href: '/work',
     render: () => (
       <PageContainer
-        callOptions={postApiConfiguration("get", "findByTagName", {
-          tagName: "Work",
+        callOptions={postApiConfiguration('get', 'findByTagName', {
+          tagName: 'Work',
           pageOffset: 1,
-          pageLimit: 5
+          pageLimit: 5,
         })}
         options={{
-          type: "post",
+          type: 'post',
           metadata: {
-            subType: "titles"
-          }
+            subType: 'titles',
+          },
         }}
       />
-    )
+    ),
   },
   {
-    displayName: "freeswim",
-    href: "/freeswim",
+    displayName: 'freeswim',
+    href: '/freeswim',
     render: () => (
       <PageContainer
-        callOptions={postApiConfiguration("get", "findByTagName", {
-          tagName: "Trampoline",
+        callOptions={postApiConfiguration('get', 'findByTagName', {
+          tagName: 'Trampoline',
           pageOffset: 1,
-          pageLimit: 5
+          pageLimit: 5,
         })}
         options={{
-          type: "post",
+          type: 'post',
           metadata: {
-            subType: "blog"
-          }
+            subType: 'blog',
+          },
         }}
       />
-    )
+    ),
   },
   {
-    displayName: "illustrations",
-    href: "/illustrations",
+    displayName: 'illustrations',
+    href: '/illustrations',
     render: () => (
       <PageContainer
-        callOptions={postApiConfiguration("get", "findByTagName", {
-          tagName: "Illustrations",
+        callOptions={postApiConfiguration('get', 'findByTagName', {
+          tagName: 'Illustrations',
           pageOffset: 1,
-          pageLimit: 5
+          pageLimit: 5,
         })}
         options={{
-          type: "post",
+          type: 'post',
           metadata: {
-            subType: "illustrations"
-          }
+            subType: 'illustrations',
+          },
         }}
       />
-    )
+    ),
   },
   {
-    displayName: "archive",
-    href: "/archive",
+    displayName: 'archive',
+    href: '/archive',
     render: () => (
       <PageContainer
-        callOptions={postApiConfiguration("get", "getArchivedPosts")}
+        callOptions={postApiConfiguration('get', 'getArchivedPosts')}
         options={{
-          type: "post",
+          type: 'post',
           metadata: {
-            subType: "archive"
-          }
+            subType: 'archive',
+          },
         }}
       />
-    )
+    ),
   },
   {
-    displayName: "colophon",
-    href: "/colophon",
+    displayName: 'colophon',
+    href: '/colophon',
     render: () => (
       <PageContainer
         callOptions={{
-          callMethod: "get",
-          callURIAction: "retrieveOne",
+          callMethod: 'get',
+          callURIAction: 'retrieveOne',
           callParams: {
-            slug: "colophon"
-          }
+            slug: 'colophon',
+          },
         }}
         options={{
-          type: "post",
+          type: 'post',
           metadata: {
-            subType: "single"
-          }
+            subType: 'single',
+          },
         }}
       />
-    )
-  }
+    ),
+  },
 ];
 
 const AppContainer = () => (
@@ -139,59 +139,59 @@ const AppContainer = () => (
               />
             ))}
             <Route
-              path={"/post/:postSlug"}
+              path={'/post/:postSlug'}
               render={props => (
                 <PageContainer
                   callOptions={{
-                    callMethod: "get",
-                    callURIAction: "retrieveOne",
+                    callMethod: 'get',
+                    callURIAction: 'retrieveOne',
                     callParams: {
-                      slug: props.match.params.postSlug
-                    }
+                      slug: props.match.params.postSlug,
+                    },
                   }}
                   options={{
-                    type: "post",
+                    type: 'post',
                     metadata: {
-                      subType: "single"
-                    }
+                      subType: 'single',
+                    },
                   }}
                 />
               )}
             />
             <Route
-              path={"/admin"}
+              path={'/admin'}
               exact
               render={props => (
                 <PageContainer
                   callOptions={{
-                    callMethod: "get",
-                    callURIAction: "retrieve"
+                    callMethod: 'get',
+                    callURIAction: 'retrieve',
                   }}
                   options={{
-                    type: "adminMain",
-                    metadata: {}
+                    type: 'adminMain',
+                    metadata: {},
                   }}
                 />
               )}
             />
             {/* Edit post form route */}
             <Route
-              path={"/admin/edit/:postSlug"}
+              path={'/admin/edit/:postSlug'}
               exact
               render={props => (
                 <PageContainer
                   callOptions={{
-                    callMethod: "get",
-                    callURIAction: "retrieveOne",
+                    callMethod: 'get',
+                    callURIAction: 'retrieveOne',
                     callParams: {
-                      slug: props.match.params.postSlug
-                    }
+                      slug: props.match.params.postSlug,
+                    },
                   }}
                   options={{
-                    type: "adminForm",
+                    type: 'adminForm',
                     metadata: {
-                      mode: "edit"
-                    }
+                      mode: 'edit',
+                    },
                   }}
                 />
               )}
