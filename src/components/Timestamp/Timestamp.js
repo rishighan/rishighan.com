@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const Timestamp = props => (
     <div className="content is-small timestamp">
-        { format(props.date, props.dateFormat) }
+        { props.date ? format(props.date, props.dateFormat) : null }
     </div>
 );
 
