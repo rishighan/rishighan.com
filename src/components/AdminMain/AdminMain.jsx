@@ -14,7 +14,7 @@ class AdminMain extends Component {
 
   render() {
     return (
-      <div className="column content is-two-thirds-tablet is-full-mobile">
+      <div className="column content is-two-thirds-tablet is-multiline is-full-mobile">
         <DebounceInput minLength={3}
           debounceTimeout={450}
           onChange={e => this.props.searchPosts(e)}
@@ -22,20 +22,23 @@ class AdminMain extends Component {
         <List>
           {!_.isEmpty(this.props.posts) ? this.props.posts.map(post => post) : []}
         </List>
-        <ReactPaginate
-          previousLabel={'previous'}
-          nextLabel={'next'}
-          breakLabel={'...'}
-          containerClassName={'pagination'}
-          pageLinkClassName={'pagination-link'}
-          previousClassName={'pagination-previous'}
-          nextClassName={'pagination-next'}
-          pageCount={this.props.pages}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
-          onPageChange={this.props.nextPageHandler}
-          activeClassName={'active'}
-        />
+        <div className="column is-two-thirds">
+          <ReactPaginate
+            previousLabel={'Previous'}
+            nextLabel={'Next'}
+            breakLabel={'...'}
+            containerClassName={'pagination is-right'}
+            pageLinkClassName={'pagination-link'}
+            previousClassName={'pagination-previous'}
+            nextClassName={'pagination-next'}
+            pageCount={this.props.pages}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={this.props.nextPageHandler}
+            activeClassName={'is-current'}
+            disabledClassName={'disabled'}
+          />
+        </div>
       </div>
     );
   }
