@@ -6,7 +6,7 @@ import {
   FETCH_POSTS_SUCCESS,
 } from '../constants/action-types';
 
-const postsServiceBaseURI = 'http://localhost:3000/api/v1/posts/';
+const postsServiceBaseURI = 'http://localhost:3060/api/v1/posts/';
 const assetsServiceBaseURI = 'http://localhost:4000/upload/';
 
 // @params {options}

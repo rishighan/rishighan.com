@@ -39,9 +39,29 @@ $content-blockquote-background-color: none transparent;
     font-kerning: normal;
     font-feature-settings: "ss01", "ss08";
 
+
+    // High-level <header>
+    header {
+        a {
+            h3 {
+                margin-bottom: 0;
+            }
+        }
+    }
+    .rg-list {
+        margin-left: 0;
+
+        li {
+            margin-bottom: 1.2rem;
+        }
+        .timestamp {
+            margin-bottom: 0.7rem;
+        }
+    }
     article,
     div {
         margin-bottom: 0.7em;
+
         .timestamp {
             margin-bottom: 1em;
         }
@@ -104,6 +124,7 @@ $content-blockquote-background-color: none transparent;
     }
 
     form {
+
         h1,
         h2,
         h3,
@@ -121,9 +142,12 @@ $content-blockquote-background-color: none transparent;
 
         .field {
             margin: 1.5rem 0;
-            input, textarea {
+
+            input,
+            textarea {
                 padding-left: 0;
             }
+
             .tags {
                 margin: 0.5rem 0.5rem 0 0;
             }
