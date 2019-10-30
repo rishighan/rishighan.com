@@ -4,6 +4,7 @@ import {
   FETCH_POSTS_REQUEST,
   FETCH_POSTS_ERROR,
   FETCH_POSTS_SUCCESS,
+  FETCH_STATISTICS_SUCCESS,
 } from '../constants/action-types';
 
 const postsServiceBaseURI = 'http://localhost:3060/api/v1/posts/';
@@ -25,10 +26,20 @@ export const fetchPosts = options => async (dispatch) => {
         'Access-Control-Allow-Origin': '*',
       },
     });
-    dispatch({
-      type: FETCH_POSTS_SUCCESS,
-      posts: response.data,
-    });
+
+    switch (options.callURIAction) {
+      case 'getStatistics':
+        dispatch({
+          type: FETCH_STATISTICS_SUCCESS,
+          statistics: response.data,
+        });
+        break;
+      default:
+        dispatch({
+          type: FETCH_POSTS_SUCCESS,
+          posts: response.data,
+        });
+    }
   } catch (error) {
     console.log(error);
     dispatch({
@@ -45,10 +56,11 @@ export const onDroppedFile = async (file) => {
     fd.append('fileName', file[0].name);
     const response = await axios.post(
       assetsServiceBaseURI, fd, {
-        headers: {
-          'Content-Type': `multipart/form-data boundary=${fd._boundary}`,
-        },
-      });
+      headers: {
+        'Content-Type': `multipart/form-data boundary=${fd._boundary}`,
+      },
+    },
+    );
     return response;
   } catch (error) {
     return error;

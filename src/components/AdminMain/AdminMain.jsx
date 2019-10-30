@@ -10,19 +10,28 @@ import { fetchPosts } from '../../actions/index';
 class AdminMain extends Component {
   componentDidMount() {
     this.props.searchPosts();
+    this.props.getPostStatistics();
   }
 
   render() {
     return (
-      <div className="column content is-two-thirds-tablet is-multiline is-full-mobile">
-        <DebounceInput minLength={3}
-          debounceTimeout={450}
-          onChange={e => this.props.searchPosts(e)}
-        />
-        <List>
-          {!_.isEmpty(this.props.posts) ? this.props.posts.map(post => post) : []}
-        </List>
-        <div className="column is-two-thirds">
+      <div className="column content">
+        <div className="columns is-multiline is-centered">
+          <DebounceInput minLength={3}
+            className="input column is-half"
+            placeholder='Search Posts'
+            debounceTimeout={450}
+            onChange={e => this.props.searchPosts(e)}
+          />
+
+          <dl className="column is-one-quarter tile box">
+            {_.map(this.props.statistics, statistic => <dd>{statistic.key} {statistic.count}</dd>)}
+          </dl>
+
+          <List>
+            {!_.isEmpty(this.props.posts) ? this.props.posts.map(post => post) : []}
+          </List>
+
           <ReactPaginate
             previousLabel={'Previous'}
             nextLabel={'Next'}
@@ -48,6 +57,7 @@ function mapStateToProps(state) {
   return {
     posts: state.posts.posts.docs,
     pages: state.posts.posts.pages,
+    statistics: state.posts.statistics,
   };
 }
 
@@ -79,6 +89,12 @@ const mapDispatchToProps = dispatch => ({
     }
     dispatch(fetchPosts(actionConfig));
   },
+  getPostStatistics: () => {
+    dispatch(fetchPosts({
+      callURIAction: 'getStatistics',
+      callMethod: 'get',
+    }));
+  },
   nextPageHandler: (data) => {
     dispatch(fetchPosts({
       callURIAction: 'retrieve',
@@ -93,6 +109,8 @@ const mapDispatchToProps = dispatch => ({
 
 AdminMain.propTypes = {
   posts: PropTypes.array,
+  statistics: PropTypes.array,
   searchPosts: PropTypes.func,
+  getPostStatistics: PropTypes.func,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AdminMain);
