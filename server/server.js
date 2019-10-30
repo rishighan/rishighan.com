@@ -7,7 +7,7 @@ const app = express();
 // prevent no-sniff header
 app.use(helmet.noSniff());
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8999;
 
 app.use('/dist', express.static(path.resolve(__dirname, '../dist')));
 
