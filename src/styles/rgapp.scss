@@ -51,7 +51,8 @@ $content-blockquote-background-color: none transparent;
         }
     }
 
-    // my overrides 
+    // Overrides for:
+    // <List>, <Timestamp>, pagination, tile and search input
     .rg-list {
         margin-left: 0;
 
@@ -70,7 +71,7 @@ $content-blockquote-background-color: none transparent;
     }
 
     .tile {
-        p.subtitle {
+        div {
             margin-bottom: 0.3rem;
         }
     }
@@ -78,6 +79,7 @@ $content-blockquote-background-color: none transparent;
         padding: 0;
     }
 
+    // Article styles
     article,
     div {
         margin-bottom: 0.7em;

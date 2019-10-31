@@ -54,9 +54,9 @@ class AdminMain extends Component {
             <div className="columns">
               <div className="column is-half">
                 <div className="tile is-vertical notification has-background-light">
-                  {_.map(this.props.statistics, (statistic, idx) => <>
-                    <p className="subtitle is-6 is-family-monospace" key={idx}>{statistic.count} {statistic.key} </p>
-                  </>)}
+                  {_.map(this.props.statistics, (statistic, idx) => <div key={idx}>
+                    <span className="subtitle is-6 is-family-monospace">{statistic.count} {statistic.key} </span>
+                  </div>)}
                 </div>
               </div>
             </div>
