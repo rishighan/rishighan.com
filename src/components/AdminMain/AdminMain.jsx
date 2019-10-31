@@ -16,36 +16,28 @@ class AdminMain extends Component {
 
   render() {
     return (
-      <div className="column content">
+      <div className="column content is-11">
         <div className="columns is-multiline">
-          <div className="column is-three-quarters">
-            <DebounceInput minLength={3}
-              className="input"
+
+          <div className="column is-half">
+            <DebounceInput
+              minLength={3}
+              className="input search has-text-primary subtitle is-3"
               placeholder='Search Posts'
               debounceTimeout={450}
               onChange={e => this.props.searchPosts(e)}
             />
-          </div>
 
-          <div className="column is-one-quarter">
-            <dl className="tile box">
-              { _.map(this.props.statistics, (statistic, idx) => <p key={idx}>
-              <dt>{statistic.key}</dt>
-              <dd>{statistic.count}</dd>
-              </p>) }
-            </dl>
-          </div>
-          <div className="column is-half">
             <List showTags>
               {!_.isEmpty(this.props.posts) ? this.props.posts.map(post => post) : []}
             </List>
 
-            <div className="column">
             <ReactPaginate
               previousLabel={'Previous'}
               nextLabel={'Next'}
-              breakLabel={'...'}
-              containerClassName={'pagination is-right'}
+              breakLabel={'&hellip;'}
+              breakClassName={'pagination-ellipsis'}
+              containerClassName={'pagination'}
               pageLinkClassName={'pagination-link'}
               previousClassName={'pagination-previous'}
               nextClassName={'pagination-next'}
@@ -57,14 +49,23 @@ class AdminMain extends Component {
               disabledClassName={'disabled'}
             />
           </div>
-          </div>
-          <div className="column is-half">
-            Drafts
+
+          <div className="column">
+            <div className="columns">
+              <div className="column is-half">
+                <div className="tile is-vertical notification has-background-light">
+                  {_.map(this.props.statistics, (statistic, idx) => <>
+                    <p className="subtitle is-6 is-family-monospace" key={idx}>{statistic.count} {statistic.key} </p>
+                  </>)}
+                </div>
+              </div>
+            </div>
+            <p className="subtitle is-3">Drafts</p>
             <List showTags={false}>
-              { !_.isEmpty(this.props.drafts) ? this.props.drafts.docs.map(draft => draft) : [] }
+              {!_.isEmpty(this.props.drafts) ? this.props.drafts.docs.map(draft => draft) : []}
             </List>
           </div>
-          
+
         </div>
       </div>
     );
