@@ -11,9 +11,9 @@ function List(props) {
         <li key={idx}>
           <Heading headingText={child.title} linkHref={`/admin/edit/${child.slug}`} />
           <Timestamp date={child.date_updated} dateFormat={'dddd, MMMM Do YYYY'} />
-          <div className="tags">
+          {props.showTags ? <div className="tags">
             { _.map(child.tags, (tag, i) => <span className="tag is-light is-normal" key={i}>{ tag.id }</span>)}
-          </div>
+          </div> : null }
         </li>)) : 'No posts found'}
     </ul>
   );
@@ -21,5 +21,6 @@ function List(props) {
 
 List.propTypes = {
   children: PropTypes.array,
+  showTags: PropTypes.bool,
 };
 export default List;

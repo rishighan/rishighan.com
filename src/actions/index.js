@@ -5,6 +5,7 @@ import {
   FETCH_POSTS_ERROR,
   FETCH_POSTS_SUCCESS,
   FETCH_STATISTICS_SUCCESS,
+  FETCH_DRAFTS_SUCCESS,
 } from '../constants/action-types';
 
 const postsServiceBaseURI = 'http://localhost:3060/api/v1/posts/';
@@ -32,6 +33,12 @@ export const fetchPosts = options => async (dispatch) => {
         dispatch({
           type: FETCH_STATISTICS_SUCCESS,
           statistics: response.data,
+        });
+        break;
+      case 'getDrafts':
+        dispatch({
+          type: FETCH_DRAFTS_SUCCESS,
+          drafts: response.data,
         });
         break;
       default:

@@ -4,6 +4,7 @@ import {
   FETCH_POSTS_ERROR,
   FETCH_POSTS_SUCCESS,
   FETCH_STATISTICS_SUCCESS,
+  FETCH_DRAFTS_SUCCESS,
 } from '../constants/action-types';
 
 const initialState = {
@@ -40,6 +41,12 @@ function postsReducer(state = initialState, action) {
         ...state,
         isFetching: false,
         statistics: action.statistics,
+      };
+    case FETCH_DRAFTS_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        drafts: action.drafts,
       };
     default:
       return state;

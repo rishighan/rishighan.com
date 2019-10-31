@@ -11,42 +11,60 @@ class AdminMain extends Component {
   componentDidMount() {
     this.props.searchPosts();
     this.props.getPostStatistics();
+    this.props.getDrafts();
   }
 
   render() {
     return (
       <div className="column content">
-        <div className="columns is-multiline is-centered">
-          <DebounceInput minLength={3}
-            className="input column is-half"
-            placeholder='Search Posts'
-            debounceTimeout={450}
-            onChange={e => this.props.searchPosts(e)}
-          />
+        <div className="columns is-multiline">
+          <div className="column is-three-quarters">
+            <DebounceInput minLength={3}
+              className="input"
+              placeholder='Search Posts'
+              debounceTimeout={450}
+              onChange={e => this.props.searchPosts(e)}
+            />
+          </div>
 
-          <dl className="column is-one-quarter tile box">
-            {_.map(this.props.statistics, statistic => <dd>{statistic.key} {statistic.count}</dd>)}
-          </dl>
+          <div className="column is-one-quarter">
+            <dl className="tile box">
+              { _.map(this.props.statistics, (statistic, idx) => <p key={idx}>
+              <dt>{statistic.key}</dt>
+              <dd>{statistic.count}</dd>
+              </p>) }
+            </dl>
+          </div>
+          <div className="column is-half">
+            <List showTags>
+              {!_.isEmpty(this.props.posts) ? this.props.posts.map(post => post) : []}
+            </List>
 
-          <List>
-            {!_.isEmpty(this.props.posts) ? this.props.posts.map(post => post) : []}
-          </List>
-
-          <ReactPaginate
-            previousLabel={'Previous'}
-            nextLabel={'Next'}
-            breakLabel={'...'}
-            containerClassName={'pagination is-right'}
-            pageLinkClassName={'pagination-link'}
-            previousClassName={'pagination-previous'}
-            nextClassName={'pagination-next'}
-            pageCount={this.props.pages}
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={5}
-            onPageChange={this.props.nextPageHandler}
-            activeClassName={'is-current'}
-            disabledClassName={'disabled'}
-          />
+            <div className="column">
+            <ReactPaginate
+              previousLabel={'Previous'}
+              nextLabel={'Next'}
+              breakLabel={'...'}
+              containerClassName={'pagination is-right'}
+              pageLinkClassName={'pagination-link'}
+              previousClassName={'pagination-previous'}
+              nextClassName={'pagination-next'}
+              pageCount={this.props.pageCount}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={this.props.nextPageHandler}
+              activeClassName={'is-current'}
+              disabledClassName={'disabled'}
+            />
+          </div>
+          </div>
+          <div className="column is-half">
+            Drafts
+            <List showTags={false}>
+              { !_.isEmpty(this.props.drafts) ? this.props.drafts.docs.map(draft => draft) : [] }
+            </List>
+          </div>
+          
         </div>
       </div>
     );
@@ -56,8 +74,9 @@ class AdminMain extends Component {
 function mapStateToProps(state) {
   return {
     posts: state.posts.posts.docs,
-    pages: state.posts.posts.pages,
+    pageCount: state.posts.posts.pages,
     statistics: state.posts.statistics,
+    drafts: state.posts.drafts,
   };
 }
 
@@ -89,6 +108,16 @@ const mapDispatchToProps = dispatch => ({
     }
     dispatch(fetchPosts(actionConfig));
   },
+  getDrafts: () => {
+    dispatch(fetchPosts({
+      callURIAction: 'getDrafts',
+      callMethod: 'get',
+      callParams: {
+        pageOffset: 1,
+        pageLimit: 5,
+      },
+    }));
+  },
   getPostStatistics: () => {
     dispatch(fetchPosts({
       callURIAction: 'getStatistics',
@@ -109,8 +138,10 @@ const mapDispatchToProps = dispatch => ({
 
 AdminMain.propTypes = {
   posts: PropTypes.array,
+  drafts: PropTypes.object,
   statistics: PropTypes.array,
   searchPosts: PropTypes.func,
+  getDrafts: PropTypes.func,
   getPostStatistics: PropTypes.func,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AdminMain);
