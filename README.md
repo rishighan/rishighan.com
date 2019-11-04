@@ -2,7 +2,7 @@
 
 This is a basic boilerplate built on:
 
-+ react 16.8.1
++ react 16.10.2
 + redux 6.0.0
 + redux-thunk 2.3.0 
 + react-router 4.3.1

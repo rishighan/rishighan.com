@@ -55,10 +55,11 @@ const renderPageFragment = (props) => {
                     <ul>
                         {props.postsData.posts[0].archivedPosts.map((post, idx) => (<li key={idx}>
                             <Heading headingText={post.title} linkHref={`/post/${post.slug}`} />
+                            <Timestamp date={post.date_updated} dateFormat={'MMMM Do, YYYY'} />
                         </li>))}
                     </ul>
                 </div>) : null}
-        </React.Fragment>)
+        </React.Fragment>),
   });
 };
 
