@@ -30,10 +30,13 @@ const renderPageFragment = (props) => {
         </>),
         titles: (<>
             {_.isArray(props.postsData.posts) ? (<>
-                {props.postsData.posts.map((post, idx) => (<div key={idx}>
-                    <Heading headingText={post.title} linkHref={`/post/${post.slug}`} />
-                    <span>{post.excerpt} </span>
-                </div>))}
+                <List
+                    showTags={false}
+                    showTimestamps={false}
+                    showExcerpts
+                >
+                    { props.postsData.posts.map(post => post)}
+                </List>
             </>) : null}
         </>),
         illustrations: (<>
