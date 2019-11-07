@@ -28,7 +28,9 @@ class AdminMain extends Component {
               onChange={e => this.props.searchPosts(e)}
             />
 
-            <List showTags>
+            <List 
+              showTags
+              showTimestamps >
               {!_.isEmpty(this.props.posts) ? this.props.posts.map(post => post) : []}
             </List>
 

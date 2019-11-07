@@ -10,7 +10,8 @@ function List(props) {
       {!_.isEmpty(props.children) ? props.children.map((child, idx) => (
         <li key={idx}>
           <Heading headingText={child.title} linkHref={`/admin/edit/${child.slug}`} />
-          <Timestamp date={child.date_updated} dateFormat={'MMMM Do, YYYY'} />
+          { props.showTimestamps ? <Timestamp date={child.date_updated} dateFormat={'MMMM Do, YYYY'} /> : null }
+          { props.showExcerpts ? <span>{ child.excerpt }</span> : null }
           { props.showTags ? <div className="tags">
             { _.map(child.tags, (tag, i) => <span className="tag is-light is-normal" key={i}>{ tag.id }</span>)}
           </div> : null }

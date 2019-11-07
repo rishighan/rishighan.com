@@ -4,10 +4,11 @@ import _ from 'lodash';
 import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 import Heading from '../Heading/Heading';
 import Timestamp from '../Timestamp/Timestamp';
+import List from '../List/List';
 
 const renderPageFragment = (props) => {
-  return ({
-    single: (<React.Fragment>
+    return ({
+        single: (<>
             {props.singlePostData ? (<article>
                 <Heading headingText={props.singlePostData.title} />
                 <Timestamp date={props.singlePostData.date_updated} dateFormat={'D MMM, YYYY '} />
@@ -15,8 +16,8 @@ const renderPageFragment = (props) => {
                     <MarkdownRenderer text={props.singlePostData.content} />
                 </section>
             </article>) : null}
-        </React.Fragment>),
-    blog: (<React.Fragment>
+        </>),
+        blog: (<>
             {_.isArray(props.postsData.posts) ? (<div>
                 {props.postsData.posts.map((post, idx) => (<article key={idx}>
                     <Heading headingText={post.title} linkHref={`/post/${post.slug}`} />
@@ -26,16 +27,16 @@ const renderPageFragment = (props) => {
                     </section>
                 </article>))}
             </div>) : null}
-        </React.Fragment>),
-    titles: (<React.Fragment>
+        </>),
+        titles: (<>
             {_.isArray(props.postsData.posts) ? (<>
                 {props.postsData.posts.map((post, idx) => (<div key={idx}>
                     <Heading headingText={post.title} linkHref={`/post/${post.slug}`} />
                     <span>{post.excerpt} </span>
                 </div>))}
             </>) : null}
-        </React.Fragment>),
-    illustrations: (<React.Fragment>
+        </>),
+        illustrations: (<>
             {_.isArray(props.postsData.posts) ? (<div>
                 {props.postsData.posts.map((post, idx) => (<div key={idx}>
                     <Heading headingText={post.title} />
@@ -48,25 +49,25 @@ const renderPageFragment = (props) => {
                     </section>
                 </div>))}
             </div>) : null}
-        </React.Fragment>),
-    archive: (<React.Fragment>
+        </>),
+        archive: (<>
             {!_.isUndefined(props.postsData.posts[0]) &&
-                !_.isUndefined(props.postsData.posts[0].archivedPosts) ? (<div>
-                    <ul>
-                        {props.postsData.posts[0].archivedPosts.map((post, idx) => (<li key={idx}>
-                            <Heading headingText={post.title} linkHref={`/post/${post.slug}`} />
-                            <Timestamp date={post.date_updated} dateFormat={'MMMM Do, YYYY'} />
-                        </li>))}
-                    </ul>
-                </div>) : null}
-        </React.Fragment>),
-  });
+                !_.isUndefined(props.postsData.posts[0].archivedPosts) ? (<>
+                    <List
+                        showTags={false}
+                        showTimestamps
+                    >
+                        {props.postsData.posts[0].archivedPosts.map(post => post)}
+                    </List>
+                </>) : null}
+        </>),
+    });
 };
 
 const PageFragment = props => renderPageFragment(props)[props.postType];
 
 PageFragment.propTypes = {
-  postType: PropTypes.string,
-  posts: PropTypes.array,
+    postType: PropTypes.string,
+    posts: PropTypes.array,
 };
 export default PageFragment;
