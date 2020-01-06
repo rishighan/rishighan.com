@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form';
-import Autosave from '../Autosave/Autosave';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import AspectRatio from 'react-aspect-ratio';
+import Autosave from '../Autosave/Autosave';
 import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 import { onDroppedFile } from '../../actions/index';
 import { inferImageDimensions } from '../../utils/image.utils';
@@ -11,9 +11,10 @@ import { inferImageDimensions } from '../../utils/image.utils';
 const onSubmit = () => {
   console.log('submitted');
 };
-
-const save = (values) => {
-    console.log("save");
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+const save = async (values) => {
+  console.log('save');
+  await sleep(1000);
 };
 
 function AdminForm(props) {
@@ -32,7 +33,7 @@ function AdminForm(props) {
       displayName: 'Diff History',
       markup: <div>yaaa</div>,
     },
-    
+
 
   ];
   const [tabContent, changeTab] = useState({
@@ -53,8 +54,8 @@ function AdminForm(props) {
                   handleSubmit, pristine, invalid,
                 }) => (
                         <form>
-                            <Autosave debounce={1000} save={save} />
                             <h2>Write a Post</h2>
+                            <Autosave debounce={1000} save={save} />
                             <div className="field">
                                 <label className="field-label is-normal">Title</label>
                                 <div className="control is-expanded">
@@ -101,7 +102,7 @@ function AdminForm(props) {
                             <div className="field">
                                 <label className="field-label is-normal">Excerpt</label>
                                 <div className="control is-expanded">
-                                    <Field name="title" component="textarea" placeholder="Write" className="textarea" rows="1" />
+                                    <Field name="excerpt" component="textarea" placeholder="Write" className="textarea" rows="1" />
                                 </div>
                             </div>
                             {/* Media management */}

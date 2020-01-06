@@ -9,7 +9,7 @@ class Autosave extends React.Component {
     this.state = { values: props.values, submitting: false };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(nextProps) {
     if (this.timeout) {
       clearTimeout(this.timeout);
     }
@@ -24,13 +24,13 @@ class Autosave extends React.Component {
 
     // This diff step is totally optional
     const difference = diff(this.state.values, values);
-    if (!_.isEmpty(Object.keys(difference))) {
+    if (Object.keys(difference).length) {
+      console.log("here");
       // values have changed
-    console.log(difference)
-      this.setState({ submitting: true, values })
-      this.promise = save(difference)
-      await this.promise
-      delete this.promise
+      this.setState({ submitting: true, values });
+      this.promise = save(difference);
+      await this.promise;
+      delete this.promise;
       this.setState({ submitting: false });
     }
   }
@@ -39,8 +39,8 @@ class Autosave extends React.Component {
     // This component doesn't have to render anything, but it can render
     // submitting state.
     return (
-      this.state.submitting && <div className="submitting">Submitting...</div>
-    )
+      this.state.submitting && <div className="submitting"><i className="fas fa-save"></i> Submitting...</div>
+    );
   }
 }
 
@@ -52,4 +52,4 @@ class Autosave extends React.Component {
 // - Pass in debounce and save props nicely
 export default props => (
   <FormSpy {...props} subscription={{ values: true }} component={Autosave} />
-)
+);

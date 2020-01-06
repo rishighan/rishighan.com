@@ -3,6 +3,7 @@
 
 // Typography
 @import url("//hello.myfonts.net/count/38dd7f");
+@import url("//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css");
 
 @include font-face('Source Code Pro Regular', '../../public/assets/fonts/Source Code Pro/Source Code Pro Regular', normal, normal, ttf);
 @include font-face('ArminGrotesk-Regular', '../../public/assets/fonts/Armin Grotesk/38DD7F_3_0', normal, normal, eot ttf woff woff2);
@@ -13,8 +14,7 @@
 @include font-face('ArminGrotesk-SemiBoldItalic', '../../public/assets/fonts/Armin Grotesk/38DD7F_4_0', normal, normal, eot ttf woff woff2);
 
 $render-mode: optimizeLegibility;
-$family-sans-serif: 'ArminGrotesk-Regular',
-sans-serif;
+$family-sans-serif: 'ArminGrotesk-Regular', sans-serif;
 $family-primary: $family-sans-serif;
 $family-monospace: 'Source Code Pro Regular';
 $family-code: 'Source Code Pro Regular';
@@ -196,7 +196,6 @@ $content-blockquote-background-color: none transparent;
 
         }
         .submitting {
-            background: $dark;
         }
     }
 }
