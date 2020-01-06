@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form';
+import Autosave from '../Autosave/Autosave';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import AspectRatio from 'react-aspect-ratio';
@@ -11,12 +12,12 @@ const onSubmit = () => {
   console.log('submitted');
 };
 
+const save = (values) => {
+    console.log("save");
+};
+
 function AdminForm(props) {
   const tabs = [
-    {
-      displayName: 'Statistics',
-      markup: <div>yaaa</div>,
-    },
     {
       displayName: 'Preview',
       markup: <MarkdownRenderer text={props.formData.content} />,
@@ -27,6 +28,11 @@ function AdminForm(props) {
                 <Field name="content" component="textarea" placeholder="Write" className="textarea is-family-monospace" rows="20" />
             </div>,
     },
+    {
+      displayName: 'Diff History',
+      markup: <div>yaaa</div>,
+    },
+    
 
   ];
   const [tabContent, changeTab] = useState({
@@ -47,6 +53,7 @@ function AdminForm(props) {
                   handleSubmit, pristine, invalid,
                 }) => (
                         <form>
+                            <Autosave debounce={1000} save={save} />
                             <h2>Write a Post</h2>
                             <div className="field">
                                 <label className="field-label is-normal">Title</label>

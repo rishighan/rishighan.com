@@ -8,8 +8,8 @@ import {
   FETCH_DRAFTS_SUCCESS,
 } from '../constants/action-types';
 
-const postsServiceBaseURI = 'http://localhost:3060/api/v1/posts/';
-const assetsServiceBaseURI = 'http://localhost:4000/upload/';
+const postsServiceURI = 'http://services.rishighan.com/api/v1/posts/';
+const assetsServiceURI = 'http://services.rishighan.com/upload/';
 
 // @params {options}
 export const fetchPosts = options => async (dispatch) => {
@@ -18,7 +18,7 @@ export const fetchPosts = options => async (dispatch) => {
       type: FETCH_POSTS_REQUEST,
       isFetching: true,
     });
-    const serviceURI = postsServiceBaseURI + options.callURIAction;
+    const serviceURI = postsServiceURI + options.callURIAction;
     const response = await axios(serviceURI, {
       method: options.callMethod,
       params: options.callParams,
@@ -62,7 +62,7 @@ export const onDroppedFile = async (file) => {
     fd.append('fileData', file[0]);
     fd.append('fileName', file[0].name);
     const response = await axios.post(
-      assetsServiceBaseURI, fd, {
+      assetsServiceURI, fd, {
       headers: {
         'Content-Type': `multipart/form-data boundary=${fd._boundary}`,
       },
