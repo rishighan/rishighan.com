@@ -39,7 +39,7 @@ class Autosave extends React.Component {
     // This component doesn't have to render anything, but it can render
     // submitting state.
     return (
-      this.state.submitting && <div className="submitting"><i className="fas fa-save"></i> Submitting...</div>
+      this.state.submitting && <div className="submitting"><i className="fas fa-save"></i> Autosaving...</div>
     );
   }
 }

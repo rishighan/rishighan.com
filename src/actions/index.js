@@ -2,8 +2,9 @@ import axios from 'axios';
 import FormData from 'form-data';
 import {
   FETCH_POSTS_REQUEST,
-  FETCH_POSTS_ERROR,
+  GENERIC_POSTS_API_ERROR,
   FETCH_POSTS_SUCCESS,
+  UPDATE_POST_SUCCESS,
   FETCH_STATISTICS_SUCCESS,
   FETCH_DRAFTS_SUCCESS,
 } from '../constants/action-types';
@@ -12,11 +13,11 @@ const postsServiceURI = 'http://services.rishighan.com/api/v1/posts/';
 const assetsServiceURI = 'http://services.rishighan.com/upload/';
 
 // @params {options}
-export const fetchPosts = options => async (dispatch) => {
+export const postsAPICall = options => async (dispatch) => {
   try {
     dispatch({
       type: FETCH_POSTS_REQUEST,
-      isFetching: true,
+      inProgress: true,
     });
     const serviceURI = postsServiceURI + options.callURIAction;
     const response = await axios(serviceURI, {
@@ -50,7 +51,7 @@ export const fetchPosts = options => async (dispatch) => {
   } catch (error) {
     console.log(error);
     dispatch({
-      type: FETCH_POSTS_ERROR,
+      type: GENERIC_POSTS_API_ERROR,
       error,
     });
   }
@@ -63,10 +64,10 @@ export const onDroppedFile = async (file) => {
     fd.append('fileName', file[0].name);
     const response = await axios.post(
       assetsServiceURI, fd, {
-      headers: {
-        'Content-Type': `multipart/form-data boundary=${fd._boundary}`,
+        headers: {
+          'Content-Type': `multipart/form-data boundary=${fd._boundary}`,
+        },
       },
-    },
     );
     return response;
   } catch (error) {

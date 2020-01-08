@@ -6,9 +6,8 @@ import Heading from '../Heading/Heading';
 import Timestamp from '../Timestamp/Timestamp';
 import List from '../List/List';
 
-const renderPageFragment = (props) => {
-    return ({
-        single: (<>
+const renderPageFragment = props => ({
+  single: (<>
             {props.singlePostData ? (<article>
                 <Heading headingText={props.singlePostData.title} />
                 <Timestamp date={props.singlePostData.date_updated} dateFormat={'D MMM, YYYY '} />
@@ -17,7 +16,7 @@ const renderPageFragment = (props) => {
                 </section>
             </article>) : null}
         </>),
-        blog: (<>
+  blog: (<>
             {_.isArray(props.postsData.posts) ? (<div>
                 {props.postsData.posts.map((post, idx) => (<article key={idx}>
                     <Heading headingText={post.title} linkHref={`/post/${post.slug}`} />
@@ -28,7 +27,7 @@ const renderPageFragment = (props) => {
                 </article>))}
             </div>) : null}
         </>),
-        titles: (<>
+  titles: (<>
             {_.isArray(props.postsData.posts) ? (<>
                 <List
                     showTags={false}
@@ -39,7 +38,7 @@ const renderPageFragment = (props) => {
                 </List>
             </>) : null}
         </>),
-        illustrations: (<>
+  illustrations: (<>
             {_.isArray(props.postsData.posts) ? (<div>
                 {props.postsData.posts.map((post, idx) => (<div key={idx}>
                     <Heading headingText={post.title} />
@@ -53,9 +52,9 @@ const renderPageFragment = (props) => {
                 </div>))}
             </div>) : null}
         </>),
-        archive: (<>
-            {!_.isUndefined(props.postsData.posts[0]) &&
-                !_.isUndefined(props.postsData.posts[0].archivedPosts) ? (<>
+  archive: (<>
+            {!_.isUndefined(props.postsData.posts[0])
+                && !_.isUndefined(props.postsData.posts[0].archivedPosts) ? (<>
                     <List
                         showTags={false}
                         showTimestamps
@@ -64,13 +63,12 @@ const renderPageFragment = (props) => {
                     </List>
                 </>) : null}
         </>),
-    });
-};
+});
 
 const PageFragment = props => renderPageFragment(props)[props.postType];
 
 PageFragment.propTypes = {
-    postType: PropTypes.string,
-    posts: PropTypes.array,
+  postType: PropTypes.string,
+  posts: PropTypes.array,
 };
 export default PageFragment;

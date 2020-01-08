@@ -6,7 +6,7 @@ import _ from 'lodash';
 import PageFragment from '../PageFragment/PageFragment';
 import AdminForm from '../AdminForm/AdminForm';
 import AdminMain from '../AdminMain/AdminMain';
-import { fetchPosts } from '../../actions/index';
+import { postsAPICall } from '../../actions/index';
 
 const renderPage = props => ({
   post: (
@@ -41,7 +41,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchPosts() {
-    dispatch(fetchPosts(ownProps.callOptions));
+    dispatch(postsAPICall(ownProps.callOptions));
   },
 });
 

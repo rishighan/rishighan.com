@@ -1,53 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, Component } from 'react';
 import { Form, Field } from 'react-final-form';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import AspectRatio from 'react-aspect-ratio';
 import Autosave from '../Autosave/Autosave';
 import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
-import { onDroppedFile } from '../../actions/index';
+import { postsAPICall, onDroppedFile } from '../../actions/index';
 import { inferImageDimensions } from '../../utils/image.utils';
 
 const onSubmit = () => {
   console.log('submitted');
 };
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-const save = async (values) => {
-  console.log('save');
-  await sleep(1000);
-};
+class AdminForm extends Component {
+  constructor(props) {
+    super(props);
+    this.tabs = [
+      {
+        displayName: 'Preview',
+        markup: <MarkdownRenderer text={this.props.formData.content} />,
+      },
+      {
+        displayName: 'Raw',
+        markup: <div className="control is-expanded">
+                  <Field name="content" component="textarea" placeholder="Write" className="textarea is-family-monospace" rows="20" />
+              </div>,
+      },
+      {
+        displayName: 'Diff History',
+        markup: <div>yaaa</div>,
+      },
+    ];
+    this.state = {
+      currentlyActiveTab: this.tabs[0].displayName,
+      markup: this.tabs[0].markup,
+    };
+  }
 
-function AdminForm(props) {
-  const tabs = [
-    {
-      displayName: 'Preview',
-      markup: <MarkdownRenderer text={props.formData.content} />,
-    },
-    {
-      displayName: 'Raw',
-      markup: <div className="control is-expanded">
-                <Field name="content" component="textarea" placeholder="Write" className="textarea is-family-monospace" rows="20" />
-            </div>,
-    },
-    {
-      displayName: 'Diff History',
-      markup: <div>yaaa</div>,
-    },
+  changeTab = (newTab) => {
+    this.setState({
+      currentlyActiveTab: newTab.displayName,
+      markup: newTab.markup,
+    });
+  };
 
-
-  ];
-  const [tabContent, changeTab] = useState({
-    markup: tabs[0].markup,
-    currentlyActiveTab: tabs[0].displayName,
-  });
-
-  return (
+  render() {
+    return (
         <div className="column content is-two-thirds-tablet is-full-mobile">
             <Form
                 onSubmit={onSubmit}
                 initialValues={
                     {
-                      ...props.formData,
+                      ...this.props.formData,
                     }
                 }
                 render={({
@@ -55,7 +59,7 @@ function AdminForm(props) {
                 }) => (
                         <form>
                             <h2>Write a Post</h2>
-                            <Autosave debounce={1000} save={save} />
+                            <Autosave debounce={1000} save={this.updatePost} />
                             <div className="field">
                                 <label className="field-label is-normal">Title</label>
                                 <div className="control is-expanded">
@@ -74,7 +78,7 @@ function AdminForm(props) {
                             <div className="field">
                                 <label className="field-label is-normal">Tags</label>
                                 <div className="field-body">
-                                    {props.formData.tags.map((tag, idx) => <div key={idx}>
+                                    {this.props.formData.tags.map((tag, idx) => <div key={idx}>
                                         <div className="tags has-addons is-grouped">
                                             <span className="tag is-light">{tag.id}</span>
                                             <a className="tag is-delete"></a>
@@ -85,18 +89,16 @@ function AdminForm(props) {
 
                             <div className="tabs">
                                 <ul>
-                                    {tabs.map((tab, idx) => <li
-                                        className={tabContent.currentlyActiveTab === tab.displayName ? 'is-active' : ''}
+                                    {this.tabs.map((tab, idx) => <li
+                                        className={this.state.currentlyActiveTab === tab.displayName ? 'is-active' : ''}
                                         key={idx}
-                                        onClick={() => {
-                                          changeTab({ markup: tab.markup, currentlyActiveTab: tab.displayName });
-                                        }}>
+                                        onClick={ () => { this.changeTab({ markup: tab.markup, displayName: tab.displayName }); }}>
                                         <a>{tab.displayName}</a>
                                     </li>)}
                                 </ul>
                             </div>
                             <div id="tab-content">
-                                {tabContent.markup}
+                                {this.state.markup}
                             </div>
 
                             <div className="field">
@@ -119,7 +121,7 @@ function AdminForm(props) {
                                         )}
                                     </Dropzone>
                                     <ul className="is-clearfix">
-                                        {props.formData.attachment.map((mediaObj, idx) => <li className="is-pulled-left" key={idx}>
+                                        {this.props.formData.attachment.map((mediaObj, idx) => <li className="is-pulled-left" key={idx}>
                                             <div className="card">
                                                 <div className="card-image">
                                                     <AspectRatio ratio={inferImageDimensions(mediaObj.url)} style={{ maxWidth: '200px' }}>
@@ -158,11 +160,27 @@ function AdminForm(props) {
                         </form>
                 )} />
         </div>);
+  }
 }
+
+function mapStateToProps(state) {}
+
+const mapDispatchToProps = dispatch => ({
+  updatePost: (post) => {
+    dispatch(postsAPICall({
+      callURIAction: 'update',
+      callMethod: 'get',
+      callParams: {
+        postId: post.id,
+        data: post,
+      },
+    }));
+  },
+});
 
 AdminForm.propTypes = {
   formData: PropTypes.object,
   onDroppedFile: PropTypes.func,
 };
 
-export default AdminForm;
+export default connect(mapStateToProps, mapDispatchToProps)(AdminForm);

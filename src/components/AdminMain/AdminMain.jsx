@@ -5,7 +5,7 @@ import { DebounceInput } from 'react-debounce-input';
 import _ from 'lodash';
 import ReactPaginate from 'react-paginate';
 import List from '../List/List';
-import { fetchPosts } from '../../actions/index';
+import { postsAPICall } from '../../actions/index';
 
 class AdminMain extends Component {
   componentDidMount() {
@@ -109,10 +109,10 @@ const mapDispatchToProps = dispatch => ({
       };
       actionConfig = retrieveCallConfiguration;
     }
-    dispatch(fetchPosts(actionConfig));
+    dispatch(postsAPICall(actionConfig));
   },
   getDrafts: () => {
-    dispatch(fetchPosts({
+    dispatch(postsAPICall({
       callURIAction: 'getDrafts',
       callMethod: 'get',
       callParams: {
@@ -122,13 +122,13 @@ const mapDispatchToProps = dispatch => ({
     }));
   },
   getPostStatistics: () => {
-    dispatch(fetchPosts({
+    dispatch(postsAPICall({
       callURIAction: 'getStatistics',
       callMethod: 'get',
     }));
   },
   nextPageHandler: (data) => {
-    dispatch(fetchPosts({
+    dispatch(postsAPICall({
       callURIAction: 'retrieve',
       callMethod: 'get',
       callParams: {

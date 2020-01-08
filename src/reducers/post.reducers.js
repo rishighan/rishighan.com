@@ -1,7 +1,7 @@
 import { LOCATION_CHANGE } from 'connected-react-router';
 import {
   FETCH_POSTS_REQUEST,
-  FETCH_POSTS_ERROR,
+  GENERIC_POSTS_API_ERROR,
   FETCH_POSTS_SUCCESS,
   FETCH_STATISTICS_SUCCESS,
   FETCH_DRAFTS_SUCCESS,
@@ -9,7 +9,7 @@ import {
 
 const initialState = {
   posts: [],
-  isFetching: false,
+  inProgress: false,
   error: undefined,
   statistics: [],
 };
@@ -22,30 +22,30 @@ function postsReducer(state = initialState, action) {
     case FETCH_POSTS_REQUEST:
       return {
         ...state,
-        isFetching: true,
+        inProgress: true,
       };
-    case FETCH_POSTS_ERROR:
+    case GENERIC_POSTS_API_ERROR:
       return {
         ...state,
-        isFetching: false,
+        inProgress: false,
         error: action.error,
       };
     case FETCH_POSTS_SUCCESS:
       return {
         ...state,
-        isFetching: false,
+        inProgress: false,
         posts: action.posts,
       };
     case FETCH_STATISTICS_SUCCESS:
       return {
         ...state,
-        isFetching: false,
+        inProgress: false,
         statistics: action.statistics,
       };
     case FETCH_DRAFTS_SUCCESS:
       return {
         ...state,
-        isFetching: false,
+        inProgress: false,
         drafts: action.drafts,
       };
     default:
