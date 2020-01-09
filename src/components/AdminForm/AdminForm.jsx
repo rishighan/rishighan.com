@@ -59,7 +59,7 @@ class AdminForm extends Component {
                 }) => (
                         <form>
                             <h2>Write a Post</h2>
-                            <Autosave debounce={1000} save={this.updatePost} />
+                            <Autosave debounce={1000} save={this.props.updatePost} />
                             <div className="field">
                                 <label className="field-label is-normal">Title</label>
                                 <div className="control is-expanded">

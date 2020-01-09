@@ -6,6 +6,7 @@ import diff from 'object-diff';
 class Autosave extends React.Component {
   constructor(props) {
     super(props);
+    this.props = props;
     this.state = { values: props.values, submitting: false };
   }
 
@@ -16,22 +17,16 @@ class Autosave extends React.Component {
     this.timeout = setTimeout(this.save, this.props.debounce);
   }
 
-  save = async () => {
-    if (this.promise) {
-      await this.promise;
-    }
+  save(){
+   console.log(s);
     const { values, save } = this.props;
-
     // This diff step is totally optional
-    const difference = diff(this.state.values, values);
+    const difference = diff(this.props.values, values);
     if (Object.keys(difference).length) {
       console.log("here");
       // values have changed
-      this.setState({ submitting: true, values });
-      this.promise = save(difference);
-      await this.promise;
-      delete this.promise;
-      this.setState({ submitting: false });
+      this.props.save(difference);
+      
     }
   }
 
@@ -39,7 +34,7 @@ class Autosave extends React.Component {
     // This component doesn't have to render anything, but it can render
     // submitting state.
     return (
-      this.state.submitting && <div className="submitting"><i className="fas fa-save"></i> Autosaving...</div>
+      <div className="submitting"><i className="fas fa-save"></i> Autosaving...</div>
     );
   }
 }
