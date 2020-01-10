@@ -16,7 +16,6 @@ const onSubmit = () => {
 class AdminForm extends Component {
   constructor(props) {
     super(props);
-    
     this.tabs = [
       {
         displayName: 'Preview',
@@ -38,7 +37,6 @@ class AdminForm extends Component {
       },
     ];
     this.state = {
-      posts: this.props.formData,
       currentlyActiveTab: this.tabs[0].displayName,
       markup: this.tabs[0].markup,
     };
@@ -62,12 +60,12 @@ class AdminForm extends Component {
                     }
                 }
                 render={({
-                  handleSubmit, pristine, invalid,
+                  handleSubmit, pristine, invalid, submitting, values,
                 }) => (
                         <div className="form">
                             <h2>Write a Post</h2>
                             <div>
-                                <span className="is-size-7 has-text-grey-lighter">{ this.props.formData._id}</span>
+                                <span className="is-size-7 has-text-grey-lighter">{ this.props.formData._id }</span>
                             </div>
                             {/* <Autosave debounce={1000} save={this.props.updatePost} /> */}
                             <div className="field">
@@ -165,10 +163,15 @@ class AdminForm extends Component {
                             {/* Global Form controls */}
                             <div className="field is-grouped">
                                 <div className="control">
-                                    <button className="button is-link" onClick={ () => this.props.updatePost(this.state.posts) }>Save Topic</button>
+                                    <button className="button is-link"
+                                            onClick={ () => this.props.updatePost(values) }
+                                            disabled={ submitting || pristine }
+                                            >Save Topic</button>
                                 </div>
                                 <div className="control">
-                                    <button className="button is-link">Save As Draft</button>
+                                    <button className="button is-link"
+                                            disabled={ submitting || pristine }
+                                    >Save As Draft</button>
                                 </div>
                                 <div className="control">
                                     <button className="button is-link is-danger">Delete Post</button>
