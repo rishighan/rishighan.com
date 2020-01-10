@@ -9,7 +9,8 @@ import {
   FETCH_DRAFTS_SUCCESS,
 } from '../constants/action-types';
 
-const postsServiceURI = 'http://services.rishighan.com/api/v1/posts/';
+// const postsServiceURI = 'http://services.rishighan.com/api/v1/posts/';
+const postsServiceURI = 'http://localhost/api/v1/posts/';
 const assetsServiceURI = 'http://services.rishighan.com/upload/';
 
 // @params {options}
@@ -20,9 +21,11 @@ export const postsAPICall = options => async (dispatch) => {
       inProgress: true,
     });
     const serviceURI = postsServiceURI + options.callURIAction;
+    console.log(options.data)
     const response = await axios(serviceURI, {
       method: options.callMethod,
       params: options.callParams,
+      data: options.data ? options.data : null,
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -40,6 +43,12 @@ export const postsAPICall = options => async (dispatch) => {
         dispatch({
           type: FETCH_DRAFTS_SUCCESS,
           drafts: response.data,
+        });
+        break;
+      case 'update':
+        dispatch({
+          type: UPDATE_POST_SUCCESS,
+          status: response.data,
         });
         break;
       default:

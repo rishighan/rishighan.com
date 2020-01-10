@@ -1,8 +1,9 @@
-import React, { useState, Component } from 'react';
+import React, { Component } from 'react';
 import { Form, Field } from 'react-final-form';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
+import _ from 'lodash';
 import AspectRatio from 'react-aspect-ratio';
 import Autosave from '../Autosave/Autosave';
 import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
@@ -15,6 +16,7 @@ const onSubmit = () => {
 class AdminForm extends Component {
   constructor(props) {
     super(props);
+    
     this.tabs = [
       {
         displayName: 'Preview',
@@ -30,8 +32,13 @@ class AdminForm extends Component {
         displayName: 'Diff History',
         markup: <div>yaaa</div>,
       },
+      {
+        displayName: 'JSON',
+        markup: <div><pre>{JSON.stringify(this.props.formData, null, 2) }</pre></div>,
+      },
     ];
     this.state = {
+      posts: this.props.formData,
       currentlyActiveTab: this.tabs[0].displayName,
       markup: this.tabs[0].markup,
     };
@@ -57,9 +64,12 @@ class AdminForm extends Component {
                 render={({
                   handleSubmit, pristine, invalid,
                 }) => (
-                        <form>
+                        <div className="form">
                             <h2>Write a Post</h2>
-                            <Autosave debounce={1000} save={this.props.updatePost} />
+                            <div>
+                                <span className="is-size-7 has-text-grey-lighter">{ this.props.formData._id}</span>
+                            </div>
+                            {/* <Autosave debounce={1000} save={this.props.updatePost} /> */}
                             <div className="field">
                                 <label className="field-label is-normal">Title</label>
                                 <div className="control is-expanded">
@@ -145,10 +155,17 @@ class AdminForm extends Component {
                                     </ul>
                                 </section>
                             </div>
+                            {/* Metadata */}
+                            <div className="field is-grouped">
+                            <label className="checkbox">
+                              <input type="checkbox" name="is_sticky" value={this.props.formData.is_sticky} />
+                               Make post sticky
+                            </label>
+                            </div>
                             {/* Global Form controls */}
                             <div className="field is-grouped">
                                 <div className="control">
-                                    <button className="button is-link">Save Topic</button>
+                                    <button className="button is-link" onClick={ () => this.props.updatePost(this.state.posts) }>Save Topic</button>
                                 </div>
                                 <div className="control">
                                     <button className="button is-link">Save As Draft</button>
@@ -157,23 +174,28 @@ class AdminForm extends Component {
                                     <button className="button is-link is-danger">Delete Post</button>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                 )} />
         </div>);
   }
 }
 
-function mapStateToProps(state) {}
+function mapStateToProps(state) {
+  return {
+    updateStatus: state.posts.posts,
+  };
+}
 
 const mapDispatchToProps = dispatch => ({
   updatePost: (post) => {
+    _.assign(post, { upsertValue: false });
     dispatch(postsAPICall({
       callURIAction: 'update',
-      callMethod: 'get',
+      callMethod: 'post',
       callParams: {
-        postId: post.id,
-        data: post,
+        postId: post._id,
       },
+      data: post,
     }));
   },
 });
@@ -181,6 +203,7 @@ const mapDispatchToProps = dispatch => ({
 AdminForm.propTypes = {
   formData: PropTypes.object,
   onDroppedFile: PropTypes.func,
+  updatePost: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminForm);

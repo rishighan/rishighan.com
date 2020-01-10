@@ -5,6 +5,7 @@ import {
   FETCH_POSTS_SUCCESS,
   FETCH_STATISTICS_SUCCESS,
   FETCH_DRAFTS_SUCCESS,
+  UPDATE_POST_SUCCESS,
 } from '../constants/action-types';
 
 const initialState = {
@@ -47,6 +48,11 @@ function postsReducer(state = initialState, action) {
         ...state,
         inProgress: false,
         drafts: action.drafts,
+      };
+    case UPDATE_POST_SUCCESS:
+      return {
+        ...state,
+        status: action.post,
       };
     default:
       return state;
