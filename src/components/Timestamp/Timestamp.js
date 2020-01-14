@@ -3,9 +3,9 @@ import format from 'date-fns/format';
 import PropTypes from 'prop-types';
 
 const Timestamp = props => (
-    <div className="content is-small timestamp">
+    <span className="content is-small timestamp">
         { props.date ? format(props.date, props.dateFormat) : null }
-    </div>
+    </span>
 );
 
 Timestamp.propTypes = {

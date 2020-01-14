@@ -6,6 +6,7 @@ import Dropzone from 'react-dropzone';
 import _ from 'lodash';
 import AspectRatio from 'react-aspect-ratio';
 import Autosave from '../Autosave/Autosave';
+import Timestamp from '../Timestamp/Timestamp';
 import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 import { postsAPICall, onDroppedFile } from '../../actions/index';
 import { inferImageDimensions } from '../../utils/image.utils';
@@ -44,7 +45,7 @@ class AdminForm extends Component {
 
   changeTab = (newTab) => {
     const diffHistoryMarkup = <pre> {this.props.diffHistories && this.props.diffHistories.map((historyItem, idx) => <p key={idx}>
-        {historyItem.changedAt}: {historyItem.comment}
+        <Timestamp date={historyItem.changedAt} dateFormat={'MMMM Do, YYYY'} />: <span className="is-small content">{historyItem.comment}</span>
       </p>)} </pre>;
     const markup = newTab.displayName === 'Diff History' ? diffHistoryMarkup : newTab.markup;
     this.setState({
