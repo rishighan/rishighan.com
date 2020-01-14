@@ -22,7 +22,7 @@ class AdminForm extends Component {
         markup: <MarkdownRenderer text={this.props.formData.content} />,
       },
       {
-        displayName: 'Raw',
+        displayName: 'Markdown',
         markup: <div className="control is-expanded">
                   <Field name="content" component="textarea" placeholder="Write" className="textarea is-family-monospace" rows="20" />
               </div>,

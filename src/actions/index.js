@@ -21,7 +21,7 @@ export const postsAPICall = options => async (dispatch) => {
       inProgress: true,
     });
     const serviceURI = postsServiceURI + options.callURIAction;
-    console.log(options.data)
+    console.log(options.callURIAction);
     const response = await axios(serviceURI, {
       method: options.callMethod,
       params: options.callParams,
