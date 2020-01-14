@@ -7,6 +7,7 @@ import {
   UPDATE_POST_SUCCESS,
   FETCH_STATISTICS_SUCCESS,
   FETCH_DRAFTS_SUCCESS,
+  GET_DIFF_HISTORIES_SUCCESS,
 } from '../constants/action-types';
 
 // const postsServiceURI = 'http://services.rishighan.com/api/v1/posts/';
@@ -21,7 +22,6 @@ export const postsAPICall = options => async (dispatch) => {
       inProgress: true,
     });
     const serviceURI = postsServiceURI + options.callURIAction;
-    console.log(options.callURIAction);
     const response = await axios(serviceURI, {
       method: options.callMethod,
       params: options.callParams,
@@ -49,6 +49,12 @@ export const postsAPICall = options => async (dispatch) => {
         dispatch({
           type: UPDATE_POST_SUCCESS,
           status: response.data,
+        });
+        break;
+      case 'getDiffHistories':
+        dispatch({
+          type: GET_DIFF_HISTORIES_SUCCESS,
+          diffHistories: response.data,
         });
         break;
       default:

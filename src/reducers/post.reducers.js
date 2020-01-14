@@ -6,6 +6,7 @@ import {
   FETCH_STATISTICS_SUCCESS,
   FETCH_DRAFTS_SUCCESS,
   UPDATE_POST_SUCCESS,
+  GET_DIFF_HISTORIES_SUCCESS,
 } from '../constants/action-types';
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   inProgress: false,
   error: undefined,
   statistics: [],
+  diffHistories: [],
 };
 function postsReducer(state = initialState, action) {
   switch (action.type) {
@@ -53,6 +55,12 @@ function postsReducer(state = initialState, action) {
       return {
         ...state,
         status: action.post,
+      };
+    case GET_DIFF_HISTORIES_SUCCESS:
+      return {
+        ...state,
+        inProgress: false,
+        diffHistories: action.diffHistories,
       };
     default:
       return state;
