@@ -6,11 +6,29 @@ import Dropzone from 'react-dropzone';
 import _ from 'lodash';
 import AspectRatio from 'react-aspect-ratio';
 import Autosave from '../Autosave/Autosave';
+import Typeahead from '../Typeahead/Typeahead';
 import Timestamp from '../Timestamp/Timestamp';
 import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 import { postsAPICall, onDroppedFile } from '../../actions/index';
 import { inferImageDimensions } from '../../utils/image.utils';
 
+const foo = [
+  { value: 'Apple', label: '🍎 Apple' },
+  { value: 'Banana', label: '🍌 Banana' },
+  { value: 'Cherry', label: '🍒 Cherry' },
+  { value: 'Grape', label: '🍇 Grape' },
+  { value: 'Kiwi', label: '🥝 Kiwi' },
+  { value: 'Orange', label: '🍊 Orange' },
+  { value: 'Peach', label: '🍑 Peach' },
+  { value: 'Pear', label: '🍐 Pear' },
+  { value: 'Pineapple', label: '🍍 Pineapple' },
+  { value: 'Strawberry', label: '🍓 Strawberry' },
+  { value: 'Watermelon', label: '🍉 Watermelon' },
+];
+
+const fon = () => {
+  console.log("lk");
+}
 const onSubmit = () => {
   console.log('submitted');
 };
@@ -45,8 +63,8 @@ class AdminForm extends Component {
 
   changeTab = (newTab) => {
     const diffHistoryMarkup = <pre> {this.props.diffHistories && this.props.diffHistories.map((historyItem, idx) => <p key={idx}>
-        <Timestamp date={historyItem.changedAt} dateFormat={'MMMM Do, YYYY'} />: <span className="is-small content">{historyItem.comment}</span>
-      </p>)} </pre>;
+      <Timestamp date={historyItem.changedAt} dateFormat={'MMMM Do, YYYY'} />: <span className="is-small content">{historyItem.comment}</span>
+    </p>)} </pre>;
     const markup = newTab.displayName === 'Diff History' ? diffHistoryMarkup : newTab.markup;
     this.setState({
       currentlyActiveTab: newTab.displayName,
@@ -92,6 +110,18 @@ class AdminForm extends Component {
                   </div>
                 </div>
 
+                {/* Tags */}
+                <div className="field">
+                  <label className="field-label is-normal">Tags</label>
+                  <div className="field-body">
+                    <Field
+                      name="fruit"
+                      items={foo}
+                      component={Typeahead}
+                      placeholder="Favorite Fruit"
+                    />
+                  </div>
+                </div>
                 <div className="field">
                   <label className="field-label is-normal">Tags</label>
                   <div className="field-body">
@@ -104,6 +134,7 @@ class AdminForm extends Component {
                   </div>
                 </div>
 
+                {/* Tabs: Content, MD preview, JSON model and more */}
                 <div className="tabs">
                   <ul>
                     {this.tabs.map((tab, idx) => <li
@@ -124,6 +155,7 @@ class AdminForm extends Component {
                     <Field name="excerpt" component="textarea" placeholder="Write" className="textarea" rows="1" />
                   </div>
                 </div>
+
                 {/* Media management */}
                 <div className="box">
                   <section>
@@ -162,6 +194,7 @@ class AdminForm extends Component {
                     </ul>
                   </section>
                 </div>
+
                 {/* Metadata */}
                 <div className="field is-grouped">
                   <label className="checkbox">
@@ -169,6 +202,7 @@ class AdminForm extends Component {
                     Make post sticky
                             </label>
                 </div>
+
                 {/* Global Form controls */}
                 <div className="field is-grouped">
                   <div className="control">
@@ -187,7 +221,7 @@ class AdminForm extends Component {
                   </div>
                 </div>
               </div>
-          )} />
+            )} />
       </div>);
   }
 }
