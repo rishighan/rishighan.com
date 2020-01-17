@@ -6,6 +6,8 @@ import Dropzone from 'react-dropzone';
 import _ from 'lodash';
 import AspectRatio from 'react-aspect-ratio';
 import CreatableSelect from 'react-select/creatable';
+import customStyles from '../Select/select-styles';
+import tags from '../../constants/tags';
 import Autosave from '../Autosave/Autosave';
 import Timestamp from '../Timestamp/Timestamp';
 import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
@@ -104,22 +106,14 @@ class AdminForm extends Component {
                 <div>
                   <label className="field-label is-normal">Tags</label>
                     <CreatableSelect
+                      styles={customStyles}
                       isMulti
                       onChange={this.changeTagSelection}
-                      options={this.tags}
+                      value={this.formattedTags}
+                      options={tags}
                     />
                 </div>
-                <div className="field">
-                  <label className="field-label is-normal">Tags</label>
-                  <div className="field-body">
-                    {this.props.formData.tags.map((tag, idx) => <div key={idx}>
-                      <div className="tags has-addons is-grouped">
-                        <span className="tag is-light">{tag.id}</span>
-                        <a className="tag is-delete"></a>
-                      </div>
-                    </div>)}
-                  </div>
-                </div>
+              
 
                 {/* Tabs: Content, MD preview, JSON model and more */}
                 <div className="tabs">
