@@ -5,36 +5,22 @@ import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import _ from 'lodash';
 import AspectRatio from 'react-aspect-ratio';
+import CreatableSelect from 'react-select/creatable';
 import Autosave from '../Autosave/Autosave';
-import Typeahead from '../Typeahead/Typeahead';
 import Timestamp from '../Timestamp/Timestamp';
 import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 import { postsAPICall, onDroppedFile } from '../../actions/index';
 import { inferImageDimensions } from '../../utils/image.utils';
 
-const foo = [
-  { value: 'Apple', label: '🍎 Apple' },
-  { value: 'Banana', label: '🍌 Banana' },
-  { value: 'Cherry', label: '🍒 Cherry' },
-  { value: 'Grape', label: '🍇 Grape' },
-  { value: 'Kiwi', label: '🥝 Kiwi' },
-  { value: 'Orange', label: '🍊 Orange' },
-  { value: 'Peach', label: '🍑 Peach' },
-  { value: 'Pear', label: '🍐 Pear' },
-  { value: 'Pineapple', label: '🍍 Pineapple' },
-  { value: 'Strawberry', label: '🍓 Strawberry' },
-  { value: 'Watermelon', label: '🍉 Watermelon' },
-];
 
-const fon = () => {
-  console.log("lk");
-}
 const onSubmit = () => {
   console.log('submitted');
 };
+
 class AdminForm extends Component {
   constructor(props) {
     super(props);
+    this.formattedTags = _.map(this.props.formData.tags, tag => ({ value: tag.id, label: tag.id }));
     this.tabs = [
       {
         displayName: 'Preview',
@@ -71,6 +57,10 @@ class AdminForm extends Component {
       markup,
     });
   };
+
+  changeTagSelection = (e) => {
+    console.log(e);
+  }
 
   componentDidMount() {
     this.props.getDiffHistories(this.props.formData._id);
@@ -111,16 +101,13 @@ class AdminForm extends Component {
                 </div>
 
                 {/* Tags */}
-                <div className="field">
+                <div>
                   <label className="field-label is-normal">Tags</label>
-                  <div className="field-body">
-                    <Field
-                      name="fruit"
-                      items={foo}
-                      component={Typeahead}
-                      placeholder="Favorite Fruit"
+                    <CreatableSelect
+                      isMulti
+                      onChange={this.changeTagSelection}
+                      options={this.tags}
                     />
-                  </div>
                 </div>
                 <div className="field">
                   <label className="field-label is-normal">Tags</label>
@@ -221,7 +208,7 @@ class AdminForm extends Component {
                   </div>
                 </div>
               </div>
-            )} />
+          )} />
       </div>);
   }
 }
