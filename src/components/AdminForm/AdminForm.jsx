@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Field } from 'react-final-form';
+import { Form, Field, useFormState } from 'react-final-form';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
@@ -22,7 +22,7 @@ const onSubmit = () => {
 class AdminForm extends Component {
   constructor(props) {
     super(props);
-    this.formattedTags = _.map(this.props.formData.tags, tag => ({ value: tag.id, label: tag.id }));
+    this.formatTags = input => _.map(input, tag => ({ value: tag.id, label: tag.id }));
     this.tabs = [
       {
         displayName: 'Preview',
@@ -40,31 +40,53 @@ class AdminForm extends Component {
       },
       {
         displayName: 'JSON',
-        markup: <div><pre>{JSON.stringify(this.props.formData, null, 2)}</pre></div>,
+        markup: <div>
+
+                </div>,
       },
     ];
     this.state = {
+      currentlySelectedTags: this.formatTags(this.props.formData.tags),
       currentlyActiveTab: this.tabs[0].displayName,
       markup: this.tabs[0].markup,
     };
   }
 
   changeTab = (newTab) => {
-    const diffHistoryMarkup = <pre> {this.props.diffHistories && this.props.diffHistories.map((historyItem, idx) => <p key={idx}>
-      <Timestamp date={historyItem.changedAt} dateFormat={'MMMM Do, YYYY'} />: <span className="is-small content">{historyItem.comment}</span>
-    </p>)} </pre>;
-    const markup = newTab.displayName === 'Diff History' ? diffHistoryMarkup : newTab.markup;
-    this.setState({
-      currentlyActiveTab: newTab.displayName,
-      markup,
-    });
+    switch (newTab.displayName) {
+      case 'Diff History':
+        console.log(this.props.diffHistories);
+        this.setState({
+          currentlyActiveTab: newTab.displayName,
+          markup: <pre> {this.props.diffHistories && this.props.diffHistories.map((historyItem, idx) => <div key={idx}>
+                  {_.each(historyItem.diff, (diffObject, i) => <p>
+                      {JSON.stringify(diffObject)}
+                  </p>)}
+                  </div>)}</pre>,
+        });
+        break;
+      case 'JSON':
+        this.setState({
+          currentlyActiveTab: newTab.displayName,
+          markup: <div><pre>{JSON.stringify(values, null, 2)}</pre></div>,
+        });
+        break;
+      default:
+        this.setState({
+          currentlyActiveTab: newTab.displayName,
+          markup: newTab.markup,
+        });
+    }
   };
 
-  changeTagSelection = (e) => {
-    console.log(e);
+  changeTagSelection = (selectedTags) => {
+    this.setState({
+      currentlySelectedTags: selectedTags,
+    });
   }
 
   componentDidMount() {
+    console.log(this.props);
     this.props.getDiffHistories(this.props.formData._id);
   }
 
@@ -109,11 +131,10 @@ class AdminForm extends Component {
                       styles={customStyles}
                       isMulti
                       onChange={this.changeTagSelection}
-                      value={this.formattedTags}
+                      value={this.state.currentlySelectedTags}
                       options={tags}
                     />
                 </div>
-              
 
                 {/* Tabs: Content, MD preview, JSON model and more */}
                 <div className="tabs">

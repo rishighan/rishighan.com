@@ -1,13 +1,7 @@
 const customStyles = {
   container: (provided, state) => ({
     ...provided,
-    marginBottom: 10,
-  }),
-  menu: (provided, state) => ({
-    ...provided,
-    width: '100%',
-    color: state.selectProps.menuColor,
-    padding: 3,
+    marginBottom: 15,
   }),
   multiValue: (provided, state) => ({
     ...provided,
@@ -20,12 +14,6 @@ const customStyles = {
   }),
   placeholder: () => ({
     marginTop: 0,
-  }),
-  option: (provided, state) => ({
-    ...provided,
-    borderBottom: '1px dotted pink',
-    color: state.isSelected ? 'red' : 'blue',
-    padding: 3,
   }),
   singleValue: (provided, state) => {
     const opacity = state.isDisabled ? 0.5 : 1;
