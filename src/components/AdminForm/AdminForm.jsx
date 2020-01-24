@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Field } from 'react-final-form';
+import { Form, Field, FormSpy } from 'react-final-form';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -91,7 +91,7 @@ class AdminForm extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
+    console.log(this.state);
     this.props.getDiffHistories(this.props.formData._id);
   }
 
@@ -109,6 +109,12 @@ class AdminForm extends Component {
             handleSubmit, pristine, invalid, submitting, values,
           }) => (
               <div className="form">
+                <FormSpy
+                  subscription={{ values: true, valid: true }}
+                  onChange={(state) => {
+                    const { formValues, valid } = state;
+                    this.props.exposeValues({ formValues, valid });
+                  }} />
                 <h2>Write a Post</h2>
                 <div>
                   <span className="is-size-7 has-text-grey-lighter">{this.props.formData._id}</span>
