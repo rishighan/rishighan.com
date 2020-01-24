@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
-import { Form, Field, useFormState } from 'react-final-form';
+import { Form, Field } from 'react-final-form';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Dropzone from 'react-dropzone';
+
 import _ from 'lodash';
 import AspectRatio from 'react-aspect-ratio';
 import CreatableSelect from 'react-select/creatable';
-import customStyles from '../Select/select-styles';
-import tags from '../../constants/tags';
-import Autosave from '../Autosave/Autosave';
-import Timestamp from '../Timestamp/Timestamp';
-import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
-import { postsAPICall, onDroppedFile } from '../../actions/index';
+import Dropzone from 'react-dropzone';
+
+import format from 'date-fns/format';
+import hljs from 'highlight.js';
+import Interweave from 'interweave';
 import { inferImageDimensions } from '../../utils/image.utils';
+import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
+import Autosave from '../Autosave/Autosave';
+
+import customStyles from '../Select/select-styles';
+import 'highlight.js/styles/atom-one-dark.css';
+
+import tags from '../../constants/tags';
+import { postsAPICall, onDroppedFile } from '../../actions/index';
 
 
 const onSubmit = () => {
@@ -55,14 +62,12 @@ class AdminForm extends Component {
   changeTab = (newTab) => {
     switch (newTab.displayName) {
       case 'Diff History':
-        console.log(this.props.diffHistories);
         this.setState({
           currentlyActiveTab: newTab.displayName,
-          markup: <pre> {this.props.diffHistories && this.props.diffHistories.map((historyItem, idx) => <div key={idx}>
-                  {_.each(historyItem.diff, (diffObject, i) => <p>
-                      {JSON.stringify(diffObject)}
-                  </p>)}
-                  </div>)}</pre>,
+          markup: <>{ _.map(this.props.diffHistories, (diffHistory, i) => <pre key={i}>
+                      <p>{ format(diffHistory.createdAt, 'MMMM Do, YYYY') }</p>
+                      <Interweave content={ hljs.highlightAuto(JSON.stringify(diffHistory.diff, null, 4)).value } />
+                    </pre>)}</>,
         });
         break;
       case 'JSON':

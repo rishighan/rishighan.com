@@ -23,5 +23,7 @@ function List(props) {
 List.propTypes = {
   children: PropTypes.array,
   showTags: PropTypes.bool,
+  showTimestamps: PropTypes.bool,
+  showExcerpts: PropTypes.bool,
 };
 export default List;
