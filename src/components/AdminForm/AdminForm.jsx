@@ -32,14 +32,14 @@ class AdminForm extends Component {
     this.formatTags = input => _.map(input, tag => ({ value: tag.id, label: tag.id }));
     this.tabs = [
       {
-        displayName: 'Preview',
-        markup: <MarkdownRenderer text={this.props.formData.content} />,
-      },
-      {
         displayName: 'Markdown',
         markup: <div className="control is-expanded">
           <Field name="content" component="textarea" placeholder="Write" className="textarea is-family-monospace" rows="20" />
         </div>,
+      },
+      {
+        displayName: 'Preview',
+        markup: <MarkdownRenderer text={this.props.formData.content} />,
       },
       {
         displayName: 'Diff History',
@@ -47,9 +47,7 @@ class AdminForm extends Component {
       },
       {
         displayName: 'JSON',
-        markup: <div>
-
-                </div>,
+        markup: <div></div>,
       },
     ];
     this.state = {
@@ -70,12 +68,6 @@ class AdminForm extends Component {
                     </pre>)}</>,
         });
         break;
-      case 'JSON':
-        this.setState({
-          currentlyActiveTab: newTab.displayName,
-          markup: <div><pre>{JSON.stringify(values, null, 2)}</pre></div>,
-        });
-        break;
       default:
         this.setState({
           currentlyActiveTab: newTab.displayName,
@@ -91,7 +83,6 @@ class AdminForm extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state);
     this.props.getDiffHistories(this.props.formData._id);
   }
 
@@ -109,12 +100,6 @@ class AdminForm extends Component {
             handleSubmit, pristine, invalid, submitting, values,
           }) => (
               <div className="form">
-                <FormSpy
-                  subscription={{ values: true, valid: true }}
-                  onChange={(state) => {
-                    const { formValues, valid } = state;
-                    this.props.exposeValues({ formValues, valid });
-                  }} />
                 <h2>Write a Post</h2>
                 <div>
                   <span className="is-size-7 has-text-grey-lighter">{this.props.formData._id}</span>
@@ -159,7 +144,8 @@ class AdminForm extends Component {
                   </ul>
                 </div>
                 <div id="tab-content">
-                  {this.state.markup}
+                  {this.state.currentlyActiveTab !== 'JSON' ? this.state.markup
+                    : <div><pre><Interweave content={ hljs.highlightAuto(JSON.stringify(values, null, 2)).value } /></pre></div>}
                 </div>
 
                 <div className="field">
@@ -209,11 +195,11 @@ class AdminForm extends Component {
                 </div>
 
                 {/* Metadata */}
-                <div className="field is-grouped">
+                <div className="field">
                   <label className="checkbox">
                     <input type="checkbox" name="is_sticky" value={this.props.formData.is_sticky} />
-                    Make post sticky
-                            </label>
+                    <span>Make post sticky</span>
+                  </label>
                 </div>
 
                 {/* Global Form controls */}
