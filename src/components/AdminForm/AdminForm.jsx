@@ -21,7 +21,6 @@ import 'highlight.js/styles/atom-one-dark.css';
 import tags from '../../constants/tags';
 import { postsAPICall, onDroppedFile } from '../../actions/index';
 
-
 const onSubmit = () => {
   console.log('submitted');
 };
@@ -60,7 +59,6 @@ class AdminForm extends Component {
   sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
   save = async (values) => {
-    console.log(values);
     this.props.updatePost(values);
     await this.sleep(2000);
   };
@@ -168,15 +166,19 @@ class AdminForm extends Component {
                 <div className="box">
                   <section>
                     <Dropzone onDrop={onDroppedFile}>
-                      {({ getRootProps, getInputProps }) => (
+                      {({ getRootProps, getInputProps, acceptedFiles }) => (
                         <section>
                           <div {...getRootProps({ className: 'dropzone' })}>
                             <input {...getInputProps({ name: 'asset' })} />
                             <p>Drag and drop some files here, or click to select files</p>
                           </div>
+                          <aside>
+                            { acceptedFiles.map((file, i) => <p key={i}>{ file.name }</p>) }
+                          </aside>
                         </section>
                       )}
                     </Dropzone>
+                    {/* Display existing and uploaded assets */}
                     <ul className="is-clearfix">
                       {this.props.formData.attachment.map((mediaObj, idx) => <li className="is-pulled-left" key={idx}>
                         <div className="card">

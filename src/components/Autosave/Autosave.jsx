@@ -8,7 +8,7 @@ class AutoSave extends React.Component {
     this.state = { values: props.values, submitting: false };
   }
 
-  componentDidUpdate(nextProps) {
+  componentDidUpdate() {
     if (this.timeout) {
       clearTimeout(this.timeout);
     }
@@ -20,7 +20,6 @@ class AutoSave extends React.Component {
       await this.promise;
     }
     const { values, save } = this.props;
-    console.log(values);
     // This diff step is totally optional
     const difference = diff(this.state.values, values);
     if (Object.keys(difference).length) {
@@ -37,7 +36,7 @@ class AutoSave extends React.Component {
     // This component doesn't have to render anything, but it can render
     // submitting state.
     return (
-      this.state.submitting && <div className="submitting">Submitting...</div>
+      this.state.submitting && <div className="submitting"><i className="fa fa-save"> </i> Submitting...</div>
     );
   }
 }
