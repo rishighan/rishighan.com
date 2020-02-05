@@ -28,7 +28,7 @@ const onSubmit = () => {
 class AdminForm extends Component {
   constructor(props) {
     super(props);
-    this.formatTags = input => _.map(input, tag => ({ value: tag.id, label: tag.id }));
+    this.formatTags = input => _.map(input, tag => ({ value: tag.value, label: tag.displayName }));
     this.tabs = [
       {
         displayName: 'Markdown',
