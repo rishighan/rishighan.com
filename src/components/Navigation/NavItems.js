@@ -2,137 +2,137 @@ import React from 'react';
 import PageContainer from '../PageContainer/PageContainer';
 
 const NavItems = [
-    {
-      displayName: "home",
-      href: "/",
-      render: () => (
+  {
+    displayName: 'home',
+    href: '/',
+    render: () => (
         <PageContainer
           callOptions={{
-            callMethod: "get",
-            callURIAction: "findByTagName",
+            callMethod: 'get',
+            callURIAction: 'findByTagName',
             callParams: {
-              tagName: "Blog",
+              tagName: 'blog',
               pageOffset: 1,
-              pageLimit: 25
-            }
+              pageLimit: 25,
+            },
           }}
           options={{
-            type: "post",
+            type: 'post',
             metadata: {
-              subType: "blog"
-            }
+              subType: 'blog',
+            },
           }}
         />
-      )
-    },
-    {
-      displayName: "work",
-      href: "/work",
-      render: () => (
+    ),
+  },
+  {
+    displayName: 'work',
+    href: '/work',
+    render: () => (
         <PageContainer
           callOptions={{
-            callMethod: "get",
-            callURIAction: "findByTagName",
+            callMethod: 'get',
+            callURIAction: 'findByTagName',
             callParams: {
-              tagName: "Work",
+              tagName: 'projects',
               pageOffset: 1,
-              pageLimit: 5
-            }
+              pageLimit: 5,
+            },
           }}
           options={{
-            type: "post",
+            type: 'post',
             metadata: {
-              subType: "titles"
-            }
+              subType: 'titles',
+            },
           }}
         />
-      )
-    },
-    {
-      displayName: "freeswim",
-      href: "/freeswim",
-      render: () => (
+    ),
+  },
+  {
+    displayName: 'freeswim',
+    href: '/freeswim',
+    render: () => (
         <PageContainer
           callOptions={{
-            callMethod: "get",
-            callURIAction: "findByTagName",
+            callMethod: 'get',
+            callURIAction: 'findByTagName',
             callParams: {
-              tagName: "Trampoline",
+              tagName: 'trampoline',
               pageOffset: 1,
-              pageLimit: 5
-            }
+              pageLimit: 5,
+            },
           }}
           options={{
-            type: "post",
+            type: 'post',
             metadata: {
-              subType: "blog"
-            }
+              subType: 'blog',
+            },
           }}
         />
-      )
-    },
-    {
-      displayName: "illustrations",
-      href: "/illustrations",
-      render: () => (
+    ),
+  },
+  {
+    displayName: 'illustrations',
+    href: '/illustrations',
+    render: () => (
         <PageContainer
           callOptions={{
-            callMethod: "get",
-            callURIAction: "findByTagName",
+            callMethod: 'get',
+            callURIAction: 'findByTagName',
             callParams: {
-              tagName: "Illustrations",
+              tagName: 'illustrations',
               pageOffset: 1,
-              pageLimit: 5
-            }
+              pageLimit: 5,
+            },
           }}
           options={{
-            type: "post",
+            type: 'post',
             metadata: {
-              subType: "illustrations"
-            }
+              subType: 'illustrations',
+            },
           }}
         />
-      )
-    },
-    {
-      displayName: "archive",
-      href: "/archive",
-      render: () => (
+    ),
+  },
+  {
+    displayName: 'archive',
+    href: '/archive',
+    render: () => (
         <PageContainer
           callOptions={{
-            callMethod: "get",
-            callURIAction: "getArchivedPosts"
+            callMethod: 'get',
+            callURIAction: 'getArchivedPosts',
           }}
           options={{
-            type: "post",
+            type: 'post',
             metadata: {
-              subType: "archive"
-            }
+              subType: 'archive',
+            },
           }}
         />
-      )
-    },
-    {
-      displayName: "colophon",
-      href: "/colophon",
-      render: () => (
+    ),
+  },
+  {
+    displayName: 'colophon',
+    href: '/colophon',
+    render: () => (
         <PageContainer
           callOptions={{
-            callMethod: "get",
-            callURIAction: "retrieveOne",
+            callMethod: 'get',
+            callURIAction: 'retrieveOne',
             callParams: {
-              slug: "colophon"
-            }
+              slug: 'colophon',
+            },
           }}
           options={{
-            type: "post",
+            type: 'post',
             metadata: {
-              subType: "single"
-            }
+              subType: 'single',
+            },
           }}
         />
-      )
-    }
-  ];
+    ),
+  },
+];
 
-  export default NavItems;
+export default NavItems;
