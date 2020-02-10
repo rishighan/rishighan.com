@@ -12,7 +12,7 @@ import {
 
 // const postsServiceURI = 'http://services.rishighan.com/api/v1/posts/';
 const postsServiceURI = 'http://localhost/api/v1/posts/';
-const assetsServiceURI = 'http://services.rishighan.com/upload/';
+const assetsServiceURI = 'http://localhost/api/v1/assets/upload/';
 
 // @params {options}
 export const postsAPICall = options => async (dispatch) => {
@@ -77,13 +77,13 @@ export const onDroppedFile = async (file) => {
     const fd = new FormData();
     fd.append('fileData', file[0]);
     fd.append('fileName', file[0].name);
-    const response = await axios.post(
-      assetsServiceURI, fd, {
-        headers: {
-          'Content-Type': `multipart/form-data boundary=${fd._boundary}`,
-        },
+    const response = await axios({
+      method: 'POST',
+      url: 'http://localhost/api/v1/assets/upload/',
+      headers: {
+        'Content-Type': `multipart/form-data; boundary=${fd._boundary}`,
       },
-    );
+    });
     return response;
   } catch (error) {
     return error;
