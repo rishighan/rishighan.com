@@ -4,14 +4,13 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import _ from 'lodash';
-import AspectRatio from 'react-aspect-ratio';
 import CreatableSelect from 'react-select/creatable';
 import Dropzone from 'react-dropzone';
+import ImageCard from '../ImageCard/ImageCard';
 
 import format from 'date-fns/format';
 import hljs from 'highlight.js';
 import Interweave from 'interweave';
-import { inferImageDimensions } from '../../utils/image.utils';
 import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 import Autosave from '../Autosave/Autosave';
 
@@ -68,10 +67,10 @@ class AdminForm extends Component {
       case 'Diff History':
         this.setState({
           currentlyActiveTab: newTab.displayName,
-          markup: <>{ _.map(this.props.diffHistories, (diffHistory, i) => <pre key={i}>
-                      <p>{ format(diffHistory.createdAt, 'MMMM Do, YYYY') }</p>
-                      <Interweave content={ hljs.highlightAuto(JSON.stringify(diffHistory.diff, null, 4)).value } />
-                    </pre>)}</>,
+          markup: <>{_.map(this.props.diffHistories, (diffHistory, i) => <pre key={i}>
+            <p>{format(diffHistory.createdAt, 'MMMM Do, YYYY')}</p>
+            <Interweave content={hljs.highlightAuto(JSON.stringify(diffHistory.diff, null, 4)).value} />
+          </pre>)}</>,
         });
         break;
       default:
@@ -130,13 +129,13 @@ class AdminForm extends Component {
                 {/* Tags */}
                 <div>
                   <label className="field-label is-normal">Tags</label>
-                    <CreatableSelect
-                      styles={customStyles}
-                      isMulti
-                      onChange={this.changeTagSelection}
-                      value={this.state.currentlySelectedTags}
-                      options={tags}
-                    />
+                  <CreatableSelect
+                    styles={customStyles}
+                    isMulti
+                    onChange={this.changeTagSelection}
+                    value={this.state.currentlySelectedTags}
+                    options={tags}
+                  />
                 </div>
 
                 {/* Tabs: Content, MD preview, JSON model and more */}
@@ -152,7 +151,7 @@ class AdminForm extends Component {
                 </div>
                 <div id="tab-content">
                   {this.state.currentlyActiveTab !== 'JSON' ? this.state.markup
-                    : <div><pre><Interweave content={ hljs.highlightAuto(JSON.stringify(values, null, 2)).value } /></pre></div>}
+                    : <div><pre><Interweave content={hljs.highlightAuto(JSON.stringify(values, null, 2)).value} /></pre></div>}
                 </div>
 
                 <div className="field">
@@ -173,35 +172,24 @@ class AdminForm extends Component {
                             <p>Drag and drop some files here, or click to select files</p>
                           </div>
                           <aside>
-                            { acceptedFiles.map((file, i) => <p key={i}>{ file.name }</p>) }
+                            <ul className="is-clearfix">
+                              {/* Recently uploaded assets */}
+                              {acceptedFiles.map((file, i) => <li key={i} className="is-pulled-left">
+                                <ImageCard
+                                  mediaObject={file}
+                                />
+                              </li>)}
+                              {/* Display existing and uploaded assets */}
+                              {this.props.formData.attachment.map((mediaObj, idx) => <li className="is-pulled-left" key={idx}>
+                                <ImageCard
+                                  mediaObject={mediaObj}
+                                />
+                              </li>)}
+                            </ul>
                           </aside>
                         </section>
                       )}
                     </Dropzone>
-                    {/* Display existing and uploaded assets */}
-                    <ul className="is-clearfix">
-                      {this.props.formData.attachment.map((mediaObj, idx) => <li className="is-pulled-left" key={idx}>
-                        <div className="card">
-                          <div className="card-image">
-                            <AspectRatio ratio={inferImageDimensions(mediaObj.url)} style={{ maxWidth: '200px' }}>
-                              <figure className="image">
-                                <img src={mediaObj.url} />
-                              </figure>
-                            </AspectRatio>
-                          </div>
-                          <div className="card-content">
-                            <div className="content is-family-monospace is-size-7">
-                              <p>{mediaObj.name}</p>
-                              <span >{Math.round(mediaObj.size / 1024)}</span>
-                            </div>
-                          </div>
-                          <footer className="card-footer">
-                            <a href="#" className="card-footer-item is-size-7">Make Hero</a>
-                            <a href="#" className="card-footer-item is-size-7">Delete</a>
-                          </footer>
-                        </div>
-                      </li>)}
-                    </ul>
                   </section>
                 </div>
 
@@ -231,7 +219,7 @@ class AdminForm extends Component {
                   </div>
                 </div>
               </div>
-          )} />
+            )} />
       </div>);
   }
 }

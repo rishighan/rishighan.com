@@ -1,5 +1,6 @@
-import axios from 'axios';
-import FormData from 'form-data';
+import axios from "axios";
+import fetch from "whatwg-fetch";
+import FormData from "form-data";
 import {
   FETCH_POSTS_REQUEST,
   GENERIC_POSTS_API_ERROR,
@@ -7,19 +8,19 @@ import {
   UPDATE_POST_SUCCESS,
   FETCH_STATISTICS_SUCCESS,
   FETCH_DRAFTS_SUCCESS,
-  GET_DIFF_HISTORIES_SUCCESS,
-} from '../constants/action-types';
+  GET_DIFF_HISTORIES_SUCCESS
+} from "../constants/action-types";
 
 // const postsServiceURI = 'http://services.rishighan.com/api/v1/posts/';
-const postsServiceURI = 'http://localhost/api/v1/posts/';
-const assetsServiceURI = 'http://localhost/api/v1/assets/upload/';
+const postsServiceURI = "http://localhost/api/v1/posts/";
+const assetsServiceURI = "http://localhost/assets/api/upload/";
 
 // @params {options}
-export const postsAPICall = options => async (dispatch) => {
+export const postsAPICall = options => async dispatch => {
   try {
     dispatch({
       type: FETCH_POSTS_REQUEST,
-      inProgress: true,
+      inProgress: true
     });
     const serviceURI = postsServiceURI + options.callURIAction;
     const response = await axios(serviceURI, {
@@ -27,64 +28,66 @@ export const postsAPICall = options => async (dispatch) => {
       params: options.callParams,
       data: options.data ? options.data : null,
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      }
     });
 
     switch (options.callURIAction) {
-      case 'getStatistics':
+      case "getStatistics":
         dispatch({
           type: FETCH_STATISTICS_SUCCESS,
-          statistics: response.data,
+          statistics: response.data
         });
         break;
-      case 'getDrafts':
+      case "getDrafts":
         dispatch({
           type: FETCH_DRAFTS_SUCCESS,
-          drafts: response.data,
+          drafts: response.data
         });
         break;
-      case 'update':
+      case "update":
         dispatch({
           type: UPDATE_POST_SUCCESS,
-          status: response.data,
+          status: response.data
         });
         break;
-      case 'getDiffHistories':
+      case "getDiffHistories":
         dispatch({
           type: GET_DIFF_HISTORIES_SUCCESS,
-          diffHistories: response.data,
+          diffHistories: response.data
         });
         break;
       default:
         dispatch({
           type: FETCH_POSTS_SUCCESS,
-          posts: response.data,
+          posts: response.data
         });
     }
   } catch (error) {
     console.log(error);
     dispatch({
       type: GENERIC_POSTS_API_ERROR,
-      error,
+      error
     });
   }
 };
 
-export const onDroppedFile = async (file) => {
+export const onDroppedFile = async file => {
   try {
     const fd = new FormData();
-    fd.append('fileData', file[0]);
-    fd.append('fileName', file[0].name);
-    const response = await axios({
-      method: 'POST',
-      url: 'http://localhost/api/v1/assets/upload/',
-      headers: {
-        'Content-Type': `multipart/form-data; boundary=${fd._boundary}`,
-      },
-    });
-    return response;
+    fd.append("fileData", file[0]);
+    fd.append("fileName", file[0].name);
+
+    axios
+      .post("http://localhost/assets/api/upload", fd, {
+        headers: {
+          "content-type": `multipart/form-data; boundary=${fd._boundary}`
+        }
+      })
+      .then(data => {
+        console.log(data);
+      });
   } catch (error) {
     return error;
   }
