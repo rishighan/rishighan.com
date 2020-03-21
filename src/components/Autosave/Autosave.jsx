@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { FormSpy } from 'react-final-form';
 import diff from 'object-diff';
 
-class AutoSave extends React.Component {
+class AutoSave extends Component {
   constructor(props) {
     super(props);
     this.state = { values: props.values, submitting: false };
+    this.save = this.save.bind(this);
   }
 
   componentDidUpdate() {
@@ -15,7 +16,7 @@ class AutoSave extends React.Component {
     this.timeout = setTimeout(this.save, this.props.debounce);
   }
 
-  save = async () => {
+  async save() {
     if (this.promise) {
       await this.promise;
     }
@@ -24,8 +25,9 @@ class AutoSave extends React.Component {
     const difference = diff(this.state.values, values);
     if (Object.keys(difference).length) {
       // values have changed
+      console.log("difference", difference)
       this.setState({ submitting: true, values });
-      this.promise = save(difference);
+      this.promise = save(this.state.values);
       await this.promise;
       delete this.promise;
       this.setState({ submitting: false });
@@ -36,7 +38,7 @@ class AutoSave extends React.Component {
     // This component doesn't have to render anything, but it can render
     // submitting state.
     return (
-      this.state.submitting && <div className="submitting"><i className="fa fa-save"> </i> Submitting...</div>
+      this.state.submitting && <div className="submitting"><i className="fa fa-save"> </i> Saving...</div>
     );
   }
 }

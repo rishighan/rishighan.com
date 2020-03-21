@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Form, Field } from 'react-final-form';
+import { Form, Field, FormSpy } from 'react-final-form';
+import setFieldTouched from 'final-form-set-field-touched';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import _ from 'lodash';
 import CreatableSelect from 'react-select/creatable';
-import Dropzone from 'react-dropzone';
-import ImageCard from '../ImageCard/ImageCard';
+import Dropzone from '../Dropzone/Dropzone';
 
 import format from 'date-fns/format';
 import hljs from 'highlight.js';
@@ -18,7 +18,7 @@ import customStyles from '../Select/select-styles';
 import 'highlight.js/styles/atom-one-dark.css';
 
 import tags from '../../constants/tags';
-import { postsAPICall, onDroppedFile } from '../../actions/index';
+import { postsAPICall } from '../../actions/index';
 
 const onSubmit = () => {
   console.log('submitted');
@@ -48,6 +48,7 @@ class AdminForm extends Component {
         markup: <div></div>,
       },
     ];
+
     this.state = {
       currentlySelectedTags: this.formatTags(this.props.formData.tags),
       currentlyActiveTab: this.tabs[0].displayName,
@@ -58,6 +59,7 @@ class AdminForm extends Component {
   sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
   save = async (values) => {
+    console.log(values)
     this.props.updatePost(values);
     await this.sleep(2000);
   };
@@ -101,16 +103,18 @@ class AdminForm extends Component {
               ...this.props.formData,
             }
           }
+          mutators={{setFieldTouched}}
           render={({
-            handleSubmit, pristine, invalid, submitting, values,
+            form, mutators, handleSubmit, pristine, invalid, submitting, values,
           }) => (
               <div className="form">
+                {/* Autosave */}
                 <Autosave debounce={1000} save={this.save} />
+
                 <h2>Write a Post</h2>
                 <div>
                   <span className="is-size-7 has-text-grey-lighter">{this.props.formData._id}</span>
                 </div>
-                {/* <Autosave debounce={1000} save={this.props.updatePost} /> */}
                 <div className="field">
                   <label className="field-label is-normal">Title</label>
                   <div className="control is-expanded">
@@ -154,6 +158,7 @@ class AdminForm extends Component {
                     : <div><pre><Interweave content={hljs.highlightAuto(JSON.stringify(values, null, 2)).value} /></pre></div>}
                 </div>
 
+                {/* Excerpt */}
                 <div className="field">
                   <label className="field-label is-normal">Excerpt</label>
                   <div className="control is-expanded">
@@ -163,34 +168,14 @@ class AdminForm extends Component {
 
                 {/* Media management */}
                 <div className="box">
-                  <section>
-                    <Dropzone onDrop={onDroppedFile}>
-                      {({ getRootProps, getInputProps, acceptedFiles }) => (
-                        <section>
-                          <div {...getRootProps({ className: 'dropzone' })}>
-                            <input {...getInputProps({ name: 'asset' })} />
-                            <p>Drag and drop some files here, or click to select files</p>
-                          </div>
-                          <aside>
-                            <ul className="is-clearfix">
-                              {/* Recently uploaded assets */}
-                              {acceptedFiles.map((file, i) => <li key={i} className="is-pulled-left">
-                                <ImageCard
-                                  mediaObject={file}
-                                />
-                              </li>)}
-                              {/* Display existing and uploaded assets */}
-                              {this.props.formData.attachment.map((mediaObj, idx) => <li className="is-pulled-left" key={idx}>
-                                <ImageCard
-                                  mediaObject={mediaObj}
-                                />
-                              </li>)}
-                            </ul>
-                          </aside>
-                        </section>
-                      )}
-                    </Dropzone>
-                  </section>
+                  <Field name="attachment"
+                         onChange={file => { values.attachment.unshift(file[0]); this.save(values); }} 
+                         >
+                    {props => <div>
+                      <Dropzone {...props} />
+                    </div>
+                    }
+                  </Field>
                 </div>
 
                 {/* Metadata */}
@@ -219,7 +204,8 @@ class AdminForm extends Component {
                   </div>
                 </div>
               </div>
-            )} />
+            )}
+        />
       </div>);
   }
 }
@@ -256,7 +242,6 @@ const mapDispatchToProps = dispatch => ({
 
 AdminForm.propTypes = {
   formData: PropTypes.object,
-  onDroppedFile: PropTypes.func,
   updatePost: PropTypes.func,
   getDiffHistories: PropTypes.func,
   diffHistories: PropTypes.array,

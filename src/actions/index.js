@@ -1,5 +1,4 @@
 import axios from "axios";
-import fetch from "whatwg-fetch";
 import FormData from "form-data";
 import {
   FETCH_POSTS_REQUEST,
@@ -8,12 +7,14 @@ import {
   UPDATE_POST_SUCCESS,
   FETCH_STATISTICS_SUCCESS,
   FETCH_DRAFTS_SUCCESS,
-  GET_DIFF_HISTORIES_SUCCESS
+  GET_DIFF_HISTORIES_SUCCESS,
+  FILE_UPLOAD_IN_PROGRESS,
+  FILE_UPLOAD_SUCCESS
 } from "../constants/action-types";
 
 // const postsServiceURI = 'http://services.rishighan.com/api/v1/posts/';
 const postsServiceURI = "http://localhost/api/v1/posts/";
-const assetsServiceURI = "http://localhost/assets/api/upload/";
+const assetsServiceURI = "http://localhost/assets/api/";
 
 // @params {options}
 export const postsAPICall = options => async dispatch => {
@@ -73,21 +74,29 @@ export const postsAPICall = options => async dispatch => {
   }
 };
 
-export const onDroppedFile = async file => {
+export const assetsAPICall = async options => {
   try {
-    const fd = new FormData();
-    fd.append("fileData", file[0]);
-    fd.append("fileName", file[0].name);
+    switch (options.callURIAction) {
+      case "upload":
+        const fd = new FormData();
+        fd.append("fileData", options.file[0]);
+        fd.append("fileName", options.file[0].name);
 
-    axios
-      .post("http://localhost/assets/api/upload", fd, {
-        headers: {
-          "content-type": `multipart/form-data; boundary=${fd._boundary}`
-        }
-      })
-      .then(data => {
-        console.log(data);
-      });
+        const response = await axios.post(
+          assetsServiceURI + options.callURIAction,
+          fd,
+          {
+            headers: {
+              "content-type": `multipart/form-data; boundary=${fd._boundary}`
+            }
+          }
+        );
+        console.log(response);
+        return response; 
+
+      case "delete":
+        break;
+    }
   } catch (error) {
     return error;
   }

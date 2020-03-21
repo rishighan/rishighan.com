@@ -1296,7 +1296,7 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.9.1.tgz#7e33d8f7d449b3f673cd72deb9abdc552dbe528e"
   integrity sha512-wMHVg2EOHaMRxbzgFJ9gtjOOCrI80OHLG14rxi28XwOW8ux6IiEbRCGGGqCtdAIg4FQCbW20k9RsT4y3gJlFug==
 
-axios@^0.19.0:
+axios@^0.19.2:
   version "0.19.2"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
   integrity sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==
@@ -3678,6 +3678,11 @@ fill-range@^4.0.0:
     is-number "^3.0.0"
     repeat-string "^1.6.1"
     to-regex-range "^2.1.0"
+
+final-form-set-field-touched@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/final-form-set-field-touched/-/final-form-set-field-touched-1.0.1.tgz#cfbfc0c623df157a1dd0f1a120faa4e2274950f2"
+  integrity sha512-yvE5AAs9U3OgJQ9YF8NhSF0I0mJEECvOpkaXNqovloxji5Q6gOZ0DCIAyLAKHluGSpsXKUGORyBm8Hq0beZIqQ==
 
 final-form@^4.18.6:
   version "4.18.7"
@@ -7913,6 +7918,11 @@ webpack@^4.29.3:
     terser-webpack-plugin "^1.4.3"
     watchpack "^1.6.0"
     webpack-sources "^1.4.1"
+
+whatwg-fetch@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-3.0.0.tgz#fc804e458cc460009b1a2b966bc8817d2578aefb"
+  integrity sha512-9GSJUgz1D4MfyKU7KRqwOjXCXTqWdFNvEr7eUBYchQiVc744mqK/MzXPNR2WsPkmkOa4ywfg8C2n8h+13Bey1Q==
 
 which-module@^1.0.0:
   version "1.0.0"
