@@ -91,11 +91,22 @@ export const assetsAPICall = async options => {
             }
           }
         );
-        console.log(response);
-        return response; 
+        return response;
 
       case "delete":
-        break;
+        const deleteResponse = await axios({
+          method: options.method,
+          url: assetsServiceURI + options.callURIAction,
+          params: {
+            fileName: options.fileName
+          },
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+          },
+          data: {}
+        });
+        return deleteResponse;
     }
   } catch (error) {
     return error;

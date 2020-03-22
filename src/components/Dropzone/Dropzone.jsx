@@ -12,11 +12,12 @@ function Dropzone(props) {
         multiple: true,
         noDrag: true,
         onDrop: acceptedFiles => {
+                setFiles(files);
             assetsAPICall({
                 callURIAction: 'upload',
                 callMethod: 'post',
                 file: acceptedFiles,
-            }).then((uploadResult) => {
+            }).then(uploadResult => {
                 S3Object = {
                     url: uploadResult.data[0].service.endpoint.href + uploadResult.data[0].service.config.params.Bucket + '/' + uploadResult.data[0].service.config.params.Key,
                     name: uploadResult.data[0].service.config.params.Key,
@@ -25,7 +26,6 @@ function Dropzone(props) {
                 const files = acceptedFiles.map(file => {
                     return _.assign(S3Object, { size: file.size });
                 });
-                setFiles(files);
                 if (props.onChange) {
                     props.onChange(files);
                 }
@@ -35,26 +35,28 @@ function Dropzone(props) {
     });
 
     const removeFile = file => () => {
-        const newFiles = [...props.input.value];
-        newFiles.splice(newFiles.indexOf(file), 1);
-        console.log(newFiles);
+        console.log(file);
+        const newFiles = [...files];
+                props.onFileObjectRemoved(file);
         assetsAPICall({
             callURIAction: 'delete',
             method: 'post',
-            params: file.name,
+            fileName: file.name,
         })
-        setFiles(newFiles);
-        _.remove(props.input.value, fileObj => fileObj._id === file._id);
+            .then(result => {
+                console.log(result);
+                newFiles.splice(newFiles.indexOf(file), 1);
+                setFiles(newFiles);
+
+            });
     };
 
     const existingFilesPreviews = _.map(props.input.value, (file, idx) => (
-        <>
-            {/* Display existing and uploaded assets */}
-            <div className="is-pulled-left" key={idx}>
-                <ImageCard mediaObject={file} 
-                           deleteFileHandler={removeFile(file)} />
-            </div>
-        </>));
+        < div className="is-pulled-left" key={idx} >
+            <ImageCard mediaObject={file}
+                deleteFileHandler={removeFile(file)} />
+        </div >
+    ));
 
     return (
         <section>

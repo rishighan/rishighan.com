@@ -170,7 +170,7 @@ class AdminForm extends Component {
                 <div className="box">
                   <Field name="attachment"
                          onChange={file => { values.attachment.unshift(file[0]); this.save(values); }} 
-                         >
+                         onFileObjectRemoved={ file => { _.remove(values.attachment, fileObject => fileObject._id === file._id); this.save(values); } }>
                     {props => <div>
                       <Dropzone {...props} />
                     </div>
