@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import ImageCard from "../ImageCard/ImageCard";
-import { FormSpy } from "react-final-form";
 import { assetsAPICall } from "../../actions/index";
+
+// TODO: Update file state upon resolution of the promise
+//       Error handling
+//       Batch upload and delete
 
 function Dropzone(props) {
     const [files, setFiles] = useState([]);
@@ -12,7 +15,7 @@ function Dropzone(props) {
         multiple: true,
         noDrag: true,
         onDrop: acceptedFiles => {
-                setFiles(files);
+            setFiles(files);
             assetsAPICall({
                 callURIAction: 'upload',
                 callMethod: 'post',
@@ -37,7 +40,7 @@ function Dropzone(props) {
     const removeFile = file => () => {
         console.log(file);
         const newFiles = [...files];
-                props.onFileObjectRemoved(file);
+        props.onFileObjectRemoved(file);
         assetsAPICall({
             callURIAction: 'delete',
             method: 'post',
