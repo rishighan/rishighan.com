@@ -21,11 +21,8 @@ class AutoSave extends Component {
       await this.promise;
     }
     const { values, save } = this.props;
-    // This diff step is totally optional
     const difference = diff(this.state.values, values);
     if (Object.keys(difference).length) {
-      // values have changed
-      console.log("difference", difference)
       this.setState({ submitting: true, values });
       this.promise = save(this.state.values);
       await this.promise;

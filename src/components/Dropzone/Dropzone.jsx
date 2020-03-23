@@ -7,64 +7,55 @@ import { assetsAPICall } from "../../actions/index";
 //       Error handling
 //       Batch upload and delete
 
-function Dropzone(props) {
+const Dropzone = props => {
     const [files, setFiles] = useState([]);
-    let S3Object;
     const { getRootProps, getInputProps } = useDropzone({
         accept: "image/*",
         multiple: true,
         noDrag: true,
-        onDrop: acceptedFiles => {
-            setFiles(files);
-            assetsAPICall({
+        onDrop: async acceptedFiles => {
+            let uploadResult = await assetsAPICall({
                 callURIAction: 'upload',
                 callMethod: 'post',
                 file: acceptedFiles,
-            }).then(uploadResult => {
-                S3Object = {
-                    url: uploadResult.data[0].service.endpoint.href + uploadResult.data[0].service.config.params.Bucket + '/' + uploadResult.data[0].service.config.params.Key,
-                    name: uploadResult.data[0].service.config.params.Key,
-                    isHero: false,
-                };
-                const files = acceptedFiles.map(file => {
-                    return _.assign(S3Object, { size: file.size });
-                });
-                if (props.onChange) {
-                    props.onChange(files);
-                }
             });
-
+            const S3Object = {
+                url: uploadResult.data[0].Location,
+                name: uploadResult.data[0].Key,
+                isHero: false,
+            };
+            const files = acceptedFiles.map(file => {
+                return _.assign(S3Object, { size: file.size });
+            });
+            props.onChange(files);
+            setFiles(files);
         }
     });
 
-    const removeFile = file => () => {
-        console.log(file);
+    const removeFile = file => async () => {
         const newFiles = [...files];
         props.onFileObjectRemoved(file);
-        assetsAPICall({
+        const deleteResult = await assetsAPICall({
             callURIAction: 'delete',
             method: 'post',
             fileName: file.name,
-        })
-            .then(result => {
-                console.log(result);
-                newFiles.splice(newFiles.indexOf(file), 1);
-                setFiles(newFiles);
+        });
+        newFiles.splice(newFiles.indexOf(file), 1);
+        setFiles(newFiles);
 
-            });
     };
 
     const existingFilesPreviews = _.map(props.input.value, (file, idx) => (
-        < div className="is-pulled-left" key={idx} >
+        <div className="is-pulled-left" key={idx} >
             <ImageCard mediaObject={file}
-                deleteFileHandler={removeFile(file)} />
+                       deleteFileHandler={removeFile(file)} />
         </div >
     ));
 
     return (
         <section>
             <div {...getRootProps({ className: 'dropzone' })}>
-                <input {...getInputProps({ name: 'attachment' })} />
+                <input {...getInputProps()} />
                 <p>Drag and drop some files here, or click to select files</p>
             </div>
             <div className="is-clearfix">

@@ -59,7 +59,6 @@ class AdminForm extends Component {
   sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
   save = async (values) => {
-    console.log(values)
     this.props.updatePost(values);
     await this.sleep(2000);
   };
@@ -168,6 +167,7 @@ class AdminForm extends Component {
 
                 {/* Media management */}
                 <div className="box">
+                  {/* TODO: this is a hack, till I figure out how to use setFieldTouched mutator */}
                   <Field name="attachment"
                          onChange={file => { values.attachment.unshift(file[0]); this.save(values); }} 
                          onFileObjectRemoved={ file => { _.remove(values.attachment, fileObject => fileObject._id === file._id); this.save(values); } }>
