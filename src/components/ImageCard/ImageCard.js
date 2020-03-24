@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import AspectRatio from "react-aspect-ratio";
 import { inferImageDimensions } from "../../utils/image.utils";
 import _ from "lodash";
@@ -18,8 +17,8 @@ const ImageCard = props => (
     </div>
     <div className="card-content">
       <div className="content is-family-monospace is-size-7">
-        <p>{props.mediaObject.name}</p>
-        <span>
+        <p className="truncated">{props.mediaObject.name}</p>
+        <span className="tag is-light">
           {props.mediaObject.size
             ? Math.round(parseInt(props.mediaObject.size, 10) / 1024)
             : "Size not available."}

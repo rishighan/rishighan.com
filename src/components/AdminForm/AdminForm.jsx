@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Field, FormSpy } from 'react-final-form';
+import { Form, Field } from 'react-final-form';
 import setFieldTouched from 'final-form-set-field-touched';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -27,7 +27,6 @@ const onSubmit = () => {
 class AdminForm extends Component {
   constructor(props) {
     super(props);
-    this.formatTags = input => _.map(input, tag => ({ value: tag.value, label: tag.displayName }));
     this.tabs = [
       {
         displayName: 'Markdown',
@@ -63,6 +62,17 @@ class AdminForm extends Component {
     await this.sleep(2000);
   };
 
+  formatTags = input => _.map(input, tag => ({ value: tag.value, label: tag.displayName }));
+
+  ReactSelect = ({ input, ...rest }) => (
+    <CreatableSelect
+      {...input}
+      { ...rest }
+      styles={customStyles}
+      isMulti
+    /> 
+  );
+
   changeTab = (newTab) => {
     switch (newTab.displayName) {
       case 'Diff History':
@@ -82,12 +92,6 @@ class AdminForm extends Component {
     }
   };
 
-  changeTagSelection = (selectedTags) => {
-    this.setState({
-      currentlySelectedTags: selectedTags,
-    });
-  }
-
   componentDidMount() {
     this.props.getDiffHistories(this.props.formData._id);
   }
@@ -102,7 +106,7 @@ class AdminForm extends Component {
               ...this.props.formData,
             }
           }
-          mutators={{setFieldTouched}}
+          mutators={{ setFieldTouched }}
           render={({
             form, mutators, handleSubmit, pristine, invalid, submitting, values,
           }) => (
@@ -132,11 +136,9 @@ class AdminForm extends Component {
                 {/* Tags */}
                 <div>
                   <label className="field-label is-normal">Tags</label>
-                  <CreatableSelect
-                    styles={customStyles}
-                    isMulti
-                    onChange={this.changeTagSelection}
-                    value={this.state.currentlySelectedTags}
+                  <Field 
+                    name="tags"
+                    component={this.ReactSelect}
                     options={tags}
                   />
                 </div>
@@ -169,8 +171,8 @@ class AdminForm extends Component {
                 <div className="box">
                   {/* TODO: this is a hack, till I figure out how to use setFieldTouched mutator */}
                   <Field name="attachment"
-                         onChange={file => { values.attachment.unshift(file[0]); this.save(values); }} 
-                         onFileObjectRemoved={ file => { _.remove(values.attachment, fileObject => fileObject._id === file._id); this.save(values); } }>
+                    onChange={file => { values.attachment.unshift(file[0]); this.save(values); }}
+                    onFileObjectRemoved={file => { _.remove(values.attachment, fileObject => fileObject._id === file._id); this.save(values); }}>
                     {props => <div>
                       <Dropzone {...props} />
                     </div>

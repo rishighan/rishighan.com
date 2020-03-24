@@ -191,6 +191,11 @@ $content-blockquote-background-color: none transparent;
                         line-height: 1.3rem;
                     }
                 }
+                .truncated {
+                    width: 160px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
             }
 
         }
