@@ -9,7 +9,6 @@ import { postsAPICall } from '../../actions/index';
 
 class AdminMain extends Component {
   componentDidMount() {
-    this.props.searchPosts();
     this.props.getPostStatistics();
     this.props.getDrafts();
   }
@@ -18,7 +17,6 @@ class AdminMain extends Component {
     return (
       <div className="column content is-11">
         <div className="columns is-multiline">
-
           <div className="column is-half">
             <DebounceInput
               minLength={3}
@@ -28,10 +26,10 @@ class AdminMain extends Component {
               onChange={e => this.props.searchPosts(e)}
             />
 
-            <List 
+            <List
               showTags
               showTimestamps >
-              {!_.isEmpty(this.props.posts) ? this.props.posts.map(post => post) : []}
+              {!_.isEmpty(this.props.posts) ? this.props.posts.map(post => post): [] }
             </List>
 
             <ReactPaginate
@@ -85,10 +83,9 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = dispatch => ({
   searchPosts: (e) => {
-    let actionConfig;
     if (!_.isUndefined(e) && !_.isEmpty(e.target.value)) {
       const searchTextValue = e.target.value;
-      const searchCallConfiguration = {
+      dispatch(postsAPICall({
         callURIAction: 'searchPosts',
         callMethod: 'post',
         callParams: {
@@ -96,20 +93,8 @@ const mapDispatchToProps = dispatch => ({
           pageLimit: 10,
           searchTerm: searchTextValue,
         },
-      };
-      actionConfig = searchCallConfiguration;
-    } else {
-      const retrieveCallConfiguration = {
-        callURIAction: 'retrieve',
-        callMethod: 'get',
-        callParams: {
-          pageOffset: 1,
-          pageLimit: 10,
-        },
-      };
-      actionConfig = retrieveCallConfiguration;
+      }));
     }
-    dispatch(postsAPICall(actionConfig));
   },
   getDrafts: () => {
     dispatch(postsAPICall({

@@ -49,7 +49,6 @@ class AdminForm extends Component {
     ];
 
     this.state = {
-      currentlySelectedTags: this.formatTags(this.props.formData.tags),
       currentlyActiveTab: this.tabs[0].displayName,
       markup: this.tabs[0].markup,
     };
@@ -62,16 +61,14 @@ class AdminForm extends Component {
     await this.sleep(2000);
   };
 
-  formatTags = input => _.map(input, tag => ({ value: tag.value, label: tag.displayName }));
-
-  ReactSelect = ({ input, ...rest }) => (
-    <CreatableSelect
+  ReactSelect = ({ input, ...rest }) => {
+    return (<CreatableSelect
       {...input}
       { ...rest }
       styles={customStyles}
       isMulti
-    /> 
-  );
+    />) 
+  };
 
   changeTab = (newTab) => {
     switch (newTab.displayName) {
@@ -171,8 +168,8 @@ class AdminForm extends Component {
                 <div className="box">
                   {/* TODO: this is a hack, till I figure out how to use setFieldTouched mutator */}
                   <Field name="attachment"
-                    onChange={file => { values.attachment.unshift(file[0]); this.save(values); }}
-                    onFileObjectRemoved={file => { _.remove(values.attachment, fileObject => fileObject._id === file._id); this.save(values); }}>
+                         onChange={file => { values.attachment.unshift(file[0]); this.save(values); }}
+                         onFileObjectRemoved={file => { _.remove(values.attachment, fileObject => fileObject._id === file._id); this.save(values); }}>
                     {props => <div>
                       <Dropzone {...props} />
                     </div>
@@ -192,14 +189,17 @@ class AdminForm extends Component {
                 <div className="field is-grouped">
                   <div className="control">
                     <button className="button is-link"
-                      onClick={() => this.props.updatePost(values)}
-                      disabled={submitting || pristine}
-                    >Save Topic</button>
+                            onClick={() => this.props.updatePost(values)}
+                            disabled={submitting || pristine}>
+                            Save Topic
+                    </button>
                   </div>
                   <div className="control">
                     <button className="button is-link"
-                      disabled={submitting || pristine}
-                    >Save As Draft</button>
+                            disabled={submitting || pristine}
+                            onClick={() => this.props.updatePost(values)}>
+                        Save As Draft
+                    </button>
                   </div>
                   <div className="control">
                     <button className="button is-link is-danger">Delete Post</button>

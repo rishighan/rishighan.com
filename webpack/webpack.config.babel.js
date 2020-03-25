@@ -1,6 +1,7 @@
 import path from 'path';
 import MiniCSSExtractPlugin from 'mini-css-extract-plugin';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
 
 module.exports = {
   entry: ['babel-polyfill', './src/index.js'],
@@ -9,7 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
   },
-  mode: 'development',
+  mode: 'production',
   devtool: 'source-map',
   watch: true,
   module: {
@@ -59,10 +60,14 @@ module.exports = {
   resolve: {
     extensions: ['*', '.js', '.jsx'],
   },
+  optimization: {
+    minimizer: [new TerserPlugin({ /* additional options here */ })],
+  },
   plugins: [
     new MiniCSSExtractPlugin({
       filename: '[name].[contenthash].css',
     }),
+    
     new HTMLWebpackPlugin({
       inject: false,
       hash: true,

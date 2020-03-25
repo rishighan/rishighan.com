@@ -7,9 +7,7 @@ import {
   UPDATE_POST_SUCCESS,
   FETCH_STATISTICS_SUCCESS,
   FETCH_DRAFTS_SUCCESS,
-  GET_DIFF_HISTORIES_SUCCESS,
-  FILE_UPLOAD_IN_PROGRESS,
-  FILE_UPLOAD_SUCCESS
+  GET_DIFF_HISTORIES_SUCCESS
 } from "../constants/action-types";
 
 // const postsServiceURI = 'http://services.rishighan.com/api/v1/posts/';
@@ -35,6 +33,18 @@ export const postsAPICall = options => async dispatch => {
     });
 
     switch (options.callURIAction) {
+      case "retrieve":
+        dispatch({
+          type: FETCH_POSTS_SUCCESS,
+          posts: response.data
+        });
+        break;
+      case "retrieveOne":
+        dispatch({
+          type: FETCH_POSTS_SUCCESS,
+          posts: response.data
+        });
+        break;
       case "getStatistics":
         dispatch({
           type: FETCH_STATISTICS_SUCCESS,
@@ -60,10 +70,7 @@ export const postsAPICall = options => async dispatch => {
         });
         break;
       default:
-        dispatch({
-          type: FETCH_POSTS_SUCCESS,
-          posts: response.data
-        });
+        console.log("what");
     }
   } catch (error) {
     console.log(error);

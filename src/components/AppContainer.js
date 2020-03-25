@@ -1,10 +1,10 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
-import { ConnectedRouter } from 'connected-react-router';
-import { history } from '../store/index';
-import Navigation from './Navigation/Navigation';
-import PageContainer from './PageContainer/PageContainer';
-import NavItems from './Navigation/NavItems';
+import React from "react";
+import { Route } from "react-router-dom";
+import { ConnectedRouter } from "connected-react-router";
+import { history } from "../store/index";
+import Navigation from "./Navigation/Navigation";
+import PageContainer from "./PageContainer/PageContainer";
+import NavItems from "./Navigation/NavItems";
 
 const AppContainer = () => (
   <section className="section">
@@ -23,59 +23,63 @@ const AppContainer = () => (
               />
             ))}
             <Route
-              path={'/post/:postSlug'}
+              path={"/post/:postSlug"}
               render={props => (
                 <PageContainer
                   callOptions={{
-                    callMethod: 'get',
-                    callURIAction: 'retrieveOne',
+                    callMethod: "get",
+                    callURIAction: "retrieveOne",
                     callParams: {
-                      slug: props.match.params.postSlug,
-                    },
+                      slug: props.match.params.postSlug
+                    }
                   }}
                   options={{
-                    type: 'post',
+                    type: "post",
                     metadata: {
-                      subType: 'single',
-                    },
+                      subType: "single"
+                    }
                   }}
                 />
               )}
             />
             <Route
-              path={'/admin'}
+              path={"/admin"}
               exact
               render={() => (
                 <PageContainer
                   callOptions={{
-                    callMethod: 'get',
-                    callURIAction: 'retrieve',
+                    callMethod: "get",
+                    callURIAction: "retrieve",
+                    callParams: {
+                      pageOffset: 1,
+                      pageLimit: 10
+                    }
                   }}
                   options={{
-                    type: 'adminMain',
-                    metadata: {},
+                    type: "adminMain",
+                    metadata: {}
                   }}
                 />
               )}
             />
             {/* Edit post form route */}
             <Route
-              path={'/admin/edit/:postSlug'}
+              path={"/admin/edit/:postSlug"}
               exact
               render={props => (
                 <PageContainer
                   callOptions={{
-                    callMethod: 'get',
-                    callURIAction: 'retrieveOne',
+                    callMethod: "get",
+                    callURIAction: "retrieveOne",
                     callParams: {
-                      slug: props.match.params.postSlug,
-                    },
+                      slug: props.match.params.postSlug
+                    }
                   }}
                   options={{
-                    type: 'adminForm',
+                    type: "adminForm",
                     metadata: {
-                      mode: 'edit',
-                    },
+                      mode: "edit"
+                    }
                   }}
                 />
               )}
