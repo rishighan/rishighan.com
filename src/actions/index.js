@@ -34,18 +34,10 @@ export const postsAPICall = options => async dispatch => {
 
     switch (options.callURIAction) {
       case "retrieve":
-        dispatch({
-          type: FETCH_POSTS_SUCCESS,
-          posts: response.data
-        });
-        break;
+      case "findByTagName":
       case "searchPosts":
-        dispatch({
-          type: FETCH_POSTS_SUCCESS,
-          posts: response.data
-        });
-        break;
       case "retrieveOne":
+        case "getArchivedPosts":
         dispatch({
           type: FETCH_POSTS_SUCCESS,
           posts: response.data
