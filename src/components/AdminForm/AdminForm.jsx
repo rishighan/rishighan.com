@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Form, Field } from 'react-final-form';
-import setFieldTouched from 'final-form-set-field-touched';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -103,9 +102,8 @@ class AdminForm extends Component {
               ...this.props.formData,
             }
           }
-          mutators={{ setFieldTouched }}
           render={({
-            form, mutators, handleSubmit, pristine, invalid, submitting, values,
+            form, handleSubmit, pristine, invalid, submitting, values,
           }) => (
               <div className="form">
                 {/* Autosave */}

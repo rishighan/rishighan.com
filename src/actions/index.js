@@ -39,6 +39,12 @@ export const postsAPICall = options => async dispatch => {
           posts: response.data
         });
         break;
+      case "searchPosts":
+        dispatch({
+          type: FETCH_POSTS_SUCCESS,
+          posts: response.data
+        });
+        break;
       case "retrieveOne":
         dispatch({
           type: FETCH_POSTS_SUCCESS,
