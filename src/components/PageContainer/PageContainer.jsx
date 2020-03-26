@@ -10,17 +10,17 @@ import { postsAPICall } from '../../actions/index';
 
 const renderPage = props => ({
   post: (
-      <div className="column content is-two-thirds-tablet is-full-mobile">
-        <PageFragment
-          postsData={props.posts}
-          singlePostData={props.posts.posts}
-          postType={props.options.metadata.subType}
-        />
-      </div>
+    <div className="column content is-two-thirds-tablet is-full-mobile">
+      <PageFragment
+        postsData={props.posts}
+        singlePostData={props.posts.posts}
+        postType={props.options.metadata.subType}
+      />
+    </div>
   ),
   adminMain: <AdminMain />,
   adminForm: !_.isArray(props.posts.posts) ? (
-      <AdminForm formData={ props.posts.posts } />
+    <AdminForm formData={props.posts.posts} />
   ) : null,
 });
 class PageContainer extends Component {

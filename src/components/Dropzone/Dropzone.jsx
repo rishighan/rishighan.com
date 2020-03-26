@@ -44,6 +44,9 @@ const Dropzone = props => {
         setFiles(newFiles);
 
     };
+    const markAsHero = file => {
+        
+    }
 
     const existingFilesPreviews = _.map(props.input.value, (file, idx) => (
         <div className="is-pulled-left" key={idx} >

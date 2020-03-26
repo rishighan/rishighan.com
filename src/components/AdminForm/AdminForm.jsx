@@ -8,13 +8,11 @@ import CreatableSelect from 'react-select/creatable';
 import Dropzone from '../Dropzone/Dropzone';
 
 import format from 'date-fns/format';
-import hljs from 'highlight.js';
-import Interweave from 'interweave';
+import { Markup } from 'interweave';
 import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 import Autosave from '../Autosave/Autosave';
 
 import customStyles from '../Select/select-styles';
-import 'highlight.js/styles/atom-one-dark.css';
 
 import tags from '../../constants/tags';
 import { postsAPICall } from '../../actions/index';
@@ -63,10 +61,10 @@ class AdminForm extends Component {
   ReactSelect = ({ input, ...rest }) => {
     return (<CreatableSelect
       {...input}
-      { ...rest }
+      {...rest}
       styles={customStyles}
       isMulti
-    />) 
+    />)
   };
 
   changeTab = (newTab) => {
@@ -76,7 +74,7 @@ class AdminForm extends Component {
           currentlyActiveTab: newTab.displayName,
           markup: <>{_.map(this.props.diffHistories, (diffHistory, i) => <pre key={i}>
             <p>{format(diffHistory.createdAt, 'MMMM Do, YYYY')}</p>
-            <Interweave content={hljs.highlightAuto(JSON.stringify(diffHistory.diff, null, 4)).value} />
+            <Markup content={JSON.stringify(diffHistory.diff, null, 4)} />
           </pre>)}</>,
         });
         break;
@@ -111,7 +109,12 @@ class AdminForm extends Component {
 
                 <h2>Write a Post</h2>
                 <div>
-                  <span className="is-size-7 has-text-grey-lighter">{this.props.formData._id}</span>
+                  <span className="is-size-7 has-text-grey-lighter">
+                    <div className="tags has-addons">
+                      <span className="tag is-light">{this.props.formData._id}</span>
+                      { values.isDraft ? <span className="tag is-warning">Draft</span> : null }
+                    </div>
+                  </span>
                 </div>
                 <div className="field">
                   <label className="field-label is-normal">Title</label>
@@ -131,7 +134,7 @@ class AdminForm extends Component {
                 {/* Tags */}
                 <div>
                   <label className="field-label is-normal">Tags</label>
-                  <Field 
+                  <Field
                     name="tags"
                     component={this.ReactSelect}
                     options={tags}
@@ -151,7 +154,11 @@ class AdminForm extends Component {
                 </div>
                 <div id="tab-content">
                   {this.state.currentlyActiveTab !== 'JSON' ? this.state.markup
-                    : <div><pre><Interweave content={hljs.highlightAuto(JSON.stringify(values, null, 2)).value} /></pre></div>}
+                    : <div>
+                        <pre>
+                          <Markup content={JSON.stringify(values, null, 2)} />
+                        </pre>
+                      </div>}
                 </div>
 
                 {/* Excerpt */}
@@ -166,8 +173,8 @@ class AdminForm extends Component {
                 <div className="box">
                   {/* TODO: this is a hack, till I figure out how to use setFieldTouched mutator */}
                   <Field name="attachment"
-                         onChange={file => { values.attachment.unshift(file[0]); this.save(values); }}
-                         onFileObjectRemoved={file => { _.remove(values.attachment, fileObject => fileObject._id === file._id); this.save(values); }}>
+                    onChange={file => { values.attachment.unshift(file[0]); this.save(values); }}
+                    onFileObjectRemoved={file => { _.remove(values.attachment, fileObject => fileObject._id === file._id); this.save(values); }}>
                     {props => <div>
                       <Dropzone {...props} />
                     </div>
@@ -187,16 +194,16 @@ class AdminForm extends Component {
                 <div className="field is-grouped">
                   <div className="control">
                     <button className="button is-link"
-                            onClick={() => this.props.updatePost(values)}
-                            disabled={submitting || pristine}>
-                            Save Topic
+                      onClick={() => this.props.updatePost(values)}
+                      disabled={submitting || pristine}>
+                      Save Topic
                     </button>
                   </div>
                   <div className="control">
                     <button className="button is-link"
-                            disabled={submitting || pristine}
-                            onClick={() => this.props.updatePost(values)}>
-                        Save As Draft
+                      disabled={submitting}
+                      onClick={() => this.props.updatePost(values)}>
+                      Save As Draft
                     </button>
                   </div>
                   <div className="control">

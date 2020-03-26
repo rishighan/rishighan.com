@@ -26,11 +26,13 @@ const ImageCard = props => (
       </div>
     </div>
     <footer className="card-footer">
-      <a className="card-footer-item is-size-7">Mark as Hero</a>
-      <a
-        className="card-footer-item is-size-7"
-        onClick={props.deleteFileHandler}
-      >
+      <a className="card-footer-item is-size-7" 
+         onClick={props.markAsHero}>
+        Mark as Hero
+      </a>
+
+      <a className="card-footer-item is-size-7"
+         onClick={props.deleteFileHandler}>
         Delete
       </a>
     </footer>
