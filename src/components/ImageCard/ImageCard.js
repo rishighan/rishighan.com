@@ -4,7 +4,7 @@ import { inferImageDimensions } from "../../utils/image.utils";
 import _ from "lodash";
 
 const ImageCard = props => (
-  <div className="card">
+  <div className={ "card " + (props.mediaObject.isHero ? 'card-hero-background-color' : '')} >
     <div className="card-image">
       <AspectRatio
         ratio={inferImageDimensions(props.mediaObject.url)}
@@ -27,8 +27,8 @@ const ImageCard = props => (
     </div>
     <footer className="card-footer">
       <a className="card-footer-item is-size-7" 
-         onClick={props.markAsHero}>
-        Mark as Hero
+         onClick={props.toggleHeroStatus}>
+        { props.mediaObject.isHero ? 'Unmark' : 'Mark as Hero' }
       </a>
 
       <a className="card-footer-item is-size-7"

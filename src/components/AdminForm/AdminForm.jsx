@@ -173,8 +173,18 @@ class AdminForm extends Component {
                 <div className="box">
                   {/* TODO: this is a hack, till I figure out how to use setFieldTouched mutator */}
                   <Field name="attachment"
-                    onChange={file => { values.attachment.unshift(file[0]); this.save(values); }}
-                    onFileObjectRemoved={file => { _.remove(values.attachment, fileObject => fileObject._id === file._id); this.save(values); }}>
+                         onChange={file => { values.attachment.unshift(file[0]); this.save(values); }}
+                         markedAsHero={ file => { 
+                           let affectedFileIndex = _.findIndex(values.attachment, fileObj => fileObj._id === file._id);
+                           values.attachment[affectedFileIndex].isHero = file.isHero === false ? true : false;
+                           _.each(values.attachment, fileObj => {
+                             if(fileObj._id !== file._id) {
+                               fileObj.isHero = false;
+                             }
+                           })
+                           this.save(values); 
+                          }} 
+                         onFileObjectRemoved={file => { _.remove(values.attachment, fileObject => fileObject._id === file._id); this.save(values); }}>
                     {props => <div>
                       <Dropzone {...props} />
                     </div>

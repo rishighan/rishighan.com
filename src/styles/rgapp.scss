@@ -5,19 +5,61 @@
 @import url("//hello.myfonts.net/count/38dd7f");
 @import url("//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css");
 
-@include font-face('Source Code Pro Regular', '../../public/assets/fonts/Source Code Pro/Source Code Pro Regular', normal, normal, ttf);
-@include font-face('ArminGrotesk-Regular', '../../public/assets/fonts/Armin Grotesk/38DD7F_3_0', normal, normal, eot ttf woff woff2);
-@include font-face('ArminGrotesk-Thin', '../../public/assets/fonts/Armin Grotesk/38DD7F_0_0', normal, normal, eot ttf woff woff2);
-@include font-face('ArminGrotesk-ThinItalic', '../../public/assets/fonts/Armin Grotesk/38DD7F_1_0', normal, normal, eot ttf woff woff2);
-@include font-face('ArminGrotesk-Normal', '../../public/assets/fonts/Armin Grotesk/38DD7F_2_0', normal, normal, eot ttf woff woff2);
-@include font-face('ArminGrotesk-SemiBold', '../../public/assets/fonts/Armin Grotesk/38DD7F_5_0', normal, normal, eot ttf woff woff2);
-@include font-face('ArminGrotesk-SemiBoldItalic', '../../public/assets/fonts/Armin Grotesk/38DD7F_4_0', normal, normal, eot ttf woff woff2);
+@include font-face(
+  "Source Code Pro Regular",
+  "../../public/assets/fonts/Source Code Pro/Source Code Pro Regular",
+  normal,
+  normal,
+  ttf
+);
+@include font-face(
+  "ArminGrotesk-Regular",
+  "../../public/assets/fonts/Armin Grotesk/38DD7F_3_0",
+  normal,
+  normal,
+  eot ttf woff woff2
+);
+@include font-face(
+  "ArminGrotesk-Thin",
+  "../../public/assets/fonts/Armin Grotesk/38DD7F_0_0",
+  normal,
+  normal,
+  eot ttf woff woff2
+);
+@include font-face(
+  "ArminGrotesk-ThinItalic",
+  "../../public/assets/fonts/Armin Grotesk/38DD7F_1_0",
+  normal,
+  normal,
+  eot ttf woff woff2
+);
+@include font-face(
+  "ArminGrotesk-Normal",
+  "../../public/assets/fonts/Armin Grotesk/38DD7F_2_0",
+  normal,
+  normal,
+  eot ttf woff woff2
+);
+@include font-face(
+  "ArminGrotesk-SemiBold",
+  "../../public/assets/fonts/Armin Grotesk/38DD7F_5_0",
+  normal,
+  normal,
+  eot ttf woff woff2
+);
+@include font-face(
+  "ArminGrotesk-SemiBoldItalic",
+  "../../public/assets/fonts/Armin Grotesk/38DD7F_4_0",
+  normal,
+  normal,
+  eot ttf woff woff2
+);
 
 $render-mode: optimizeLegibility;
-$family-sans-serif: 'ArminGrotesk-Regular', sans-serif;
+$family-sans-serif: "ArminGrotesk-Regular", sans-serif;
 $family-primary: $family-sans-serif;
-$family-monospace: 'Source Code Pro Regular';
-$family-code: 'Source Code Pro Regular';
+$family-monospace: "Source Code Pro Regular";
+$family-code: "Source Code Pro Regular";
 
 // Colors
 $black: hsl(0, 0%, 8%);
@@ -30,178 +72,180 @@ $content-blockquote-padding: 0em;
 $content-blockquote-background-color: none transparent;
 
 .navbar {
-    text-transform: uppercase;
-    font-family: 'ArminGrotesk-Normal', sans-serif;
-    font-kerning: normal;
+  text-transform: uppercase;
+  font-family: "ArminGrotesk-Normal", sans-serif;
+  font-kerning: normal;
 }
 
 .content {
-    font-variant-numeric: tabular-nums;
-    font-variant-ligatures: discretionary-ligatures;
-    font-kerning: normal;
-    font-feature-settings: "ss01", "ss08";
+  font-variant-numeric: tabular-nums;
+  font-variant-ligatures: discretionary-ligatures;
+  font-kerning: normal;
+  font-feature-settings: "ss01", "ss08";
 
+  // High-level <header>
+  header {
+    a {
+      h3 {
+        margin-bottom: 0;
+      }
+    }
+  }
 
-    // High-level <header>
-    header {
-        a {
-            h3 {
-                margin-bottom: 0;
-            }
-        }
+  // Overrides for:
+  // <List>, <Timestamp>, pagination, tile and search input
+  .rg-list {
+    margin-left: 0;
+
+    li {
+      margin-bottom: 1.2rem;
     }
 
-    // Overrides for:
-    // <List>, <Timestamp>, pagination, tile and search input
-    .rg-list {
-        margin-left: 0;
+    .timestamp {
+      margin-bottom: 0.7rem;
+    }
+  }
 
-        li {
-            margin-bottom: 1.2rem;
-        }
+  .pagination {
+    margin: 0rem;
+    padding: 0rem;
+  }
 
-        .timestamp {
-            margin-bottom: 0.7rem;
-        }
+  .tile {
+    div {
+      margin-bottom: 0.3rem;
+    }
+  }
+  .search {
+    padding: 0;
+  }
+
+  // Article styles
+  article {
+    margin-bottom: 0.7em;
+
+    .timestamp {
+      margin-bottom: 1em;
     }
 
-    .pagination {
-        margin: 0rem;
-        padding: 0rem;
+    th,
+    h2,
+    h3,
+    h4 {
+      font-family: "ArminGrotesk-Regular", sans-serif;
+      font-weight: normal;
     }
 
-    .tile {
-        div {
-            margin-bottom: 0.3rem;
-        }
+    h3 {
+      margin-bottom: 0.2em;
     }
-    .search {
-        padding: 0;
-    }
+  }
 
-    // Article styles
-    article {
-        margin-bottom: 0.7em;
+  ul {
+    li {
+      list-style-type: none;
 
-        .timestamp {
-            margin-bottom: 1em;
-        }
-
-        th,
-        h2,
-        h3,
-        h4 {
-            font-family: 'ArminGrotesk-Regular', sans-serif;
-            font-weight: normal;
-        }
-
+      a {
         h3 {
-            margin-bottom: 0.2em;
+          font-weight: normal;
         }
+      }
+    }
+  }
+
+  article {
+    padding: 0 0 2em 0;
+
+    blockquote {
+      font-size: 0.75rem;
+
+      sup {
+        color: $black;
+      }
+    }
+  }
+
+  .input,
+  .textarea {
+    border-bottom: 1px solid $black;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+    box-shadow: none;
+
+    &:hover {
+      border-color: $dark;
     }
 
-    ul {
-        li {
-            list-style-type: none;
+    &:active,
+    &:focus {
+      box-shadow: none;
+      border-color: $primary;
+    }
+  }
 
-            a {
-                h3 {
-                    font-weight: normal;
-                }
-            }
-        }
+  .form {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: normal;
     }
 
-    article {
-        padding: 0 0 2em 0;
-
-        blockquote {
-            font-size: 0.75rem;
-
-            sup {
-                color: $black;
-            }
-        }
+    .tabs {
+      ul {
+        margin: 0 auto;
+      }
     }
 
-    .input,
-    .textarea {
-        border-bottom: 1px solid $black;
-        border-top: 0;
-        border-right: 0;
-        border-left: 0;
-        border-radius: 0;
-        box-shadow: none;
+    .field {
+      margin: 1.5rem 0;
 
-        &:hover {
-            border-color: $dark;
-        }
+      input,
+      textarea {
+        padding-left: 0;
+      }
 
-        &:active,
-        &:focus {
-            box-shadow: none;
-            border-color: $primary;
-        }
+      .tags {
+        margin: 0.5rem 0.5rem 0 0;
+      }
     }
 
-    .form {
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            font-weight: normal;
-        }
-
-        .tabs {
-            ul {
-                margin: 0 auto;
-            }
-        }
-
-        .field {
-            margin: 1.5rem 0;
-
-            input,
-            textarea {
-                padding-left: 0;
-            }
-
-            .tags {
-                margin: 0.5rem 0.5rem 0 0;
-            }
-        }
-
-        .card {
-            margin: 0 10px 0 0;
-
-            figure {
-                margin: 0;
-            }
-
-            .card-content {
-                padding: 0.1rem 1rem;
-
-                ul {
-                    li {
-                        display: block;
-                        margin: 5px 0 auto;
-                        line-height: 1.3rem;
-                    }
-                }
-                .truncated {
-                    width: 160px;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                }
-            }
-
-        }
-        .submitting {
-        }
+    .card-hero-background-color {
+      background-color: #cccccc;
     }
+    .card {
+      margin: 0 10px 0 0;
+      border-radius: 4px;
+      figure {
+        margin: 0;
+        img {
+            border-top-right-radius: 4px;
+            border-top-left-radius: 4px;
+        }
+      }
+
+      .card-content {
+        padding: 0.1rem 1rem;
+
+        ul {
+          li {
+            display: block;
+            margin: 5px 0 auto;
+            line-height: 1.3rem;
+          }
+        }
+        .truncated {
+          width: 160px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
 }
 
 @import "../../node_modules/bulma/bulma.sass";

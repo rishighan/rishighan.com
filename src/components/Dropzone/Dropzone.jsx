@@ -44,14 +44,15 @@ const Dropzone = props => {
         setFiles(newFiles);
 
     };
-    const markAsHero = file => {
-        
-    }
+    const toggleHeroStatus = file => ()=> {
+        props.markedAsHero(file);
+    };
 
     const existingFilesPreviews = _.map(props.input.value, (file, idx) => (
         <div className="is-pulled-left" key={idx} >
             <ImageCard mediaObject={file}
-                       deleteFileHandler={removeFile(file)} />
+                       deleteFileHandler={removeFile(file)}
+                       toggleHeroStatus={toggleHeroStatus(file)} />
         </div >
     ));
 
