@@ -45,7 +45,7 @@ const Dropzone = props => {
 
     };
     const toggleHeroStatus = file => ()=> {
-        props.markedAsHero(file);
+        props.toggleHeroStatus(file);
     };
 
     const existingFilesPreviews = _.map(props.input.value, (file, idx) => (

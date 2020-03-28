@@ -22,6 +22,7 @@ const renderPage = props => ({
   adminForm: !_.isArray(props.posts.posts) ? (
     <AdminForm formData={props.posts.posts} />
   ) : null,
+  writeNewPost: !_.isUndefined(props.posts.result) ? <AdminForm formData={props.posts.result} /> : null,
 });
 class PageContainer extends Component {
   componentDidMount() {
@@ -36,6 +37,7 @@ class PageContainer extends Component {
 function mapStateToProps(state) {
   return {
     posts: state.posts,
+    newPost: state.posts.result
   };
 }
 

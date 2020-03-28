@@ -1,6 +1,8 @@
 import axios from "axios";
 import FormData from "form-data";
 import {
+  CREATE_POST_SUCCESS,
+  CREATE_POST_ERROR,
   FETCH_POSTS_REQUEST,
   GENERIC_POSTS_API_ERROR,
   FETCH_POSTS_SUCCESS,
@@ -33,11 +35,18 @@ export const postsAPICall = options => async dispatch => {
     });
 
     switch (options.callURIAction) {
+      case "create":
+        console.log(options);
+        dispatch({
+          type: CREATE_POST_SUCCESS,
+          result: response.data,
+        });
+        break;
       case "retrieve":
       case "findByTagName":
       case "searchPosts":
       case "retrieveOne":
-        case "getArchivedPosts":
+      case "getArchivedPosts":
         dispatch({
           type: FETCH_POSTS_SUCCESS,
           posts: response.data

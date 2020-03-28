@@ -15,6 +15,7 @@ import Autosave from '../Autosave/Autosave';
 import customStyles from '../Select/select-styles';
 
 import tags from '../../constants/tags';
+import { createSlug } from '../../utils/slug.util';
 import { postsAPICall } from '../../actions/index';
 
 const onSubmit = () => {
@@ -55,7 +56,7 @@ class AdminForm extends Component {
 
   save = async (values) => {
     this.props.updatePost(values);
-    await this.sleep(2000);
+    await this.sleep(5000);
   };
 
   ReactSelect = ({ input, ...rest }) => {
@@ -111,8 +112,8 @@ class AdminForm extends Component {
                 <div>
                   <span className="is-size-7 has-text-grey-lighter">
                     <div className="tags has-addons">
-                      <span className="tag is-light">{this.props.formData._id}</span>
-                      { values.isDraft ? <span className="tag is-warning">Draft</span> : null }
+                      {values._id ? <span className="tag is-light">{this.props.formData._id}</span> : null}
+                      {values.is_draft ? <span className="tag is-warning">Draft</span> : null}
                     </div>
                   </span>
                 </div>
@@ -155,10 +156,10 @@ class AdminForm extends Component {
                 <div id="tab-content">
                   {this.state.currentlyActiveTab !== 'JSON' ? this.state.markup
                     : <div>
-                        <pre>
-                          <Markup content={JSON.stringify(values, null, 2)} />
-                        </pre>
-                      </div>}
+                      <pre>
+                        <Markup content={JSON.stringify(values, null, 2)} />
+                      </pre>
+                    </div>}
                 </div>
 
                 {/* Excerpt */}
@@ -171,20 +172,26 @@ class AdminForm extends Component {
 
                 {/* Media management */}
                 <div className="box">
-                  {/* TODO: this is a hack, till I figure out how to use setFieldTouched mutator */}
+                  <label className="field-label is-normal">Attachments</label>
+                  {/* TODO: Figure out how to use setFieldTouched mutator.
+                            Currently, all changes are manually saved using this.save()
+                            Blurring of the input is necessary to update form model */}
                   <Field name="attachment"
-                         onChange={file => { values.attachment.unshift(file[0]); this.save(values); }}
-                         markedAsHero={ file => { 
-                           let affectedFileIndex = _.findIndex(values.attachment, fileObj => fileObj._id === file._id);
-                           values.attachment[affectedFileIndex].isHero = file.isHero === false ? true : false;
-                           _.each(values.attachment, fileObj => {
-                             if(fileObj._id !== file._id) {
-                               fileObj.isHero = false;
-                             }
-                           })
-                           this.save(values); 
-                          }} 
-                         onFileObjectRemoved={file => { _.remove(values.attachment, fileObject => fileObject._id === file._id); this.save(values); }}>
+                    onChange={file => { values.attachment.unshift(file[0]); this.save(values); }}
+                    toggleHeroStatus={file => {
+                      let affectedFileIndex = _.findIndex(values.attachment, fileObj => fileObj._id === file._id);
+                      values.attachment[affectedFileIndex].isHero = file.isHero === false ? true : false;
+                      _.each(values.attachment, fileObj => {
+                        if (fileObj._id !== file._id) {
+                          fileObj.isHero = false;
+                        }
+                      })
+                      this.save(values);
+                    }}
+                    onFileObjectRemoved={file => { _.remove(values.attachment, fileObject => fileObject._id === file._id); this.save(values); }}
+                    component={() => null}
+                  >
+
                     {props => <div>
                       <Dropzone {...props} />
                     </div>
@@ -245,7 +252,10 @@ const mapDispatchToProps = dispatch => ({
     }));
   },
   updatePost: (post) => {
-    _.assign(post, { upsertValue: false });
+    _.assign(post, {
+      upsertValue: false,
+      slug: createSlug(post.title),
+    });
     dispatch(postsAPICall({
       callURIAction: 'update',
       callMethod: 'post',
@@ -254,7 +264,7 @@ const mapDispatchToProps = dispatch => ({
       },
       data: post,
     }));
-  },
+  }
 });
 
 AdminForm.propTypes = {

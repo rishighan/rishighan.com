@@ -5,6 +5,7 @@ import { history } from "../store/index";
 import Navigation from "./Navigation/Navigation";
 import PageContainer from "./PageContainer/PageContainer";
 import NavItems from "./Navigation/NavItems";
+import { postModel } from '../constants/post.model';
 
 const AppContainer = () => (
   <section className="section">
@@ -79,6 +80,26 @@ const AppContainer = () => (
                     type: "adminForm",
                     metadata: {
                       mode: "edit"
+                    }
+                  }}
+                />
+              )}
+            />
+            {/* New post, started as a draft */}
+            <Route
+              path={"/admin/write"}
+              exact
+              render={props => (
+                <PageContainer
+                  callOptions={{
+                    callMethod: "post",
+                    callURIAction: "create",
+                    data: postModel, 
+                  }}
+                  options={{
+                    type: "writeNewPost",
+                    metadata: {
+                      mode: "new"
                     }
                   }}
                 />

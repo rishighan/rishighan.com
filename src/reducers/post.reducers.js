@@ -1,5 +1,7 @@
 import { LOCATION_CHANGE } from "connected-react-router";
 import {
+  CREATE_POST_SUCCESS,
+  CREATE_POST_ERROR,
   FETCH_POSTS_REQUEST,
   SEARCH_POSTS_SUCCESS,
   GENERIC_POSTS_API_ERROR,
@@ -19,6 +21,11 @@ const initialState = {
 };
 function postsReducer(state = initialState, action) {
   switch (action.type) {
+    case CREATE_POST_SUCCESS:
+      return {
+        ...state,
+        result: action.result,
+      };
     case LOCATION_CHANGE:
       return {
         posts: []
