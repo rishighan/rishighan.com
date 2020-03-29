@@ -19,10 +19,10 @@ const renderPage = props => ({
     </div>
   ),
   adminMain: <AdminMain />,
-  adminForm: !_.isArray(props.posts.posts) ? (
+  editPostForm: !_.isArray(props.posts.posts) ? (
     <AdminForm formData={props.posts.posts} />
   ) : null,
-  writeNewPost: !_.isUndefined(props.posts.result) ? <AdminForm formData={props.posts.result} /> : null,
+  newPostForm: !_.isUndefined(props.posts.result) ? <AdminForm formData={props.posts.result} /> : null,
 });
 class PageContainer extends Component {
   componentDidMount() {

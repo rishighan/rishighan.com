@@ -7,12 +7,12 @@ import PageContainer from "./PageContainer/PageContainer";
 import NavItems from "./Navigation/NavItems";
 import { postModel } from '../constants/post.model';
 
-const AppContainer = () => (
+const AppContainer = () => (<>
+  <Navigation navItems={NavItems} />
   <section className="section">
     <div className="container">
       <ConnectedRouter history={history}>
         <div>
-          <Navigation navItems={NavItems} />
           {/* Route configuration */}
           <div className="columns is-centered">
             {NavItems.map((navItem, idx) => (
@@ -77,7 +77,7 @@ const AppContainer = () => (
                     }
                   }}
                   options={{
-                    type: "adminForm",
+                    type: "editPostForm",
                     metadata: {
                       mode: "edit"
                     }
@@ -97,7 +97,7 @@ const AppContainer = () => (
                     data: postModel, 
                   }}
                   options={{
-                    type: "writeNewPost",
+                    type: "newPostForm",
                     metadata: {
                       mode: "new"
                     }
@@ -110,6 +110,7 @@ const AppContainer = () => (
       </ConnectedRouter>
     </div>
   </section>
+  </>
 );
 
 export default AppContainer;

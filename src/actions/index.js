@@ -36,7 +36,6 @@ export const postsAPICall = options => async dispatch => {
 
     switch (options.callURIAction) {
       case "create":
-        console.log(options);
         dispatch({
           type: CREATE_POST_SUCCESS,
           result: response.data,

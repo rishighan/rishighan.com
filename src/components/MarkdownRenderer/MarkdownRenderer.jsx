@@ -6,12 +6,12 @@ import 'highlight.js/styles/kimbie.dark.css';
 import _ from 'lodash';
 
 const md = require('markdown-it')({
-  html:         true,        
-  xhtmlOut:     true,        // Use '/' to close single tags (<br />).
-  breaks:       false,        // Convert '\n' in paragraphs into <br>
-  langPrefix:   'language-',  
-  linkify:      false,        
-  typographer:  true,
+  html: true,        
+  xhtmlOut: true,       // Use '/' to close single tags (<br />).
+  breaks: false,        // Convert '\n' in paragraphs into <br>
+  langPrefix: 'language-',  
+  linkify: false,        
+  typographer: true,
   highlight: (str, lang) => {
     if (lang && hljs.getLanguage(lang)) {
       try {
@@ -23,6 +23,8 @@ const md = require('markdown-it')({
 })
 .use(require('markdown-it-footnote'));
 
+// Todo: footnote references will not work if multiple posts with footnotes 
+//       are displayed on the same page
 md.renderer.rules.footnote_caption = (tokens, idx/*, options, env, slf*/) => {
   let n = Number(tokens[idx].meta.id + 1).toString();
   if (tokens[idx].meta.subId > 0) {
