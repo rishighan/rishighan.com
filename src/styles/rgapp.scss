@@ -71,10 +71,14 @@ $content-blockquote-border-left: 0px none;
 $content-blockquote-padding: 0em;
 $content-blockquote-background-color: none transparent;
 
-.navbar {
+.sitenav {
+  background: transparent none;
   text-transform: uppercase;
   font-family: "ArminGrotesk-Normal", sans-serif;
   font-kerning: normal;
+  position:fixed;
+  top:50px;
+  left:50px;
 }
 
 .content {
