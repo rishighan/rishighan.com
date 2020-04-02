@@ -114,6 +114,7 @@ class AdminForm extends Component {
                     <div className="tags has-addons">
                       {values._id ? <span className="tag is-light">{this.props.formData._id}</span> : null}
                       {values.is_draft ? <span className="tag is-warning">Draft</span> : null}
+                      {values.is_archived ? <span className="tag is-info">Archived Post</span> : null}
                     </div>
                   </span>
                 </div>
@@ -177,19 +178,19 @@ class AdminForm extends Component {
                             Currently, all changes are manually saved using this.save()
                             Blurring of the input is necessary to update form model */}
                   <Field name="attachment"
-                    onChange={file => { values.attachment.unshift(file[0]); this.save(values); }}
-                    toggleHeroStatus={file => {
-                      let affectedFileIndex = _.findIndex(values.attachment, fileObj => fileObj._id === file._id);
-                      values.attachment[affectedFileIndex].isHero = file.isHero === false ? true : false;
-                      _.each(values.attachment, fileObj => {
-                        if (fileObj._id !== file._id) {
-                          fileObj.isHero = false;
-                        }
-                      })
-                      this.save(values);
-                    }}
-                    onFileObjectRemoved={file => { _.remove(values.attachment, fileObject => fileObject._id === file._id); this.save(values); }}
-                    component={() => null}
+                         onChange={file => { values.attachment.unshift(file[0]); this.save(values); }}
+                         toggleHeroStatus={file => {
+                                              let affectedFileIndex = _.findIndex(values.attachment, fileObj => fileObj._id === file._id);
+                                              values.attachment[affectedFileIndex].isHero = file.isHero === false ? true : false;
+                                              _.each(values.attachment, fileObj => {
+                                                if (fileObj._id !== file._id) {
+                                                  fileObj.isHero = false;
+                                                }
+                                              })
+                                              this.save(values);
+                                            }}
+                          onFileObjectRemoved={file => { _.remove(values.attachment, fileObject => fileObject._id === file._id); this.save(values); }}
+                          component={() => null}
                   >
 
                     {props => <div>
@@ -209,23 +210,50 @@ class AdminForm extends Component {
 
                 {/* Global Form controls */}
                 <div className="field is-grouped">
-                  <div className="control">
-                    <button className="button is-link"
-                      onClick={() => this.props.updatePost(values)}
-                      disabled={submitting || pristine}>
-                      Save Topic
-                    </button>
-                  </div>
-                  <div className="control">
-                    <button className="button is-link"
-                      disabled={submitting}
-                      onClick={() => this.props.updatePost(values)}>
-                      Save As Draft
-                    </button>
-                  </div>
-                  <div className="control">
-                    <button className="button is-link is-danger">Delete Post</button>
-                  </div>
+                  <p className="control">
+                    <div className="buttons has-addons">
+                      {/* Save Post */}
+                      <button className="button is-inverted"
+                        onClick={() => this.props.updatePost(values)}
+                        disabled={submitting || pristine}>
+                        <span class="icon">
+                          <i class="fas fa-save"></i>
+                        </span>
+                        <span>Save Topic</span>
+                      </button>
+
+                      {/* Save draft */}
+                      <button className="button is-warning"
+                              disabled={submitting}
+                              onClick={() => this.props.updatePost(values)}>
+                        <span className="icon">
+                          <i className="fab fa-firstdraft"></i>
+                        </span>
+                        <span>Save Draft</span>
+                      </button>
+                    </div>
+                  </p>
+                  <p className="control is-right">
+                    <div className="buttons has-addons">
+                      {/* Archive */}
+                      <button className="button is-info"
+                              disabled={submitting}>
+                        <span className="icon">
+                          <i className="fas fa-archive"></i>
+                        </span>
+                        <span>Archive</span>
+                      </button>
+
+                      {/* Delete */}
+                      <button className="button is-link is-danger">
+                        <span className="icon">
+                          <i className="far fa-trash-alt"></i>
+                        </span>
+                        <span>Delete Post</span>
+                      </button>
+                    </div>
+                  </p>
+
                 </div>
               </div>
             )}

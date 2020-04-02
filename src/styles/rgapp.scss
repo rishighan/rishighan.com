@@ -220,7 +220,10 @@ $content-blockquote-background-color: none transparent;
         margin: 0.5rem 0.5rem 0 0;
       }
     }
-
+    // override for bulma's button groups
+    .buttons {
+      margin-right: 30px;
+    }
     .card-hero-background-color {
       background-color: #cccccc;
     }
