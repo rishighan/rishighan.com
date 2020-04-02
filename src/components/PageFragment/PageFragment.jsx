@@ -7,68 +7,67 @@ import Timestamp from '../Timestamp/Timestamp';
 import List from '../List/List';
 
 const renderPageFragment = props => ({
-  single: (<>
-            {props.singlePostData ? (<article>
-                <Heading headingText={props.singlePostData.title} />
-                <Timestamp date={props.singlePostData.date_updated} dateFormat={'D MMM, YYYY '} />
+    single: (<>
+        {!_.isNil(props.singlePostData) ? (<article>
+            <Heading headingText={props.singlePostData.title} />
+            <Timestamp date={props.singlePostData.date_updated} dateFormat={'D MMM, YYYY '} />
+            <section>
+                <MarkdownRenderer text={props.singlePostData.content} />
+            </section>
+        </article>) : null}
+    </>),
+    blog: (<>
+        {_.isArray(props.postsData.posts) ? (<div>
+            {props.postsData.posts.map((post, idx) => (<article key={idx}>
+                <Heading headingText={post.title} linkHref={`/post/${post.slug}`} />
+                <Timestamp date={post.date_updated} dateFormat={'D MMM, YYYY '} />
                 <section>
-                    <MarkdownRenderer text={props.singlePostData.content} />
+                    <MarkdownRenderer text={post.content} />
                 </section>
-            </article>) : null}
-        </>),
-  blog: (<>
-            {_.isArray(props.postsData.posts) ? (<div>
-                {props.postsData.posts.map((post, idx) => (<article key={idx}>
-                    <Heading headingText={post.title} linkHref={`/post/${post.slug}`} />
-                    <Timestamp date={post.date_updated} dateFormat={'D MMM, YYYY '} />
-                    <section>
-                        <MarkdownRenderer text={post.content} />
-                    </section>
-                </article>))}
-            </div>) : null}
-        </>),
-  titles: (<>
-            {_.isArray(props.postsData.posts) ? (<>
-                <List
-                    showTags={false}
-                    showTimestamps={false}
-                    showExcerpts
-                >
-                    { props.postsData.posts.map(post => post)}
+            </article>))}
+        </div>) : null}
+    </>),
+    titles: (<>
+        {_.isArray(props.postsData.posts) ? (<>
+            <List
+                showTags={false}
+                showTimestamps={false}
+                showExcerpts
+            >
+                {props.postsData.posts.map(post => post)}
+            </List>
+        </>) : null}
+    </>),
+    illustrations: (<>
+        {_.isArray(props.postsData.posts) ? (<div>
+            {props.postsData.posts.map((post, idx) => (<div key={idx}>
+                <Heading headingText={post.title} />
+                <figure className="image">
+                    {post.attachment
+                        && post.attachment.map((pic, i) => (<img key={i} src={pic.url} data-meta={pic.isHero} />))}
+                </figure>
+                <section>
+                    <MarkdownRenderer text={post.content} />
+                </section>
+            </div>))}
+        </div>) : null}
+    </>),
+    archive: (<>
+        {_.isArray(props.postsData.posts) ? (<div>
+            {props.postsData.posts.map((archive, idx) => (<div key={idx}>
+                <h2 className="is-size-3 has-text-grey has-text-weight-normal">{archive._id.year} </h2>
+                <List showTimestamps>
+                    {!_.isNil(archive.archivedPosts) && archive.archivedPosts.map(post => post)}
                 </List>
-            </>) : null}
-        </>),
-  illustrations: (<>
-            {_.isArray(props.postsData.posts) ? (<div>
-                {props.postsData.posts.map((post, idx) => (<div key={idx}>
-                    <Heading headingText={post.title} />
-                    <figure className="image">
-                        {post.attachment
-                            && post.attachment.map((pic, i) => (<img key={i} src={pic.url} data-meta={pic.isHero} />))}
-                    </figure>
-                    <section>
-                        <MarkdownRenderer text={post.content} />
-                    </section>
-                </div>))}
-            </div>) : null}
-        </>),
-  archive: (<>
-            {!_.isUndefined(props.postsData.posts[0])
-                && !_.isUndefined(props.postsData.posts[0].archivedPosts) ? (<>
-                    <List
-                        showTags={false}
-                        showTimestamps
-                    >
-                        {props.postsData.posts[0].archivedPosts.map(post => post)}
-                    </List>
-                </>) : null}
-        </>),
+            </div>))}
+        </div>) : null}
+    </>),
 });
 
 const PageFragment = props => renderPageFragment(props)[props.postType];
 
 PageFragment.propTypes = {
-  postType: PropTypes.string,
-  posts: PropTypes.array,
+    postType: PropTypes.string,
+    posts: PropTypes.array,
 };
 export default PageFragment;

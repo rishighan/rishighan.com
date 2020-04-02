@@ -214,8 +214,8 @@ class AdminForm extends Component {
                     <div className="buttons has-addons">
                       {/* Save Post */}
                       <button className="button is-inverted"
-                        onClick={() => this.props.updatePost(values)}
-                        disabled={submitting || pristine}>
+                              onClick={() => this.props.updatePost(values)}
+                              disabled={submitting || pristine}>
                         <span class="icon">
                           <i class="fas fa-save"></i>
                         </span>
@@ -283,6 +283,8 @@ const mapDispatchToProps = dispatch => ({
     _.assign(post, {
       upsertValue: false,
       slug: createSlug(post.title),
+      is_archived: post.is_archived,
+      is_sticky: post.is_sticky,
     });
     dispatch(postsAPICall({
       callURIAction: 'update',
