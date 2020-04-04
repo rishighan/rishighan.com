@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 
 import _ from 'lodash';
 import CreatableSelect from 'react-select/creatable';
-import Dropzone from '../Dropzone/Dropzone';
 
 import format from 'date-fns/format';
 import { Markup } from 'interweave';
+import Dropzone from '../Dropzone/Dropzone';
 import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 import Autosave from '../Autosave/Autosave';
 
@@ -59,33 +59,56 @@ class AdminForm extends Component {
     await this.sleep(5000);
   };
 
-  ReactSelect = ({ input, ...rest }) => {
-    return (<CreatableSelect
-      {...input}
-      {...rest}
-      styles={customStyles}
-      isMulti
-    />)
-  };
+  ReactSelect = ({ input, ...rest }) => (<CreatableSelect
+    {...input}
+    {...rest}
+    styles={customStyles}
+    isMulti
+  />);
 
-  changeTab = (newTab) => {
-    switch (newTab.displayName) {
+  renderTabContent = (tabName, values) => {
+    switch (tabName) {
+      case 'JSON':
+        this.setState({
+          currentlyActiveTab: tabName,
+          markup: <>
+            <pre>
+              <Markup content={JSON.stringify(values, null, 2)} />
+            </pre>
+          </>,
+        });
+        break;
+      case 'Preview':
+        return (
+          <MarkdownRenderer text={values.content} />
+        );
       case 'Diff History':
         this.setState({
-          currentlyActiveTab: newTab.displayName,
+          currentlyActiveTab: tabName,
           markup: <>{_.map(this.props.diffHistories, (diffHistory, i) => <pre key={i}>
             <p>{format(diffHistory.createdAt, 'MMMM Do, YYYY')}</p>
             <Markup content={JSON.stringify(diffHistory.diff, null, 4)} />
           </pre>)}</>,
         });
         break;
-      default:
+
+      case 'Markdown':
         this.setState({
-          currentlyActiveTab: newTab.displayName,
-          markup: newTab.markup,
-        });
+          currentlyActiveTab: tabName,
+          markup:(<div className="control is-expanded">
+          <Field name="content"
+                 component="textarea"
+                 value={ values.content }
+                 placeholder="Write"
+                 className="textarea is-family-monospace" 
+                 rows="20" />
+        </div>),
+        }
+        break;
+      default:
+        return null;
     }
-  };
+  }
 
   componentDidMount() {
     this.props.getDiffHistories(this.props.formData._id);
@@ -102,7 +125,7 @@ class AdminForm extends Component {
             }
           }
           render={({
-            form, handleSubmit, pristine, invalid, submitting, values,
+            pristine, submitting, values,
           }) => (
               <div className="form">
                 {/* Autosave */}
@@ -111,9 +134,11 @@ class AdminForm extends Component {
                 <h2>Write a Post</h2>
                 <div>
                   <span className="is-size-7 has-text-grey-lighter">
+                    {/* Statuses */}
                     <div className="tags has-addons">
                       {values._id ? <span className="tag is-light">{this.props.formData._id}</span> : null}
                       {values.is_draft ? <span className="tag is-warning">Draft</span> : null}
+                      {values.is_sticky ? <span className="tag is-primary">Sticky</span> : null}
                       {values.is_archived ? <span className="tag is-info">Archived Post</span> : null}
                     </div>
                   </span>
@@ -125,7 +150,7 @@ class AdminForm extends Component {
                   </div>
                 </div>
 
-                {/* Edit mode only */}
+                {/* Slug */}
                 <div className="field">
                   <label className="field-label is-normal">Slug</label>
                   <div className="control is-expanded">
@@ -149,18 +174,13 @@ class AdminForm extends Component {
                     {this.tabs.map((tab, idx) => <li
                       className={this.state.currentlyActiveTab === tab.displayName ? 'is-active' : ''}
                       key={idx}
-                      onClick={() => { this.changeTab({ markup: tab.markup, displayName: tab.displayName }); }}>
+                      onClick={() => { this.renderTabContent(tab.displayName, values); }}>
                       <a>{tab.displayName}</a>
                     </li>)}
                   </ul>
                 </div>
                 <div id="tab-content">
-                  {this.state.currentlyActiveTab !== 'JSON' ? this.state.markup
-                    : <div>
-                      <pre>
-                        <Markup content={JSON.stringify(values, null, 2)} />
-                      </pre>
-                    </div>}
+                  {this.renderTabContent()}
                 </div>
 
                 {/* Excerpt */}
@@ -178,19 +198,19 @@ class AdminForm extends Component {
                             Currently, all changes are manually saved using this.save()
                             Blurring of the input is necessary to update form model */}
                   <Field name="attachment"
-                         onChange={file => { values.attachment.unshift(file[0]); this.save(values); }}
-                         toggleHeroStatus={file => {
-                                              let affectedFileIndex = _.findIndex(values.attachment, fileObj => fileObj._id === file._id);
-                                              values.attachment[affectedFileIndex].isHero = file.isHero === false ? true : false;
-                                              _.each(values.attachment, fileObj => {
-                                                if (fileObj._id !== file._id) {
-                                                  fileObj.isHero = false;
-                                                }
-                                              })
-                                              this.save(values);
-                                            }}
-                          onFileObjectRemoved={file => { _.remove(values.attachment, fileObject => fileObject._id === file._id); this.save(values); }}
-                          component={() => null}
+                    onChange={(file) => { values.attachment.unshift(file[0]); this.save(values); }}
+                    toggleHeroStatus={(file) => {
+                      const affectedFileIndex = _.findIndex(values.attachment, fileObj => fileObj._id === file._id);
+                      values.attachment[affectedFileIndex].isHero = file.isHero === false;
+                      _.each(values.attachment, (fileObj) => {
+                        if (fileObj._id !== file._id) {
+                          fileObj.isHero = false;
+                        }
+                      });
+                      this.save(values);
+                    }}
+                    onFileObjectRemoved={(file) => { _.remove(values.attachment, fileObject => fileObject._id === file._id); this.save(values); }}
+                    component={() => null}
                   >
 
                     {props => <div>
@@ -201,12 +221,7 @@ class AdminForm extends Component {
                 </div>
 
                 {/* Metadata */}
-                <div className="field">
-                  <label className="checkbox">
-                    <input type="checkbox" name="is_sticky" value={this.props.formData.is_sticky} />
-                    <span>Make post sticky</span>
-                  </label>
-                </div>
+
 
                 {/* Global Form controls */}
                 <div className="field is-grouped">
@@ -214,34 +229,59 @@ class AdminForm extends Component {
                     <div className="buttons has-addons">
                       {/* Save Post */}
                       <button className="button is-inverted"
-                              onClick={() => this.props.updatePost(values)}
-                              disabled={submitting || pristine}>
-                        <span class="icon">
-                          <i class="fas fa-save"></i>
+                        onClick={() => this.props.updatePost(values)}
+                        disabled={submitting || pristine}>
+                        <span className="icon">
+                          <i className="fas fa-save"></i>
                         </span>
                         <span>Save Topic</span>
                       </button>
 
                       {/* Save draft */}
-                      <button className="button is-warning"
-                              disabled={submitting}
-                              onClick={() => this.props.updatePost(values)}>
+                      <button className="button is-primary" disabled={submitting} >
+                        <span className="icon">
+                          <i className="fas fa-paperclip"></i>
+                        </span>
+                        <label>
+                          <Field
+                            name="is_sticky"
+                            component="input"
+                            type="checkbox"
+                          />{' '}
+                          <span>{values.is_sticky ? 'Unstick' : 'Make Sticky'}</span>
+                        </label>
+                      </button>
+                      {/* Make Sticky */}
+                      <button className="button is-warning" disabled={submitting}>
                         <span className="icon">
                           <i className="fab fa-firstdraft"></i>
                         </span>
-                        <span>Save Draft</span>
+                        <label>
+                          <Field
+                            name="is_draft"
+                            component="input"
+                            type="checkbox"
+                          />{' '}
+                          <span>{values.is_draft ? 'Unmark Draft' : 'Save As Draft'}</span>
+                        </label>
                       </button>
                     </div>
                   </p>
                   <p className="control is-right">
                     <div className="buttons has-addons">
                       {/* Archive */}
-                      <button className="button is-info"
-                              disabled={submitting}>
+                      <button className="button is-info" disabled={submitting} >
                         <span className="icon">
                           <i className="fas fa-archive"></i>
                         </span>
-                        <span>Archive</span>
+                        <label>
+                          <Field
+                            name="is_archived"
+                            component="input"
+                            type="checkbox"
+                          />{' '}
+                          <span>{values.is_archived ? 'Unarchive' : 'Archive'}</span>
+                        </label>
                       </button>
 
                       {/* Delete */}
@@ -280,6 +320,7 @@ const mapDispatchToProps = dispatch => ({
     }));
   },
   updatePost: (post) => {
+    console.log(post);
     _.assign(post, {
       upsertValue: false,
       slug: createSlug(post.title),
@@ -294,7 +335,7 @@ const mapDispatchToProps = dispatch => ({
       },
       data: post,
     }));
-  }
+  },
 });
 
 AdminForm.propTypes = {

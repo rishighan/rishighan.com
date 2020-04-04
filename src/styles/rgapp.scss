@@ -1,3 +1,9 @@
+// Artifice as poem
+// blasted in stone,
+// vacant in the black pitch
+// to eternity unknown
+
+
 @charset "utf-8";
 @import "./mixins/helpers";
 
@@ -214,6 +220,13 @@ $content-blockquote-background-color: none transparent;
       input,
       textarea {
         padding-left: 0;
+      }
+      // to hide checkboxes inside buttons
+      button {
+        input[type="checkbox"] {
+          display: none;
+          cursor: pointer;
+        }
       }
 
       .tags {

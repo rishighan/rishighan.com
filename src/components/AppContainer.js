@@ -1,11 +1,11 @@
-import React from "react";
-import { Route, useLocation } from "react-router-dom";
-import { ConnectedRouter } from "connected-react-router";
-import { history } from "../store/index";
-import SiteNavbar from "./Navigation/SiteNavbar";
-import PageContainer from "./PageContainer/PageContainer";
-import NavItems from "./Navigation/NavItems";
-import { postModel } from "../constants/post.model";
+import React from 'react';
+import { Route } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import { history } from '../store/index';
+import SiteNavbar from './Navigation/SiteNavbar';
+import PageContainer from './PageContainer/PageContainer';
+import NavItems from './Navigation/NavItems';
+import { postModel } from '../constants/post.model';
 
 const AppContainer = () => (
   <>
@@ -25,83 +25,83 @@ const AppContainer = () => (
                 />
               ))}
               <Route
-                path={"/post/:postSlug"}
+                path={'/post/:postSlug'}
                 render={props => (
                   <PageContainer
                     callOptions={{
-                      callMethod: "get",
-                      callURIAction: "retrieveOne",
+                      callMethod: 'get',
+                      callURIAction: 'retrieveOne',
                       callParams: {
-                        slug: props.match.params.postSlug
-                      }
+                        slug: props.match.params.postSlug,
+                      },
                     }}
                     options={{
-                      type: "post",
+                      type: 'post',
                       metadata: {
-                        subType: "single"
-                      }
+                        subType: 'single',
+                      },
                     }}
                   />
                 )}
               />
               <Route
-                path={"/admin"}
+                path={'/admin'}
                 exact
                 render={() => (
                   <PageContainer
                     callOptions={{
-                      callMethod: "get",
-                      callURIAction: "retrieve",
+                      callMethod: 'get',
+                      callURIAction: 'retrieve',
                       callParams: {
                         pageOffset: 1,
-                        pageLimit: 10
-                      }
+                        pageLimit: 10,
+                      },
                     }}
                     options={{
-                      type: "adminMain",
-                      metadata: {}
+                      type: 'adminMain',
+                      metadata: {},
                     }}
                   />
                 )}
               />
               {/* Edit post form route */}
               <Route
-                path={"/admin/edit/:postSlug"}
+                path={'/admin/edit/:postSlug'}
                 exact
                 render={props => (
                   <PageContainer
                     callOptions={{
-                      callMethod: "get",
-                      callURIAction: "retrieveOne",
+                      callMethod: 'get',
+                      callURIAction: 'retrieveOne',
                       callParams: {
-                        slug: props.match.params.postSlug
-                      }
+                        slug: props.match.params.postSlug,
+                      },
                     }}
                     options={{
-                      type: "editPostForm",
+                      type: 'editPostForm',
                       metadata: {
-                        mode: "edit"
-                      }
+                        mode: 'edit',
+                      },
                     }}
                   />
                 )}
               />
               {/* New post, started as a draft */}
               <Route
-                path={"/admin/write"}
+                path={'/admin/write'}
                 exact
                 render={props => (
                   <PageContainer
                     callOptions={{
-                      callMethod: "post",
-                      callURIAction: "create",
-                      data: postModel
+                      callMethod: 'post',
+                      callURIAction: 'create',
+                      data: postModel,
                     }}
                     options={{
-                      type: "newPostForm",
+                      type: 'newPostForm',
                       metadata: {
-                        mode: "new"
-                      }
+                        mode: 'new',
+                      },
                     }}
                   />
                 )}

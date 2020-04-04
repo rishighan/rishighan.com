@@ -4,8 +4,7 @@ import _ from 'lodash';
 import Heading from '../Heading/Heading';
 import Timestamp from '../Timestamp/Timestamp';
 
-const List = props => {
-  return (
+const List = props => (
     <ul className="rg-list">
       {!_.isNull(props.children) ? props.children.map((child, idx) => (
         <li key={idx}>
@@ -17,8 +16,7 @@ const List = props => {
           </div> : null }
         </li>)) : 'No posts found'}
     </ul>
-  );
-}
+);
 
 List.propTypes = {
   children: PropTypes.array,

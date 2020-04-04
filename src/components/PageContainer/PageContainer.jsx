@@ -37,7 +37,7 @@ class PageContainer extends Component {
 function mapStateToProps(state) {
   return {
     posts: state.posts,
-    newPost: state.posts.result
+    newPost: state.posts.result,
   };
 }
 

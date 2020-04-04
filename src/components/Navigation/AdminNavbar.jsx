@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 
-const AdminNavbar = props => {
-    return (<nav className="navbar" role="navigation" aria-label="main navigation">
+const AdminNavbar = props => (<nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
             <a className="navbar-item" href="https://bulma.io">
                 <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
@@ -35,10 +34,9 @@ const AdminNavbar = props => {
 
             <div className="navbar-end">
                 <div className="navbar-item">
-                    
+
                 </div>
             </div>
         </div>
     </nav>);
-}
 export default AdminNavbar;
