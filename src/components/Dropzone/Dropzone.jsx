@@ -12,7 +12,7 @@ const Dropzone = (props) => {
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     multiple: true,
-    noDrag: true,
+    noDrag: false,
     onDrop: async (acceptedFiles) => {
       const uploadResult = await assetsAPICall({
         callURIAction: 'upload',

@@ -51,7 +51,7 @@ class AdminForm extends Component {
 
   MarkdownEditor = ({ content }) => (<Field name="content"
     component="textarea"
-    value={ content }
+    value={content}
     placeholder="Write"
     className="textarea is-family-monospace"
     rows="20" />)
@@ -88,7 +88,7 @@ class AdminForm extends Component {
         this.setState({
           currentlyActiveTab: tabName,
           markup: <div className="control is-expanded">
-            { <this.MarkdownEditor content={ values.content }/>}
+            {<this.MarkdownEditor content={values.content} />}
           </div>,
         });
         break;
@@ -307,7 +307,6 @@ const mapDispatchToProps = dispatch => ({
     }));
   },
   updatePost: (post) => {
-    console.log(post);
     _.assign(post, {
       upsertValue: false,
       slug: createSlug(post.title),

@@ -22,7 +22,7 @@ const ImageCard = props => (
     <div className="card-content">
       <div className="tags has-addons metadata is-family-monospace is-size-7">
         <span className="tag has-background-light">
-          <span className="truncated" alt={props.mediaObject.name}>{props.mediaObject.name}</span>
+          <span className="truncated" title={props.mediaObject.name}>{props.mediaObject.name}</span>
         </span>
         <span className="tag has-background-grey-light">
           {props.mediaObject.size
