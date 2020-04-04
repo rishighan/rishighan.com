@@ -25,30 +25,13 @@ const onSubmit = () => {
 class AdminForm extends Component {
   constructor(props) {
     super(props);
-    this.tabs = [
-      {
-        displayName: 'Markdown',
-        markup: <div className="control is-expanded">
-          <Field name="content" component="textarea" placeholder="Write" className="textarea is-family-monospace" rows="20" />
-        </div>,
-      },
-      {
-        displayName: 'Preview',
-        markup: <MarkdownRenderer text={this.props.formData.content} />,
-      },
-      {
-        displayName: 'Diff History',
-        markup: <div></div>,
-      },
-      {
-        displayName: 'JSON',
-        markup: <div></div>,
-      },
-    ];
+    this.tabs = ['Markdown', 'Preview', 'Diff History', 'JSON'];
 
     this.state = {
-      currentlyActiveTab: this.tabs[0].displayName,
-      markup: this.tabs[0].markup,
+      currentlyActiveTab: this.tabs[0],
+      markup: <div className="control is-expanded">
+        <this.MarkdownEditor content={this.props.formData.content} />
+      </div>,
     };
   }
 
@@ -66,6 +49,13 @@ class AdminForm extends Component {
     isMulti
   />);
 
+  MarkdownEditor = ({ content }) => (<Field name="content"
+    component="textarea"
+    value={ content }
+    placeholder="Write"
+    className="textarea is-family-monospace"
+    rows="20" />)
+
   renderTabContent = (tabName, values) => {
     switch (tabName) {
       case 'JSON':
@@ -79,9 +69,11 @@ class AdminForm extends Component {
         });
         break;
       case 'Preview':
-        return (
-          <MarkdownRenderer text={values.content} />
-        );
+        this.setState({
+          currentlyActiveTab: tabName,
+          markup: <MarkdownRenderer text={values.content} />,
+        });
+        break;
       case 'Diff History':
         this.setState({
           currentlyActiveTab: tabName,
@@ -95,15 +87,10 @@ class AdminForm extends Component {
       case 'Markdown':
         this.setState({
           currentlyActiveTab: tabName,
-          markup:(<div className="control is-expanded">
-          <Field name="content"
-                 component="textarea"
-                 value={ values.content }
-                 placeholder="Write"
-                 className="textarea is-family-monospace" 
-                 rows="20" />
-        </div>),
-        }
+          markup: <div className="control is-expanded">
+            { <this.MarkdownEditor content={ values.content }/>}
+          </div>,
+        });
         break;
       default:
         return null;
@@ -136,7 +123,7 @@ class AdminForm extends Component {
                   <span className="is-size-7 has-text-grey-lighter">
                     {/* Statuses */}
                     <div className="tags has-addons">
-                      {values._id ? <span className="tag is-light">{this.props.formData._id}</span> : null}
+                      {values._id ? <span className="tag is-light">{values._id}</span> : null}
                       {values.is_draft ? <span className="tag is-warning">Draft</span> : null}
                       {values.is_sticky ? <span className="tag is-primary">Sticky</span> : null}
                       {values.is_archived ? <span className="tag is-info">Archived Post</span> : null}
@@ -172,15 +159,15 @@ class AdminForm extends Component {
                 <div className="tabs">
                   <ul>
                     {this.tabs.map((tab, idx) => <li
-                      className={this.state.currentlyActiveTab === tab.displayName ? 'is-active' : ''}
+                      className={this.state.currentlyActiveTab === tab ? 'is-active' : ''}
                       key={idx}
-                      onClick={() => { this.renderTabContent(tab.displayName, values); }}>
-                      <a>{tab.displayName}</a>
+                      onClick={() => { this.renderTabContent(tab, values); }}>
+                      <a>{tab}</a>
                     </li>)}
                   </ul>
                 </div>
                 <div id="tab-content">
-                  {this.renderTabContent()}
+                  {this.state.markup}
                 </div>
 
                 {/* Excerpt */}
@@ -200,8 +187,9 @@ class AdminForm extends Component {
                   <Field name="attachment"
                     onChange={(file) => { values.attachment.unshift(file[0]); this.save(values); }}
                     toggleHeroStatus={(file) => {
+                      const formModel = values;
                       const affectedFileIndex = _.findIndex(values.attachment, fileObj => fileObj._id === file._id);
-                      values.attachment[affectedFileIndex].isHero = file.isHero === false;
+                      formModel.attachment[affectedFileIndex].isHero = file.isHero === false;
                       _.each(values.attachment, (fileObj) => {
                         if (fileObj._id !== file._id) {
                           fileObj.isHero = false;
@@ -212,7 +200,6 @@ class AdminForm extends Component {
                     onFileObjectRemoved={(file) => { _.remove(values.attachment, fileObject => fileObject._id === file._id); this.save(values); }}
                     component={() => null}
                   >
-
                     {props => <div>
                       <Dropzone {...props} />
                     </div>
@@ -296,7 +283,7 @@ class AdminForm extends Component {
 
                 </div>
               </div>
-            )}
+          )}
         />
       </div>);
   }

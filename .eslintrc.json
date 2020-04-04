@@ -1,6 +1,7 @@
 {
     "extends": ["airbnb-base", "plugin:react/recommended"],
     "parser": "babel-eslint",
+    "parserOptions": {"ecmaVersion": 10},
     "settings": {
         "import/resolver": {
           "node": {
@@ -8,6 +9,9 @@
             "paths": ["./src"]
           }
         }
+    },
+    "rules": {
+      "no-underscore-dangle": 0
     },
     "env": {
       "browser": true

@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
 
 const AdminNavbar = props => (<nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">

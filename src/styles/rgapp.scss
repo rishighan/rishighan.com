@@ -259,8 +259,11 @@ $content-blockquote-background-color: none transparent;
             line-height: 1.3rem;
           }
         }
+        .metadata {
+          margin: 5px 0;
+        }
         .truncated {
-          width: 160px;
+          width: 100px;
           overflow: hidden;
           text-overflow: ellipsis;
         }
