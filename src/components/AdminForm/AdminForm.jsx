@@ -223,7 +223,7 @@ class AdminForm extends Component {
 
                 {/* Global Form controls */}
                 <div className="field is-grouped">
-                  <p className="control">
+                  <div className="control">
                     <div className="buttons has-addons">
                       {/* Save Post */}
                       <button className="button is-inverted"
@@ -264,8 +264,8 @@ class AdminForm extends Component {
                         </label>
                       </button>
                     </div>
-                  </p>
-                  <p className="control is-right">
+                  </div>
+                  <div className="control is-right">
                     <div className="buttons has-addons">
                       {/* Archive */}
                       <button className="button is-info" disabled={submitting} >
@@ -290,11 +290,10 @@ class AdminForm extends Component {
                         <span>Delete Post</span>
                       </button>
                     </div>
-                  </p>
-
+                  </div>
                 </div>
               </div>
-            )}
+          )}
         />
       </div>);
   }
