@@ -120,20 +120,31 @@ class AdminForm extends Component {
 
                 <h2>Write a Post</h2>
                 <div>
-                  <span className="is-size-7 has-text-grey-lighter">
+                  <span className="is-size-7">
                     {/* Statuses */}
-                    <div className="tags has-addons">
+                    <div className="tags has-addons has-text-grey-lighter is-pulled-left">
                       {values._id ? <span className="tag is-light">{values._id}</span> : null}
                       {values.is_draft ? <span className="tag is-warning">Draft</span> : null}
                       {values.is_sticky ? <span className="tag is-primary">Sticky</span> : null}
                       {values.is_archived ? <span className="tag is-info">Archived Post</span> : null}
                     </div>
+                    {/* Preview post */}
+                    <a href={`/post/${values.slug}`} target="blank" title="Preview Post">
+                      <span className="icon is-small has-text-dark-grey preview-post">
+                        <i className="fas fa-external-link-alt" />
+                      </span>
+                    </a>
                   </span>
                 </div>
+
+                {/* Title */}
                 <div className="field">
                   <label className="field-label is-normal">Title</label>
                   <div className="control is-expanded">
-                    <Field name="title" component="input" placeholder="Title for this content" className="input" />
+                    <Field name="title"
+                      component="input"
+                      className="input is-size-5"
+                      placeholder="Title for this content" />
                   </div>
                 </div>
 
@@ -283,7 +294,7 @@ class AdminForm extends Component {
 
                 </div>
               </div>
-          )}
+            )}
         />
       </div>);
   }

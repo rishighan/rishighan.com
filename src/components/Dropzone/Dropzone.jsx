@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import PropTypes from 'prop-types';
 import ImageCard from '../ImageCard/ImageCard';
 import { assetsAPICall } from '../../actions/index';
 
@@ -66,4 +67,10 @@ const Dropzone = (props) => {
   );
 };
 
+Dropzone.propTypes = {
+  toggleHeroStatus: PropTypes.func,
+  input: PropTypes.object,
+  onFileObjectRemoved: PropTypes.func,
+  onChange: PropTypes.func,
+};
 export default Dropzone;

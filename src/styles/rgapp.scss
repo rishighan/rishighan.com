@@ -234,6 +234,12 @@ $content-blockquote-background-color: none transparent;
       }
     }
 
+    // preview post icon
+    .preview-post {
+      cursor: pointer;
+      margin-left: 5px;
+    }
+
     //  Image Cards
     .card-hero-background-color {
       background-color: #cccccc;

@@ -10,7 +10,7 @@ import { postsAPICall } from '../../actions/index';
 
 const renderPage = props => ({
   post: (
-    <div className="column content is-two-thirds-tablet is-full-mobile">
+    <div className="column content is-two-thirds is-two-thirds-tablet is-full-mobile">
       <PageFragment
         postsData={props.posts}
         singlePostData={props.posts.posts}
