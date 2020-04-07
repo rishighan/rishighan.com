@@ -9,7 +9,7 @@ const store = configureStore({});
 
 render(
     <Provider store={ store }>
-        <AppContainer/>
+        <AppContainer history={history}/>
     </Provider>,
     document.getElementById('app'),
 );

@@ -27,7 +27,6 @@ const renderPage = props => ({
 
 class PageContainer extends Component {
   componentDidMount() {
-    console.log(this.props.history.location.pathname);
     this.props.fetchPosts();
   }
 

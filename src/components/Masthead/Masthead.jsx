@@ -5,7 +5,6 @@ const Masthead = props => (
     <div className="masthead-container">
         <figure className="masthead">
             hi
-
         </figure>
     </div> );
 
