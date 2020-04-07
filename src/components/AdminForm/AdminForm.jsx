@@ -103,7 +103,7 @@ class AdminForm extends Component {
 
   render() {
     return (
-      <div className="column content is-two-thirds-tablet is-full-mobile">
+      <div className="column content is-two-thirds is-full-tablet is-full-mobile">
         <Form
           onSubmit={onSubmit}
           initialValues={
@@ -220,7 +220,7 @@ class AdminForm extends Component {
                 </div>
 
                 {/* Global Form controls */}
-                <div className="field is-grouped">
+                <div className="field">
                   <div className="buttons has-addons">
                     {/* Save Post */}
                     <button className="button is-inverted"
@@ -229,7 +229,6 @@ class AdminForm extends Component {
                       <span className="icon">
                         <i className="fas fa-save"></i>
                       </span>
-                      <span>Save</span>
                     </button>
 
                     {/* Save draft */}
@@ -258,7 +257,7 @@ class AdminForm extends Component {
                           component="input"
                           type="checkbox"
                         />{' '}
-                        <span>{values.is_draft ? 'Unmark Draft' : 'Save As Draft'}</span>
+                        <span>{values.is_draft ? 'Unmark Draft' : 'Save Draft'}</span>
                       </label>
                     </button>
                   </div>
