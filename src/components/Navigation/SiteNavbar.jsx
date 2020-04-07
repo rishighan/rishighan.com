@@ -7,7 +7,7 @@ class SiteNavbar extends Component {
   render() {
     return (!_.isEmpty(this.props.navItems)
       && <>
-        <nav className="sitenav is-full-mobile">
+        <nav className="sitenav">
           <ul>
             {this.props.navItems.map((navItem, idx) => <li key={idx}>
               <Link to={navItem.href}>

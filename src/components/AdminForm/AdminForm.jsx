@@ -128,6 +128,7 @@ class AdminForm extends Component {
                       {values.is_sticky ? <span className="tag is-primary">Sticky</span> : null}
                       {values.is_archived ? <span className="tag is-info">Archived Post</span> : null}
                     </div>
+
                     {/* Preview post */}
                     <a href={`/post/${values.slug}`} target="blank" title="Preview Post">
                       <span className="icon is-small has-text-dark-grey preview-post">
@@ -157,7 +158,7 @@ class AdminForm extends Component {
                 </div>
 
                 {/* Tags */}
-                <div>
+                <div className="field">
                   <label className="field-label is-normal">Tags</label>
                   <Field
                     name="tags"
@@ -218,78 +219,73 @@ class AdminForm extends Component {
                   </Field>
                 </div>
 
-                {/* Metadata */}
-
-
                 {/* Global Form controls */}
                 <div className="field is-grouped">
-                  <div className="control">
-                    <div className="buttons has-addons">
-                      {/* Save Post */}
-                      <button className="button is-inverted"
-                        onClick={() => this.props.updatePost(values)}
-                        disabled={submitting || pristine}>
-                        <span className="icon">
-                          <i className="fas fa-save"></i>
-                        </span>
-                        <span>Save Topic</span>
-                      </button>
+                  <div className="buttons has-addons">
+                    {/* Save Post */}
+                    <button className="button is-inverted"
+                      onClick={() => this.props.updatePost(values)}
+                      disabled={submitting || pristine}>
+                      <span className="icon">
+                        <i className="fas fa-save"></i>
+                      </span>
+                      <span>Save</span>
+                    </button>
 
-                      {/* Save draft */}
-                      <button className="button is-primary" disabled={submitting} >
-                        <span className="icon">
-                          <i className="fas fa-paperclip"></i>
-                        </span>
-                        <label>
-                          <Field
-                            name="is_sticky"
-                            component="input"
-                            type="checkbox"
-                          />{' '}
-                          <span>{values.is_sticky ? 'Unstick' : 'Make Sticky'}</span>
-                        </label>
-                      </button>
-                      {/* Make Sticky */}
-                      <button className="button is-warning" disabled={submitting}>
-                        <span className="icon">
-                          <i className="fab fa-firstdraft"></i>
-                        </span>
-                        <label>
-                          <Field
-                            name="is_draft"
-                            component="input"
-                            type="checkbox"
-                          />{' '}
-                          <span>{values.is_draft ? 'Unmark Draft' : 'Save As Draft'}</span>
-                        </label>
-                      </button>
-                    </div>
+                    {/* Save draft */}
+                    <button className="button is-primary" disabled={submitting} >
+                      <span className="icon">
+                        <i className="fas fa-paperclip"></i>
+                      </span>
+                      <label>
+                        <Field
+                          name="is_sticky"
+                          component="input"
+                          type="checkbox"
+                        />{' '}
+                        <span>{values.is_sticky ? 'Unstick' : 'Make Sticky'}</span>
+                      </label>
+                    </button>
+
+                    {/* Make Sticky */}
+                    <button className="button is-warning" disabled={submitting}>
+                      <span className="icon">
+                        <i className="fab fa-firstdraft"></i>
+                      </span>
+                      <label>
+                        <Field
+                          name="is_draft"
+                          component="input"
+                          type="checkbox"
+                        />{' '}
+                        <span>{values.is_draft ? 'Unmark Draft' : 'Save As Draft'}</span>
+                      </label>
+                    </button>
                   </div>
-                  <div className="control is-right">
-                    <div className="buttons has-addons">
-                      {/* Archive */}
-                      <button className="button is-info" disabled={submitting} >
-                        <span className="icon">
-                          <i className="fas fa-archive"></i>
-                        </span>
-                        <label>
-                          <Field
-                            name="is_archived"
-                            component="input"
-                            type="checkbox"
-                          />{' '}
-                          <span>{values.is_archived ? 'Unarchive' : 'Archive'}</span>
-                        </label>
-                      </button>
 
-                      {/* Delete */}
-                      <button className="button is-link is-danger">
-                        <span className="icon">
-                          <i className="far fa-trash-alt"></i>
-                        </span>
-                        <span>Delete Post</span>
-                      </button>
-                    </div>
+                  <div className="buttons has-addons">
+                    {/* Archive */}
+                    <button className="button is-info" disabled={submitting} >
+                      <span className="icon">
+                        <i className="fas fa-archive"></i>
+                      </span>
+                      <label>
+                        <Field
+                          name="is_archived"
+                          component="input"
+                          type="checkbox"
+                        />{' '}
+                        <span>{values.is_archived ? 'Unarchive' : 'Archive'}</span>
+                      </label>
+                    </button>
+
+                    {/* Delete */}
+                    <button className="button is-link is-danger">
+                      <span className="icon">
+                        <i className="far fa-trash-alt"></i>
+                      </span>
+                      <span>Delete Post</span>
+                    </button>
                   </div>
                 </div>
               </div>

@@ -77,7 +77,20 @@ $content-blockquote-border-left: 0px none;
 $content-blockquote-padding: 0em;
 $content-blockquote-background-color: none transparent;
 
+// Media queries
+$small: 400px;
+$medium: 900px;
+
+
+@media only screen and (min-width: 320px) and (max-width: 995px) {
+  .sitenav {
+    border: 1px dotted red;
+    display: none;
+  }
+}
+// Navigation
 .sitenav {
+  
   background: transparent none;
   text-transform: uppercase;
   font-family: "ArminGrotesk-Normal", sans-serif;
@@ -87,6 +100,7 @@ $content-blockquote-background-color: none transparent;
   left:50px;
 }
 
+// Content
 .content {
   font-variant-numeric: tabular-nums;
   font-variant-ligatures: discretionary-ligatures;
