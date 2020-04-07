@@ -1,14 +1,16 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../store/index';
 import SiteNavbar from './Navigation/SiteNavbar';
 import PageContainer from './PageContainer/PageContainer';
+import Masthead from './Masthead/Masthead';
 import NavItems from './Navigation/NavItems';
 import { postModel } from '../constants/post.model';
 
-const AppContainer = () => (
-  <>
+const AppContainer = props => ({
+  return(<>
+   { window.location.pathname === '/' ? <Masthead /> : null }
     <section className="section">
       <div className="container">
         <ConnectedRouter history={history}>
@@ -39,6 +41,7 @@ const AppContainer = () => (
                       type: 'post',
                       metadata: {
                         subType: 'single',
+                        path: history.location.pathname,
                       },
                     }}
                   />
@@ -111,7 +114,7 @@ const AppContainer = () => (
         </ConnectedRouter>
       </div>
     </section>
-  </>
-);
+  </>);
+                  });
 
-export default AppContainer;
+export default withRouter(AppContainer);

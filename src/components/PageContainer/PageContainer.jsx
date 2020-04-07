@@ -10,7 +10,7 @@ import { postsAPICall } from '../../actions/index';
 
 const renderPage = props => ({
   post: (
-    <div className="column content is-two-thirds is-two-thirds-tablet is-full-mobile">
+    <div className="column content is-two-thirds-tablet is-full-mobile">
       <PageFragment
         postsData={props.posts}
         singlePostData={props.posts.posts}
@@ -24,8 +24,10 @@ const renderPage = props => ({
   ) : null,
   newPostForm: !_.isUndefined(props.posts.result) ? <AdminForm formData={props.posts.result} /> : null,
 });
+
 class PageContainer extends Component {
   componentDidMount() {
+    console.log(this.props.history.location.pathname);
     this.props.fetchPosts();
   }
 

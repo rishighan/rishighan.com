@@ -100,6 +100,44 @@ $medium: 900px;
   left:50px;
 }
 
+// Masthead component styles
+.masthead-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+
+  .masthead {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -9;
+    width: 100%;
+    height: 500px;
+    background-size: cover;
+    overflow: hidden;
+  }
+
+  .title {
+    position: relative;
+    top: 450px;
+    align-self: flex-end;
+    z-index: 99;
+    color: #CCC;
+    font-style: italic;
+    font-size: 0.8em;
+  }
+
+  @media only screen and (min-width: 320px) and (max-width: 995px) {
+    .title {
+      position: relative;
+      align-self: flex-end;
+      z-index: 99;
+      top: 210px;
+    }
+  }
+}
+
 // Content
 .content {
   font-variant-numeric: tabular-nums;
