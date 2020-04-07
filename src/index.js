@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore from './store/index';
 import './styles/rgapp.scss';
-import AppContainer from './components/AppContainer';
+import AppContainer from './components/AppContainer/AppContainer';
 
 const store = configureStore({});
 
