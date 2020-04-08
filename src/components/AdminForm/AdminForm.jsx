@@ -219,8 +219,8 @@ class AdminForm extends Component {
                   </Field>
                 </div>
 
-                <div className="field is-grouped">
-                  <div className="field has-addons">
+                <div className="field">
+                  <div className="field has-addons is-pulled-left">
                     {/* Save Post */}
                     <p className="control">
                       <button className="button is-inverted"
