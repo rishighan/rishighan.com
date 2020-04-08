@@ -219,52 +219,56 @@ class AdminForm extends Component {
                   </Field>
                 </div>
 
-                {/* Global Form controls */}
-                <div className="field">
-                  <div className="buttons has-addons">
+                <div className="field is-grouped">
+                  <div className="field has-addons">
                     {/* Save Post */}
-                    <button className="button is-inverted"
-                      onClick={() => this.props.updatePost(values)}
-                      disabled={submitting || pristine}>
-                      <span className="icon">
-                        <i className="fas fa-save"></i>
-                      </span>
-                    </button>
-
-                    {/* Save draft */}
-                    <button className="button is-primary" disabled={submitting} >
-                      <span className="icon">
-                        <i className="fas fa-paperclip"></i>
-                      </span>
-                      <label>
-                        <Field
-                          name="is_sticky"
-                          component="input"
-                          type="checkbox"
-                        />{' '}
-                        <span>{values.is_sticky ? 'Unstick' : 'Make Sticky'}</span>
-                      </label>
-                    </button>
-
+                    <p className="control">
+                      <button className="button is-inverted"
+                        onClick={() => this.props.updatePost(values)}
+                        disabled={submitting || pristine}>
+                        <span className="icon">
+                          <i className="fas fa-save"></i>
+                        </span>
+                      </button>
+                    </p>
+                    {/* Save Draft */}
+                    <p className="control">
+                      <button className="button">
+                        <span className="icon">
+                          <i className="fab fa-firstdraft"></i>
+                        </span>
+                        <label>
+                          <Field
+                            name="is_draft"
+                            component="input"
+                            type="checkbox"
+                          />{' '}
+                          <span>{values.is_draft ? 'Unmark Draft' : 'Save Draft'}</span>
+                        </label>
+                      </button>
+                    </p>
                     {/* Make Sticky */}
-                    <button className="button is-warning" disabled={submitting}>
-                      <span className="icon">
-                        <i className="fab fa-firstdraft"></i>
-                      </span>
-                      <label>
-                        <Field
-                          name="is_draft"
-                          component="input"
-                          type="checkbox"
-                        />{' '}
-                        <span>{values.is_draft ? 'Unmark Draft' : 'Save Draft'}</span>
-                      </label>
-                    </button>
+                    <p className="control">
+                      <button className="button">
+                        <span className="icon">
+                          <i className="fas fa-paperclip"></i>
+                        </span>
+                        <label>
+                          <Field
+                            name="is_sticky"
+                            component="input"
+                            type="checkbox"
+                          />{' '}
+                          <span>{values.is_sticky ? 'Unstick' : 'Make Sticky'}</span>
+                        </label>
+                      </button>
+                    </p>
                   </div>
 
-                  <div className="buttons has-addons">
+                  <div className="field has-addons is-pulled-right">
                     {/* Archive */}
-                    <button className="button is-info" disabled={submitting} >
+                    <p className="control">
+                      <button className="button">
                       <span className="icon">
                         <i className="fas fa-archive"></i>
                       </span>
@@ -276,19 +280,21 @@ class AdminForm extends Component {
                         />{' '}
                         <span>{values.is_archived ? 'Unarchive' : 'Archive'}</span>
                       </label>
-                    </button>
-
+                      </button>
+                    </p>
                     {/* Delete */}
-                    <button className="button is-link is-danger">
+                    <p className="control">
+                      <button className="button is-danger">
                       <span className="icon">
                         <i className="far fa-trash-alt"></i>
                       </span>
                       <span>Delete Post</span>
-                    </button>
-                  </div>
+                      </button>
+                    </p>
+                  </div>  
                 </div>
               </div>
-          )}
+            )}
         />
       </div>);
   }
