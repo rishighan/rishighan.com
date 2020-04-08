@@ -10,6 +10,7 @@ import {
   FETCH_DRAFTS_SUCCESS,
   GET_DIFF_HISTORIES_SUCCESS,
 } from '../constants/action-types';
+import qs from 'qs';
 
 // const postsServiceURI = 'http://services.rishighan.com/api/v1/posts/';
 const postsServiceURI = 'http://localhost/api/v1/posts/';
@@ -31,6 +32,9 @@ export const postsAPICall = options => async (dispatch) => {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
       },
+      paramsSerializer: (params) => {
+        return qs.stringify(params, {arrayFormat: 'repeat'});
+     },
     });
 
     switch (options.callURIAction) {
@@ -42,6 +46,7 @@ export const postsAPICall = options => async (dispatch) => {
         break;
       case 'retrieve':
       case 'findByTagName':
+      case 'filterPostsByTags':
       case 'searchPosts':
       case 'retrieveOne':
       case 'getArchivedPosts':

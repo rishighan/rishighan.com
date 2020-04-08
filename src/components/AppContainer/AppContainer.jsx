@@ -11,13 +11,9 @@ import { postsAPICall } from '../../actions/index';
 import { postModel } from '../../constants/post.model';
 
 class AppContainer extends Component {
-  componentDidMount() {
-    this.props.fetchMasthead();
-  }
-
   render() {
     return (<>
-     { this.props.pathname === '/' ? <Masthead/> : null }
+      {this.props.pathname === '/' ? <Masthead /> : null}
       <section className="section">
         <div className="container">
           <ConnectedRouter history={history}>
@@ -126,27 +122,11 @@ class AppContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
-  pathname: state.router.location.pathname,
-  search: state.router.location.search,
-  hash: state.router.location.hash,
-  masthead: state.posts[0],
+    pathname: state.router.location.pathname,
+    search: state.router.location.search,
+    hash: state.router.location.hash,
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  fetchMasthead: () => {
-    dispatch(postsAPICall({
-      callURIAction: 'findByTagName',
-      callMethod: 'get',
-      callParams: {
-        tagName: 'Masthead',
-        pageOffset: 1,
-        pageLimit: 1,
-      },
-    }));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);
+export default connect(mapStateToProps)(AppContainer);
