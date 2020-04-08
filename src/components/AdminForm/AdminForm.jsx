@@ -224,17 +224,18 @@ class AdminForm extends Component {
                     {/* Save Post */}
                     <p className="control">
                       <button className="button is-inverted"
-                        onClick={() => this.props.updatePost(values)}
-                        disabled={submitting || pristine}>
+                              onClick={() => this.props.updatePost(values)}
+                              disabled={submitting || pristine}>
                         <span className="icon">
                           <i className="fas fa-save"></i>
                         </span>
                       </button>
                     </p>
+                    
                     {/* Save Draft */}
                     <p className="control">
                       <button className="button">
-                        <span className="icon">
+                        <span className="icon is-info">
                           <i className="fab fa-firstdraft"></i>
                         </span>
                         <label>
@@ -247,6 +248,7 @@ class AdminForm extends Component {
                         </label>
                       </button>
                     </p>
+
                     {/* Make Sticky */}
                     <p className="control">
                       <button className="button">
@@ -282,6 +284,7 @@ class AdminForm extends Component {
                       </label>
                       </button>
                     </p>
+
                     {/* Delete */}
                     <p className="control">
                       <button className="button is-danger">

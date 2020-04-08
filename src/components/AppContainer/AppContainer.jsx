@@ -7,9 +7,14 @@ import PageContainer from '../PageContainer/PageContainer';
 import { history } from '../../store/index';
 import Masthead from '../Masthead/Masthead';
 import NavItems from '../Navigation/NavItems';
+import { postsAPICall } from '../../actions/index';
 import { postModel } from '../../constants/post.model';
 
 class AppContainer extends Component {
+  componentDidMount() {
+    this.props.fetchMasthead();
+  }
+
   render() {
     return (<>
      { this.props.pathname === '/' ? <Masthead/> : null }
@@ -120,10 +125,28 @@ class AppContainer extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => {
+  console.log(state);
+  return {
   pathname: state.router.location.pathname,
   search: state.router.location.search,
   hash: state.router.location.hash,
-})
+  masthead: state.posts[0],
+  }
+}
 
-export default connect(mapStateToProps)(AppContainer);
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  fetchMasthead: () => {
+    dispatch(postsAPICall({
+      callURIAction: 'findByTagName',
+      callMethod: 'get',
+      callParams: {
+        tagName: 'Masthead',
+        pageOffset: 1,
+        pageLimit: 1,
+      },
+    }));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);
