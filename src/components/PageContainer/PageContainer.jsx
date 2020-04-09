@@ -29,16 +29,12 @@ class PageContainer extends Component {
   componentDidMount() {
     this.props.fetchPosts();
   }
-
-  render() {
-    return renderPage(this.props)[this.props.options.type];
-  }
+  render = () => renderPage(this.props)[this.props.options.type];
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
-    posts: state.posts.docs,
+    posts: state.posts,
     newPost: state.posts.result,
   };
 }
