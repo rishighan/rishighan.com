@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import { extractPostByTagName } from '../../utils/post.utils';
 import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 import Heading from '../Heading/Heading';
 import Timestamp from '../Timestamp/Timestamp';
@@ -21,24 +22,8 @@ const renderPageFragment = (props) => {
 
         case 'blog':
             // this is to filter out the masthead post
-            let mastheadPost = _.chain(props.postsData.posts)
-                .map(posts => {
-                    return _.map(posts.tags, tag => {
-                        if (tag.value === 'Masthead') {
-                            return posts;
-                        }
-                    });
-                })
-                .each(posts => {
-                    let fr = _.each(posts, post => {
-                        if (!_.isUndefined(post)) {
-                            return post;
-                        }
-                    })
-                    return _.pull(fr, undefined)
-                })
-                .value()
-            let blogPosts = _.without(props.postsData.posts, _.flatten(mastheadPost)[0])
+            let mastheadPost = extractPostByTagName(props.postsData.posts, 'Masthead');
+            let blogPosts = _.without(props.postsData.posts, mastheadPost[0])
             return (<>
                 {_.isArray(props.postsData.posts) ? (<div>
                     {blogPosts.map((post, idx) => (<article key={idx}>

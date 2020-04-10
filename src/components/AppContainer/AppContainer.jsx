@@ -8,11 +8,31 @@ import { history } from '../../store/index';
 import Masthead from '../Masthead/Masthead';
 import NavItems from '../Navigation/NavItems';
 import { postModel } from '../../constants/post.model';
+import { extractPostByTagName, extractHeroImageFromPost } from '../../utils/post.utils';
 
 class AppContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.props = props;
+  }
+
+  componentDidMount() {
+    console.log(this.props.blogPosts)
+  }
+
+  // Still reeling from the mental gymnastics 
+  // I performed to retrieve one URL
+  getMastheadImageUrl(posts) {
+    let mastheadPost = extractPostByTagName(posts, 'Masthead');
+    return extractHeroImageFromPost(mastheadPost);
+  }
+
   render() {
     return (<>
-      {this.props.pathname === '/' ? <Masthead /> : null}
+      {this.props.pathname === '/' ? <Masthead
+                                        mastheadImageUrl={this.props.blogPosts ? this.getMastheadImageUrl(this.props.blogPosts.posts) : null} />
+        : null}
+
       <section className="section">
         <div className="container">
           <ConnectedRouter history={history}>
@@ -125,6 +145,7 @@ const mapStateToProps = state => {
     pathname: state.router.location.pathname,
     search: state.router.location.search,
     hash: state.router.location.hash,
+    blogPosts: state.posts,
   }
 }
 
