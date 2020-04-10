@@ -7,7 +7,6 @@ import PageContainer from '../PageContainer/PageContainer';
 import { history } from '../../store/index';
 import Masthead from '../Masthead/Masthead';
 import NavItems from '../Navigation/NavItems';
-import { postsAPICall } from '../../actions/index';
 import { postModel } from '../../constants/post.model';
 
 class AppContainer extends Component {
