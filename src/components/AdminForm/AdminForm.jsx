@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import _ from 'lodash';
 import CreatableSelect from 'react-select/creatable';
+import Async, { makeAsyncSelect } from 'react-select/async';
 
 import format from 'date-fns/format';
 import { Markup } from 'interweave';
@@ -160,10 +161,11 @@ class AdminForm extends Component {
                 {/* Tags */}
                 <div className="field">
                   <label className="field-label is-normal">Tags</label>
-                  <Field
-                    name="tags"
-                    component={this.ReactSelect}
-                    options={tags}
+                  <AsyncSelect
+                    cacheOptions
+                    loadOptions={loadOptions}
+                    defaultOptions
+                    onInputChange={this.handleInputChange}
                   />
                 </div>
 
@@ -219,6 +221,24 @@ class AdminForm extends Component {
                   </Field>
                 </div>
 
+                {/* Related Posts */}
+                <div className="box">
+                  <div className="columns">
+                    <div className="column">
+                      <label className="field-label is-normal">Related Posts</label>
+                      <Field name="series_name" component="input" className="input" placeholder="Series name" />
+                    </div>
+                    <div className="column">
+                      <label className="field-label is-normal">Look up Posts</label>
+                      <Field
+                        name="related_posts"
+                        component={this.ReactSelect}
+                        options={tags}
+                      />
+                    </div>
+                  </div>
+                </div>
+
                 <div className="field">
                   <div className="field has-addons is-pulled-left">
                     {/* Save Post */}
@@ -231,7 +251,7 @@ class AdminForm extends Component {
                         </span>
                       </button>
                     </p>
-                    
+
                     {/* Save Draft */}
                     <p className="control">
                       <button className="button">
@@ -271,30 +291,30 @@ class AdminForm extends Component {
                     {/* Archive */}
                     <p className="control">
                       <button className="button">
-                      <span className="icon">
-                        <i className="fas fa-archive"></i>
-                      </span>
-                      <label>
-                        <Field
-                          name="is_archived"
-                          component="input"
-                          type="checkbox"
-                        />{' '}
-                        <span>{values.is_archived ? 'Unarchive' : 'Archive'}</span>
-                      </label>
+                        <span className="icon">
+                          <i className="fas fa-archive"></i>
+                        </span>
+                        <label>
+                          <Field
+                            name="is_archived"
+                            component="input"
+                            type="checkbox"
+                          />{' '}
+                          <span>{values.is_archived ? 'Unarchive' : 'Archive'}</span>
+                        </label>
                       </button>
                     </p>
 
                     {/* Delete */}
                     <p className="control">
                       <button className="button is-danger">
-                      <span className="icon">
-                        <i className="far fa-trash-alt"></i>
-                      </span>
-                      <span>Delete Post</span>
+                        <span className="icon">
+                          <i className="far fa-trash-alt"></i>
+                        </span>
+                        <span>Delete Post</span>
                       </button>
                     </p>
-                  </div>  
+                  </div>
                 </div>
               </div>
             )}
@@ -335,6 +355,20 @@ const mapDispatchToProps = dispatch => ({
       },
       data: post,
     }));
+  },
+  searchPosts: (e) => {
+    if (!_.isUndefined(e) && !_.isEmpty(e.target.value)) {
+      const searchTextValue = e.target.value;
+      dispatch(postsAPICall({
+        callURIAction: 'searchPosts',
+        callMethod: 'post',
+        callParams: {
+          pageOffset: 1,
+          pageLimit: 10,
+          searchTerm: searchTextValue,
+        },
+      }));
+    }
   },
 });
 
