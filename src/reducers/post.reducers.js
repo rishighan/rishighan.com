@@ -9,7 +9,8 @@ import {
   FETCH_STATISTICS_SUCCESS,
   FETCH_DRAFTS_SUCCESS,
   UPDATE_POST_SUCCESS,
-  GET_DIFF_HISTORIES_SUCCESS
+  GET_DIFF_HISTORIES_SUCCESS,
+  CREATE_SERIES_SUCCESS
 } from "../constants/action-types";
 
 const initialState = {
@@ -20,6 +21,7 @@ const initialState = {
   diffHistories: []
 };
 function postsReducer(state = initialState, action) {
+  console.log(action)
   switch (action.type) {
     case CREATE_POST_SUCCESS:
       return {
@@ -75,6 +77,12 @@ function postsReducer(state = initialState, action) {
         ...state,
         inProgress: false,
         diffHistories: action.diffHistories
+      };
+    case CREATE_SERIES_SUCCESS:
+      return {
+        ...state,
+        inProgress: false,
+        result,
       };
     default:
       return state;

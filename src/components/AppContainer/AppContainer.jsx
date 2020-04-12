@@ -70,14 +70,14 @@ class AppContainer extends Component {
                   path={'/admin/manage/series'}
                   render={props => (
                     <PageContainer
-                      callOptions={{
-                        callMethod: 'get',
-                        callURIAction: 'retrieveOne',
-                        
-                      }}
                       options={{
                         type: 'seriesForm',
-                        metadata: {},
+                        metadata: {
+                          seedData: {
+                            series_name: '',
+                            post: [],
+                          }
+                        },
                       }}
                     />
                   )}

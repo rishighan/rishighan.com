@@ -9,6 +9,8 @@ import {
   FETCH_STATISTICS_SUCCESS,
   FETCH_DRAFTS_SUCCESS,
   GET_DIFF_HISTORIES_SUCCESS,
+  CREATE_SERIES_SUCCESS,
+  CREATE_SERIES_ERROR,
 } from '../constants/action-types';
 import {
   POSTS_SERVICE_URI,
@@ -77,6 +79,12 @@ export const postsAPICall = options => async (dispatch) => {
         dispatch({
           type: GET_DIFF_HISTORIES_SUCCESS,
           diffHistories: response.data,
+        });
+        break;
+      case 'createSeries':
+        dispatch({
+          type: CREATE_SERIES_SUCCESS,
+          result,
         });
         break;
       default:

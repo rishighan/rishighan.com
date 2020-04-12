@@ -5,10 +5,15 @@ import DebounceInput from 'react-debounce-input';
 import axios from 'axios';
 import { POSTS_SERVICE_URI } from '../../constants/endpoints';
 import PropTypes from 'prop-types';
+import { postsAPICall } from '../../actions';
 
 class SeriesForm extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            postsSearchResults: [],
+        };
+        this.handlePostsSearch = this.handlePostsSearch.bind(this);
     }
 
     handlePostsSearch(e) {
@@ -29,34 +34,22 @@ class SeriesForm extends Component {
         });
     }
 
-    sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
-
-    async save(values) {
-      this.props.updatePost(values);
-      await this.sleep(5000);
-    }
-
-    onSubmit() {
-        console.log(submitted);
+    onSubmit(values) {
+        console.log(values);
     }
 
     render() {
         return (
             <div className="column content is-two-thirds is-full-tablet is-full-mobile">
                 <Form
-                    onSubmit={onSubmit}
-                    initialValues={
-                        {
-                            ...this.props.formData,
-                        }
-                    }
+                    onSubmit={this.onSubmit}
+                    initialValues={{
+                        ...this.props.data
+                    }}
                     render={({
                         pristine, submitting, values,
                     }) => (
                             <div className="form">
-                                {/* Autosave */}
-                                <Autosave debounce={1000} save={this.save} />
-
                                 {/* Related Posts */}
                                 <div className="box">
                                     <div className="columns">
@@ -74,14 +67,14 @@ class SeriesForm extends Component {
                                                     onChange={this.handlePostsSearch}
                                                 />
                                             </div>
-                                            {/* search results */}
+                                            {/* Search Results */}
                                             {!_.isEmpty(this.state.postsSearchResults) ? (<div className="dropdown is-active">
                                                 <div className="dropdown-menu" id="dropdown-menu" role="menu">
                                                     <div className="dropdown-content">
                                                         <ul>
                                                             {_.map(this.state.postsSearchResults, (result, idx) => {
                                                                 return (<li onClick={() => {
-                                                                    values.series.push(result.id)
+                                                                    values.post.push(result.id)
                                                                 }}
                                                                     key={idx}>
                                                                     {result.title}
@@ -95,21 +88,51 @@ class SeriesForm extends Component {
                                     </div>
                                     {/* selections */}
                                     <div className="field is-grouped is-grouped-multiline">
-                                        {_.map(values.series, selection => {
-                                            return (<span className="tags has-addons">
+                                        {_.map(values.post, (selection, idx) => {
+                                            return (<span key={idx} className="tags has-addons">
                                                 <span className="tag is-info">{selection}</span>
                                                 <a className="tag is-delete"></a>
                                             </span>)
                                         })}
                                     </div>
+                                    <div className="is-6">
+                                        {/* Save Post */}
+                                        <p className="control" >
+                                            <button className="button is-inverted"
+                                                onClick={() => this.props.createSeries(values)}>
+                                                <span className="icon">
+                                                    <i className="fas fa-save"></i>
+                                                </span>
+                                            </button>
+                                        </p>
+                                    </div>
+
+                                    <pre>{JSON.stringify(values, 0, 2)}</pre>
                                 </div>
                             </div>
                         )}
                 />
+
             </div>
         )
     }
 }
 
-export default connect()(SeriesForm)
+function mapStateToProps(state) {
+    return {
+        createStatus: state,
+    };
+}
+
+const mapDispatchToProps = dispatch => ({
+    createSeries: values => {
+        dispatch(postsAPICall({
+            callURIAction: 'createSeries',
+            callMethod: 'post',
+            data: values,
+        }));
+    },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SeriesForm)
 

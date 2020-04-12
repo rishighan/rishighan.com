@@ -19,7 +19,7 @@ const renderPage = props => ({
       />
     </div>
   ),
-  seriesMain: <SeriesForm />,
+  seriesForm: <SeriesForm data={props.options.metadata.seedData}/>,
   adminMain: <AdminMain />,
   editPostForm: !_.isArray(props.posts.posts) ? (
     <AdminForm formData={props.posts.posts} />
@@ -29,7 +29,9 @@ const renderPage = props => ({
 
 class PageContainer extends Component {
   componentDidMount() {
-    this.props.fetchPosts();
+    if(!_.isUndefined(this.props.callOptions)) {
+      this.props.fetchPosts();
+    }
   }
   render = () => renderPage(this.props)[this.props.options.type];
 }
