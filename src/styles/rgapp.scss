@@ -263,7 +263,8 @@ $medium: 900px;
       }
     }
 
-    .field, .box {
+    .field,
+    .box {
       margin: 1.5rem 0;
 
       input,
@@ -277,6 +278,32 @@ $medium: 900px;
           input[type="checkbox"] {
             display: none;
             cursor: pointer;
+          }
+        }
+      }
+
+      // related posts and dropdown styles
+      .lookup-posts {
+        margin: 24px 0 0 0;
+      }
+
+      .dropdown {
+        width: 100%;
+        .dropdown-menu {
+          width: 100%;
+          .dropdown-content {
+            ul {
+              margin: 0px;
+              li {
+                cursor: pointer;
+                width: 100%;
+                padding: 5px 0 5px 10px;
+                margin: 0;
+                &:hover {
+                  background: #ccc;
+                }
+              }
+            }
           }
         }
       }

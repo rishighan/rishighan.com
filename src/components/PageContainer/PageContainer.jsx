@@ -6,6 +6,7 @@ import _ from 'lodash';
 import PageFragment from '../PageFragment/PageFragment';
 import AdminForm from '../AdminForm/AdminForm';
 import AdminMain from '../AdminMain/AdminMain';
+import SeriesForm from '../AdminForm/SeriesForm';
 import { postsAPICall } from '../../actions/index';
 
 const renderPage = props => ({
@@ -18,6 +19,7 @@ const renderPage = props => ({
       />
     </div>
   ),
+  seriesMain: <SeriesForm />,
   adminMain: <AdminMain />,
   editPostForm: !_.isArray(props.posts.posts) ? (
     <AdminForm formData={props.posts.posts} />

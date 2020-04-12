@@ -5,14 +5,12 @@ import PropTypes from 'prop-types';
 
 import _ from 'lodash';
 import CreatableSelect from 'react-select/creatable';
-import Async, { makeAsyncSelect } from 'react-select/async';
 
 import format from 'date-fns/format';
 import { Markup } from 'interweave';
 import Dropzone from '../Dropzone/Dropzone';
 import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 import Autosave from '../Autosave/Autosave';
-
 import customStyles from '../Select/select-styles';
 
 import tags from '../../constants/tags';
@@ -29,6 +27,7 @@ class AdminForm extends Component {
     this.tabs = ['Markdown', 'Preview', 'Diff History', 'JSON'];
 
     this.state = {
+      postsSearchResults: [],
       currentlyActiveTab: this.tabs[0],
       markup: <div className="control is-expanded">
         <this.MarkdownEditor content={this.props.formData.content} />
@@ -161,11 +160,10 @@ class AdminForm extends Component {
                 {/* Tags */}
                 <div className="field">
                   <label className="field-label is-normal">Tags</label>
-                  <AsyncSelect
-                    cacheOptions
-                    loadOptions={loadOptions}
-                    defaultOptions
-                    onInputChange={this.handleInputChange}
+                  <Field
+                    name="tags"
+                    component={this.ReactSelect}
+                    options={tags}
                   />
                 </div>
 
@@ -221,31 +219,13 @@ class AdminForm extends Component {
                   </Field>
                 </div>
 
-                {/* Related Posts */}
-                <div className="box">
-                  <div className="columns">
-                    <div className="column">
-                      <label className="field-label is-normal">Related Posts</label>
-                      <Field name="series_name" component="input" className="input" placeholder="Series name" />
-                    </div>
-                    <div className="column">
-                      <label className="field-label is-normal">Look up Posts</label>
-                      <Field
-                        name="related_posts"
-                        component={this.ReactSelect}
-                        options={tags}
-                      />
-                    </div>
-                  </div>
-                </div>
-
                 <div className="field">
                   <div className="field has-addons is-pulled-left">
                     {/* Save Post */}
                     <p className="control">
                       <button className="button is-inverted"
-                              onClick={() => this.props.updatePost(values)}
-                              disabled={submitting || pristine}>
+                        onClick={() => this.props.updatePost(values)}
+                        disabled={submitting || pristine}>
                         <span className="icon">
                           <i className="fas fa-save"></i>
                         </span>
@@ -341,6 +321,7 @@ const mapDispatchToProps = dispatch => ({
     }));
   },
   updatePost: (post) => {
+    console.log(post);
     _.assign(post, {
       upsertValue: false,
       slug: createSlug(post.title),
@@ -356,23 +337,10 @@ const mapDispatchToProps = dispatch => ({
       data: post,
     }));
   },
-  searchPosts: (e) => {
-    if (!_.isUndefined(e) && !_.isEmpty(e.target.value)) {
-      const searchTextValue = e.target.value;
-      dispatch(postsAPICall({
-        callURIAction: 'searchPosts',
-        callMethod: 'post',
-        callParams: {
-          pageOffset: 1,
-          pageLimit: 10,
-          searchTerm: searchTextValue,
-        },
-      }));
-    }
-  },
 });
 
 AdminForm.propTypes = {
+  searchPosts: PropTypes.func,
   formData: PropTypes.object,
   updatePost: PropTypes.func,
   getDiffHistories: PropTypes.func,

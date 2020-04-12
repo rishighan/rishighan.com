@@ -16,10 +16,6 @@ class AppContainer extends Component {
     this.props = props;
   }
 
-  componentDidMount() {
-    console.log(this.props.blogPosts)
-  }
-
   // Still reeling from the mental gymnastics 
   // I performed to retrieve one URL
   getMastheadImageUrl(posts) {
@@ -69,6 +65,24 @@ class AppContainer extends Component {
                     />
                   )}
                 />
+                {/* Series form routes */}
+                <Route
+                  path={'/admin/manage/series'}
+                  render={props => (
+                    <PageContainer
+                      callOptions={{
+                        callMethod: 'get',
+                        callURIAction: 'retrieveOne',
+                        
+                      }}
+                      options={{
+                        type: 'seriesForm',
+                        metadata: {},
+                      }}
+                    />
+                  )}
+                />
+
                 <Route
                   path={'/admin'}
                   exact

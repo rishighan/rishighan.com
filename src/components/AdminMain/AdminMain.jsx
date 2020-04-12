@@ -94,6 +94,15 @@ const mapDispatchToProps = dispatch => ({
           searchTerm: searchTextValue,
         },
       }));
+    } else {
+      dispatch(postsAPICall({
+        callURIAction: 'retrieve',
+        callMethod: 'get',
+        callParams: {
+          pageOffset: 1,
+          pageLimit: 10,
+        },
+      }));
     }
   },
   getDrafts: () => {

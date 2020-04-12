@@ -10,11 +10,11 @@ import {
   FETCH_DRAFTS_SUCCESS,
   GET_DIFF_HISTORIES_SUCCESS,
 } from '../constants/action-types';
+import {
+  POSTS_SERVICE_URI,
+  ASSETS_SERVICE_URI,
+} from '../constants/endpoints';
 import qs from 'qs';
-
-// const postsServiceURI = 'http://services.rishighan.com/api/v1/posts/';
-const postsServiceURI = 'http://localhost/api/v1/posts/';
-const assetsServiceURI = 'http://localhost/assets/api/';
 
 // @params {options}
 export const postsAPICall = options => async (dispatch) => {
@@ -23,7 +23,7 @@ export const postsAPICall = options => async (dispatch) => {
       type: FETCH_POSTS_REQUEST,
       inProgress: true,
     });
-    const serviceURI = postsServiceURI + options.callURIAction;
+    const serviceURI = POSTS_SERVICE_URI + options.callURIAction;
     const response = await axios(serviceURI, {
       method: options.callMethod,
       params: options.callParams,
@@ -102,7 +102,7 @@ export const assetsAPICall = async (options) => {
         fd.append('fileName', options.file[0].name);
 
         uploadResponse = await axios.post(
-          assetsServiceURI + options.callURIAction,
+          ASSETS_SERVICE_URI + options.callURIAction,
           fd,
           {
             headers: {
@@ -115,7 +115,7 @@ export const assetsAPICall = async (options) => {
       case 'delete':
         deleteResponse = await axios({
           method: options.method,
-          url: assetsServiceURI + options.callURIAction,
+          url: ASSETS_SERVICE_URI + options.callURIAction,
           params: {
             fileName: options.fileName,
           },
