@@ -16,6 +16,10 @@ class SeriesForm extends Component {
         this.handlePostsSearch = this.handlePostsSearch.bind(this);
     }
 
+    componentDidMount() {
+        this.props.fetchAllSeries();
+    }
+
     handlePostsSearch(e) {
         const searchPostsURI = POSTS_SERVICE_URI + 'searchPosts';
         axios.post(searchPostsURI, {
@@ -106,21 +110,45 @@ class SeriesForm extends Component {
                                             </button>
                                         </p>
                                     </div>
-
-                                    <pre>{JSON.stringify(values, 0, 2)}</pre>
                                 </div>
                             </div>
                         )}
                 />
 
+                {/* Table view of series  */}
+                <table className="table">
+                    <thead>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>
+                                Series Name
+                            </th>
+                            <th>
+                                Posts
+                            </th>
+
+                        </tr>
+                        {/* Series names */}
+                        {!_.isUndefined(this.props.series) ? (<>
+                            {this.props.series.map((series, idx) => (<tr key={idx}>
+                                <td> {series.series_name} </td>
+                            <td><div className="tags">{series.post.map(post => <span className="tag is-light">{post.title}</span>)}</div></td>
+                            </tr>))}
+                        </>) : null}
+                        
+                    </tbody>
+                </table>
             </div>
         )
     }
 }
 
 function mapStateToProps(state) {
+    console.log(state.posts.series)
     return {
         createStatus: state,
+        series: state.posts.series,
     };
 }
 
@@ -132,6 +160,12 @@ const mapDispatchToProps = dispatch => ({
             data: values,
         }));
     },
+    fetchAllSeries: () => {
+        dispatch(postsAPICall({
+            callURIAction: 'retrieveSeries',
+            callMethod: 'get',
+        }))
+    }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SeriesForm)
