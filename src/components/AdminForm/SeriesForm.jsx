@@ -6,12 +6,15 @@ import axios from 'axios';
 import { POSTS_SERVICE_URI } from '../../constants/endpoints';
 import PropTypes from 'prop-types';
 import { postsAPICall } from '../../actions';
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
 
 class SeriesForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
             postsSearchResults: [],
+            open: false,
         };
         this.handlePostsSearch = this.handlePostsSearch.bind(this);
     }
@@ -38,11 +41,22 @@ class SeriesForm extends Component {
         });
     }
 
+    openModal() {
+        this.setState({
+            open: true,
+        });
+    }
+    onCloseModal() {
+        this.setState({
+            open: false,
+        });
+    }
     onSubmit(values) {
         console.log(values);
     }
 
     render() {
+        const { open } = this.state;
         return (
             <div className="column content is-two-thirds is-full-tablet is-full-mobile">
                 <Form
@@ -93,7 +107,8 @@ class SeriesForm extends Component {
                                     {/* selections */}
                                     <div className="field is-grouped is-grouped-multiline">
                                         {_.map(values.post, (selection, idx) => {
-                                            return (<span key={idx} className="tags has-addons">
+                                            return (<span key={idx} 
+                                                          className="tags has-addons">
                                                 <span className="tag is-info">{selection}</span>
                                                 <a className="tag is-delete"></a>
                                             </span>)
@@ -133,12 +148,26 @@ class SeriesForm extends Component {
                         {!_.isUndefined(this.props.series) ? (<>
                             {this.props.series.map((series, idx) => (<tr key={idx}>
                                 <td> {series.series_name} </td>
-                            <td><div className="tags">{series.post.map(post => <span className="tag is-light">{post.title}</span>)}</div></td>
+                                <td><div className="tags">{series.post.map(post => <span className="tag is-light">{post.title}</span>)}</div></td>
+                                <td><div className="field is-grouped are-small">
+                                        <span className="icon"
+                                              onClick={() => this.openModal()}>
+                                            <i className="fas fa-edit"></i>
+                                        </span>
+                                        <span className="icon">
+                                            <i className="fas fa-trash-alt"></i>
+                                        </span>
+                                </div></td>
                             </tr>))}
                         </>) : null}
-                        
+
                     </tbody>
                 </table>
+
+                {/* Modal */}
+                <Modal open={open} onClose={() => this.onCloseModal()} center>
+                    <h2>Simple centered modal</h2>
+                </Modal>
             </div>
         )
     }
