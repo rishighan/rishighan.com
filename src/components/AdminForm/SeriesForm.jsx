@@ -6,8 +6,22 @@ import axios from 'axios';
 import { POSTS_SERVICE_URI } from '../../constants/endpoints';
 import PropTypes from 'prop-types';
 import { postsAPICall } from '../../actions';
-import 'react-responsive-modal/styles.css';
-import { Modal } from 'react-responsive-modal';
+import ReactDOM from 'react-dom';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#app');
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        border: '0px',
+        backgroundColor: 'transparent none',
+    }
+};
 
 class SeriesForm extends Component {
     constructor(props) {
@@ -17,6 +31,7 @@ class SeriesForm extends Component {
             open: false,
         };
         this.handlePostsSearch = this.handlePostsSearch.bind(this);
+
     }
 
     componentDidMount() {
@@ -41,9 +56,10 @@ class SeriesForm extends Component {
         });
     }
 
-    openModal() {
+    openModal(seriesData) {
         this.setState({
             open: true,
+            seriesData,
         });
     }
     onCloseModal() {
@@ -54,7 +70,6 @@ class SeriesForm extends Component {
     onSubmit(values) {
         console.log(values);
     }
-
     render() {
         const { open } = this.state;
         return (
@@ -107,8 +122,8 @@ class SeriesForm extends Component {
                                     {/* selections */}
                                     <div className="field is-grouped is-grouped-multiline">
                                         {_.map(values.post, (selection, idx) => {
-                                            return (<span key={idx} 
-                                                          className="tags has-addons">
+                                            return (<span key={idx}
+                                                className="tags has-addons">
                                                 <span className="tag is-info">{selection}</span>
                                                 <a className="tag is-delete"></a>
                                             </span>)
@@ -122,6 +137,7 @@ class SeriesForm extends Component {
                                                 <span className="icon">
                                                     <i className="fas fa-save"></i>
                                                 </span>
+                                                <span>Create Series</span>
                                             </button>
                                         </p>
                                     </div>
@@ -148,15 +164,15 @@ class SeriesForm extends Component {
                         {!_.isUndefined(this.props.series) ? (<>
                             {this.props.series.map((series, idx) => (<tr key={idx}>
                                 <td> {series.series_name} </td>
-                                <td><div className="tags">{series.post.map(post => <span className="tag is-light">{post.title}</span>)}</div></td>
+                                <td><div className="tags">{series.post.map((post, idx) => <span className="tag is-light" key={idx}>{post.title}</span>)}</div></td>
                                 <td><div className="field is-grouped are-small">
-                                        <span className="icon"
-                                              onClick={() => this.openModal()}>
-                                            <i className="fas fa-edit"></i>
-                                        </span>
-                                        <span className="icon">
-                                            <i className="fas fa-trash-alt"></i>
-                                        </span>
+                                    <span className="icon has-text-grey"
+                                        onClick={() => this.openModal(series)}>
+                                        <i className="fas fa-edit"></i>
+                                    </span>
+                                    <span className="icon has-text-grey">
+                                        <i className="fas fa-trash-alt"></i>
+                                    </span>
                                 </div></td>
                             </tr>))}
                         </>) : null}
@@ -165,9 +181,39 @@ class SeriesForm extends Component {
                 </table>
 
                 {/* Modal */}
-                <Modal open={open} onClose={() => this.onCloseModal()} center>
-                    <h2>Simple centered modal</h2>
+                <Modal
+                    isOpen={this.state.open}
+                    onRequestClose={() => this.onCloseModal()}
+                    style={customStyles}
+                    contentLabel="Example Modal"
+                >
+                    <div className="columns modal-card-container">
+                        <div className="modal-card column is-full-mobile">
+                            <header className="modal-card-head">
+                                <p className="modal-card-title">Edit Series</p>
+                                <button className="delete" aria-label="close" onClick={() => this.onCloseModal()}></button>
+                            </header>
+                            <section className="modal-card-body">
+                                {!_.isUndefined(this.state.seriesData) ? (<>
+                                    <h6>{this.state.seriesData.series_name}</h6>
+                                    <p>
+                                        {_.map(this.state.seriesData.post, (post, idx) => {
+                                            { return <span key={idx}>{post.title}</span> }
+                                        })}
+                                    </p>
+                                </>) : null}
+
+                            </section>
+                            <footer className="modal-card-foot">
+                                <button className="button is-success">Save changes</button>
+                                <button className="button">Cancel</button>
+                            </footer>
+                        </div>
+                    </div>
+
                 </Modal>
+
+                {/* {JSON.stringify(this.state)} */}
             </div>
         )
     }

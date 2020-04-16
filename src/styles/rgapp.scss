@@ -97,6 +97,16 @@ $medium: 900px;
   left: 50px;
 }
 
+// Modal
+.modal-card-container {
+  border-radius: 5px;
+  border: 1px solid #CCC;
+  .column, .is-full-mobile {
+    padding: 0px;
+    margin-left: 0px;
+  }
+}
+
 // Masthead component styles
 .masthead-container {
   display: flex;
@@ -151,7 +161,7 @@ $medium: 900px;
   }
 
   // Overrides for:
-  // <List>, <Timestamp>, pagination, tile and search input
+  // <List>, <Timestamp>, <Modal>, pagination, tile and search input
   .rg-list {
     margin-left: 0;
 
@@ -176,6 +186,14 @@ $medium: 900px;
   }
   .search {
     padding: 0;
+  }
+
+  table {
+    tr {
+      th {
+        font-weight: normal;
+      }
+    }
   }
 
   // Article styles
