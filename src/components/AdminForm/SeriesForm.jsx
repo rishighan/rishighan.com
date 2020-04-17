@@ -180,39 +180,57 @@ class SeriesForm extends Component {
                     </tbody>
                 </table>
 
-                {/* Modal */}
+                {/* Edit Series Modal */}
                 <Modal
                     isOpen={this.state.open}
                     onRequestClose={() => this.onCloseModal()}
                     style={customStyles}
                     contentLabel="Example Modal"
                 >
-                    <div className="columns modal-card-container">
+                    <div className="columns content modal-card-container">
                         <div className="modal-card column is-full-mobile">
                             <header className="modal-card-head">
                                 <p className="modal-card-title">Edit Series</p>
                                 <button className="delete" aria-label="close" onClick={() => this.onCloseModal()}></button>
                             </header>
                             <section className="modal-card-body">
-                                {!_.isUndefined(this.state.seriesData) ? (<>
-                                    <h6>{this.state.seriesData.series_name}</h6>
-                                    <p>
-                                        {_.map(this.state.seriesData.post, (post, idx) => {
-                                            { return <span key={idx}>{post.title}</span> }
-                                        })}
-                                    </p>
-                                </>) : null}
+                                <Form
+                                    onSubmit={this.onSubmit}
+                                    initialValues={{ ...this.state.seriesData }}
+                                    render={({ handleSubmit, form, submitting, pristine, values }) => (
+                                        <div className="form" onSubmit={handleSubmit}>
+                                            {/* Series Name */}
+                                            <div className="field">
+                                                <label className="field-label is-normal">Series Name</label>
+                                                <div className="control is-expanded">
+                                                    <Field name="series_name"
+                                                        component="input"
+                                                        className="input is-size-5"
+                                                        placeholder="Series Name" />
+                                                </div>
+                                            </div>
 
+                                            {/* Associated Posts */}
+                                            <div className="field">
+                                                <label className="field-label is-normal">Posts in Series</label>
+                                                <div className="control is-expanded">
+                                                    <Field name="post"/>
+                                                </div>
+                                            </div> 
+
+
+                                            <div className="buttons">
+                                                <button className="button is-success">Save changes</button>
+                                                <button className="button">Cancel</button>
+                                            </div>
+                                            <pre>{JSON.stringify(values, 0, 2)}</pre>
+                                        </div>
+                                    )}
+                                />
                             </section>
-                            <footer className="modal-card-foot">
-                                <button className="button is-success">Save changes</button>
-                                <button className="button">Cancel</button>
-                            </footer>
                         </div>
                     </div>
-
                 </Modal>
-
                 {/* {JSON.stringify(this.state)} */}
             </div>
         )
