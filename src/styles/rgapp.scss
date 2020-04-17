@@ -101,9 +101,18 @@ $medium: 900px;
 .modal-card-container {
   border-radius: 5px;
   border: 1px solid #CCC;
+  .modal-card-body {
+    padding: 10px 20px 10px 20px;
+  }
   .column, .is-full-mobile {
     padding: 0px;
     margin-left: 0px;
+
+    .tags {
+      .is-delete {
+        margin-right: 5px;
+      }
+    }
   }
 }
 

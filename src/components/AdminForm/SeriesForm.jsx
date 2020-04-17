@@ -214,16 +214,19 @@ class SeriesForm extends Component {
                                             <div className="field">
                                                 <label className="field-label is-normal">Posts in Series</label>
                                                 <div className="control is-expanded">
-                                                    <Field name="post"/>
+                                                    <div className="tags has-addons">
+                                                        {_.map(values.post, (post, idx) => (<><a className="tag">{post.title}</a>
+                                                            <a class="tag is-delete"></a></>))}
+                                                    </div>
                                                 </div>
-                                            </div> 
+                                            </div>
 
 
                                             <div className="buttons">
                                                 <button className="button is-success">Save changes</button>
                                                 <button className="button">Cancel</button>
                                             </div>
-                                            <pre>{JSON.stringify(values, 0, 2)}</pre>
+                                            {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
                                         </div>
                                     )}
                                 />
