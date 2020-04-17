@@ -83,6 +83,8 @@ class SeriesForm extends Component {
                         pristine, submitting, values,
                     }) => (
                             <div className="form">
+                                <h2>Manage Series</h2>
+
                                 {/* Related Posts */}
                                 <div className="box">
                                     <div className="columns">
@@ -185,7 +187,6 @@ class SeriesForm extends Component {
                     isOpen={this.state.open}
                     onRequestClose={() => this.onCloseModal()}
                     style={customStyles}
-                    contentLabel="Example Modal"
                 >
                     <div className="columns content modal-card-container">
                         <div className="modal-card column is-full-mobile">
@@ -216,11 +217,12 @@ class SeriesForm extends Component {
                                                 <div className="control is-expanded">
                                                     <div className="tags has-addons">
                                                         {_.map(values.post, (post, idx) => (<><a className="tag">{post.title}</a>
-                                                            <a class="tag is-delete"></a></>))}
+                                                            <a className="tag is-delete" onClick={ () => {
+                                                                console.log(post);
+                                                            }}></a></>))}
                                                     </div>
                                                 </div>
                                             </div>
-
 
                                             <div className="buttons">
                                                 <button className="button is-success">Save changes</button>
