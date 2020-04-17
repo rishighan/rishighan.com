@@ -88,6 +88,12 @@ export const postsAPICall = options => async (dispatch) => {
           result,
         });
         break;
+      case 'updateSeries':
+        dispatch({
+          type: UPDATE_SERIES_SUCCESS,
+          result,
+        });
+        break;
       case 'retrieveSeries':
         dispatch({
           type: FETCH_SERIES_SUCCESS,

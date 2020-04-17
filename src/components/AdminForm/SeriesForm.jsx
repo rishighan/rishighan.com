@@ -71,7 +71,6 @@ class SeriesForm extends Component {
         console.log(values);
     }
     render() {
-        const { open } = this.state;
         return (
             <div className="column content is-two-thirds is-full-tablet is-full-mobile">
                 <Form
@@ -218,17 +217,19 @@ class SeriesForm extends Component {
                                                     <div className="tags has-addons">
                                                         {_.map(values.post, (post, idx) => (<><a className="tag">{post.title}</a>
                                                             <a className="tag is-delete" onClick={ () => {
-                                                                console.log(post);
+                                                                let postToBeDeleted = _.find(values.post, {_id: post._id});
+                                                                return _.pull(values.post, postToBeDeleted);
                                                             }}></a></>))}
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div className="buttons">
-                                                <button className="button is-success">Save changes</button>
+                                                <button className="button is-success"
+                                                        onClick={() => {}}>Save changes</button>
                                                 <button className="button">Cancel</button>
                                             </div>
-                                            {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
+                                            <pre>{JSON.stringify(values, 0, 2)}</pre>
                                         </div>
                                     )}
                                 />
@@ -243,7 +244,6 @@ class SeriesForm extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state.posts.series)
     return {
         createStatus: state,
         series: state.posts.series,
@@ -254,6 +254,13 @@ const mapDispatchToProps = dispatch => ({
     createSeries: values => {
         dispatch(postsAPICall({
             callURIAction: 'createSeries',
+            callMethod: 'post',
+            data: values,
+        }));
+    },
+    updateSeries: values => {
+        dispatch(postsAPICall({
+            callURIAction: 'updateSeries',
             callMethod: 'post',
             data: values,
         }));
