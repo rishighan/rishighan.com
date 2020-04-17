@@ -214,19 +214,19 @@ class SeriesForm extends Component {
                                             <div className="field">
                                                 <label className="field-label is-normal">Posts in Series</label>
                                                 <div className="control is-expanded">
-                                                    <div className="tags has-addons">
-                                                        {_.map(values.post, (post, idx) => (<><a className="tag">{post.title}</a>
-                                                            <a className="tag is-delete" onClick={ () => {
-                                                                let postToBeDeleted = _.find(values.post, {_id: post._id});
+                                                    {_.map(values.post, (post, idx) => (<div className="tags has-addons">
+                                                        <a className="tag">{post.title}</a>
+                                                            <a className="tag is-delete" onClick={() => {
+                                                                let postToBeDeleted = _.find(values.post, { _id: post._id });
                                                                 return _.pull(values.post, postToBeDeleted);
-                                                            }}></a></>))}
-                                                    </div>
+                                                            }}></a>
+                                                        </div>))}
                                                 </div>
                                             </div>
 
                                             <div className="buttons">
                                                 <button className="button is-success"
-                                                        onClick={() => {}}>Save changes</button>
+                                                    onClick={() => { }}>Save changes</button>
                                                 <button className="button">Cancel</button>
                                             </div>
                                             <pre>{JSON.stringify(values, 0, 2)}</pre>
