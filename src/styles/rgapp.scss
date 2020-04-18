@@ -85,27 +85,6 @@ $medium: 900px;
   left: 50px;
 }
 
-// Modal
-.modal-card-container {
-  border-radius: 5px;
-  border: 1px solid #CCC;
-
-  .modal-card-head {
-    .modal-card-title {
-      margin: 0px;
-    }
-  }
-
-  .modal-card-body {
-    padding-top: 0px;
-  }
-
-  .column,
-  .is-full-mobile {
-    padding: 0px;
-    margin-left: 0px;
-  }
-}
 
 // Masthead component styles
 .masthead-container {

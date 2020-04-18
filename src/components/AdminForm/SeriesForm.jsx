@@ -29,6 +29,7 @@ class SeriesForm extends Component {
         this.state = {
             postsSearchResults: [],
             open: false,
+            formData: {},
         };
         this.handlePostsSearch = this.handlePostsSearch.bind(this);
 
@@ -56,17 +57,13 @@ class SeriesForm extends Component {
         });
     }
 
-    openModal(seriesData) {
+    editPost(series) {
+        console.log(series);
         this.setState({
-            open: true,
-            seriesData,
+            formData: series,
         });
     }
-    onCloseModal() {
-        this.setState({
-            open: false,
-        });
-    }
+
     onSubmit(values) {
         console.log(values);
     }
@@ -76,7 +73,7 @@ class SeriesForm extends Component {
                 <Form
                     onSubmit={this.onSubmit}
                     initialValues={{
-                        ...this.props.data
+                        ...this.state.formData
                     }}
                     render={({
                         pristine, submitting, values,
@@ -108,7 +105,7 @@ class SeriesForm extends Component {
                                                         <ul>
                                                             {_.map(this.state.postsSearchResults, (result, idx) => {
                                                                 return (<li onClick={() => {
-                                                                    values.post.push(result.id)
+                                                                    values.post.push(result);
                                                                 }}
                                                                     key={idx}>
                                                                     {result.title}
@@ -122,16 +119,20 @@ class SeriesForm extends Component {
                                     </div>
                                     {/* selections */}
                                     <div className="field is-grouped is-grouped-multiline">
+                                        
                                         {_.map(values.post, (selection, idx) => {
-                                            return (<span key={idx}
+                                            return (<div key={idx}
                                                 className="tags has-addons">
-                                                <span className="tag is-info">{selection}</span>
-                                                <a className="tag is-delete"></a>
-                                            </span>)
+                                                <span className="tag is-light-grey">{selection.title}</span>
+                                                <a className="tag is-delete"
+                                                   onClick={() => {
+                                                        return _.pull(values.post, selection);
+                                                    }}></a>
+                                            </div>)
                                         })}
                                     </div>
                                     <div className="is-6">
-                                        {/* Save Post */}
+                                        {/* Create Series */}
                                         <p className="control" >
                                             <button className="button is-inverted"
                                                 onClick={() => this.props.createSeries(values)}>
@@ -140,6 +141,14 @@ class SeriesForm extends Component {
                                                 </span>
                                                 <span>Create Series</span>
                                             </button>
+
+                                            {!pristine ? (<button className="button is-inverted"
+                                                    onClick={() => this.props.createSeries(values)}>
+                                                <span className="icon">
+                                                    <i className="fas fa-save"></i>
+                                                </span>
+                                                <span>Update Series</span>
+                                            </button>): null} 
                                         </p>
                                     </div>
                                 </div>
@@ -163,14 +172,10 @@ class SeriesForm extends Component {
                         </tr>
                         {/* Series names */}
                         {!_.isUndefined(this.props.series) ? (<>
-                            {this.props.series.map((series, idx) => (<tr key={idx}>
+                            {this.props.series.map((series, idx) => (<tr key={idx} onClick={() => this.editPost(series)}>
                                 <td> {series.series_name} </td>
                                 <td><div className="tags">{series.post.map((post, idx) => <span className="tag is-light" key={idx}>{post.title}</span>)}</div></td>
                                 <td><div className="field is-grouped are-small">
-                                    <span className="icon has-text-grey"
-                                        onClick={() => this.openModal(series)}>
-                                        <i className="fas fa-edit"></i>
-                                    </span>
                                     <span className="icon has-text-grey">
                                         <i className="fas fa-trash-alt"></i>
                                     </span>
@@ -180,63 +185,6 @@ class SeriesForm extends Component {
 
                     </tbody>
                 </table>
-
-                {/* Edit Series Modal */}
-                <Modal
-                    isOpen={this.state.open}
-                    onRequestClose={() => this.onCloseModal()}
-                    style={customStyles}
-                >
-                    <div className="columns content modal-card-container">
-                        <div className="modal-card column is-full-mobile">
-                            <header className="modal-card-head">
-                                <p className="modal-card-title">Edit Series</p>
-                                <button className="delete" aria-label="close" onClick={() => this.onCloseModal()}></button>
-                            </header>
-                            <section className="modal-card-body">
-                                <Form
-                                    onSubmit={this.onSubmit}
-                                    initialValues={{ ...this.state.seriesData }}
-                                    render={({ handleSubmit, form, submitting, pristine, values }) => (
-                                        <div className="form" onSubmit={handleSubmit}>
-                                            {/* Series Name */}
-                                            <div className="field">
-                                                <label className="field-label is-normal">Series Name</label>
-                                                <div className="control is-expanded">
-                                                    <Field name="series_name"
-                                                        component="input"
-                                                        className="input is-size-5"
-                                                        placeholder="Series Name" />
-                                                </div>
-                                            </div>
-
-                                            {/* Associated Posts */}
-                                            <div className="field">
-                                                <label className="field-label is-normal">Posts in Series</label>
-                                                <div className="control is-expanded">
-                                                    {_.map(values.post, (post, idx) => (<div className="tags has-addons">
-                                                        <a className="tag">{post.title}</a>
-                                                            <a className="tag is-delete" onClick={() => {
-                                                                let postToBeDeleted = _.find(values.post, { _id: post._id });
-                                                                return _.pull(values.post, postToBeDeleted);
-                                                            }}></a>
-                                                        </div>))}
-                                                </div>
-                                            </div>
-
-                                            <div className="buttons">
-                                                <button className="button is-success"
-                                                    onClick={() => { }}>Save changes</button>
-                                                <button className="button">Cancel</button>
-                                            </div>
-                                            <pre>{JSON.stringify(values, 0, 2)}</pre>
-                                        </div>
-                                    )}
-                                />
-                            </section>
-                        </div>
-                    </div>
-                </Modal>
                 {/* {JSON.stringify(this.state)} */}
             </div>
         )
