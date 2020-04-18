@@ -321,7 +321,6 @@ const mapDispatchToProps = dispatch => ({
     }));
   },
   updatePost: (post) => {
-    console.log(post);
     _.assign(post, {
       upsertValue: false,
       slug: createSlug(post.title),

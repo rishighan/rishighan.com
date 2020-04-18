@@ -12,6 +12,7 @@ import {
   CREATE_SERIES_SUCCESS,
   CREATE_SERIES_ERROR,
   FETCH_SERIES_SUCCESS,
+  UPDATE_SERIES_SUCCESS,
 } from '../constants/action-types';
 import {
   POSTS_SERVICE_URI,

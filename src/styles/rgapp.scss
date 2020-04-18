@@ -153,6 +153,12 @@ $medium: 900px;
     }
   }
 
+  .rg-table {
+    tr {
+      cursor: pointer;
+    }
+  }
+
   .pagination {
     margin: 0rem;
     padding: 0rem;
@@ -248,7 +254,6 @@ $medium: 900px;
   }
 
   .form {
-
     h1,
     h2,
     h3,
@@ -265,7 +270,8 @@ $medium: 900px;
     }
 
     .field,
-    .box {
+    .box,
+    .rg-box {
       margin: 1.5rem 0;
 
       input,
@@ -284,6 +290,13 @@ $medium: 900px;
           }
         }
       }
+
+      // grouped field margin override
+   
+        .field {
+          margin: 0.5rem 0;
+        }
+
 
       // related posts and dropdown styles
       .lookup-posts {
