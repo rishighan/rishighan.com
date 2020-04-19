@@ -167,8 +167,8 @@ class SeriesForm extends Component {
                       className="button is-inverted"
                       onClick={() => this.props.createSeries(values)}
                     >
-                      <span className="icon">
-                        <i className="fas fa-save"></i>
+                      <span className="icon has-text-primary">
+                        <i className="fas fa-file"></i>
                       </span>
                       <span>Create Series</span>
                     </button>
@@ -178,8 +178,8 @@ class SeriesForm extends Component {
                       className="button is-inverted"
                       onClick={() => this.props.updateSeries(values)}
                     >
-                      <span className="icon">
-                        <i className="fas fa-save"></i>
+                      <span className="icon has-text-warning">
+                        <i className="fas fa-file-import"></i>
                       </span>
                       <span>Update Series</span>
                     </button>
@@ -207,7 +207,7 @@ class SeriesForm extends Component {
                     <td>
                       <div className="tags">
                         {series.post.map((post, idx) => (
-                          <span className="tag is-light" key={idx}>
+                          <span className="tag is-warning" key={idx}>
                             {post.title}
                           </span>
                         ))}
@@ -215,7 +215,8 @@ class SeriesForm extends Component {
                     </td>
                     <td>
                       <div className="field is-grouped are-small">
-                        <span className="icon has-text-grey">
+                        <span className="icon has-text-danger"
+                              onClick={() => this.props.deleteSeries(series._id)}>
                           <i className="fas fa-trash-alt"></i>
                         </span>
                       </div>
@@ -252,7 +253,6 @@ const mapDispatchToProps = dispatch => ({
     );
   },
   updateSeries: values => {
-      console.log(values)
     dispatch(
       postsAPICall({
         callURIAction: "updateSeries",
