@@ -59,7 +59,6 @@ class SeriesForm extends Component {
   }
 
   editPost(series) {
-    console.log(series);
     this.setState({
       formData: series,
     });
@@ -79,7 +78,6 @@ class SeriesForm extends Component {
           render={({ pristine, submitting, values }) => (
             <div className="form">
               <h2>Manage Series</h2>
-
               {/* Related Posts */}
               <div className="box rg-box">
                 <div className="columns">
@@ -94,6 +92,7 @@ class SeriesForm extends Component {
                       placeholder="Series name"
                     />
                   </div>
+                  {/* Search Posts */}
                   <div className="column">
                     <div className="control is-expanded lookup-posts">
                       <DebounceInput
@@ -121,10 +120,10 @@ class SeriesForm extends Component {
                                     <li
                                       onClick={() => {
                                         if (!_.isUndefined(values.post)) {
-                                          values.post.push(result);
+                                          values.post.push(result.id);
                                         } else {
                                           values.post = [];
-                                          values.post.push(result);
+                                          values.post.push(result.id);
                                         }
                                       }}
                                       key={idx}
@@ -141,19 +140,20 @@ class SeriesForm extends Component {
                     ) : null}
                   </div>
                 </div>
-                {/* selections */}
+                {/* Associated Posts */}
                 {!_.isUndefined(values.post) ? <small className="has-text-grey-light">Associated Posts</small>: null }
                 <div className="field is-grouped is-grouped-multiline">
                   {_.map(values.post, (selection, idx) => {
+                    const selectedPost = !_.isUndefined(selection._id) ? selection._id : selection
                     return (
                       <div key={idx} className="tags has-addons">
                         <span className="tag has-background-warning">
-                          {selection.title}
+                          { selectedPost }
                         </span>
                         <a
                           className="tag is-delete"
                           onClick={() => {
-                            return _.pull(values.post, selection);
+                            return _.remove(values.post, post => post._id === selectedPost);
                           }}
                         ></a>
                       </div>
@@ -226,7 +226,9 @@ class SeriesForm extends Component {
             ) : null}
           </tbody>
         </table>
-        {/* {JSON.stringify(this.state)} */}
+        <div>
+        {/* <pre>{JSON.stringify(this.state)}</pre> */}
+        </div>
       </div>
     );
   }
@@ -239,8 +241,8 @@ function mapStateToProps(state) {
   };
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  createSeries: (values) => {
+const mapDispatchToProps = dispatch => ({
+  createSeries: values => {
     dispatch(
       postsAPICall({
         callURIAction: "createSeries",
@@ -249,18 +251,24 @@ const mapDispatchToProps = (dispatch) => ({
       })
     );
   },
-  updateSeries: (values) => {
-    console.log(values);
+  updateSeries: values => {
+      console.log(values)
     dispatch(
       postsAPICall({
         callURIAction: "updateSeries",
         callMethod: "post",
         data: values,
-        callParams: {
-          postId: values._id,
-        },
       })
     );
+  },
+  deleteSeries: seriesId => {
+      dispatch(postsAPICall({
+        callURIAction: 'deleteSeries',
+        callMethod: 'post',
+        callParams: {
+            seriesId,
+        }
+      }))
   },
   fetchAllSeries: () => {
     dispatch(

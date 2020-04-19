@@ -9,10 +9,12 @@ import {
   FETCH_STATISTICS_SUCCESS,
   FETCH_DRAFTS_SUCCESS,
   GET_DIFF_HISTORIES_SUCCESS,
+  // series
   CREATE_SERIES_SUCCESS,
   CREATE_SERIES_ERROR,
   FETCH_SERIES_SUCCESS,
   UPDATE_SERIES_SUCCESS,
+  DELETE_SERIES_SUCCESS,
 } from '../constants/action-types';
 import {
   POSTS_SERVICE_URI,
@@ -99,6 +101,12 @@ export const postsAPICall = options => async (dispatch) => {
         dispatch({
           type: FETCH_SERIES_SUCCESS,
           result: response.data,
+        });
+        break;
+      case 'deleteSeries':
+        dispatch({
+          type: DELETE_SERIES_SUCCESS,
+          result,
         });
         break;
       default:
