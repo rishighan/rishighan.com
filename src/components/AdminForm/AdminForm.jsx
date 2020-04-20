@@ -227,8 +227,15 @@ class AdminForm extends Component {
               </div>
 
               {/* Series */}
-              <CalloutCard />
-              
+              {!_.isEmpty(this.props.series) ? (<div className="field">
+                <label className="field-label is-normal">Part Of Series</label>
+                {_.map(this.props.series, series => (
+                 <CalloutCard
+                  heading={series.series_name}
+                  listItems={series.post} /> 
+                ))}
+              </div>) : null}
+
               {/* Media management */}
               <div className="box">
                 <label className="field-label is-normal">Attachments</label>
@@ -370,11 +377,12 @@ function mapStateToProps(state) {
   return {
     updateStatus: state.posts.posts,
     diffHistories: state.posts.diffHistories,
+    series: state.posts.series,
   };
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  findSeriesByPostId : postId => {
+  findSeriesByPostId: postId => {
     dispatch(postsAPICall({
       callURIAction: "findSeriesByPostId",
       callMethod: "get",

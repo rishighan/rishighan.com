@@ -110,6 +110,12 @@ export const postsAPICall = options => async (dispatch) => {
           result,
         });
         break;
+      case 'findSeriesByPostId':
+        dispatch({
+          type: FIND_SERIES_BY_POSTID_SUCCESS,
+          result: response.data,
+        });
+        break;
       default:
         console.log('Couldn\'nt complete request');
     }

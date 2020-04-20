@@ -221,10 +221,16 @@ $medium: 900px;
 
     .callout-card-text {
       ul {
-        margin: 0.75rem;
+        margin: 0 0 0.75rem 1rem;
         li {
           line-height: 1.2em;
+          color: grey;
         }
+      }
+      h6 {
+        text-transform: uppercase;
+        margin: 0.75rem 0 0.2rem 1rem;
+        letter-spacing:0.01rem;
       }
       align-self: center;
     }
