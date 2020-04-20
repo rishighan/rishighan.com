@@ -12,6 +12,7 @@ import Dropzone from "../Dropzone/Dropzone";
 import MarkdownRenderer from "../MarkdownRenderer/MarkdownRenderer";
 import Autosave from "../Autosave/Autosave";
 import customStyles from "../Select/select-styles";
+import CalloutCard from "../CalloutCard/CalloutCard";
 
 import tags from "../../constants/tags";
 import { createSlug } from "../../utils/slug.util";
@@ -112,6 +113,7 @@ class AdminForm extends Component {
 
   componentDidMount() {
     this.props.getDiffHistories(this.props.formData._id);
+    this.props.findSeriesByPostId(this.props.formData._id);
   }
 
   render() {
@@ -224,8 +226,9 @@ class AdminForm extends Component {
                 </div>
               </div>
 
-              {/*  */}
-
+              {/* Series */}
+              <CalloutCard />
+              
               {/* Media management */}
               <div className="box">
                 <label className="field-label is-normal">Attachments</label>
@@ -371,6 +374,15 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
+  findSeriesByPostId : postId => {
+    dispatch(postsAPICall({
+      callURIAction: "findSeriesByPostId",
+      callMethod: "get",
+      callParams: {
+        postId,
+      }
+    }));
+  },
   getDiffHistories: (postId) => {
     dispatch(
       postsAPICall({
@@ -408,6 +420,7 @@ AdminForm.propTypes = {
   updatePost: PropTypes.func,
   getDiffHistories: PropTypes.func,
   diffHistories: PropTypes.array,
+  findSeriesByPostId: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminForm);

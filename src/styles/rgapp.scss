@@ -191,42 +191,43 @@ $medium: 900px;
   // callout card
   .callout-card-container {
     height: 100px;
-    border: 1px solid #b8b8b2;
-    border-radius: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: center;
-    // align-content: center;
+    background: white;
+    font-size: 0.9rem;
 
-     
-      .callout-cover {
-        display: flex;
-        border-top-left-radius: 10px;
-        border-bottom-left-radius: 10px;
-        object-fit: cover;
-        justify-content: center;
-        width: 100px;
-        height: 100px;
-        
-        .icon {
-          color:white; 
-          font-size: 4rem;
-          align-self: center;
-        }
-      }
+    border-radius: 6px;
+    box-shadow: 0 0.5em 1em -0.125em rgba(20, 20, 20, 0.1), 0 0px 0 1px rgba(20, 20, 20, 0.02);
+    color: #4a4a4a;
 
-      .callout-card-text {
-        ul {
-          margin: 0.75rem;
-          li {
-            line-height: 1.2em;
-          }
-        }
+    .callout-cover {
+      display: flex;
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
+      object-fit: cover;
+      justify-content: center;
+      width: 150px;
+      height: 100px;
+
+      .icon {
+        color: white;
+        font-size: 4rem;
         align-self: center;
       }
+    }
 
+    .callout-card-text {
+      ul {
+        margin: 0.75rem;
+        li {
+          line-height: 1.2em;
+        }
+      }
+      align-self: center;
+    }
   }
 
   table {
@@ -389,8 +390,6 @@ $medium: 900px;
       cursor: pointer;
       margin-left: 5px;
     }
-
-    
 
     //  Image Cards
     .card-hero-background-color {

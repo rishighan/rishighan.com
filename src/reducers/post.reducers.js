@@ -13,6 +13,7 @@ import {
   CREATE_SERIES_SUCCESS,
   FETCH_SERIES_SUCCESS,
   DELETE_SERIES_SUCCESS,
+  FIND_SERIES_BY_POSTID_SUCCESS,
 } from "../constants/action-types";
 
 const initialState = {
@@ -92,11 +93,16 @@ function postsReducer(state = initialState, action) {
         series: action.result.docs,
       };
     case DELETE_SERIES_SUCCESS:
-      console.log(action)
       return {
         ...state,
         inProgress: false,
         deleteResult: result,
+      };
+    case FIND_SERIES_BY_POSTID_SUCCESS:
+      return {
+        ...state,
+        inProgress: false,
+        series: action.result
       };
     default:
       return state;

@@ -15,6 +15,7 @@ import {
   FETCH_SERIES_SUCCESS,
   UPDATE_SERIES_SUCCESS,
   DELETE_SERIES_SUCCESS,
+  FIND_SERIES_BY_POSTID_SUCCESS,
 } from '../constants/action-types';
 import {
   POSTS_SERVICE_URI,
