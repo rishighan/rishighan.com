@@ -6,6 +6,7 @@ import MarkdownRenderer from '../MarkdownRenderer/MarkdownRenderer';
 import Heading from '../Heading/Heading';
 import Timestamp from '../Timestamp/Timestamp';
 import List from '../List/List';
+import CalloutCard from '../CalloutCard/CalloutCard';
 
 const renderPageFragment = (props) => {
     switch (props.postType) {
@@ -26,6 +27,7 @@ const renderPageFragment = (props) => {
             let blogPosts = _.without(props.postsData.posts, mastheadPost[0])
             return (<>
                 {_.isArray(props.postsData.posts) ? (<div>
+                    <CalloutCard />
                     {blogPosts.map((post, idx) => (<article key={idx}>
                         <Heading headingText={post.title} linkHref={`/post/${post.slug}`} />
                         <Timestamp date={post.date_updated} dateFormat={'D MMM, YYYY '} />

@@ -10,45 +10,58 @@
 @import url("//hello.myfonts.net/count/38dd7f");
 @import url("//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css");
 
-@include font-face("Source Code Pro Regular",
+@include font-face(
+  "Source Code Pro Regular",
   "../../public/assets/fonts/Source Code Pro/Source Code Pro Regular",
   normal,
   normal,
-  ttf);
-@include font-face("ArminGrotesk-Regular",
+  ttf
+);
+@include font-face(
+  "ArminGrotesk-Regular",
   "../../public/assets/fonts/Armin Grotesk/38DD7F_3_0",
   normal,
   normal,
-  eot ttf woff woff2);
-@include font-face("ArminGrotesk-Thin",
+  eot ttf woff woff2
+);
+@include font-face(
+  "ArminGrotesk-Thin",
   "../../public/assets/fonts/Armin Grotesk/38DD7F_0_0",
   normal,
   normal,
-  eot ttf woff woff2);
-@include font-face("ArminGrotesk-ThinItalic",
+  eot ttf woff woff2
+);
+@include font-face(
+  "ArminGrotesk-ThinItalic",
   "../../public/assets/fonts/Armin Grotesk/38DD7F_1_0",
   normal,
   normal,
-  eot ttf woff woff2);
-@include font-face("ArminGrotesk-Normal",
+  eot ttf woff woff2
+);
+@include font-face(
+  "ArminGrotesk-Normal",
   "../../public/assets/fonts/Armin Grotesk/38DD7F_2_0",
   normal,
   normal,
-  eot ttf woff woff2);
-@include font-face("ArminGrotesk-SemiBold",
+  eot ttf woff woff2
+);
+@include font-face(
+  "ArminGrotesk-SemiBold",
   "../../public/assets/fonts/Armin Grotesk/38DD7F_5_0",
   normal,
   normal,
-  eot ttf woff woff2);
-@include font-face("ArminGrotesk-SemiBoldItalic",
+  eot ttf woff woff2
+);
+@include font-face(
+  "ArminGrotesk-SemiBoldItalic",
   "../../public/assets/fonts/Armin Grotesk/38DD7F_4_0",
   normal,
   normal,
-  eot ttf woff woff2);
+  eot ttf woff woff2
+);
 
 $render-mode: optimizeLegibility;
-$family-sans-serif: "ArminGrotesk-Regular",
-sans-serif;
+$family-sans-serif: "ArminGrotesk-Regular", sans-serif;
 $family-primary: $family-sans-serif;
 $family-monospace: "Source Code Pro Regular";
 $family-code: "Source Code Pro Regular";
@@ -84,7 +97,6 @@ $medium: 900px;
   top: 50px;
   left: 50px;
 }
-
 
 // Masthead component styles
 .masthead-container {
@@ -174,6 +186,47 @@ $medium: 900px;
 
   .search {
     padding: 0;
+  }
+
+  // callout card
+  .callout-card-container {
+    height: 100px;
+    border: 1px solid #b8b8b2;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    // align-content: center;
+
+     
+      .callout-cover {
+        display: flex;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        object-fit: cover;
+        justify-content: center;
+        width: 100px;
+        height: 100px;
+        
+        .icon {
+          color:white; 
+          font-size: 4rem;
+          align-self: center;
+        }
+      }
+
+      .callout-card-text {
+        ul {
+          margin: 0.75rem;
+          li {
+            line-height: 1.2em;
+          }
+        }
+        align-self: center;
+      }
+
   }
 
   table {
@@ -292,11 +345,9 @@ $medium: 900px;
       }
 
       // grouped field margin override
-   
-        .field {
-          margin: 0.5rem 0;
-        }
-
+      .field {
+        margin: 0.5rem 0;
+      }
 
       // related posts and dropdown styles
       .lookup-posts {
@@ -338,6 +389,8 @@ $medium: 900px;
       cursor: pointer;
       margin-left: 5px;
     }
+
+    
 
     //  Image Cards
     .card-hero-background-color {

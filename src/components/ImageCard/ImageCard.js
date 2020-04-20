@@ -1,18 +1,18 @@
-import React from 'react';
-import AspectRatio from 'react-aspect-ratio';
-import PropTypes from 'prop-types';
-import { inferImageDimensions } from '../../utils/image.utils';
+import React from "react";
+import AspectRatio from "react-aspect-ratio";
+import PropTypes from "prop-types";
+import { inferImageDimensions } from "../../utils/image.utils";
 
-const ImageCard = props => (
+const ImageCard = (props) => (
   <div
     className={`card ${
-      props.mediaObject.isHero ? 'has-background-grey-lighter' : ''
+      props.mediaObject.isHero ? "has-background-grey-lighter" : ""
     }`}
   >
     <div className="card-image">
       <AspectRatio
         ratio={inferImageDimensions(props.mediaObject.url)}
-        style={{ maxWidth: '200px' }}
+        style={{ maxWidth: "200px" }}
       >
         <figure className="image">
           <img src={props.mediaObject.url} />
@@ -22,12 +22,14 @@ const ImageCard = props => (
     <div className="card-content">
       <div className="tags has-addons metadata is-family-monospace is-size-7">
         <span className="tag has-background-light">
-          <span className="truncated" title={props.mediaObject.name}>{props.mediaObject.name}</span>
+          <span className="truncated" title={props.mediaObject.name}>
+            {props.mediaObject.name}
+          </span>
         </span>
         <span className="tag has-background-grey-light">
           {props.mediaObject.size
             ? Math.round(parseInt(props.mediaObject.size, 10) / 1024)
-            : 'Size not available.'}
+            : "Size not available."}
         </span>
       </div>
     </div>
@@ -36,7 +38,7 @@ const ImageCard = props => (
         className="card-footer-item is-size-7"
         onClick={props.toggleHeroStatus}
       >
-        {props.mediaObject.isHero ? 'Unmark' : 'Mark as Hero'}
+        {props.mediaObject.isHero ? "Unmark" : "Mark as Hero"}
       </a>
 
       <a
