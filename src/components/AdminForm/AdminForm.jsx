@@ -229,10 +229,10 @@ class AdminForm extends Component {
               {/* Series */}
               {!_.isEmpty(this.props.series) ? (<div className="field">
                 <label className="field-label is-normal">Part Of Series</label>
-                {_.map(this.props.series, series => (
+                {_.map(this.props.series, (series, idx) => (
                  <CalloutCard
-                  heading={series.series_name}
-                  listItems={series.post} /> 
+                  key={idx}
+                  data={this.props.series} /> 
                 ))}
               </div>) : null}
 
@@ -374,6 +374,7 @@ class AdminForm extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state)
   return {
     updateStatus: state.posts.posts,
     diffHistories: state.posts.diffHistories,

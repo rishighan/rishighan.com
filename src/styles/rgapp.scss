@@ -198,7 +198,7 @@ $medium: 900px;
     align-items: center;
     background: white;
     font-size: 0.9rem;
-
+    margin: 1.5rem 0;
     border-radius: 6px;
     box-shadow: 0 0.5em 1em -0.125em rgba(20, 20, 20, 0.1), 0 0px 0 1px rgba(20, 20, 20, 0.02);
     color: #4a4a4a;
@@ -230,7 +230,7 @@ $medium: 900px;
       h6 {
         text-transform: uppercase;
         margin: 0.75rem 0 0.2rem 1rem;
-        letter-spacing:0.01rem;
+        letter-spacing: 0.01rem;
       }
       align-self: center;
     }
@@ -255,7 +255,8 @@ $medium: 900px;
     th,
     h2,
     h3,
-    h4 {
+    h4,
+    h6 {
       font-family: "ArminGrotesk-Regular", sans-serif;
       font-weight: normal;
     }
