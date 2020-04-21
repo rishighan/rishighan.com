@@ -227,14 +227,22 @@ class AdminForm extends Component {
               </div>
 
               {/* Series */}
-              {!_.isEmpty(this.props.series) ? (<div className="field">
-                <label className="field-label is-normal">Part Of Series</label>
-                {_.map(this.props.series, (series, idx) => (
-                 <CalloutCard
-                  key={idx}
-                  data={this.props.series} /> 
-                ))}
-              </div>) : null}
+              {!_.isEmpty(this.props.series) ? (
+                <div className="field">
+                  <label className="field-label is-normal">
+                    Part Of Series
+                  </label>
+                  <a href="/admin/manage/series" className="button is-small is-inverted">
+                    <span className="icon">
+                      <i class="far fa-paper-plane"></i>
+                    </span>
+                    <span>Manage Series</span>
+                  </a>
+                  {_.map(this.props.series, (series, idx) => (
+                    <CalloutCard key={idx} data={this.props.series} />
+                  ))}
+                </div>
+              ) : null}
 
               {/* Media management */}
               <div className="box">
@@ -382,14 +390,16 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  findSeriesByPostId: postId => {
-    dispatch(postsAPICall({
-      callURIAction: "findSeriesByPostId",
-      callMethod: "get",
-      callParams: {
-        postId,
-      }
-    }));
+  findSeriesByPostId: (postId) => {
+    dispatch(
+      postsAPICall({
+        callURIAction: "findSeriesByPostId",
+        callMethod: "get",
+        callParams: {
+          postId,
+        },
+      })
+    );
   },
   getDiffHistories: (postId) => {
     dispatch(

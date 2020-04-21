@@ -36,7 +36,8 @@ class CalloutCard extends Component {
   }
 
   render() {
-    return (
+    return (<>
+      <div className="callout-text has-text-grey">{ this.props.calloutText }</div>
       <div className="callout-card-container">
         <div className="callout-cover has-background-info">
           {/* TODO: create own boxed-set icon */}
@@ -53,7 +54,7 @@ class CalloutCard extends Component {
             : null}
         </div>
       </div>
-    );
+    </>);
   }
 }
 

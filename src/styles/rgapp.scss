@@ -153,6 +153,11 @@ $medium: 900px;
 
   // Overrides for:
   // <List>, <Timestamp>, <Modal>, pagination, tile and search input
+  strong {
+    font-weight: normal;
+    font-family: ArminGrotesk-SemiBold;
+  }
+
   .rg-list {
     margin-left: 0;
 
@@ -189,6 +194,9 @@ $medium: 900px;
   }
 
   // callout card
+  .callout-text {
+    margin: 0.75rem 0 0.2rem 0;
+  }
   .callout-card-container {
     height: 100px;
     display: flex;
@@ -198,7 +206,7 @@ $medium: 900px;
     align-items: center;
     background: white;
     font-size: 0.9rem;
-    margin: 1.5rem 0;
+    margin: 0 0 1.5rem 0;
     border-radius: 6px;
     box-shadow: 0 0.5em 1em -0.125em rgba(20, 20, 20, 0.1), 0 0px 0 1px rgba(20, 20, 20, 0.02);
     color: #4a4a4a;
@@ -233,14 +241,6 @@ $medium: 900px;
         letter-spacing: 0.01rem;
       }
       align-self: center;
-    }
-  }
-
-  table {
-    tr {
-      th {
-        font-weight: normal;
-      }
     }
   }
 
@@ -330,6 +330,13 @@ $medium: 900px;
       }
     }
 
+    // table override
+    table {
+      th {
+        font-weight: normal;
+        font-family: ArminGrotesk-SemiBold;
+      }
+    }
     .field,
     .box,
     .rg-box {
