@@ -42,10 +42,7 @@ const renderPageFragment = (props) => {
 
     case "blog":
       // this is to filter out the masthead post
-      let mastheadPost = extractPostByTagName(
-        props.postsData.posts,
-        "Masthead"
-      );
+      let mastheadPost = extractPostByTagName(props.postsData.posts, "Masthead");
       let boxedSets = extractPostByTagName(props.postsData.posts, "boxedset");
       let blogPosts = _.without(props.postsData.posts, mastheadPost[0]);
       return (

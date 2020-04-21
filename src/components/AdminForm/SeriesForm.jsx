@@ -6,10 +6,7 @@ import axios from "axios";
 import { POSTS_SERVICE_URI } from "../../constants/endpoints";
 import PropTypes from "prop-types";
 import { postsAPICall } from "../../actions";
-import ReactDOM from "react-dom";
-import Modal from "react-modal";
 
-Modal.setAppElement("#app");
 const customStyles = {
   content: {
     top: "50%",

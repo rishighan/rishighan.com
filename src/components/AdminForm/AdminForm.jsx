@@ -374,7 +374,6 @@ class AdminForm extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state)
   return {
     updateStatus: state.posts.posts,
     diffHistories: state.posts.diffHistories,
