@@ -7,8 +7,7 @@ import AdminNavbar from "../Navigation/AdminNavbar";
 import PageContainer from "../PageContainer/PageContainer";
 import { history } from "../../store/index";
 import Masthead from "../Masthead/Masthead";
-import NavItems from "../Navigation/NavItems";
-import { postModel } from "../../constants/post.model";
+import { siteNavItems, adminNavItems } from "../Navigation/NavItems";
 import {
   extractPostByTagName,
   extractHeroImageFromPost,
@@ -31,12 +30,16 @@ class AppContainer extends Component {
     return sourceText.match(pattern);
   }
 
+  /**
+   * Finds out if a path matches /admin or not.
+   * @param {string} path - The path to match.
+   */
   isAdminPath(path) {
-    console.log(this.matchPattern(path, /\/admin\/(.)*/gm) !== null);
-    return this.matchPattern(path, /\/admin\/(.)*/gm) !== null;
+    return this.matchPattern(path, /\/admin(.)*/gm) !== null;
   }
   render() {
     return (
+      // Home page Masthead
       <>
         {this.props.pathname === "/" ? (
           <Masthead
@@ -48,17 +51,24 @@ class AppContainer extends Component {
           />
         ) : null}
 
-        {this.isAdminPath(this.props.pathname) ? <AdminNavbar /> : null}
+        {/* Single Post Masthead */}
+
         <section className="section">
           <div className="container">
             <ConnectedRouter history={history}>
+              {/* Admin navbar */}
+              {this.isAdminPath(this.props.pathname) ? (
+                <AdminNavbar navItems={adminNavItems} />
+              ) : null}
+
+              {/* Site navbar */}
               {!this.isAdminPath(this.props.pathname) ? (
-                <SiteNavbar navItems={NavItems} />
+                <SiteNavbar navItems={siteNavItems} />
               ) : null}
               <div>
                 {/* Route configuration */}
                 <div className="columns is-centered">
-                  {NavItems.map((navItem, idx) => (
+                  {[...siteNavItems, ...adminNavItems].map((navItem, idx) => (
                     <Route
                       exact
                       path={navItem.href}
@@ -82,86 +92,6 @@ class AppContainer extends Component {
                           metadata: {
                             subType: "single",
                             path: history.location.pathname,
-                          },
-                        }}
-                      />
-                    )}
-                  />
-                  {/* Series form routes */}
-                  <Route
-                    path={"/admin/manage/series"}
-                    render={(props) => (
-                      <PageContainer
-                        options={{
-                          type: "seriesForm",
-                          metadata: {
-                            seedData: {
-                              series_name: "",
-                              post: [],
-                            },
-                          },
-                        }}
-                      />
-                    )}
-                  />
-
-                  <Route
-                    path={"/admin"}
-                    exact
-                    render={() => (
-                      <PageContainer
-                        callOptions={{
-                          callMethod: "get",
-                          callURIAction: "retrieve",
-                          callParams: {
-                            pageOffset: 1,
-                            pageLimit: 10,
-                          },
-                        }}
-                        options={{
-                          type: "adminMain",
-                          metadata: {},
-                        }}
-                      />
-                    )}
-                  />
-                  {/* Edit post form route */}
-                  <Route
-                    path={"/admin/edit/:postSlug"}
-                    exact
-                    render={(props) => (
-                      <PageContainer
-                        callOptions={{
-                          callMethod: "get",
-                          callURIAction: "retrieveOne",
-                          callParams: {
-                            slug: props.match.params.postSlug,
-                          },
-                        }}
-                        options={{
-                          type: "editPostForm",
-                          metadata: {
-                            mode: "edit",
-                          },
-                        }}
-                      />
-                    )}
-                  />
-                  {/* New post, started as a draft */}
-                  <Route
-                    path={"/admin/write"}
-                    exact
-                    render={(props) => (
-                      <PageContainer
-                        callOptions={{
-                          callMethod: "post",
-                          callURIAction: "create",
-                          data: postModel,
-                        }}
-                        options={{
-                          type: "newPostForm",
-                          metadata: {
-                            mode: "new",
                           },
                         }}
                       />

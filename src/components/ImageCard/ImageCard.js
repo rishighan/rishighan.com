@@ -14,8 +14,7 @@ const bytesToSize = bytes => {
 const ImageCard = (props) => (
   <div
     className={`card ${
-      props.mediaObject.isHero ? "has-background-grey-lighter" : ""
-      }`}
+      props.mediaObject.isHero ? "has-background-light" : "" }`}
   >
     <div className="card-image">
       <AspectRatio

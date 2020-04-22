@@ -35,15 +35,15 @@ class AdminMain extends Component {
             <ReactPaginate
               previousLabel={'Previous'}
               nextLabel={'Next'}
-              breakLabel={'&hellip;'}
+              breakLabel={'...'}
               breakClassName={'pagination-ellipsis'}
               containerClassName={'pagination'}
               pageLinkClassName={'pagination-link'}
               previousClassName={'pagination-previous'}
               nextClassName={'pagination-next'}
               pageCount={this.props.pageCount}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
+              marginPagesDisplayed={1}
+              pageRangeDisplayed={2}
               onPageChange={this.props.nextPageHandler}
               activeClassName={'is-current'}
               disabledClassName={'disabled'}

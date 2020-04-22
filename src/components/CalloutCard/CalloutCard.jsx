@@ -5,7 +5,7 @@ class CalloutCard extends Component {
   constructor(props) {
     super(props);
     this.props = props;
-        this.state = {
+    this.state = {
       data: [],
       error: {},
     };
@@ -36,25 +36,25 @@ class CalloutCard extends Component {
   }
 
   render() {
-    return (<>
-      <div className="callout-text has-text-grey">{ this.props.calloutText }</div>
-      <div className="callout-card-container">
-        <div className="callout-cover has-background-info">
-          {/* TODO: create own boxed-set icon */}
-          <i className="fas fa-layer-group icon"></i>
+    const calloutContent = !_.isUndefined(this.state.data.data)
+      ? this.state.data.data
+      : this.props.data;
+    return (
+      <>
+        <div className="callout-text has-text-grey">
+          {this.props.calloutText}
         </div>
-        <div className="callout-card-text">
-          {/* data promise */}
-          {!_.isUndefined(this.state.data.data)
-            ? this.renderCalloutContent(this.state.data.data)
-            : null}
-          {/* data props */}
-          {!_.isUndefined(this.props.data)
-            ? this.renderCalloutContent(this.props.data)
-            : null}
+        <div className="callout-card-container">
+          <div className="callout-cover has-background-info">
+            {/* TODO: create own boxed-set icon */}
+            <i className="fas fa-layer-group icon"></i>
+          </div>
+          <div className="callout-card-text">
+            {this.renderCalloutContent(calloutContent)}
+          </div>
         </div>
-      </div>
-    </>);
+      </>
+    );
   }
 }
 

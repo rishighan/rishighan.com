@@ -9,8 +9,8 @@ import List from "../List/List";
 import CalloutCard from "../CalloutCard/CalloutCard";
 import axios from "axios";
 
-const getSeriesDataForPost = async (postId) => {
-  let series = await axios({
+const getSeriesDataForPost = async postId => {
+  const series = await axios({
     method: "GET",
     url: "http://localhost/api/v1/posts/findSeriesByPostId",
     params: {
@@ -41,8 +41,12 @@ const renderPageFragment = (props) => {
       );
 
     case "blog":
-      // this is to filter out the masthead post
-      let mastheadPost = extractPostByTagName(props.postsData.posts, "Masthead");
+      // This is to filter out the masthead, blog posts and boxed sets
+      // since I format them differently
+      let mastheadPost = extractPostByTagName(
+        props.postsData.posts,
+        "Masthead"
+      );
       let boxedSets = extractPostByTagName(props.postsData.posts, "boxedset");
       let blogPosts = _.without(props.postsData.posts, mastheadPost[0]);
       return (
@@ -63,11 +67,13 @@ const renderPageFragment = (props) => {
                   {_.findIndex(
                     boxedSets,
                     (boxedPost) => boxedPost._id === post._id
-                  ) !== -1
-                    ? <CalloutCard dataPromise={getSeriesDataForPost(post._id)} 
-                                   calloutText={'This post is a part of a series'}/>
-                    : null }
-                    {/* Content */}
+                  ) !== -1 ? (
+                    <CalloutCard
+                      dataPromise={getSeriesDataForPost(post._id)}
+                      calloutText={"This post is a part of a series."}
+                    />
+                  ) : null}
+                  {/* Content */}
                   <section>
                     <MarkdownRenderer text={post.content} />
                   </section>
@@ -121,7 +127,7 @@ const renderPageFragment = (props) => {
               {props.postsData.posts.map((archive, idx) => (
                 <div key={idx}>
                   <h2 className="is-size-3 has-text-grey has-text-weight-normal">
-                    {archive._id.year}{" "}
+                    {archive._id.year}
                   </h2>
                   <List showTimestamps>
                     {!_.isNil(archive.archivedPosts) &&
@@ -138,7 +144,7 @@ const renderPageFragment = (props) => {
   }
 };
 
-const PageFragment = (props) => renderPageFragment(props);
+const PageFragment = props => renderPageFragment(props);
 
 PageFragment.propTypes = {
   postType: PropTypes.string,

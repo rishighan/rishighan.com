@@ -1,137 +1,137 @@
-/* eslint-disable react/display-name */
-import React from 'react';
-import PageContainer from '../PageContainer/PageContainer';
+import React from "react";
+import PageContainer from "../PageContainer/PageContainer";
+import { postModel } from "../../constants/post.model";
 
-const NavItems = [
+export const siteNavItems = [
   {
-    displayName: 'home',
-    href: '/',
+    displayName: "home",
+    href: "/",
     render: () => (
       <PageContainer
         callOptions={{
-          callMethod: 'get',
-          callURIAction: 'filterPostsByTags',
+          callMethod: "get",
+          callURIAction: "filterPostsByTags",
           callParams: {
             pageOffset: 1,
             pageLimit: 10,
             queryDetails: {
               tagNames: ["Masthead", "blog"],
-              operator: 'include',
+              operator: "include",
             },
           },
         }}
         options={{
-          type: 'post',
+          type: "post",
           metadata: {
-            subType: 'blog',
+            subType: "blog",
           },
         }}
       />
     ),
   },
   {
-    displayName: 'work',
-    href: '/work',
+    displayName: "work",
+    href: "/work",
     render: () => (
       <PageContainer
         callOptions={{
-          callMethod: 'get',
-          callURIAction: 'findByTagName',
+          callMethod: "get",
+          callURIAction: "findByTagName",
           callParams: {
-            tagName: 'projects',
+            tagName: "projects",
             pageOffset: 1,
             pageLimit: 5,
           },
         }}
         options={{
-          type: 'post',
+          type: "post",
           metadata: {
-            subType: 'titles',
+            subType: "titles",
           },
         }}
       />
     ),
   },
   {
-    displayName: 'freeswim',
-    href: '/freeswim',
+    displayName: "freeswim",
+    href: "/freeswim",
     render: () => (
       <PageContainer
         callOptions={{
-          callMethod: 'get',
-          callURIAction: 'findByTagName',
+          callMethod: "get",
+          callURIAction: "findByTagName",
           callParams: {
-            tagName: 'trampoline',
+            tagName: "trampoline",
             pageOffset: 1,
             pageLimit: 5,
           },
         }}
         options={{
-          type: 'post',
+          type: "post",
           metadata: {
-            subType: 'blog',
+            subType: "blog",
           },
         }}
       />
     ),
   },
   {
-    displayName: 'illustrations',
-    href: '/illustrations',
+    displayName: "illustrations",
+    href: "/illustrations",
     render: () => (
       <PageContainer
         callOptions={{
-          callMethod: 'get',
-          callURIAction: 'findByTagName',
+          callMethod: "get",
+          callURIAction: "findByTagName",
           callParams: {
-            tagName: 'illustrations',
+            tagName: "illustrations",
             pageOffset: 1,
             pageLimit: 5,
           },
         }}
         options={{
-          type: 'post',
+          type: "post",
           metadata: {
-            subType: 'illustrations',
+            subType: "illustrations",
           },
         }}
       />
     ),
   },
   {
-    displayName: 'archive',
-    href: '/archive',
+    displayName: "archive",
+    href: "/archive",
     render: () => (
       <PageContainer
         callOptions={{
-          callMethod: 'get',
-          callURIAction: 'getArchivedPosts',
+          callMethod: "get",
+          callURIAction: "getArchivedPosts",
         }}
         options={{
-          type: 'post',
+          type: "post",
           metadata: {
-            subType: 'archive',
+            subType: "archive",
           },
         }}
       />
     ),
   },
   {
-    displayName: 'colophon',
-    href: '/colophon',
+    displayName: "colophon",
+    href: "/colophon",
     render: () => (
       <PageContainer
         callOptions={{
-          callMethod: 'get',
-          callURIAction: 'retrieveOne',
+          callMethod: "get",
+          callURIAction: "retrieveOne",
           callParams: {
-            slug: 'colophon',
+            slug: "colophon",
           },
         }}
         options={{
-          type: 'post',
+          type: "post",
           metadata: {
-            subType: 'single',
+            subType: "single",
           },
         }}
       />
@@ -139,4 +139,83 @@ const NavItems = [
   },
 ];
 
-export default NavItems;
+export const adminNavItems = [
+  {
+    href: "/admin",
+    displayName: "admin",
+    render: () => (
+      <PageContainer
+        callOptions={{
+          callMethod: "get",
+          callURIAction: "retrieve",
+          callParams: {
+            pageOffset: 1,
+            pageLimit: 10,
+          },
+        }}
+        options={{
+          type: "adminMain",
+          metadata: {},
+        }}
+      />
+    ),
+  },
+  {
+    href: "/admin/write",
+    displayName: "write",
+    render: (props) => (
+      <PageContainer
+        callOptions={{
+          callMethod: "post",
+          callURIAction: "create",
+          data: postModel,
+        }}
+        options={{
+          type: "newPostForm",
+          metadata: {
+            mode: "new",
+          },
+        }}
+      />
+    ),
+  },
+  {
+    displayName: "manage series",
+    href: "/admin/manage/series",
+    render: (props) => (
+      <PageContainer
+        options={{
+          type: "seriesForm",
+          metadata: {
+            seedData: {
+              series_name: "",
+              post: [],
+            },
+          },
+        }}
+      />
+    ),
+  },
+  
+  {
+    href: "/admin/edit/:postSlug",
+    render: (props) => (
+      <PageContainer
+        callOptions={{
+          callMethod: "get",
+          callURIAction: "retrieveOne",
+          callParams: {
+            slug: props.match.params.postSlug,
+          },
+        }}
+        options={{
+          type: "editPostForm",
+          metadata: {
+            mode: "edit",
+          },
+        }}
+      />
+    ),
+  },
+  
+];
