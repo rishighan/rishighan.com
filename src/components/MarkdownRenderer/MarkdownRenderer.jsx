@@ -43,9 +43,7 @@ class MarkdownRenderer extends Component {
 
   render() {
     const { text } = this.props;
-    return !_.isEmpty(text) ? (
-      <Interweave content={this.md.render(text)} />
-    ) : null;
+    return !_.isEmpty(text) ? <Interweave content={this.md.render(text)} /> : null;
   }
 }
 
