@@ -196,7 +196,7 @@ export const adminNavItems = [
       />
     ),
   },
-  
+
   {
     href: "/admin/edit/:postSlug",
     render: (props) => (
@@ -217,5 +217,25 @@ export const adminNavItems = [
       />
     ),
   },
-  
+  {
+    href: "/post/:postSlug",
+    render: (props) => (
+      <PageContainer
+        callOptions={{
+          callMethod: "get",
+          callURIAction: "retrieveOne",
+          callParams: {
+            slug: props.match.params.postSlug,
+          },
+        }}
+        options={{
+          type: "post",
+          metadata: {
+            subType: "single",
+            path: props.pathname,
+          },
+        }}
+      />
+    ),
+  },
 ];

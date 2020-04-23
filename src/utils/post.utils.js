@@ -20,9 +20,9 @@ export const extractPostByTagName = (collection, tagName) => {
 };
 
 export const extractHeroImageFromPost = post => {
-    if(!_.isUndefined(post[0])) {
+    if(!_.isUndefined(post)) {
         let heroImageUrl = [];
-        _.each(post[0].attachment, attachment => attachment.isHero ? heroImageUrl.push(attachment.url) : null);
+        _.each(post.attachment, attachment => attachment.isHero ? heroImageUrl.push(attachment.url) : null);
         return heroImageUrl[0];
     }
 };

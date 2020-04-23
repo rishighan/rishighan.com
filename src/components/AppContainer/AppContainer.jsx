@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
 import SiteNavbar from "../Navigation/SiteNavbar";
 import AdminNavbar from "../Navigation/AdminNavbar";
-import PageContainer from "../PageContainer/PageContainer";
 import { history } from "../../store/index";
 import Masthead from "../Masthead/Masthead";
 import { siteNavItems, adminNavItems } from "../Navigation/NavItems";
@@ -19,13 +18,40 @@ class AppContainer extends Component {
     this.props = props;
   }
 
-  // Still reeling from the mental gymnastics
-  // I performed to retrieve one URL
+ /**
+   * Gets the Masthead image URL from a collection of posts.
+   * @param {Array} posts - An array of post objects.
+   */
   getMastheadImageUrl(posts) {
     let mastheadPost = extractPostByTagName(posts, "Masthead");
-    return extractHeroImageFromPost(mastheadPost);
+    return extractHeroImageFromPost(mastheadPost[0]);
   }
 
+  /**
+   * Renders a Masthead component either on the 
+   * home page or a post tagged with 'projects'
+   * @param {string} pathname - The path to be matched.
+   */
+
+  displayMasthead(pathname) {
+    let mastheadUrl;
+    if (!_.isEmpty(this.props.blogPosts.posts)) {
+      if (this.props.pathname === "/") {
+        mastheadUrl = this.getMastheadImageUrl(this.props.blogPosts.posts);
+      }
+      const workPostPathPattern = this.matchPattern(pathname, /(\/post(.)*)/gm);
+      if (!_.isNull(workPostPathPattern)) {
+        mastheadUrl = extractHeroImageFromPost(this.props.blogPosts.posts);
+      }
+      return <Masthead mastheadImageUrl={mastheadUrl} />;
+    }
+  }
+
+  /**
+   * Matches a string with the provided regex.
+   * @param {string} sourceText - The string to match.
+   * @param {RegExp} pattern - A regular expression.
+   */
   matchPattern(sourceText, pattern) {
     return sourceText.match(pattern);
   }
@@ -37,20 +63,12 @@ class AppContainer extends Component {
   isAdminPath(path) {
     return this.matchPattern(path, /\/admin(.)*/gm) !== null;
   }
+
   render() {
     return (
       // Home page Masthead
       <>
-        {this.props.pathname === "/" ? (
-          <Masthead
-            mastheadImageUrl={
-              this.props.blogPosts
-                ? this.getMastheadImageUrl(this.props.blogPosts.posts)
-                : null
-            }
-          />
-        ) : null}
-
+        {this.displayMasthead(this.props.pathname)}
         {/* Single Post Masthead */}
 
         <section className="section">
@@ -65,8 +83,9 @@ class AppContainer extends Component {
               {!this.isAdminPath(this.props.pathname) ? (
                 <SiteNavbar navItems={siteNavItems} />
               ) : null}
+
+              {/* Route configuration */}
               <div>
-                {/* Route configuration */}
                 <div className="columns is-centered">
                   {[...siteNavItems, ...adminNavItems].map((navItem, idx) => (
                     <Route
@@ -76,27 +95,6 @@ class AppContainer extends Component {
                       render={navItem.render}
                     />
                   ))}
-                  <Route
-                    path={"/post/:postSlug"}
-                    render={(props) => (
-                      <PageContainer
-                        callOptions={{
-                          callMethod: "get",
-                          callURIAction: "retrieveOne",
-                          callParams: {
-                            slug: props.match.params.postSlug,
-                          },
-                        }}
-                        options={{
-                          type: "post",
-                          metadata: {
-                            subType: "single",
-                            path: history.location.pathname,
-                          },
-                        }}
-                      />
-                    )}
-                  />
                 </div>
               </div>
             </ConnectedRouter>
