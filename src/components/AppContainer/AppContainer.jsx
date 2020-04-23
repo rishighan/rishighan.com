@@ -18,7 +18,7 @@ class AppContainer extends Component {
     this.props = props;
   }
 
- /**
+  /**
    * Gets the Masthead image URL from a collection of posts.
    * @param {Array} posts - An array of post objects.
    */
@@ -28,7 +28,7 @@ class AppContainer extends Component {
   }
 
   /**
-   * Renders a Masthead component either on the 
+   * Renders a Masthead component either on the
    * home page or a post tagged with 'projects'
    * @param {string} pathname - The path to be matched.
    */
@@ -66,20 +66,21 @@ class AppContainer extends Component {
 
   render() {
     return (
-      // Home page Masthead
+      // Masthead
       <>
         {this.displayMasthead(this.props.pathname)}
-        {/* Single Post Masthead */}
+
+        {/* Admin navbar */}
+        <ConnectedRouter history={history}>
+          {this.isAdminPath(this.props.pathname) ? (
+            <AdminNavbar navItems={adminNavItems} />
+          ) : null}
+        </ConnectedRouter>
 
         <section className="section">
           <div className="container">
+            {/* Site navbar */}
             <ConnectedRouter history={history}>
-              {/* Admin navbar */}
-              {this.isAdminPath(this.props.pathname) ? (
-                <AdminNavbar navItems={adminNavItems} />
-              ) : null}
-
-              {/* Site navbar */}
               {!this.isAdminPath(this.props.pathname) ? (
                 <SiteNavbar navItems={siteNavItems} />
               ) : null}

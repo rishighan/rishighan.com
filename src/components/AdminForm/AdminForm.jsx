@@ -234,7 +234,7 @@ class AdminForm extends Component {
                   </label>
                   <a href="/admin/manage/series" className="button is-small is-inverted">
                     <span className="icon">
-                      <i class="far fa-paper-plane"></i>
+                      <i class="fas fa-layer-group"></i>
                     </span>
                     <span>Manage Series</span>
                   </a>
