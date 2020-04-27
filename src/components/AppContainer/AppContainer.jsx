@@ -7,10 +7,21 @@ import AdminNavbar from "../Navigation/AdminNavbar";
 import { history } from "../../store/index";
 import Masthead from "../Masthead/Masthead";
 import { siteNavItems, adminNavItems } from "../Navigation/NavItems";
+import PrivateRoute from "../Navigation/PrivateRoute";
+import PageContainer from "../PageContainer/PageContainer";
 import {
   extractPostByTagName,
   extractHeroImageFromPost,
 } from "../../utils/post.utils";
+
+
+const Login = props => (<div>Login</div>);
+const boo = props => (<PageContainer
+  options={{
+    type: "pin",
+    metadata: {},
+  }}
+/>)
 
 class AppContainer extends Component {
   constructor(props) {
@@ -21,6 +32,7 @@ class AppContainer extends Component {
   /**
    * Gets the Masthead image URL from a collection of posts.
    * @param {Array} posts - An array of post objects.
+   * @return {String} - The Masthead image URL 
    */
   getMastheadImageUrl(posts) {
     let mastheadPost = extractPostByTagName(posts, "Masthead");
@@ -32,7 +44,6 @@ class AppContainer extends Component {
    * home page or a post tagged with 'projects'
    * @param {string} pathname - The path to be matched.
    */
-
   displayMasthead(pathname) {
     let mastheadUrl;
     if (!_.isEmpty(this.props.blogPosts.posts)) {
@@ -57,8 +68,9 @@ class AppContainer extends Component {
   }
 
   /**
-   * Finds out if a path matches /admin or not.
+   * Finds out if a path matches /admin OR /login.
    * @param {string} path - The path to match.
+   * @return {Boolean} - Whether a match is found.
    */
   isAdminPath(path) {
     return this.matchPattern(path, /\/admin(.)*/gm) !== null;
@@ -96,6 +108,8 @@ class AppContainer extends Component {
                       render={navItem.render}
                     />
                   ))}
+                  <Route path="/login" component={Login} />
+                  <PrivateRoute path="/boo" authed={ false } component={boo} />
                 </div>
               </div>
             </ConnectedRouter>

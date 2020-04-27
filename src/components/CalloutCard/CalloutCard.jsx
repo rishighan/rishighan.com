@@ -22,6 +22,11 @@ class CalloutCard extends Component {
     }
   }
 
+  /**
+   * Renders the content of the callout card.
+   * @param {Array} data - An array series objects.
+   * @return {Object} - A React fragment 
+  */
   renderCalloutContent(data) {
     return _.map(data, (series, idx) => (
       <div key={idx}>
@@ -47,7 +52,7 @@ class CalloutCard extends Component {
         <div className="callout-card-container">
           <div className="callout-cover has-background-info">
             {/* TODO: create own boxed-set icon */}
-            <i className="fas fa-layer-group icon"></i>
+            <i className="fas fa-book icon"></i>
           </div>
           <div className="callout-card-text">
             {this.renderCalloutContent(calloutContent)}

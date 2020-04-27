@@ -1,5 +1,6 @@
 import React from "react";
 import PageContainer from "../PageContainer/PageContainer";
+import PrivateRoute from "../Navigation/PrivateRoute";
 import { postModel } from "../../constants/post.model";
 
 export const siteNavItems = [
@@ -209,7 +210,7 @@ export const adminNavItems = [
           },
         }}
         options={{
-          type: "editPostForm",
+          type: "editForm",
           metadata: {
             mode: "edit",
           },

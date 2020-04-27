@@ -21,10 +21,11 @@ const renderPage = props => ({
   ),
   seriesForm: <SeriesForm data={props.options.metadata.seedData}/>,
   adminMain: <AdminMain />,
-  editPostForm: !_.isArray(props.posts.posts) ? (
+  editForm: !_.isArray(props.posts.posts) ? (
     <AdminForm formData={props.posts.posts} />
   ) : null,
   newPostForm: !_.isUndefined(props.posts.result) ? <AdminForm formData={props.posts.result} /> : null,
+  login: <div>pochlo re baba</div>,
 });
 
 class PageContainer extends Component {

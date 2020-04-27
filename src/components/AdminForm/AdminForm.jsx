@@ -37,9 +37,17 @@ class AdminForm extends Component {
       ),
     };
   }
-
+ /**
+   * Resolves a promise after a timeout 
+   * @param {Number} ms - Delay in milliseconds.
+   * @return {Promise} -  A Promise
+   */
   sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+   /**
+   * Updates the post with the latest values 
+   * @param {Object} values - A post object.
+   */
   save = async (values) => {
     this.props.updatePost(values);
     await this.sleep(5000);
@@ -59,7 +67,13 @@ class AdminForm extends Component {
       rows="20"
     />
   );
-
+  
+  /**
+   * Renders content of tabs in the form.
+   * @param {String} tabName - The display name of the tab.
+   * @param {Object} values - The post object.
+   * @return {ReactFragment} - The content for the supplied tab. 
+   */
   renderTabContent = (tabName, values) => {
     switch (tabName) {
       case "JSON":
@@ -234,7 +248,7 @@ class AdminForm extends Component {
                   </label>
                   <a href="/admin/manage/series" className="button is-small is-inverted">
                     <span className="icon">
-                      <i class="fas fa-layer-group"></i>
+                      <i className="fas fa-layer-group"></i>
                     </span>
                     <span>Manage Series</span>
                   </a>

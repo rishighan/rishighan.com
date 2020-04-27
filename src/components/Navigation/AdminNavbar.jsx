@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
+
 const AdminNavbar = (props) => (
   <nav
     className="navbar rg-admin-navbar"
