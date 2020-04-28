@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
 import SiteNavbar from "../Navigation/SiteNavbar";
 import AdminNavbar from "../Navigation/AdminNavbar";
+import Login from "../Authentication/Login";
 import { history } from "../../store/index";
 import Masthead from "../Masthead/Masthead";
 import { siteNavItems, adminNavItems } from "../Navigation/NavItems";
@@ -14,14 +15,14 @@ import {
   extractHeroImageFromPost,
 } from "../../utils/post.utils";
 
-
-const Login = props => (<div>Login</div>);
-const boo = props => (<PageContainer
-  options={{
-    type: "pin",
-    metadata: {},
-  }}
-/>)
+const boo = (props) => (
+  <PageContainer
+    options={{
+      type: "pin",
+      metadata: {},
+    }}
+  />
+);
 
 class AppContainer extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class AppContainer extends Component {
   /**
    * Gets the Masthead image URL from a collection of posts.
    * @param {Array} posts - An array of post objects.
-   * @return {String} - The Masthead image URL 
+   * @return {String} - The Masthead image URL
    */
   getMastheadImageUrl(posts) {
     let mastheadPost = extractPostByTagName(posts, "Masthead");
@@ -69,11 +70,13 @@ class AppContainer extends Component {
 
   /**
    * Finds out if a path matches /admin OR /login.
-   * @param {string} path - The path to match.
-   * @return {Boolean} - Whether a match is found.
+   * @return {Object} - Boolean values indicating if path matches /admin or /login.
    */
-  isAdminPath(path) {
-    return this.matchPattern(path, /\/admin(.)*/gm) !== null;
+  isProtectedPath() {
+    return {
+      admin: this.matchPattern(this.props.pathname, /\/admin(.)*/gm) !== null,
+      login: this.matchPattern(this.props.pathname, /\/login\/?/gm) !== null,
+    };
   }
 
   render() {
@@ -84,7 +87,7 @@ class AppContainer extends Component {
 
         {/* Admin navbar */}
         <ConnectedRouter history={history}>
-          {this.isAdminPath(this.props.pathname) ? (
+          {this.isProtectedPath().admin ? (
             <AdminNavbar navItems={adminNavItems} />
           ) : null}
         </ConnectedRouter>
@@ -93,9 +96,10 @@ class AppContainer extends Component {
           <div className="container">
             {/* Site navbar */}
             <ConnectedRouter history={history}>
-              {!this.isAdminPath(this.props.pathname) ? (
-                <SiteNavbar navItems={siteNavItems} />
-              ) : null}
+              {!this.isProtectedPath().admin &&
+                !this.isProtectedPath().login && (
+                  <SiteNavbar navItems={siteNavItems} />
+                )}
 
               {/* Route configuration */}
               <div>
@@ -109,7 +113,7 @@ class AppContainer extends Component {
                     />
                   ))}
                   <Route path="/login" component={Login} />
-                  <PrivateRoute path="/boo" authed={ false } component={boo} />
+                  <PrivateRoute path="/boo" authed={false} component={boo} />
                 </div>
               </div>
             </ConnectedRouter>
