@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form, Field } from "react-final-form";
+import axios from "axios";
 
 class Login extends Component {
     constructor(props) {
@@ -7,8 +8,13 @@ class Login extends Component {
         this.props = props;
     }
 
-    onSubmit() {
-        console.log("submitted");
+    async onSubmit(values) {
+        const result = await axios.post("http://localhost:3456/users/login", JSON.stringify(values), {
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            },
+        });
+        console.log(result);
     }
 
     render() {
@@ -18,7 +24,6 @@ class Login extends Component {
                     <Form
                         onSubmit={this.onSubmit}
                         initialValues={{
-                            ...this.props.formData,
                         }}
                         render={({ pristine, submitting, values }) => (
                             <>
@@ -26,7 +31,7 @@ class Login extends Component {
                                 <div className="field">
                                     <div className="control is-expanded">
                                         <Field
-                                            name="usernameField"
+                                            name="username"
                                             component="input"
                                             className="input is-size-6"
                                             placeholder="Username"
@@ -36,7 +41,8 @@ class Login extends Component {
                                 <div className="field">
                                     <div className="control is-expanded">
                                         <Field
-                                            name="passwordField"
+                                            name="password"
+                                            type="password"
                                             component="input"
                                             className="input is-size-6"
                                             placeholder="Password"
@@ -45,13 +51,14 @@ class Login extends Component {
                                 </div>
 
                                 <p className="control">
-                                    <button className="button is-primary">
+                                    <button className="button is-primary" onClick={() => this.onSubmit(values)}>
                                         <span className="icon">
                                             <i className="fas fa-sign-in-alt"></i>
                                         </span>
                                         <span>Login</span>
                                     </button>
                                 </p>
+                        <pre>{JSON.stringify(values, 4)}</pre>
                             </>
                         )}
                     />

@@ -138,12 +138,34 @@ export const siteNavItems = [
       />
     ),
   },
+  {
+    href: "/post/:postSlug",
+    render: (props) => (
+      <PageContainer
+        callOptions={{
+          callMethod: "get",
+          callURIAction: "retrieveOne",
+          callParams: {
+            slug: props.match.params.postSlug,
+          },
+        }}
+        options={{
+          type: "post",
+          metadata: {
+            subType: "single",
+            path: props.pathname,
+          },
+        }}
+      />
+    ),
+  },
 ];
 
 export const adminNavItems = [
   {
     href: "/admin",
     displayName: "admin",
+    protected: true,
     render: () => (
       <PageContainer
         callOptions={{
@@ -164,6 +186,7 @@ export const adminNavItems = [
   {
     href: "/admin/write",
     displayName: "write",
+    protected: true,
     render: (props) => (
       <PageContainer
         callOptions={{
@@ -183,6 +206,7 @@ export const adminNavItems = [
   {
     displayName: "manage series",
     href: "/admin/manage/series",
+    protected: true,
     render: (props) => (
       <PageContainer
         options={{
@@ -200,6 +224,7 @@ export const adminNavItems = [
 
   {
     href: "/admin/edit/:postSlug",
+    protected: true,
     render: (props) => (
       <PageContainer
         callOptions={{
@@ -213,27 +238,6 @@ export const adminNavItems = [
           type: "editForm",
           metadata: {
             mode: "edit",
-          },
-        }}
-      />
-    ),
-  },
-  {
-    href: "/post/:postSlug",
-    render: (props) => (
-      <PageContainer
-        callOptions={{
-          callMethod: "get",
-          callURIAction: "retrieveOne",
-          callParams: {
-            slug: props.match.params.postSlug,
-          },
-        }}
-        options={{
-          type: "post",
-          metadata: {
-            subType: "single",
-            path: props.pathname,
           },
         }}
       />

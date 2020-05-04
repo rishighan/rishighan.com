@@ -2,27 +2,19 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
+
+import { siteNavItems, adminNavItems } from "../Navigation/NavItems";
 import SiteNavbar from "../Navigation/SiteNavbar";
 import AdminNavbar from "../Navigation/AdminNavbar";
+import PrivateRoute from "../Navigation/PrivateRoute";
+
 import Login from "../Authentication/Login";
 import { history } from "../../store/index";
 import Masthead from "../Masthead/Masthead";
-import { siteNavItems, adminNavItems } from "../Navigation/NavItems";
-import PrivateRoute from "../Navigation/PrivateRoute";
-import PageContainer from "../PageContainer/PageContainer";
 import {
   extractPostByTagName,
   extractHeroImageFromPost,
 } from "../../utils/post.utils";
-
-const boo = (props) => (
-  <PageContainer
-    options={{
-      type: "pin",
-      metadata: {},
-    }}
-  />
-);
 
 class AppContainer extends Component {
   constructor(props) {
@@ -104,16 +96,24 @@ class AppContainer extends Component {
               {/* Route configuration */}
               <div>
                 <div className="columns is-centered">
-                  {[...siteNavItems, ...adminNavItems].map((navItem, idx) => (
-                    <Route
-                      exact
-                      path={navItem.href}
-                      key={idx}
-                      render={navItem.render}
-                    />
-                  ))}
+                  {[...siteNavItems, ...adminNavItems].map((navItem, idx) =>
+                    !_.isUndefined(navItem.protected) ? (
+                      <PrivateRoute
+                        key={idx}
+                        path={navItem.href}
+                        authed={false}
+                        component={this.render}
+                      />
+                    ) : (
+                      <Route
+                        exact
+                        path={navItem.href}
+                        key={idx}
+                        render={navItem.render}
+                      />
+                    )
+                  )}
                   <Route path="/login" component={Login} />
-                  <PrivateRoute path="/boo" authed={false} component={boo} />
                 </div>
               </div>
             </ConnectedRouter>
