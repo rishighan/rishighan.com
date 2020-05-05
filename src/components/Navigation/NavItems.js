@@ -164,7 +164,7 @@ export const siteNavItems = [
 export const adminNavItems = [
   {
     href: "/admin",
-    displayName: "admin",
+    displayName: "dashboard",
     protected: true,
     render: () => (
       <PageContainer
@@ -177,7 +177,7 @@ export const adminNavItems = [
           },
         }}
         options={{
-          type: "adminMain",
+          type: "adminDashboard",
           metadata: {},
         }}
       />

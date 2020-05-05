@@ -20,12 +20,11 @@ const renderPage = props => ({
     </div>
   ),
   seriesForm: <SeriesForm data={props.options.metadata.seedData}/>,
-  adminMain: <AdminMain />,
-  editForm: !_.isArray(props.posts.posts) ? (
+  adminDashboard: <AdminMain />,
+  editForm: !_.isArray(props.posts.posts) && props.options.metadata.mode === 'edit' ? (
     <AdminForm formData={props.posts.posts} />
   ) : null,
-  newPostForm: !_.isUndefined(props.posts.result) ? <AdminForm formData={props.posts.result} /> : null,
-  login: <div>pochlo re baba</div>,
+  newPostForm: props.options.metadata.mode === 'new' ? <AdminForm formData={props.posts.result} /> : null,
 });
 
 class PageContainer extends Component {

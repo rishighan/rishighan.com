@@ -36,6 +36,7 @@ class AppContainer extends Component {
    * Renders a Masthead component either on the
    * home page or a post tagged with 'projects'
    * @param {string} pathname - The path to be matched.
+   * @return {Component} - Masthead component with the corresponding masthead image
    */
   displayMasthead(pathname) {
     let mastheadUrl;
@@ -99,10 +100,11 @@ class AppContainer extends Component {
                   {[...siteNavItems, ...adminNavItems].map((navItem, idx) =>
                     !_.isUndefined(navItem.protected) ? (
                       <PrivateRoute
+                        exact
                         key={idx}
                         path={navItem.href}
-                        authed={false}
-                        component={this.render}
+                        authed={true}
+                        component={navItem.render}
                       />
                     ) : (
                       <Route
