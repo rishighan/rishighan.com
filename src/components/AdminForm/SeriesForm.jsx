@@ -5,7 +5,7 @@ import DebounceInput from "react-debounce-input";
 import axios from "axios";
 import { POSTS_SERVICE_URI } from "../../constants/endpoints";
 import PropTypes from "prop-types";
-import { postsAPICall } from "../../actions";
+import { postsAPICall } from "../../actions/post.actions";
 
 const customStyles = {
   content: {
@@ -25,7 +25,6 @@ class SeriesForm extends Component {
     super(props);
     this.state = {
       postsSearchResults: [],
-      open: false,
       formData: {},
     };
     this.handlePostsSearch = this.handlePostsSearch.bind(this);

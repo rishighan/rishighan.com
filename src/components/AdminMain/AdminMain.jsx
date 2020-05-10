@@ -5,7 +5,7 @@ import { DebounceInput } from 'react-debounce-input';
 import _ from 'lodash';
 import ReactPaginate from 'react-paginate';
 import List from '../List/List';
-import { postsAPICall } from '../../actions/index';
+import { postsAPICall } from '../../actions/post.actions';
 
 class AdminMain extends Component {
   componentDidMount() {

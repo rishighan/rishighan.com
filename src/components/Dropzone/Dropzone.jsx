@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import PropTypes from 'prop-types';
 import ImageCard from '../ImageCard/ImageCard';
-import { assetsAPICall } from '../../actions/index';
+import { assetsAPICall } from '../../actions/assets.actions';
 
 // TODO: Update file state upon resolution of the promise
 //       Error handling

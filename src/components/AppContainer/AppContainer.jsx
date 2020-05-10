@@ -103,7 +103,7 @@ class AppContainer extends Component {
                         exact
                         key={idx}
                         path={navItem.href}
-                        authed={true}
+                        authed={false}
                         component={navItem.render}
                       />
                     ) : (

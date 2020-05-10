@@ -7,7 +7,7 @@ import PageFragment from '../PageFragment/PageFragment';
 import AdminForm from '../AdminForm/AdminForm';
 import AdminMain from '../AdminMain/AdminMain';
 import SeriesForm from '../AdminForm/SeriesForm';
-import { postsAPICall } from '../../actions/index';
+import { postsAPICall } from '../../actions/post.actions';
 
 const renderPage = props => ({
   post: (

@@ -16,7 +16,7 @@ import CalloutCard from "../CalloutCard/CalloutCard";
 
 import tags from "../../constants/tags";
 import { createSlug } from "../../utils/slug.util";
-import { postsAPICall } from "../../actions/index";
+import { postsAPICall } from "../../actions/post.actions";
 
 const onSubmit = () => {
   console.log("submitted");
@@ -396,7 +396,6 @@ class AdminForm extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state)
   return {
     updateStatus: state.posts.posts,
     diffHistories: state.posts.diffHistories,
