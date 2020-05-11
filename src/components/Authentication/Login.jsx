@@ -10,6 +10,9 @@ class Login extends Component {
   }
 
   async onSubmit(values) {}
+  componentDidMount() {
+      this.props.getLoggedInUser();
+  }
 
   render() {
     return (
@@ -66,7 +69,9 @@ class Login extends Component {
 
 function mapStateToProps(state) {
     console.log(state)
-  return {};
+  return {
+      user: state.loggedInUser,
+  };
 }
 const mapDispatchToProps = (dispatch) => ({
   loginUser: async (values) => {
@@ -81,6 +86,20 @@ const mapDispatchToProps = (dispatch) => ({
       })
     );
   },
+  getLoggedInUser: () => {
+      const token = localStorage.token;
+      dispatch(
+          userAPICall({
+              callURIAction: "me",
+              callMethod: "get",
+              headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'Authorization': `Bearer ${token}`
+              },
+          })
+      )
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

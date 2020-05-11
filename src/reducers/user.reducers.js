@@ -9,7 +9,7 @@ function userReducer(state = initialState, action) {
     case LOGIN_USER:
       return {
         ...state,
-        user: action.user,
+        loggedInUser: action.user,
       };
 
     default:

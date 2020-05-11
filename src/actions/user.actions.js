@@ -17,7 +17,7 @@ export const userAPICall = (options) => async (dispatch) => {
       dispatch({
           type: LOGIN_USER,
           isLoggedIn: true,
-          user: result.data.user,
+          loggedInUser: result.data.user,
       });
     }
   } catch (error) {
