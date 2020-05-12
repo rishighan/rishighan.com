@@ -1,7 +1,7 @@
 import { LOGIN_USER } from "../constants/action-types";
 
 const initialState = {
-  isLoggedIn: false,
+  loggedInUser: {},
 };
 
 function userReducer(state = initialState, action) {
@@ -9,10 +9,9 @@ function userReducer(state = initialState, action) {
     case LOGIN_USER:
       return {
         ...state,
-        loggedInUser: action.user,
+        loggedInUser: action.loggedInUser,
       };
-
-    default:
+   default:
       return state;
   }
 }

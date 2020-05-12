@@ -22,6 +22,9 @@ class AppContainer extends Component {
     this.props = props;
   }
 
+  componentDidMount(){
+    console.log(this.props.loggedInUser);
+  }
   /**
    * Gets the Masthead image URL from a collection of posts.
    * @param {Array} posts - An array of post objects.
@@ -98,12 +101,12 @@ class AppContainer extends Component {
               <div>
                 <div className="columns is-centered">
                   {[...siteNavItems, ...adminNavItems].map((navItem, idx) =>
-                    !_.isUndefined(navItem.protected) ? (
+                    navItem.protected ? (
                       <PrivateRoute
                         exact
                         key={idx}
                         path={navItem.href}
-                        authed={false}
+                        authed={this.props.loggedInUser.isLoggedIn}
                         component={navItem.render}
                       />
                     ) : (
@@ -127,11 +130,13 @@ class AppContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state)
   return {
     pathname: state.router.location.pathname,
     search: state.router.location.search,
     hash: state.router.location.hash,
     blogPosts: state.posts,
+    loggedInUser: state.user,
   };
 };
 

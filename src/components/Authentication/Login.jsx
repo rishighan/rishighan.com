@@ -7,11 +7,14 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.props = props;
+    this.state = {
+      redirectToReferrer: false,
+    };
   }
 
   async onSubmit(values) {}
   componentDidMount() {
-      this.props.getLoggedInUser();
+    this.props.getLoggedInUser();
   }
 
   render() {
@@ -49,7 +52,7 @@ class Login extends Component {
                 <p className="control">
                   <button
                     className="button is-primary"
-                    onClick={() => this.props.loginUser({user: values})}
+                    onClick={() => this.props.loginUser({ user: values })}
                   >
                     <span className="icon">
                       <i className="fas fa-sign-in-alt"></i>
@@ -57,7 +60,6 @@ class Login extends Component {
                     <span>Login</span>
                   </button>
                 </p>
-                <pre>{JSON.stringify(values, 4)}</pre>
               </>
             )}
           />
@@ -68,9 +70,8 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state)
   return {
-      user: state.loggedInUser,
+    user: state.user.loggedInUser,
   };
 }
 const mapDispatchToProps = (dispatch) => ({
@@ -82,24 +83,26 @@ const mapDispatchToProps = (dispatch) => ({
         headers: {
           "Content-Type": "application/json; charset=utf-8",
         },
-        data: JSON.stringify(values)
+        data: JSON.stringify(values),
       })
     );
   },
   getLoggedInUser: () => {
-      const token = localStorage.token;
+    const token = localStorage.token;
+    if (token) {
       dispatch(
-          userAPICall({
-              callURIAction: "me",
-              callMethod: "get",
-              headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                'Authorization': `Bearer ${token}`
-              },
-          })
-      )
-  }
+        userAPICall({
+          callURIAction: "me",
+          callMethod: "get",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+      );
+    }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -11,14 +11,17 @@ export const userAPICall = (options) => async (dispatch) => {
       headers: options.headers,
       data: options.data || null,
     });
-
+    
     if (!_.isUndefined(result)) {
-      localStorage.setItem("token", result.data.user.token);
-      dispatch({
-          type: LOGIN_USER,
-          isLoggedIn: true,
-          loggedInUser: result.data.user,
-      });
+      switch (options.callURIAction) {
+        case 'login':
+          localStorage.setItem("token", result.data.user.token);
+          dispatch({
+            type: LOGIN_USER,
+            loggedInUser: result.data.user,
+          });
+          break;
+      }
     }
   } catch (error) {
     console.log(error);

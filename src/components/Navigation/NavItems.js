@@ -235,7 +235,7 @@ export const adminNavItems = [
           },
         }}
         options={{
-          type: "editForm",
+          type: "editPostForm",
           metadata: {
             mode: "edit",
           },
