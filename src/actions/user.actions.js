@@ -1,29 +1,22 @@
-import axios from "axios";
+import axios from 'axios';
 import { USER_SERVICE_URI } from "../constants/endpoints";
-import { LOGIN_USER } from "../constants/action-types";
+import { AUTHENTICATED, AUTHENTICATION_ERROR } from "../constants/action-types";
 
-export const userAPICall = (options) => async (dispatch) => {
-  try {
-    const serviceURI = USER_SERVICE_URI + options.callURIAction;
-    const result = await axios(serviceURI, {
-      method: options.callMethod,
-      params: options.params,
-      headers: options.headers,
-      data: options.data || null,
-    });
-    
-    if (!_.isUndefined(result)) {
-      switch (options.callURIAction) {
-        case 'login':
-          localStorage.setItem("token", result.data.user.token);
-          dispatch({
-            type: LOGIN_USER,
-            loggedInUser: result.data.user,
-          });
-          break;
-      }
+
+export function signInAction({ email, password }, history) {
+  return async (dispatch) => {
+    try {
+      const res = await axios.post(`${USER_SERVICE_URI}/login`, { email, password });
+
+      dispatch({ type: AUTHENTICATED });
+      localStorage.setItem('user', res.data.token);
+      history.push('/secret');
+    } catch(error) {
+      dispatch({
+        type: AUTHENTICATION_ERROR,
+        payload: 'Invalid email or password'
+      });
     }
-  } catch (error) {
-    console.log(error);
-  }
+  };
+}
 };

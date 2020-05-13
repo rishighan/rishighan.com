@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form, Field } from "react-final-form";
+import { withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { userAPICall } from "../../actions/user.actions";
 
@@ -15,6 +16,14 @@ class Login extends Component {
   async onSubmit(values) {}
   componentDidMount() {
     this.props.getLoggedInUser();
+    console.log("redirect to", this.props.user);
+  }
+
+  login(values) {
+    this.props.loginUser(values);
+    this.setState({
+      redirectToReferrer: true,
+    });
   }
 
   render() {
@@ -52,7 +61,7 @@ class Login extends Component {
                 <p className="control">
                   <button
                     className="button is-primary"
-                    onClick={() => this.props.loginUser({ user: values })}
+                    onClick={() => this.login({ user: values })}
                   >
                     <span className="icon">
                       <i className="fas fa-sign-in-alt"></i>
@@ -70,12 +79,13 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state);
   return {
     user: state.user.loggedInUser,
   };
 }
 const mapDispatchToProps = (dispatch) => ({
-  loginUser: async (values) => {
+  loginUser: (values) => {
     dispatch(
       userAPICall({
         callURIAction: "login",
@@ -105,4 +115,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

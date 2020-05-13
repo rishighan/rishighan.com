@@ -1,19 +1,17 @@
-import { LOGIN_USER } from "../constants/action-types";
+import {
+  AUTHENTICATED,
+  UNAUTHENTICATED,
+  AUTHENTICATION_ERROR,
+} from "../constants/action-types";
 
-const initialState = {
-  loggedInUser: {},
-};
-
-function userReducer(state = initialState, action) {
+export default function userReducer(state = {}, action) {
   switch (action.type) {
-    case LOGIN_USER:
-      return {
-        ...state,
-        loggedInUser: action.loggedInUser,
-      };
-   default:
-      return state;
+    case AUTHENTICATED:
+      return { ...state, authenticated: true };
+    case UNAUTHENTICATED:
+      return { ...state, authenticated: false };
+    case AUTHENTICATION_ERROR:
+      return { ...state, error: action.payload };
   }
+  return state;
 }
-
-export default userReducer;
