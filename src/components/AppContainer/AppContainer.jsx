@@ -103,7 +103,7 @@ class AppContainer extends Component {
                         exact
                         key={idx}
                         path={navItem.href}
-                        authed={this.props.loggedInUser.isLoggedIn}
+                        authed={false}
                         component={navItem.render}
                       />
                     ) : (
@@ -132,7 +132,7 @@ const mapStateToProps = (state) => {
     search: state.router.location.search,
     hash: state.router.location.hash,
     blogPosts: state.posts,
-    loggedInUser: state.user,
+    // authenticated: state.auth.authenticated,
   };
 };
 

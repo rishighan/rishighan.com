@@ -3,10 +3,11 @@ import { USER_SERVICE_URI } from "../constants/endpoints";
 import { AUTHENTICATED, AUTHENTICATION_ERROR } from "../constants/action-types";
 
 
-export function signInAction({ email, password }, history) {
+export const signInAction = (values, history) => {
   return async (dispatch) => {
+    console.log(dispatch)
     try {
-      const res = await axios.post(`${USER_SERVICE_URI}/login`, { email, password });
+      const res = await axios.post(`${USER_SERVICE_URI}/login`, values);
 
       dispatch({ type: AUTHENTICATED });
       localStorage.setItem('user', res.data.token);
@@ -18,5 +19,4 @@ export function signInAction({ email, password }, history) {
       });
     }
   };
-}
 };

@@ -2,28 +2,18 @@ import React, { Component } from "react";
 import { Form, Field } from "react-final-form";
 import { withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { userAPICall } from "../../actions/user.actions";
+import { signInAction } from "../../actions/user.actions";
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.props = props;
-    this.state = {
-      redirectToReferrer: false,
-    };
   }
 
   async onSubmit(values) {}
-  componentDidMount() {
-    this.props.getLoggedInUser();
-    console.log("redirect to", this.props.user);
-  }
 
   login(values) {
-    this.props.loginUser(values);
-    this.setState({
-      redirectToReferrer: true,
-    });
+    this.props.signInAction(values, this.props.history);
   }
 
   render() {
@@ -80,39 +70,9 @@ class Login extends Component {
 
 function mapStateToProps(state) {
   console.log(state);
-  return {
-    user: state.user.loggedInUser,
-  };
+  // return { errorMessage: state.auth.error }
+  return {};
 }
-const mapDispatchToProps = (dispatch) => ({
-  loginUser: (values) => {
-    dispatch(
-      userAPICall({
-        callURIAction: "login",
-        callMethod: "post",
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-        },
-        data: JSON.stringify(values),
-      })
-    );
-  },
-  getLoggedInUser: () => {
-    const token = localStorage.token;
-    if (token) {
-      dispatch(
-        userAPICall({
-          callURIAction: "me",
-          callMethod: "get",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        })
-      );
-    }
-  },
-});
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));
+
+export default withRouter(connect(mapStateToProps, { signInAction })(Login));
