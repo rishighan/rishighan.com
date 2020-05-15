@@ -15,11 +15,20 @@ import {
   extractPostByTagName,
   extractHeroImageFromPost,
 } from "../../utils/post.utils";
+import { AUTHENTICATED, UNAUTHENTICATED } from "../../constants/action-types";
 
 class AppContainer extends Component {
   constructor(props) {
     super(props);
     this.props = props;
+  }
+
+  componentDidMount() {
+    const user = localStorage.getItem('user');
+    console.log(user)
+    if(user) {
+      this.props.setAuthenticatedUser();
+    }
   }
 
   /**
@@ -73,6 +82,7 @@ class AppContainer extends Component {
   }
 
   render() {
+    console.log(this.props.authenticated)
     return (
       // Masthead
       <>
@@ -103,7 +113,7 @@ class AppContainer extends Component {
                         exact
                         key={idx}
                         path={navItem.href}
-                        authed={false}
+                        authed={this.props.authenticated}
                         component={navItem.render}
                       />
                     ) : (
@@ -132,8 +142,21 @@ const mapStateToProps = (state) => {
     search: state.router.location.search,
     hash: state.router.location.hash,
     blogPosts: state.posts,
-    // authenticated: state.auth.authenticated,
+    authenticated: state.user.authenticated,
   };
 };
 
-export default connect(mapStateToProps)(AppContainer);
+const mapDispatchToProps = dispatch => ({
+  setAuthenticatedUser: () => {
+    dispatch({
+      type: AUTHENTICATED,
+    })
+  },
+  deAuthenticateUser: () => {
+    dispatch({
+      type: UNAUTHENTICATED,
+    })
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);
