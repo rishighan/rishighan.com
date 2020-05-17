@@ -1,7 +1,7 @@
 import React from "react";
 import PageContainer from "../PageContainer/PageContainer";
-import PrivateRoute from "../Navigation/PrivateRoute";
 import { postModel } from "../../constants/post.model";
+import { signOutAction } from "../../actions/user.actions";
 
 export const siteNavItems = [
   {
@@ -221,7 +221,14 @@ export const adminNavItems = [
       />
     ),
   },
-
+ {
+   displayName: 'logout',
+   href: '/logout',
+   clickHandler: signOutAction,
+   redirect: {
+     to: '/',
+   }
+ },
   {
     href: "/admin/edit/:postSlug",
     protected: true,

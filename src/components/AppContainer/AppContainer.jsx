@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
 
@@ -15,20 +15,11 @@ import {
   extractPostByTagName,
   extractHeroImageFromPost,
 } from "../../utils/post.utils";
-import { AUTHENTICATED, UNAUTHENTICATED } from "../../constants/action-types";
 
 class AppContainer extends Component {
   constructor(props) {
     super(props);
     this.props = props;
-  }
-
-  componentDidMount() {
-    const user = localStorage.getItem('user');
-    console.log(user)
-    if(user) {
-      this.props.setAuthenticatedUser();
-    }
   }
 
   /**
@@ -82,7 +73,6 @@ class AppContainer extends Component {
   }
 
   render() {
-    console.log(this.props.authenticated)
     return (
       // Masthead
       <>
@@ -109,13 +99,13 @@ class AppContainer extends Component {
                 <div className="columns is-centered">
                   {[...siteNavItems, ...adminNavItems].map((navItem, idx) =>
                     navItem.protected ? (
-                      <PrivateRoute
-                        exact
-                        key={idx}
-                        path={navItem.href}
-                        authed={this.props.authenticated}
-                        component={navItem.render}
-                      />
+                        <PrivateRoute
+                          exact
+                          key={idx}
+                          path={navItem.href}
+                          authed={this.props.authenticated}
+                          component={navItem.render}
+                        />
                     ) : (
                       <Route
                         exact
@@ -146,17 +136,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  setAuthenticatedUser: () => {
-    dispatch({
-      type: AUTHENTICATED,
-    })
-  },
-  deAuthenticateUser: () => {
-    dispatch({
-      type: UNAUTHENTICATED,
-    })
-  }
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);
+export default connect(mapStateToProps, {})(AppContainer);

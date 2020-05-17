@@ -11,7 +11,11 @@ class Login extends Component {
   }
 
   async onSubmit(values) {}
-
+  /**
+   * Matches a string with the provided regex.
+   * @param {string} sourceText - The string to match.
+   * @param {RegExp} pattern - A regular expression.
+   */
   login(values) {
     this.props.signInAction(values, this.props.history);
   }
@@ -69,8 +73,7 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-  return { errorMessage: state.user.error }
+  return { errorMessage: state.user.error };
 }
-
 
 export default withRouter(connect(mapStateToProps, { signInAction })(Login));
