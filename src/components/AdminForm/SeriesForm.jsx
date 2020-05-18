@@ -7,19 +7,6 @@ import { POSTS_SERVICE_URI } from "../../constants/endpoints";
 import PropTypes from "prop-types";
 import { postsAPICall } from "../../actions/post.actions";
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    border: "0px",
-    backgroundColor: "transparent none",
-  },
-};
-
 class SeriesForm extends Component {
   constructor(props) {
     super(props);
