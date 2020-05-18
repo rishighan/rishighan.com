@@ -221,14 +221,6 @@ export const adminNavItems = [
       />
     ),
   },
- {
-   displayName: 'logout',
-   href: '/logout',
-   clickHandler: signOutAction,
-   redirect: {
-     to: '/',
-   }
- },
   {
     href: "/admin/edit/:postSlug",
     protected: true,

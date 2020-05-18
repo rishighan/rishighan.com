@@ -16,10 +16,10 @@ import {
 export const signInAction = (values, history) => {
   return async (dispatch) => {
     try {
-      console.log(history)
       const res = await axios.post(`${USER_SERVICE_URI}/login`, values);
       dispatch({ type: AUTHENTICATED });
       localStorage.setItem("user", res.data.user.token);
+      localStorage.setItem("username", res.data.user.username);
       history.push(history.location.state.from.pathname);
     } catch (error) {
       dispatch({
@@ -36,7 +36,6 @@ export const signInAction = (values, history) => {
  */
 export const signOutAction = () => {
   return (dispatch) => {
-    console.log("signing out...")
     localStorage.clear();
     dispatch({
       type: UNAUTHENTICATED,

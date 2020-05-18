@@ -41,10 +41,16 @@ class AdminNavbar extends Component {
                 <Link to={navItem.href}>{navItem.displayName}</Link>
               </li>
             ))}
-            <li>
+            <li className="navbar-item">
+             
               <Link to="/" onClick={this.props.signOutAction}>
                 Logout
               </Link>
+            </li>
+            <li className="navbar-item">
+                {!_.isUndefined(localStorage.getItem("username"))
+                ? 'Logged in as ' + localStorage.getItem("username")
+                : null}
             </li>
           </ul>
         </div>
