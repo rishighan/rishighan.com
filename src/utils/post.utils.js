@@ -16,13 +16,17 @@ export const extractPostByTagName = (collection, tagName) => {
       return _.pull(targetedPost, undefined);
     })
     .value();
-    return _.flatten(temp);
+  return _.flatten(temp);
 };
 
-export const extractHeroImageFromPost = post => {
-    if(!_.isUndefined(post)) {
-        let heroImageUrl = [];
-        _.each(post.attachment, attachment => attachment.isHero ? heroImageUrl.push(attachment.url) : null);
-        return heroImageUrl[0];
-    }
+export const extractHeroImageFromPost = (post) => {
+  if (!_.isUndefined(post)) {
+    let heroImage = [];
+    _.each(post.attachment, (attachment) =>
+      attachment.isHero
+        ? heroImage.push({ url: attachment.url, title: post.title })
+        : null
+    );
+    return heroImage[0];
+  }
 };

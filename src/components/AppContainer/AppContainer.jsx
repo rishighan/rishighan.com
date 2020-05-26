@@ -39,16 +39,16 @@ class AppContainer extends Component {
    * @return {Component} - Masthead component with the corresponding masthead image
    */
   displayMasthead(pathname) {
-    let mastheadUrl;
+    let masthead;
     if (!_.isEmpty(this.props.blogPosts.posts)) {
       if (this.props.pathname === "/") {
-        mastheadUrl = this.getMastheadImageUrl(this.props.blogPosts.posts);
+        masthead = this.getMastheadImageUrl(this.props.blogPosts.posts);
       }
       const workPostPathPattern = this.matchPattern(pathname, /(\/post(.)*)/gm);
       if (!_.isNull(workPostPathPattern)) {
-        mastheadUrl = extractHeroImageFromPost(this.props.blogPosts.posts);
+        masthead = extractHeroImageFromPost(this.props.blogPosts.posts);
       }
-      return <Masthead mastheadImageUrl={mastheadUrl} />;
+      return !_.isUndefined(masthead) ? <Masthead mastheadImage={masthead} /> : null;
     }
   }
 
@@ -73,6 +73,7 @@ class AppContainer extends Component {
   }
 
   render() {
+    console.log(this.props.blogPosts.posts)
     return (
       // Masthead
       <>
@@ -96,7 +97,7 @@ class AppContainer extends Component {
 
               {/* Route configuration */}
               <div>
-                <div className="columns is-centered">
+                <div className={`columns is-centered ${ !_.isUndefined(this.displayMasthead(this.props.pathname)) ? "site-content" : ""}`}>
                   {[...siteNavItems, ...adminNavItems].map((navItem, idx) =>
                     navItem.protected ? (
                         <PrivateRoute
