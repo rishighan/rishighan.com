@@ -1,3 +1,9 @@
+/**
+ * Extracts a post with the specified tag from a collection of posts.
+ * @param {Array} collection - An array of post objects.
+ * @param {String} tagName - A tag name 
+ * @return {Array} - An array containing a matching post object.
+ */
 export const extractPostByTagName = (collection, tagName) => {
   let temp = _.chain(collection)
     .map((posts) => {
@@ -19,6 +25,11 @@ export const extractPostByTagName = (collection, tagName) => {
   return _.flatten(temp);
 };
 
+/**
+ * Extracts the attachment flagged as `isHero` from the supplied post object.
+ * @param {Array} post - The post object.
+ * @return {Object} - An object containing the masthead URL and post title 
+ */
 export const extractHeroImageFromPost = (post) => {
   if (!_.isUndefined(post)) {
     let heroImage = [];

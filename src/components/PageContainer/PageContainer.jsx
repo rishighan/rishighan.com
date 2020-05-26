@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import PageFragment from "../PageFragment/PageFragment";
 import AdminForm from "../AdminForm/AdminForm";
-import AdminMain from "../AdminMain/AdminMain";
+import AdminDashboard from "../AdminDashboard/AdminDashboard";
 import SeriesForm from "../AdminForm/SeriesForm";
 import { postsAPICall } from "../../actions/post.actions";
 
@@ -19,8 +19,8 @@ const renderPage = (props) => ({
       />
     </div>
   ),
-  seriesForm: <SeriesForm data={props.options.metadata.seedData} />,
-  adminDashboard: <AdminMain />,
+  seriesManagementForm: <SeriesForm data={props.options.metadata.seedData} />,
+  adminDashboard: <AdminDashboard />,
   editPostForm:
     !_.isArray(props.posts.posts) && props.options.metadata.mode === "edit" ? (
       <AdminForm formData={props.posts.posts} />

@@ -7,7 +7,7 @@ import ReactPaginate from 'react-paginate';
 import List from '../List/List';
 import { postsAPICall } from '../../actions/post.actions';
 
-class AdminMain extends Component {
+class AdminDashboard extends Component {
   componentDidMount() {
     this.props.getPostStatistics();
     this.props.getDrafts();
@@ -133,7 +133,7 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-AdminMain.propTypes = {
+AdminDashboard.propTypes = {
   posts: PropTypes.array,
   drafts: PropTypes.object,
   statistics: PropTypes.array,
@@ -141,4 +141,4 @@ AdminMain.propTypes = {
   getDrafts: PropTypes.func,
   getPostStatistics: PropTypes.func,
 };
-export default connect(mapStateToProps, mapDispatchToProps)(AdminMain);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminDashboard);

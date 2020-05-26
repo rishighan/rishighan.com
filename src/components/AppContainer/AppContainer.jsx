@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Link } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
 
@@ -36,8 +36,8 @@ class AppContainer extends Component {
       if (this.props.pathname === "/") {
         masthead = getMastheadImageUrl(this.props.blogPosts.posts);
       }
-      const workPostPathPattern = matchPattern(pathname, /(\/post(.)*)/gm);
-      if (!_.isNull(workPostPathPattern)) {
+      const postPathPattern = matchPattern(pathname, /(\/post(.)*)/gm);
+      if (!_.isNull(postPathPattern)) {
         masthead = extractHeroImageFromPost(this.props.blogPosts.posts);
       }
       return !_.isUndefined(masthead) ? <Masthead mastheadImage={masthead} /> : null;
@@ -45,7 +45,6 @@ class AppContainer extends Component {
   }
 
   render() {
-    console.log(this.props.blogPosts.posts)
     return (
       // Masthead
       <>
@@ -100,6 +99,7 @@ class AppContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state)
   return {
     pathname: state.router.location.pathname,
     search: state.router.location.search,

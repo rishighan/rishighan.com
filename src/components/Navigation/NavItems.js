@@ -210,7 +210,7 @@ export const adminNavItems = [
     render: (props) => (
       <PageContainer
         options={{
-          type: "seriesForm",
+          type: "seriesManagementForm",
           metadata: {
             seedData: {
               series_name: "",
