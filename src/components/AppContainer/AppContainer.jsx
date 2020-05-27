@@ -24,7 +24,7 @@ class AppContainer extends Component {
     this.props = props;
   }
 
- /**
+  /**
    * Renders a Masthead component either on the
    * home page or a post tagged with 'projects'
    * @param {string} pathname - The path to be matched.
@@ -34,14 +34,24 @@ class AppContainer extends Component {
     let masthead;
     if (!_.isEmpty(this.props.blogPosts.posts)) {
       if (this.props.pathname === "/") {
-        masthead = getMastheadImageUrl(this.props.blogPosts.posts);
+        masthead = this.props.masthead;
       }
       const postPathPattern = matchPattern(pathname, /(\/post(.)*)/gm);
       if (!_.isNull(postPathPattern)) {
-        masthead = extractHeroImageFromPost(this.props.blogPosts.posts);
+        masthead = this.props.singleMasthead;
       }
-      return !_.isUndefined(masthead) ? <Masthead mastheadImage={masthead} /> : null;
+      return !_.isUndefined(masthead) ? (
+        <Masthead mastheadImage={masthead} />
+      ) : null;
     }
+  }
+
+  shouldDisplayMasthead() {
+    const singleMastheadCriteria =
+      !_.isUndefined(this.props.singleMasthead) &&
+      !_.isNull(matchPattern(this.props.pathname, /(\/post(.)*)/gm));
+    const homePageMastheadCriteria = this.props.pathname === "/";
+    return singleMastheadCriteria || homePageMastheadCriteria;
   }
 
   render() {
@@ -56,7 +66,7 @@ class AppContainer extends Component {
             <AdminNavbar navItems={adminNavItems} />
           ) : null}
         </ConnectedRouter>
-
+            
         <section className="section">
           <div className="container">
             {/* Site navbar */}
@@ -68,16 +78,20 @@ class AppContainer extends Component {
 
               {/* Route configuration */}
               <div>
-                <div className="columns is-centered">
+                <div
+                  className={`columns is-centered ${
+                    this.shouldDisplayMasthead() ? "with-masthead" : ""
+                  }`}
+                >
                   {[...siteNavItems, ...adminNavItems].map((navItem, idx) =>
                     navItem.protected ? (
-                        <PrivateRoute
-                          exact
-                          key={idx}
-                          path={navItem.href}
-                          authed={this.props.authenticated}
-                          component={navItem.render}
-                        />
+                      <PrivateRoute
+                        exact
+                        key={idx}
+                        path={navItem.href}
+                        authed={this.props.authenticated}
+                        component={navItem.render}
+                      />
                     ) : (
                       <Route
                         exact
@@ -99,13 +113,14 @@ class AppContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     pathname: state.router.location.pathname,
     search: state.router.location.search,
     hash: state.router.location.hash,
     blogPosts: state.posts,
     authenticated: state.user.authenticated,
+    masthead: getMastheadImageUrl(state.posts.posts),
+    singleMasthead: extractHeroImageFromPost(state.posts.posts),
   };
 };
 
