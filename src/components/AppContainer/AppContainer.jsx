@@ -45,7 +45,12 @@ class AppContainer extends Component {
       ) : null;
     }
   }
-
+  
+  /**
+   * Returns a boolean indicating if a masthead should be displayed
+   * on posts tagged 'projects' or 'blog'
+   * @return {Boolean} - Boolean flag indicating if a masthead should be displayed or not
+   */
   shouldDisplayMasthead() {
     const singleMastheadCriteria =
       !_.isUndefined(this.props.singleMasthead) &&
@@ -66,7 +71,7 @@ class AppContainer extends Component {
             <AdminNavbar navItems={adminNavItems} />
           ) : null}
         </ConnectedRouter>
-            
+
         <section className="section">
           <div className="container">
             {/* Site navbar */}

@@ -126,22 +126,8 @@ $content-blockquote-background-color: none transparent;
     overflow: hidden;
   }
 
-  .masthead-title-container {
-    position: relative;
-    top: 400px;
-    align-self: flex-end;
-    font-weight: normal;
-    background: rgb(102, 99, 99);
-    background: rgba(102, 99, 99, 0.2);
-    z-index: 99;
-    margin-right: 10px;
-    padding: 0px 8px;
-    border-radius: 5px;
-
-    .masthead-title {
-      font-size: 0.7em;
-      color: rgb(101, 103, 105);
-    }
+  .masthead-title {
+    color: rgb(101, 103, 105);
   }
 
   @media only screen and (min-width: 320px) and (max-width: 995px) {
