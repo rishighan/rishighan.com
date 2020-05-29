@@ -19,8 +19,8 @@ const CaptionContainer = styled.div`
 `;
 
 const Caption = styled.span`
-    font-size: 0.7em;
-    color: ${ props => props.textColor };
+  font-size: 0.7em;
+  color: ${(props) => props.textColor};
 `;
 class Masthead extends Component {
   constructor(props) {
@@ -28,17 +28,17 @@ class Masthead extends Component {
     this.props = props;
     this.imageRef = React.createRef();
     this.state = {
-      titleContainerBg: '',
-      titleTextColor: '',
+      titleContainerBg: "",
+      titleTextColor: "",
     };
   }
 
   componentDidMount() {
-    console.log(this.state)
     const dominantColor = getDominantColor(this.imageRef.current);
     const titleContainerBg = calculateOppositeColor(dominantColor);
     this.setState({
-      titleContainerBg, 
+      titleContainerBg,
+      textColor: calculateOppositeColor(titleContainerBg),
     });
   }
   render() {
@@ -48,7 +48,7 @@ class Masthead extends Component {
           <img src={this.props.mastheadImage.url} ref={this.imageRef} />
         </figure>
         <CaptionContainer bgColor={this.state.titleContainerBg}>
-          <Caption textColor={ calculateOppositeColor(this.state.titleContainerBg) } >
+          <Caption textColor={this.state.textColor}>
             {this.props.mastheadImage.title}
           </Caption>
         </CaptionContainer>
