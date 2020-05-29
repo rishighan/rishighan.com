@@ -84,7 +84,7 @@ const renderPageFragment = (props) => {
         </>
       );
 
-    case "titles":
+    case "work":
       return (
         <>
           {_.isArray(props.postsData.posts) ? (

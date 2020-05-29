@@ -106,6 +106,17 @@ $content-blockquote-background-color: none transparent;
   position: fixed;
   top: 50px;
   left: 50px;
+  max-width:100px;
+  
+  li {
+    background: #CCC;
+    width: auto;
+    display: inline-block;
+    margin-top: 2px;
+    padding: 0 4px;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
 }
 
 // Masthead component styles

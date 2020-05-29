@@ -47,7 +47,7 @@ export const siteNavItems = [
         options={{
           type: "post",
           metadata: {
-            subType: "titles",
+            subType: "work",
           },
         }}
       />
