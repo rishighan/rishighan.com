@@ -29,6 +29,7 @@ class AdminDashboard extends Component {
             <List
               showTags
               showTimestamps >
+              linkBase={"/admin/edit/"}
               {!_.isEmpty(this.props.posts) ? this.props.posts.map(post => post): [] }
             </List>
 

@@ -12,7 +12,7 @@ export const getDominantColor = (img) => {
   if (img.complete) {
     return colorThief.getColor(img);
   } else {
-    image.addEventListener("load", function () {
+    img.addEventListener("load", function () {
       return colorThief.getColor(img);
     });
   }

@@ -104,18 +104,23 @@ $content-blockquote-background-color: none transparent;
   font-family: "ArminGrotesk-Normal", sans-serif;
   font-kerning: normal;
   position: fixed;
+  z-index: 99;
   top: 50px;
-  left: 50px;
-  max-width:100px;
+  left: 30px;
+  max-width:95px;
   
   li {
-    background: #CCC;
-    width: auto;
+    background: rgb(208, 215, 221);
+    background: rgba(208, 215, 221, 0.6);
     display: inline-block;
     margin-top: 2px;
-    padding: 0 4px;
+    padding: 2px 5px 0px 5px;
     border-radius: 4px;
-    font-size: 1rem;
+    font-size: 0.90rem;
+
+    a {
+      color: rgba(20, 20, 20, 0.6)
+    }
   }
 }
 

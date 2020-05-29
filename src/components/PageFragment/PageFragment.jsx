@@ -89,7 +89,7 @@ const renderPageFragment = (props) => {
         <>
           {_.isArray(props.postsData.posts) ? (
             <>
-              <List showTags={false} showTimestamps={false} showExcerpts>
+              <List showTags={false} showTimestamps={false} showExcerpts linkBase={"/post/"}>
                 {props.postsData.posts.map((post) => post)}
               </List>
             </>
@@ -129,7 +129,8 @@ const renderPageFragment = (props) => {
                   <h2 className="is-size-3 has-text-grey has-text-weight-normal">
                     {archive._id.year}
                   </h2>
-                  <List showTimestamps>
+                  <List showTimestamps
+                        linkBase={'/post/'}>
                     {!_.isNil(archive.archivedPosts) &&
                       archive.archivedPosts.map((post) => post)}
                   </List>

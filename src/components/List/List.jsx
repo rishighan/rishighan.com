@@ -8,7 +8,7 @@ const List = props => (
     <ul className="rg-list">
       {!_.isNull(props.children) ? props.children.map((child, idx) => (
         <li key={idx}>
-          <Heading headingText={child.title} linkHref={`/admin/edit/${child.slug}`} />
+          <Heading headingText={child.title} linkHref={props.linkBase + `${child.slug}`} />
           { props.showTimestamps ? <Timestamp date={child.date_updated} dateFormat={'MMMM Do, YYYY'} /> : null }
           { props.showExcerpts ? <span>{ child.excerpt }</span> : null }
           { props.showTags ? <div className="tags">
