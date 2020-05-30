@@ -9,7 +9,7 @@ import List from "../List/List";
 import CalloutCard from "../CalloutCard/CalloutCard";
 import axios from "axios";
 
-const getSeriesDataForPost = async postId => {
+const getSeriesDataForPost = async (postId) => {
   const series = await axios({
     method: "GET",
     url: "http://localhost/api/v1/posts/findSeriesByPostId",
@@ -33,7 +33,12 @@ const renderPageFragment = (props) => {
                 dateFormat={"D MMM, YYYY "}
               />
               <section>
-                <MarkdownRenderer text={props.singlePostData.content} />
+                <MarkdownRenderer
+                  text={props.singlePostData.content}
+                  metadata={{
+                    postId: props.singlePostData._id,
+                  }}
+                />
               </section>
             </article>
           ) : null}
@@ -75,7 +80,12 @@ const renderPageFragment = (props) => {
                   ) : null}
                   {/* Content */}
                   <section>
-                    <MarkdownRenderer text={post.content} />
+                    <MarkdownRenderer
+                      text={post.content}
+                      metadata={{
+                        postId: post._id,
+                      }}
+                    />
                   </section>
                 </article>
               ))}
@@ -89,7 +99,12 @@ const renderPageFragment = (props) => {
         <>
           {_.isArray(props.postsData.posts) ? (
             <>
-              <List showTags={false} showTimestamps={false} showExcerpts linkBase={"/post/"}>
+              <List
+                showTags={false}
+                showTimestamps={false}
+                showExcerpts
+                linkBase={"/post/"}
+              >
                 {props.postsData.posts.map((post) => post)}
               </List>
             </>
@@ -129,8 +144,7 @@ const renderPageFragment = (props) => {
                   <h2 className="is-size-3 has-text-grey has-text-weight-normal">
                     {archive._id.year}
                   </h2>
-                  <List showTimestamps
-                        linkBase={'/post/'}>
+                  <List showTimestamps linkBase={"/post/"}>
                     {!_.isNil(archive.archivedPosts) &&
                       archive.archivedPosts.map((post) => post)}
                   </List>
@@ -145,7 +159,7 @@ const renderPageFragment = (props) => {
   }
 };
 
-const PageFragment = props => renderPageFragment(props);
+const PageFragment = (props) => renderPageFragment(props);
 
 PageFragment.propTypes = {
   postType: PropTypes.string,

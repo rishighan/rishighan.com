@@ -47,8 +47,8 @@ class Masthead extends Component {
         <figure className="masthead">
           <img src={this.props.mastheadImage.url} ref={this.imageRef} />
         </figure>
-        <CaptionContainer bgColor={this.state.titleContainerBg}>
-          <Caption textColor={this.state.textColor}>
+        <CaptionContainer bgColor={this.state.titleContainerBg} className="masthead-title-container">
+          <Caption textColor={this.state.textColor} className="masthead-title">
             {this.props.mastheadImage.title}
           </Caption>
         </CaptionContainer>

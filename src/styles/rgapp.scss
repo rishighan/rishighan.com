@@ -84,10 +84,9 @@ $content-blockquote-background-color: none transparent;
   top: 400px;
 }
 
-@media only screen and (min-width: 320px) and (max-width: 995px) {
+@media only screen and (min-width: 320px) and (max-width: 768px) {
   .sitenav {
-    border: 1px dotted red;
-    display: none;
+    position: relative;
   }
 
   // site-content
@@ -97,16 +96,20 @@ $content-blockquote-background-color: none transparent;
   }
 }
 
+@media only screen and (min-width: 769px) and (max-width: 1199.98px) {
+  .sitenav {
+    position: fixed;
+    z-index: 99;
+    top: 50px;
+    left: 30px;
+  }
+}
 // Navigation
 .sitenav {
   background: transparent none;
   text-transform: uppercase;
   font-family: "ArminGrotesk-Normal", sans-serif;
   font-kerning: normal;
-  position: fixed;
-  z-index: 99;
-  top: 50px;
-  left: 30px;
   max-width:95px;
   
   li {
@@ -143,10 +146,9 @@ $content-blockquote-background-color: none transparent;
   }
 
   .masthead-title {
-    color: rgb(101, 103, 105);
   }
 
-  @media only screen and (min-width: 320px) and (max-width: 995px) {
+  @media only screen and (min-width: 320px) and (max-width: 768px) {
     // masthead title
     .masthead-title-container {
       position: relative;
