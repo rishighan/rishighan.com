@@ -525,11 +525,11 @@ $content-blockquote-background-color: none transparent;
   }
 }
 
-@media only screen and (min-width: 1367px) and (max-width: 1920px) {
+@media only screen and (min-width: 1367px) and (max-width: 1680px) {
   .masthead-container {
-    height: 450px;
+    height: 550px;
     .masthead-title-container {
-      top: 410px;
+      top: 480px;
     }
   }
   .content {
