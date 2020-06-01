@@ -45,19 +45,6 @@ class AppContainer extends Component {
       ) : null;
     }
   }
-  
-  /**
-   * Returns a boolean indicating if a masthead should be displayed
-   * on posts tagged 'projects' or 'blog'
-   * @return {Boolean} - Boolean flag indicating if a masthead should be displayed or not
-   */
-  shouldDisplayMasthead() {
-    const singleMastheadCriteria =
-      !_.isUndefined(this.props.singleMasthead) &&
-      !_.isNull(matchPattern(this.props.pathname, /(\/post(.)*)/gm));
-    const homePageMastheadCriteria = this.props.pathname === "/";
-    return singleMastheadCriteria || homePageMastheadCriteria;
-  }
 
   render() {
     return (
@@ -83,11 +70,7 @@ class AppContainer extends Component {
 
               {/* Route configuration */}
               <div>
-                <div
-                  className={`columns is-centered ${
-                    this.shouldDisplayMasthead() ? "with-masthead" : ""
-                  }`}
-                >
+                <div className="columns is-centered" >
                   {[...siteNavItems, ...adminNavItems].map((navItem, idx) =>
                     navItem.protected ? (
                       <PrivateRoute

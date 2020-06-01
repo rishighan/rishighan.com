@@ -28,8 +28,8 @@ class AdminDashboard extends Component {
 
             <List
               showTags
-              showTimestamps >
-              linkBase={"/admin/edit/"}
+              showTimestamps
+              linkBase={"/admin/edit/"}>
               {!_.isEmpty(this.props.posts) ? this.props.posts.map(post => post): [] }
             </List>
 
@@ -62,7 +62,8 @@ class AdminDashboard extends Component {
               </div>
             </div>
             <p className="subtitle is-3">Drafts</p>
-            <List showTags={false}>
+            <List showTags={false}
+                  linkBase={"/admin/edit/"}>
               {!_.isEmpty(this.props.drafts) ? this.props.drafts.docs.map(draft => draft) : []}
             </List>
           </div>

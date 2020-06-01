@@ -1,15 +1,8 @@
 import React from "react";
 import AspectRatio from "react-aspect-ratio";
 import PropTypes from "prop-types";
-import { inferImageDimensions } from "../../utils/image.utils";
+import { inferImageDimensions, bytesToSize } from "../../utils/image.utils";
 
-const bytesToSize = bytes => {
-  const sizes = ['Bytes', 'kB', 'MB', 'GB', 'TB'];
-  if (bytes == 0) return 'n/a';
-  const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-  if (i == 0) return bytes + ' ' + sizes[i];
-  return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
-};
 
 const ImageCard = (props) => (
   <div
