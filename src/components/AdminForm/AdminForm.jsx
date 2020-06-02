@@ -91,7 +91,9 @@ class AdminForm extends Component {
       case "Preview":
         this.setState({
           currentlyActiveTab: tabName,
-          markup: <MarkdownRenderer text={values.content} />,
+          markup: <MarkdownRenderer text={values.content} metadata={{
+            postId: values._id,
+          }} />,
         });
         break;
       case "Diff History":
