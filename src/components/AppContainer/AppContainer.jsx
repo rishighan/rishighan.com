@@ -18,6 +18,8 @@ import {
   isProtectedPath,
 } from "../../utils/post.utils";
 
+import Copyright from "../Copyright/Copyright";
+
 class AppContainer extends Component {
   constructor(props) {
     super(props);
@@ -95,6 +97,7 @@ class AppContainer extends Component {
             </ConnectedRouter>
           </div>
         </section>
+            <Copyright options={{ entity: "Rishi Ghan"}} />
       </>
     );
   }

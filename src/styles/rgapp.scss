@@ -544,4 +544,22 @@ $content-blockquote-background-color: none transparent;
 
 }
 
+@media only screen and (min-width: 1681px) and (max-width: 1920px) {
+  .masthead-container {
+    height: 650px;
+    .masthead-title-container {
+      top: 520px;
+    }
+  }
+  .content {
+    margin-top: 3.5rem;
+  }
+  .sitenav {
+    position: fixed;
+    z-index: 99;
+    top: 50px;
+    left: 30px;
+  }
+}
+
 @import "../../node_modules/bulma/bulma.sass";
