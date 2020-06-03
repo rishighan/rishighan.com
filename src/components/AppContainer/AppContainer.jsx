@@ -96,8 +96,11 @@ class AppContainer extends Component {
               </div>
             </ConnectedRouter>
           </div>
+            <Copyright options={{ 
+              articleToUse: "The",
+              copyrightObject: "content of this blog",
+              entity: "Rishi Ghan"}} />
         </section>
-            <Copyright options={{ entity: "Rishi Ghan"}} />
       </>
     );
   }

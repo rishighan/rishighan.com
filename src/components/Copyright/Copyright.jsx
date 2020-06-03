@@ -1,25 +1,28 @@
 import React from "react";
 import moment from "moment";
 
-export const Copyright = (props) => {
+const Copyright = (props) => {
   return (
     <div>
-      &copy; Copyright {moment().year()}, {props.options.entity}
-      <p>
-        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
-          <img
-            alt="Creative Commons License"
-            style="border-width:0"
-            src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
-          />
+      <small>
+        &copy; Copyright {moment().year()}, {props.options.entity}
+        <p>
+          <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+            <img
+              alt="Creative Commons License"
+              style={{ borderWidth: 0 }}
+              src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+            />
+          </a>
+          <br />
+  {props.options.articleToUse} {props.options.copyrightObject} is licensed under a{" "}
+          <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+            Creative Commons Attribution-ShareAlike 4.0 International License
         </a>
-        <br />
-        This work is licensed under a{" "}
-        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
-          Creative Commons Attribution-ShareAlike 4.0 International License
-        </a>
-        .
-      </p>
+        </p>
+      </small>
     </div>
   );
 };
+
+export default Copyright;
