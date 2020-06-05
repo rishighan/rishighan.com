@@ -72,7 +72,7 @@ class AppContainer extends Component {
 
               {/* Route configuration */}
               <div>
-                <div className="columns is-centered" >
+                <div className="columns is-multiline is-centered is-mobile">
                   {[...siteNavItems, ...adminNavItems].map((navItem, idx) =>
                     navItem.protected ? (
                       <PrivateRoute
@@ -83,23 +83,27 @@ class AppContainer extends Component {
                         component={navItem.render}
                       />
                     ) : (
-                      <Route
-                        exact
-                        path={navItem.href}
-                        key={idx}
-                        render={navItem.render}
-                      />
-                    )
+                        <Route
+                          exact
+                          path={navItem.href}
+                          key={idx}
+                          render={navItem.render}
+                        />
+                      )
                   )}
                   <Route path="/login" component={Login} />
+
+                  <Copyright options={{
+                    articleToUse: "The",
+                    copyrightObject: "content of this blog",
+                    entity: "Rishi Ghan"
+                  }} />
                 </div>
+
               </div>
             </ConnectedRouter>
           </div>
-            <Copyright options={{ 
-              articleToUse: "The",
-              copyrightObject: "content of this blog",
-              entity: "Rishi Ghan"}} />
+
         </section>
       </>
     );

@@ -3,7 +3,7 @@ import moment from "moment";
 
 const Copyright = (props) => {
   return (
-    <div>
+    <div className="column is-half">
       <small>
         &copy; Copyright {moment().year()}, {props.options.entity}
         <p>
@@ -13,8 +13,7 @@ const Copyright = (props) => {
           >
             <img
               alt="Creative Commons License"
-              style={{ borderWidth: 0 }}
-              src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+              src="https://mirrors.creativecommons.org/presskit/buttons/80x15/svg/by-sa.svg"
             />
           </a>
 

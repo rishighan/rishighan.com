@@ -18,6 +18,13 @@
   ttf
 );
 @include font-face(
+  "Hasklig Regular",
+  "../../public/assets/fonts/Hasklig/Hasklig-Regular",
+  normal,
+  normal,
+  ttf
+);
+@include font-face(
   "ArminGrotesk-Regular",
   "../../public/assets/fonts/Armin Grotesk/38DD7F_3_0",
   normal,
@@ -63,8 +70,8 @@
 $render-mode: optimizeLegibility;
 $family-sans-serif: "ArminGrotesk-Regular", sans-serif;
 $family-primary: $family-sans-serif;
-$family-monospace: "Source Code Pro Regular";
-$family-code: "Source Code Pro Regular";
+$family-monospace: "Hasklig Regular";
+$family-code: "Hasklig Regular";
 
 // Colors
 $black: hsl(0, 0%, 8%);
@@ -139,6 +146,7 @@ $content-blockquote-background-color: none transparent;
   font-variant-ligatures: discretionary-ligatures;
   font-kerning: normal;
   font-feature-settings: "ss01", "ss08";
+
 
   // High-level <header>
   header {
