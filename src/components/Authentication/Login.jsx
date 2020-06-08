@@ -22,7 +22,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="column content is-half is-full-tablet is-full-mobile">
+      <div className="column content is-two-thirds-tablet is-full-mobile">
         <div className="form box">
           <Form
             onSubmit={this.onSubmit}

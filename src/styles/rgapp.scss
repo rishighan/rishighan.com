@@ -83,6 +83,17 @@ $content-blockquote-border-left: 0px none;
 $content-blockquote-padding: 0em;
 $content-blockquote-background-color: none transparent;
 
+
+// Container 
+.container {
+  .inner-container {
+    height: 100vh;
+    .copyright {
+      margin-top: auto;
+    }
+  }
+}
+
 // Navigation
 .sitenav {
   background: transparent none;

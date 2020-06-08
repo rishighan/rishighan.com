@@ -71,8 +71,7 @@ class AppContainer extends Component {
                 )}
 
               {/* Route configuration */}
-              <div>
-                <div className="columns is-multiline is-centered is-mobile">
+                <div className="columns inner-container is-multiline is-centered is-mobile">
                   {[...siteNavItems, ...adminNavItems].map((navItem, idx) =>
                     navItem.protected ? (
                       <PrivateRoute
@@ -100,7 +99,6 @@ class AppContainer extends Component {
                   }} />
                 </div>
 
-              </div>
             </ConnectedRouter>
           </div>
 
