@@ -134,7 +134,7 @@ class AdminForm extends Component {
 
   render() {
     return (
-      <div className="column content is-two-thirds is-full-tablet is-full-mobile">
+      <div className="column content is-two-thirds-desktop is-full-tablet is-full-mobile">
         <Form
           onSubmit={onSubmit}
           initialValues={{

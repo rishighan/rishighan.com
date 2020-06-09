@@ -3,7 +3,7 @@ import moment from "moment";
 
 const Copyright = (props) => {
   return (
-    <div className="column copyright is-half has-text-grey is-size-7">
+    <div className="column copyright is-three-quarters has-text-grey is-size-7">
         <p>
           &copy; Copyright {moment().year()}, {props.options.entity}
         </p>
