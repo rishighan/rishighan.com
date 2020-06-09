@@ -83,8 +83,7 @@ $content-blockquote-border-left: 0px none;
 $content-blockquote-padding: 0em;
 $content-blockquote-background-color: none transparent;
 
-
-// Container 
+// Container
 .container {
   .inner-container {
     height: 100vh;
@@ -137,7 +136,6 @@ $content-blockquote-background-color: none transparent;
   }
 }
 
-
 // Admin navbar
 .rg-admin-navbar {
   position: absolute;
@@ -157,7 +155,6 @@ $content-blockquote-background-color: none transparent;
   font-variant-ligatures: discretionary-ligatures;
   font-kerning: normal;
   font-feature-settings: "ss01", "ss08";
-
 
   // High-level <header>
   header {
@@ -273,7 +270,14 @@ $content-blockquote-background-color: none transparent;
       margin-bottom: 1em;
     }
 
-    th,
+    pre {
+      border-radius: 8px;
+    }
+
+    code {
+      padding: 0.1em 0.5em 0.1em;
+      border-radius: 3px;
+    }
     h2,
     h3,
     h4,
@@ -288,6 +292,18 @@ $content-blockquote-background-color: none transparent;
 
     img {
       border-radius: 8px;
+    }
+
+    table {
+      thead {
+        tr {
+          th:not([align]) {
+            text-align: left;
+            font-weight: normal;
+            font-family: "ArminGrotesk-SemiBold";
+          }
+        }
+      }
     }
   }
 
@@ -353,10 +369,12 @@ $content-blockquote-background-color: none transparent;
 
     // table override
     table {
-      tr {
-        th {
-          font-weight: normal;
-          font-family: ArminGrotesk-SemiBold;
+      thead {
+        tr {
+          th {
+            font-weight: normal;
+            font-family: "ArminGrotesk-SemiBold";
+          }
         }
       }
     }
@@ -471,114 +489,5 @@ $content-blockquote-background-color: none transparent;
   }
 }
 
-
-// Media queries
-@media only screen and (min-width: 320px) and (max-width: 480px) {
-  .masthead-container {
-    height: 0px;
-    .masthead-title-container {
-      top: 190px;
-    }
-  }
-
-  .content {
-    margin-top: 2rem;
-  }
-
-  .sitenav {
-    position: relative;
-    top: 0px;
-    left: 0px;
-  }
-}
-
-@media only screen and (min-width: 481px) and (max-width: 768px) {
-  .masthead-container {
-    height: 0px;
-    .masthead-title-container {
-      top: 190px;
-    }
-  }
-  .content {
-    margin-top: 4rem;
-  }
-  .sitenav {
-    position: relative;
-  }
-}
-
-@media only screen and (min-width: 769px) and (max-width: 1024px) {
-  .masthead-container {
-    height: 300px;
-    .masthead-title-container {
-      top: 320px;
-    }
-  }
-
-  .content {
-    margin-top: 2.5rem;
-  }
-  .sitenav {
-    position: fixed;
-    z-index: 99;
-    top: 50px;
-    left: 30px;
-  }
-}
-
-@media only screen and (min-width: 1025px) and (max-width: 1366px) {
-  .masthead-container {
-    height: 370px;
-    .masthead-title-container {
-      top: 380px;
-    }
-  }
-  .content {
-    margin-top: 2.5rem;
-  }
-  .sitenav {
-    position: fixed;
-    z-index: 99;
-    top: 50px;
-    left: 30px;
-  }
-}
-
-@media only screen and (min-width: 1367px) and (max-width: 1680px) {
-  .masthead-container {
-    height: 550px;
-    .masthead-title-container {
-      top: 480px;
-    }
-  }
-  .content {
-    margin-top: 3.5rem;
-  }
-  .sitenav {
-    position: fixed;
-    z-index: 99;
-    top: 50px;
-    left: 30px;
-  }
-
-}
-
-@media only screen and (min-width: 1681px) and (max-width: 1920px) {
-  .masthead-container {
-    height: 650px;
-    .masthead-title-container {
-      top: 520px;
-    }
-  }
-  .content {
-    margin-top: 3.5rem;
-  }
-  .sitenav {
-    position: fixed;
-    z-index: 99;
-    top: 50px;
-    left: 30px;
-  }
-}
-
+@import "./mixins/mediaqueries";
 @import "../../node_modules/bulma/bulma.sass";

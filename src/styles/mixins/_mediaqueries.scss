@@ -1,0 +1,108 @@
+// Media queries
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+    .masthead-container {
+      height: 0px;
+      .masthead-title-container {
+        top: 190px;
+      }
+    }
+  
+    .content {
+      margin-top: 2rem;
+    }
+  
+    .sitenav {
+      position: relative;
+      top: 0px;
+      left: 0px;
+    }
+  }
+  
+  @media only screen and (min-width: 481px) and (max-width: 768px) {
+    .masthead-container {
+      height: 0px;
+      .masthead-title-container {
+        top: 190px;
+      }
+    }
+    .content {
+      margin-top: 4rem;
+    }
+    .sitenav {
+      position: relative;
+    }
+  }
+  
+  @media only screen and (min-width: 769px) and (max-width: 1024px) {
+    .masthead-container {
+      height: 300px;
+      .masthead-title-container {
+        top: 320px;
+      }
+    }
+  
+    .content {
+      margin-top: 2.5rem;
+    }
+    .sitenav {
+      position: fixed;
+      z-index: 99;
+      top: 50px;
+      left: 30px;
+    }
+  }
+  
+  @media only screen and (min-width: 1025px) and (max-width: 1366px) {
+    .masthead-container {
+      height: 370px;
+      .masthead-title-container {
+        top: 380px;
+      }
+    }
+    .content {
+      margin-top: 2.5rem;
+    }
+    .sitenav {
+      position: fixed;
+      z-index: 99;
+      top: 50px;
+      left: 30px;
+    }
+  }
+  
+  @media only screen and (min-width: 1367px) and (max-width: 1680px) {
+    .masthead-container {
+      height: 550px;
+      .masthead-title-container {
+        top: 480px;
+      }
+    }
+    .content {
+      margin-top: 3.5rem;
+    }
+    .sitenav {
+      position: fixed;
+      z-index: 99;
+      top: 50px;
+      left: 30px;
+    }
+  
+  }
+  
+  @media only screen and (min-width: 1681px) and (max-width: 1920px) {
+    .masthead-container {
+      height: 650px;
+      .masthead-title-container {
+        top: 520px;
+      }
+    }
+    .content {
+      margin-top: 3.5rem;
+    }
+    .sitenav {
+      position: fixed;
+      z-index: 99;
+      top: 50px;
+      left: 30px;
+    }
+  }

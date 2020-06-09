@@ -44,14 +44,14 @@ class Masthead extends Component {
   render() {
     return (
       <div className="masthead-container">
-        <figure className="masthead">
+        {!_.isUndefined(this.imageRef) ? <><figure className="masthead">
           <img src={this.props.mastheadImage.url} ref={this.imageRef} />
         </figure>
         <CaptionContainer bgColor={this.state.titleContainerBg} className="masthead-title-container">
           <Caption textColor={this.state.textColor} className="masthead-title">
             {this.props.mastheadImage.title}
           </Caption>
-        </CaptionContainer>
+        </CaptionContainer>)</> : null }
       </div>
     );
   }
