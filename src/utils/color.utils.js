@@ -12,11 +12,24 @@ export const getDominantColor = (img) => {
   if (img.complete) {
     return colorThief.getColor(img);
   } else {
-    img.addEventListener("load", function () {
+    img.addEventListener("load", () => {
       return colorThief.getColor(img);
     });
   }
 };
+
+/**
+ * Checks if an image has completed loading
+ * @param {HTMLImageElement} - An image node
+ * @return {Promise} - A Promise object that resolves the image load status
+ */
+
+export const getImageLoadStatus = img =>
+  new Promise(resolve => {
+    img.onload = () => resolve({ img, status: 'ok' });
+    img.onerror = () => resolve({ img, status: 'error' });
+
+  });
 
 /**
  * Gets the opposite color for a supplied rgb value
