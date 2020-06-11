@@ -5,7 +5,7 @@ const Copyright = (props) => {
   return (
     <div className="column copyright is-three-quarters has-text-grey is-size-7">
         <p>
-          &copy; Copyright {moment().year()}, {props.options.entity}
+          &copy; Copyright {moment().year()}, {props.options.author}
         </p>
         <p>
           {props.options.articleToUse} {props.options.copyrightObject} is

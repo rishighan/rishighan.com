@@ -95,7 +95,7 @@ class AppContainer extends Component {
                   <Copyright options={{
                     articleToUse: "The",
                     copyrightObject: "content of this blog",
-                    entity: "Rishi Ghan"
+                    author: "Rishi Ghan"
                   }} />
                 </div>
 
