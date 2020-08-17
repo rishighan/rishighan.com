@@ -5,8 +5,7 @@
   "repository": "https://github.com/rishighan/rishighan.com",
   "main": "index.js",
   "scripts": {
-    "hot": "webpack --config webpack/webpack.config.babel.js --mode development",
-    "dev": "nodemon server/server.js -e /dist/*.js",
+    "dev": "pm2 start && webpack --config webpack/webpack.config.babel.js --mode development",
     "test": "npm test"
   },
   "keywords": [

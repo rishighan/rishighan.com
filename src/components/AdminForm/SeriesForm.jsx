@@ -178,8 +178,8 @@ class SeriesForm extends Component {
           <thead></thead>
           <tbody>
             <tr>
-              <th className="has-text-grey">Series Name</th>
-              <th className="has-text-grey">Associated Posts</th>
+              <th className="has-text-grey has-text-left">Series Name</th>
+              <th className="has-text-grey has-text-left">Associated Posts</th>
             </tr>
             {/* Series names */}
             {!_.isUndefined(this.props.series) ? (
