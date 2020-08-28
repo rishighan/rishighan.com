@@ -246,7 +246,7 @@ class AdminForm extends Component {
               {!_.isEmpty(this.props.series) ? (
                 <div className="field">
                   <label className="field-label is-normal">
-                    Part Of Series
+                    This post is a part of a series
                   </label>
                   <a href="/admin/manage/series" className="button is-small is-inverted">
                     <span className="icon">
