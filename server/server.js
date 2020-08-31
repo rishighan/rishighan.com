@@ -10,6 +10,7 @@ app.use(helmet.noSniff());
 const port = process.env.PORT || 8999;
 
 app.use('/dist', express.static(path.resolve(__dirname, '../dist')));
+app.use('/public', express.static(path.resolve(__dirname, '../public')));
 
 // catch-all
 app.get('*', (req, res) => {

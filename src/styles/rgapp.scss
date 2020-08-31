@@ -101,7 +101,10 @@ $content-blockquote-background-color: none transparent;
   font-family: "ArminGrotesk-Normal", sans-serif;
   font-kerning: normal;
   max-width: 95px;
-
+  .logo {
+    background: transparent;
+    height: 50px;
+  }
   li {
     background: rgb(208, 215, 221);
     background: rgba(208, 215, 221, 0.6);
@@ -143,6 +146,9 @@ $content-blockquote-background-color: none transparent;
   width: 100vw;
   font-size: 0.85em;
 
+  .logo {
+    height:30px;
+  }
   ul {
     li {
       text-transform: uppercase;

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { signOutAction } from "../../actions/user.actions";
+import { ReactSVG } from "react-svg";
 
 class AdminNavbar extends Component {
   render() {
@@ -14,11 +15,14 @@ class AdminNavbar extends Component {
       >
         <div className="navbar-brand">
           <a className="navbar-item" href="https://bulma.io">
-            <img
-              src="https://bulma.io/images/bulma-logo.png"
-              width="112"
-              height="28"
-            />
+          <ReactSVG
+                  src="/public/assets/images/rishighan_logo.svg"
+                  beforeInjection={(svg) => {
+                    svg.classList.add("logo");
+                    svg.setAttribute("style", "width: 50px");
+                  }}
+                  className="logo"
+                />
           </a>
 
           <a
