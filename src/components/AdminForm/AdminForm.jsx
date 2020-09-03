@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import _ from "lodash";
 import CreatableSelect from "react-select/creatable";
 
-import format from "date-fns/format";
+import dayjs from "dayjs";
 import { Markup } from "interweave";
 import Dropzone from "../Dropzone/Dropzone";
 import MarkdownRenderer from "../MarkdownRenderer/MarkdownRenderer";
@@ -103,7 +103,7 @@ class AdminForm extends Component {
             <>
               {_.map(this.props.diffHistories, (diffHistory, i) => (
                 <pre key={i}>
-                  <p>{format(diffHistory.createdAt, "MMMM Do, YYYY")}</p>
+                  <p>{dayjs(diffHistory.createdAt).format("MMMM Do, YYYY")}</p>
                   <Markup content={JSON.stringify(diffHistory.diff, null, 4)} />
                 </pre>
               ))}

@@ -1,11 +1,11 @@
-import React from "react";
-import moment from "moment";
+import React from 'react';
+import dayjs from 'dayjs';
 
 const Copyright = (props) => {
   return (
     <div className="column copyright is-three-quarters has-text-grey is-size-7">
         <p>
-          &copy; Copyright {moment().year()}, {props.options.author}
+          &copy; Copyright {dayjs().year()}, {props.options.author}
         </p>
         <p>
           {props.options.articleToUse} {props.options.copyrightObject} is
