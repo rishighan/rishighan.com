@@ -1,6 +1,6 @@
 ## rishighan.com
 
-This is a basic boilerplate built on:
+This is the code for rishighan.com's frontend
 
 + react 16.10.2
 + redux 6.0.0
