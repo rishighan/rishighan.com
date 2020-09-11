@@ -1,0 +1,3 @@
+rishighan.local {
+    reverse_proxy /* localhost:8999
+}

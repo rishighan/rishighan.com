@@ -1,0 +1,28 @@
+version: "3.3"
+
+services:
+  caddy:
+    image: caddy
+    container_name: caddy
+    restart: always
+    ports:
+      - "443:443"
+      - "80:80"
+    networks:
+      - main-network
+    volumes:
+      - "./Caddyfile:/etc/caddy/Caddyfile"
+
+  rishighan:
+    image: frishi/rishighan.com
+    container_name: rishighan.com
+    depends_on: 
+      - caddy
+    ports:
+      - 8999:8999
+    networks:
+      - main-network
+
+networks:
+  main-network:
+    external: true
