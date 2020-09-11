@@ -15,7 +15,7 @@ services:
 
   rishighan:
     image: frishi/rishighan.com:caddy
-    container_name: rishighan.com
+    container_name: rishighan
     volumes:
       - "./ecosystem.config.json:/ecosystem.config.json"
     depends_on: 
