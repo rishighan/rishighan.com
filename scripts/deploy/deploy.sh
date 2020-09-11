@@ -65,6 +65,7 @@ fi
     printf "$DOWNLOAD Downloading the docker-compose configuration for $service_name...\n\n"
     printf "$repository_base_url\n\n"
     curl "$repository_base_url"/docker-compose.yml --output docker-compose.yml
+    curl "$repository_base_url"/Caddyfile --output Caddyfile
 
     printf "\n$BROOM Stopping and removing containers and volumes...\n\n"
     docker-compose down -v
