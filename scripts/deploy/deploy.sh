@@ -60,7 +60,7 @@ fi
     docker system prune -f
 
     printf "\n$CONSTRUCTION Creating an external docker network...\n\n"
-    docker network create gateway
+    docker network create main-network
     
     printf "$DOWNLOAD Downloading the docker-compose configuration for $service_name...\n\n"
     printf "$repository_base_url\n\n"
