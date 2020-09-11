@@ -16,4 +16,4 @@ COPY . /usr/src/rishighan.com
 EXPOSE 8999
 
 # This starts the app
-CMD pm2 start --no-daemon --env production ecosystem.config.json
+CMD ["pm2-runtime", "server/server.js"]

@@ -9,17 +9,14 @@ jobs:
           name: Update to latest npm version
           command: "sudo npm install -g npm@latest"
       - run:
-          name: Install yarn 
-          command: "sudo npm install -g yarn@latest"
-      - run:
           name: Install dependencies
           command: yarn 
       - setup_remote_docker:
           docker_layer_caching: false 
       - run:
-          name: Build Docker container 
+          name: Build using `docker-compose`
           command: |
-            docker build
+            docker-compose build
       - run:
           name: Login for Docker Hub
           command: | 

@@ -4,6 +4,7 @@ import HTMLWebpackPlugin from "html-webpack-plugin";
 import TerserPlugin from "terser-webpack-plugin";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import OptimizeCssAssetsPlugin from "optimize-css-assets-webpack-plugin";
+
 module.exports = {
   entry: ["babel-polyfill", "./src/index.js"],
   output: {

@@ -14,8 +14,10 @@ services:
       - "./Caddyfile:/etc/caddy/Caddyfile"
 
   rishighan:
-    image: frishi/rishighan.com
+    image: frishi/rishighan.com:caddy
     container_name: rishighan.com
+    volumes:
+      - "./ecosystem.config.json:/ecosystem.config.json"
     depends_on: 
       - caddy
     ports:
