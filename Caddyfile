@@ -12,3 +12,7 @@
 rishighan.com {
     reverse_proxy rishighan:8999
 }
+
+posts.services.rishighan.com {
+    reverse_proxy posts-api:5000
+}

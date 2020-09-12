@@ -67,6 +67,7 @@ fi
     curl "$repository_base_url"/docker-compose.yml --output docker-compose.yml
     curl "$repository_base_url"/docker-compose.env --output docker-compose.env
     curl "$repository_base_url"/Caddyfile --output Caddyfile
+    curl "$repository_base_url"/ecosystem.config.js --output ecosystem.config.js
 
     printf "\n$BROOM Stopping and removing containers and volumes...\n\n"
     docker-compose down -v
