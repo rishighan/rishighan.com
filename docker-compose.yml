@@ -14,7 +14,7 @@ services:
       - "./Caddyfile:/etc/caddy/Caddyfile"
 
   rishighan:
-    image: frishi/rishighan.com:caddy
+    image: frishi/rishighan
     container_name: rishighan
     volumes:
       - "./ecosystem.config.json:/ecosystem.config.json"
