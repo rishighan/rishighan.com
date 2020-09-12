@@ -1,3 +1,9 @@
-rishighan.com
+{
+    # Global options block. Entirely optional, https is on by default
+    email frishi@me.com 
+    acme_ca https://acme.zerossl.com/v2/DV9
+}
 
-reverse_proxy rishighan:8999
+rishighan.com {
+    reverse_proxy rishighan:8999
+}
