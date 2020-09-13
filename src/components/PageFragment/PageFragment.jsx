@@ -12,7 +12,7 @@ import axios from "axios";
 const getSeriesDataForPost = async (postId) => {
   const series = await axios({
     method: "GET",
-    url: "http://localhost/api/v1/posts/findSeriesByPostId",
+    url: "https://posts.services.rishighan.com/api/v1/posts/findSeriesByPostId",
     params: {
       postId,
     },
