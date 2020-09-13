@@ -12,7 +12,8 @@ services:
       - main-network
     volumes:
       - "./Caddyfile:/etc/caddy/Caddyfile"
-      - $HOME/.caddy:/etc/caddycerts
+      - $PWD/.caddy/data:/data
+      - $PWD/.caddy/config:/config
 
   rishighan:
     image: frishi/rishighan
