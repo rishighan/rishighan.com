@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
 import { extractPostByTagName } from "../../utils/post.utils";
-import { POSTS_SERVICE_API } from "../../constants/endpoints";
+import { POSTS_SERVICE_URI } from "../../constants/endpoints";
 import MarkdownRenderer from "../MarkdownRenderer/MarkdownRenderer";
 import Heading from "../Heading/Heading";
 import Timestamp from "../Timestamp/Timestamp";
@@ -13,7 +13,7 @@ import axios from "axios";
 const getSeriesDataForPost = async (postId) => {
   const series = await axios({
     method: "GET",
-    url: POSTS_SERVICE_API + "findSeriesByPostId",
+    url: POSTS_SERVICE_URI + "findSeriesByPostId",
     params: {
       postId,
     },
