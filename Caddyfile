@@ -3,8 +3,8 @@
     email frishi@me.com 
     acme_ca https://acme.zerossl.com/v2/DV90
     acme_eab {
-        key_id zttASlajslyxsaZ-g_GOjw 
-        hmac FGJ3viT2OUkFLt3_pZc7Fgapw7ohPQZjmkHpmtDJccZB8z3N8JSTnKW58miblqoyrxU0NEtt5dbdn15dPGE5bg 
+        key_id alEDh3Yt0A4WokbKY1bH4g 
+        hmac DXESSe8qnd6VjggKyqYu4RYEiE0tZzm1ZxbYuWwJz2YhDJcpOMlUCO2_2MU-A8HtmR1U5RM4N5mn6PTMIamMqQ 
     }
     # cert_issuer zerossl aa69d181dc7a7417f2adbd65d5a3e032
 }
@@ -15,4 +15,16 @@ rishighan.com {
 
 posts.services.rishighan.com {
     reverse_proxy posts-service-api:5000
+}
+
+user.services.rishighan.com {
+    reverse_proxy user-service-api:3456
+}
+
+assets.services.rishighan.com {
+    reverse_proxy assets-service-api:6000
+}
+
+analytics.services.rishighan.com {
+    reverse_proxy analytics-service-api:9876
 }

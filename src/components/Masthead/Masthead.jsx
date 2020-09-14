@@ -49,7 +49,7 @@ class Masthead extends Component {
     return (
       <div className="masthead-container">
         {!_.isUndefined(this.imageRef) ? <><figure className="masthead">
-          <img src={this.props.mastheadImage.url} ref={this.imageRef} />
+          <img crossorigin="anonymous" src={this.props.mastheadImage.url} ref={this.imageRef} />
         </figure>
           <CaptionContainer bgColor={this.state.titleContainerBg} className="masthead-title-container">
             <Caption textColor={this.state.textColor} className="masthead-title">
