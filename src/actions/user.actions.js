@@ -16,7 +16,7 @@ import {
 export const signInAction = (values, history) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post(`${USER_SERVICE_URI}/login`, values);
+      const res = await axios.post(`${USER_SERVICE_URI}login`, values);
       dispatch({ type: AUTHENTICATED });
       localStorage.setItem("user", res.data.user.token);
       localStorage.setItem("username", res.data.user.username);
