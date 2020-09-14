@@ -6,7 +6,7 @@ services:
     container_name: rishighan
     volumes:
       - "./ecosystem.config.json:/ecosystem.config.json"
-    depends_on: 
+    external_links: 
       - caddy
     ports:
       - 8999:8999
