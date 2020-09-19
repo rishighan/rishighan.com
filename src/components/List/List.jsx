@@ -12,7 +12,8 @@ const List = props => (
           { props.showTimestamps ? <Timestamp date={child.date_updated} dateFormat={'MMMM DD, YYYY'} /> : null }
           { props.showExcerpts ? <span>{ child.excerpt }</span> : null }
           { props.showTags ? <div className="tags">
-            { _.map(child.tags, (tag, i) => <span className="tag is-light is-normal" key={i}>{ tag.label }</span>)}
+          { child.is_draft ? <span className="tag is-warning">Draft</span>  : null }
+          { _.map(child.tags, (tag, i) => <span className="tag is-light is-normal" key={i}>{ tag.label }</span>)}
           </div> : null }
         </li>)) : 'No posts found'}
     </ul>

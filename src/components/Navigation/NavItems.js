@@ -133,6 +133,7 @@ export const siteNavItems = [
           type: "post",
           metadata: {
             subType: "single",
+            timestamps: false,
           },
         }}
       />

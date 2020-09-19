@@ -28,10 +28,10 @@ const renderPageFragment = (props) => {
           {!_.isNil(props.singlePostData) ? (
             <article>
               <Heading headingText={props.singlePostData.title} />
-              <Timestamp
+              { props.timestamp ? <Timestamp
                 date={props.singlePostData.date_updated}
                 dateFormat={"D MMM, YYYY "}
-              />
+              /> : null }
               <section>
                 <MarkdownRenderer
                   text={props.singlePostData.content}
