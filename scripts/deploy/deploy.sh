@@ -59,14 +59,10 @@ fi
     printf "\n$SCISSORS  Pruning Docker images, networks and volumes...\n\n"
     docker system prune -f
 
-    printf "\n$CONSTRUCTION Creating an external docker network...\n\n"
-    docker network create main-network
-    
     printf "$DOWNLOAD Downloading the docker-compose configuration for $service_name...\n\n"
     printf "$repository_base_url\n\n"
     curl "$repository_base_url"/docker-compose.yml --output docker-compose.yml
     curl "$repository_base_url"/docker-compose.env --output docker-compose.env
-    curl "$repository_base_url"/Caddyfile --output Caddyfile
     curl "$repository_base_url"/ecosystem.config.js --output ecosystem.config.js
 
     printf "\n$BROOM Stopping and removing containers and volumes...\n\n"

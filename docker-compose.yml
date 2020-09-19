@@ -1,26 +1,12 @@
 version: "3.3"
 
 services:
-  caddy:
-    image: caddy
-    container_name: caddy
-    restart: always
-    ports:
-      - "443:443"
-      - "80:80"
-    networks:
-      - main-network
-    volumes:
-      - "./Caddyfile:/etc/caddy/Caddyfile"
-      - $PWD/.caddy/data:/data
-      - $PWD/.caddy/config:/config
-
   rishighan:
     image: frishi/rishighan
     container_name: rishighan
     volumes:
       - "./ecosystem.config.json:/ecosystem.config.json"
-    depends_on: 
+    external_links: 
       - caddy
     ports:
       - 8999:8999
