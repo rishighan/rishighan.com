@@ -5,7 +5,7 @@
   "repository": "https://github.com/rishighan/rishighan.com",
   "main": "index.js",
   "scripts": {
-    "dev": "pm2 start && webpack --config webpack/webpack.config.babel.js",
+    "dev": "pm2 start && rm -rf dist && webpack --config webpack/webpack.config.babel.js",
     "test": "npm test"
   },
   "keywords": [
