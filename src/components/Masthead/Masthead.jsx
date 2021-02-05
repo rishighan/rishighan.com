@@ -36,7 +36,7 @@ class Masthead extends Component {
 
   async componentDidMount() {
     const isImageLoaded = await getImageLoadStatus(this.imageRef.current);
-    if (isImageLoaded.status === 'ok') {
+    if (isImageLoaded.status === "ok") {
       const dominantColor = getDominantColor(this.imageRef.current);
       const titleContainerBg = calculateOppositeColor(dominantColor);
       this.setState({
@@ -48,14 +48,28 @@ class Masthead extends Component {
   render() {
     return (
       <div className="masthead-container">
-        {!_.isUndefined(this.imageRef) ? <><figure className="masthead">
-          <img crossorigin="anonymous" src={this.props.mastheadImage.url} ref={this.imageRef} />
-        </figure>
-          <CaptionContainer bgColor={this.state.titleContainerBg} className="masthead-title-container">
-            <Caption textColor={this.state.textColor} className="masthead-title">
-              {this.props.mastheadImage.title}
-            </Caption>
-          </CaptionContainer>)</> : null}
+        {!_.isUndefined(this.imageRef) ? (
+          <>
+            <figure className="masthead">
+              <img
+                crossorigin="anonymous"
+                src={this.props.mastheadImage.url}
+                ref={this.imageRef}
+              />
+            </figure>
+            <CaptionContainer
+              bgColor={this.state.titleContainerBg}
+              className="masthead-title-container"
+            >
+              <Caption
+                textColor={this.state.textColor}
+                className="masthead-title"
+              >
+                {this.props.mastheadImage.title}
+              </Caption>
+            </CaptionContainer>
+          </>
+        ) : null}
       </div>
     );
   }

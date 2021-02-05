@@ -9,6 +9,7 @@ import Timestamp from "../Timestamp/Timestamp";
 import List from "../List/List";
 import CalloutCard from "../CalloutCard/CalloutCard";
 import axios from "axios";
+import { extractHeroImageFromPost } from "../../utils/post.utils";
 
 const getSeriesDataForPost = async (postId) => {
   const series = await axios({
@@ -25,14 +26,16 @@ const renderPageFragment = (props) => {
   switch (props.postType) {
     case "single":
       return (
-        <>
+        <> 
           {!_.isNil(props.singlePostData) ? (
-            <article>
+            <article className={(!_.isUndefined(extractHeroImageFromPost(props.singlePostData)) ? 'article-with-masthead' : '')}>
               <Heading headingText={props.singlePostData.title} />
-              { props.timestamp ? <Timestamp
-                date={props.singlePostData.date_updated}
-                dateFormat={"D MMM, YYYY "}
-              /> : null }
+              {props.timestamp ? (
+                <Timestamp
+                  date={props.singlePostData.date_updated}
+                  dateFormat={"D MMM, YYYY "}
+                />
+              ) : null}
               <section>
                 <MarkdownRenderer
                   text={props.singlePostData.content}
