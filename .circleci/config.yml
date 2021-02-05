@@ -9,7 +9,7 @@ jobs:
           name: Update to latest npm version
           command: "sudo npm install -g npm@latest"
       - run:
-          name: Install dependencies
+          name: Install dependencies using yarn
           command: yarn 
       - setup_remote_docker:
           docker_layer_caching: false 

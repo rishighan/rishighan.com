@@ -47,7 +47,8 @@
     "terser-webpack-plugin": "^2.3.5",
     "url-loader": "^1.1.2",
     "webpack": "^4.29.3",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "yarn-audit-fix": "^3.2.13"
   },
   "dependencies": {
     "@babel/core": "^7.2.2",
