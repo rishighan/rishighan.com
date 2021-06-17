@@ -66,7 +66,7 @@
     "final-form-set-field-touched": "^1.0.1",
     "form-data": "^2.5.1",
     "helmet": "^3.21.1",
-    "highlight.js": "^9.14.2",
+    "highlight.js": "^10.4.1",
     "history": "^4.9.0",
     "interweave": "^10.1.2",
     "invert-color": "^2.0.0",
