@@ -71,7 +71,7 @@
     "interweave": "^10.1.2",
     "invert-color": "^2.0.0",
     "lodash": "^4.17.21",
-    "markdown-it": "^10.0.0",
+    "markdown-it": "^12.3.2",
     "markdown-it-footnote": "^3.0.2",
     "object-diff": "0.0.4",
     "prop-types": "^15.7.2",
