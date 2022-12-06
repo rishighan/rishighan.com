@@ -75,7 +75,7 @@
     "markdown-it-footnote": "^3.0.2",
     "object-diff": "0.0.4",
     "prop-types": "^15.7.2",
-    "qs": "^6.9.3",
+    "qs": "^6.9.7",
     "react": "^16.13.1",
     "react-aspect-ratio": "^1.0.40",
     "react-debounce-input": "^3.2.0",
